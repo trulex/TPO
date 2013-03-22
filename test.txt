@@ -1,2 +1,0 @@
-Probamo, če dela
-Zdej pa še preko SSH
