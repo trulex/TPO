@@ -1,0 +1,41 @@
+.naslov
+{
+    font-weight:bold;
+    margin-left:25%;
+    float:left;
+    margin-bottom:0;
+    font-size:18px;
+}
+body
+{
+    font-family: Tahoma, Geneva, sans-serif;
+}
+.welcome
+{
+    float:right;
+    margin-right:25%;
+    margin-bottom:0;
+}
+ul
+{
+    margin-left:25%;
+    margin-right:25%;   
+}
+li
+{
+    display:inline;
+}
+#glava
+{
+   background-color:#B8B8B8;
+}
+#menu
+{
+    font-size:20;
+    word-spacing:50px;
+}
+#footer
+{
+    text-align:center;
+    background-color:#B8B8B8;
+}
