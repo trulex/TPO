@@ -1,41 +1,56 @@
-.naslov
-{
+.naslov {
     font-weight:bold;
     margin-left:25%;
     float:left;
-    margin-bottom:0;
+    margin-bottom:-25px;
     font-size:18px;
 }
-body
-{
-    font-family: Tahoma, Geneva, sans-serif;
-}
-.welcome
-{
+.welcome {
     float:right;
-    margin-right:25%;
-    margin-bottom:0;
+    margin-right:25%; 
+    margin-bottom:-20px;
 }
-ul
-{
-    margin-left:25%;
-    margin-right:25%;   
+.glava {
+    background-size:cover;
+    background-color:#CCCCCC;
+    margin-bottom:-21px;
 }
-li
-{
-    display:inline;
-}
-#glava
-{
-   background-color:#B8B8B8;
-}
-#menu
-{
+#menu {
     font-size:20;
     word-spacing:50px;
 }
-#footer
-{
+body {
+    font-family: Tahoma, Geneva, sans-serif;   
+    margin:0;
+}
+#container {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin-left:40px;
+}
+a:link {
+    color:#996699;
+    text-decoration:none;
+}
+a:visited {
+    color:#7d537d;
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+a:active {
+    text-decoration:underline;
+    color:black;
+}
+
+ul {
+    margin-left:25%;
+    margin-right:25%;   
+}
+li {
+    display:inline;
+}
+#footer {
     text-align:center;
-    background-color:#B8B8B8;
+    background-color:#006699;
 }
