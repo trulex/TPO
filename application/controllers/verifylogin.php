@@ -10,7 +10,7 @@ class VerifyLogin extends CI_Controller {
 
  function index()
  {
-    $this->load->view('header');
+    $this->load->view('header_login');
    //This method will have the credentials validation
    $this->load->library('form_validation');
 
@@ -45,7 +45,9 @@ class VerifyLogin extends CI_Controller {
      {
        $sess_array = array(
          'id' => $row->id,
-         'username' => $row->username
+         'username' => $row->username,
+         'name' => $row->name,
+         'rights' => $row->rights
        );
        $this->session->set_userdata('logged_in', $sess_array);
      }

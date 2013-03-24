@@ -1,0 +1,1 @@
+<?php echo anchor('adduser','Add new users'); ?>

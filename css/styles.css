@@ -5,6 +5,12 @@
     margin-bottom:-25px;
     font-size:18px;
 }
+.naslov-login {
+    font-weight:bold;
+    margin-left:25%;
+    float:left;
+    font-size:18px;
+}
 .welcome {
     float:right;
     margin-right:25%; 
@@ -14,6 +20,10 @@
     background-size:cover;
     background-color:#CCCCCC;
     margin-bottom:-21px;
+}
+.glava-login {
+    background-size:cover;
+    background-color:#CCCCCC;
 }
 #menu {
     font-size:20;
