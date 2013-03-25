@@ -14,8 +14,8 @@ class VerifyAddUser extends CI_Controller {
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
-	    $this->form_validation->set_rules('username', 'Username', 'trim|required');
-	    $this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha');
+	    $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha');
 	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alpha');
 	    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -25,7 +25,7 @@ class VerifyAddUser extends CI_Controller {
 		$this->load->view('adduser_view',$data);
 	    } else {
 		$username=$this->input->post('username');
-		$password=$this->input->post('password');
+		$password=md5($this->input->post('password'));
 		$name=$this->input->post('name');
 		$surname=$this->input->post('surname');
 		$email=$this->input->post('email');

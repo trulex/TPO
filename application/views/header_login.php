@@ -2,6 +2,7 @@
 <head>
     <title>ScrumPro</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/styles.css" media="screen" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
