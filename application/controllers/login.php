@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 	if( $this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['rights'] = $session_data['rights'];
-	    if(strcmp($data['rights'],admin)==0) {
+	    if(strcmp($data['rights'],'admin')==0) {
 		redirect('administration','refresh');
 	    }
 	    redirect('home','refresh');

@@ -1091,7 +1091,6 @@ class CI_Form_validation {
 
 	/**
 	 * Alpha
-	 *
 	 * @access	public
 	 * @param	string
 	 * @return	bool
@@ -1100,8 +1099,20 @@ class CI_Form_validation {
 	{
 		return ( ! preg_match("/^([a-z])+$/i", $str)) ? FALSE : TRUE;
 	}
-
+	
 	// --------------------------------------------------------------------
+	
+	/**
+	 * Alpha si
+	 * 26.3.13 - dodani posebni znaki za slovenski jezik
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function alphasi($str)
+	{
+		return ( ! preg_match("/^([a-z-čćžšđČĆŽŠĐ])+$/i", $str)) ? FALSE : TRUE;
+	}
 
 	/**
 	 * Alpha-numeric

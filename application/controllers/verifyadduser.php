@@ -14,10 +14,10 @@ class VerifyAddUser extends CI_Controller {
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
-	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha');
+	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');
 	    $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
-	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha');
-	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alpha');
+	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
+	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 	    $this->form_validation->set_rules('rights', 'Rights');
 	    
@@ -44,6 +44,18 @@ class VerifyAddUser extends CI_Controller {
 	}    else {
 	//If no session, redirect to login page
 	redirect('login', 'refresh');
+	}
+    }
+    public function username_check($str) {
+	$this->db->select('username');
+	$this->db->from('users');
+	$this->db->where('username', $str);
+	$query=$this->db->get();
+	if ($query->num_rows() > 0) {
+	    $this->form_validation->set_message('username_check', 'The user already exists.');
+	    return FALSE;
+	} else {
+	    return TRUE;
 	}
     }
 }

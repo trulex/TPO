@@ -11,6 +11,9 @@ class Adduser extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
+	    if(strcmp($data['rights'],'user')==0) {
+		redirect('home','refresh');
+	    }
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $this->load->view('adduser_view', $data);
