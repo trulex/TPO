@@ -15,7 +15,7 @@ class VerifyAddStory extends CI_Controller {
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 	    
-	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
+	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
 	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required');
@@ -28,6 +28,15 @@ class VerifyAddStory extends CI_Controller {
 		$tests=$this->input->post('tests');
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
+		if (strcmp($priority,'Must have')==0) {
+		    $priority='musthave';
+		} elseif (strcmp($priority,'Could have')==0) {
+		    $priority='couldhave';
+		} else if (strcmp($priority,'Should have')==0){
+		    $priority='shouldhave';
+		} else {
+		    $priority='wonthave';
+		}
 		$userdata=array(
 		    'name'=>$name,
 		    'text'=>$text,
@@ -41,6 +50,18 @@ class VerifyAddStory extends CI_Controller {
 	} else {
 	    //If no session, redirect to login page
 	    redirect('login', 'refresh');
+	}
+    }
+    public function storyname_check($str) {
+    	$this->db->select('name');
+	$this->db->from('stories');
+	$this->db->where('name', $str);
+	$query=$this->db->get();
+	if ($query->num_rows() > 0) {
+	    $this->form_validation->set_message('storyname_check', 'The story already exists.');
+	return FALSE;
+	} else {
+	    return TRUE;
 	}
     }
 }

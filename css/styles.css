@@ -62,6 +62,9 @@ body {
     margin-left:25%;
     color:red;
 }
+textarea.addstory {
+    resize:none;
+}
 #container {
     font-family: Tahoma, Geneva, sans-serif;
     margin-left:40px;
