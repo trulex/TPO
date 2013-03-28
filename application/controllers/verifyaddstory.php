@@ -1,0 +1,46 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class VerifyAddStory extends CI_Controller { 
+    function __construct(){
+	parent::__construct();
+	$this->load->model('user','',TRUE);
+    } 
+
+    function index() {
+	if($this->session->userdata('logged_in')) {
+	    $session_data = $this->session->userdata('logged_in');
+	    $data['username'] = $session_data['username'];
+	    $data['name'] = $session_data['name'];
+	    $data['rights'] = $session_data['rights'];
+	    $this->load->view('header',$data);
+	    $this->load->library('form_validation');
+	    
+	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
+	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
+	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
+	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required');
+	    
+	    if ($this->form_validation->run() == FALSE) {
+		$this->load->view('addstory_view',$data);
+	    } else {
+		$name=$this->input->post('name');
+		$text=$this->input->post('text');
+		$tests=$this->input->post('tests');
+		$priority=$this->input->post('priority');
+		$business_value=$this->input->post('business_value');
+		$userdata=array(
+		    'name'=>$name,
+		    'text'=>$text,
+		    'tests'=>$tests,
+		    'priority'=>$priority,
+		    'busvalue'=>$business_value );
+		$this->db->insert('stories', $userdata);
+		redirect('addstory', $data);
+	    }
+	    $this->load->view('footer');
+	} else {
+	    //If no session, redirect to login page
+	    redirect('login', 'refresh');
+	}
+    }
+}

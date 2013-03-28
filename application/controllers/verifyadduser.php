@@ -42,8 +42,8 @@ class VerifyAddUser extends CI_Controller {
 	    }
 	    $this->load->view('footer');
 	}    else {
-	//If no session, redirect to login page
-	redirect('login', 'refresh');
+	    //If no session, redirect to login page
+	    redirect('login', 'refresh');
 	}
     }
     public function username_check($str) {

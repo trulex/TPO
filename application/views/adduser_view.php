@@ -1,6 +1,4 @@
-<?php echo validation_errors();
-echo form_open('verifyadduser');
-?>
+<?php echo form_open('verifyadduser'); ?>
 <div id="adduser">
     <p>Add a new user</p>
     <label>Username</label>
@@ -19,5 +17,8 @@ echo form_open('verifyadduser');
 	<option value="admin">Administrator</option>
     </select>
     <div><input type="submit" value="Submit" /></div>
+</div>
+<div id="uservalidation">
+    <?php echo validation_errors(); ?>
 </div>
 </form>
