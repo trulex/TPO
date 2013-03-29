@@ -16,6 +16,7 @@ class Adduser extends CI_Controller {
 	    }
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
+	    $data['message']='';
 	    $this->load->view('adduser_view', $data);
 	    $this->load->view('footer');
 	} else {

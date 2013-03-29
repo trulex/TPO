@@ -18,10 +18,11 @@ class VerifyAddUser extends CI_Controller {
 	    $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alphasi');
-	    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+	    $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
 	    $this->form_validation->set_rules('rights', 'Rights');
 	    
 	    if ($this->form_validation->run() == FALSE) {
+		$data['message']='';
 		$this->load->view('adduser_view',$data);
 	    } else {
 		$username=$this->input->post('username');
@@ -38,7 +39,9 @@ class VerifyAddUser extends CI_Controller {
 		    'email'=>$email,
 		    'rights'=>$rights );
 		$this->db->insert('users', $userdata);
-		redirect('adduser',$data);
+		$data['message']='User successfully added.';
+		$this->load->view('adduser_view',$data);
+		//redirect('adduser',$data);
 	    }
 	    $this->load->view('footer');
 	}    else {

@@ -1111,7 +1111,7 @@ class CI_Form_validation {
 	 */
 	public function alphasi($str)
 	{
-		return ( ! preg_match("/^([a-z-čćžšđČĆŽŠĐ])+$/i", $str)) ? FALSE : TRUE;
+		return ( ! preg_match("/^([a-z-čćžšđČĆŽŠĐ ])+$/i", $str)) ? FALSE : TRUE;
 	}
 
 	/**
