@@ -18,9 +18,10 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
-	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required');
+	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|is_natural_no_zero');
 	    
 	    if ($this->form_validation->run() == FALSE) {
+		$data['message']='';
 		$this->load->view('addstory_view',$data);
 	    } else {
 		$name=$this->input->post('name');
@@ -28,15 +29,15 @@ class VerifyAddStory extends CI_Controller {
 		$tests=$this->input->post('tests');
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
-		if (strcmp($priority,'Must have')==0) {
+		/*if (strcmp($priority,"Must have")==0) {
 		    $priority='musthave';
-		} elseif (strcmp($priority,'Could have')==0) {
+		} else if (strcmp($priority,"Could have")==0) {
 		    $priority='couldhave';
-		} else if (strcmp($priority,'Should have')==0){
+		} else if (strcmp($priority,"Should have")==0){
 		    $priority='shouldhave';
 		} else {
 		    $priority='wonthave';
-		}
+		}*/
 		$userdata=array(
 		    'name'=>$name,
 		    'text'=>$text,
@@ -44,7 +45,8 @@ class VerifyAddStory extends CI_Controller {
 		    'priority'=>$priority,
 		    'busvalue'=>$business_value );
 		$this->db->insert('stories', $userdata);
-		redirect('addstory', $data);
+		$data['message']='Story successfully added.';
+		$this->load->view('addstory_view',$data);
 	    }
 	    $this->load->view('footer');
 	} else {

@@ -1,7 +1,7 @@
 <?php echo form_open('verifyadduser'); 
 $msg=strcmp($message,'');
 ?>
-<div id="adduser">
+<div id="add">
     <p>Add a new user</p>
     <label>Username</label>
     <input type="text" name="username" value="<?php if($msg==0) {echo set_value('username');} ?>" size="20"/><br />

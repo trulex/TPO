@@ -48,15 +48,18 @@ body {
 #administration p{
     font-weight:bold;
 }
-#adduser {
+#add {
     margin-right:60%;
     text-align:right;
 }
-#adduser p {
+#add p {
     text-align:left;
     margin-left:60%;
     font-weight:bold;
     margin-top:5%;
+}
+#add label {
+    font-style:italic;
 }
 #uservalidation {
     margin-left:25%;
