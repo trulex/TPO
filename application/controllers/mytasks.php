@@ -16,6 +16,7 @@ class MyTasks extends CI_Controller {
 	    }
 	    /*Pridobimo seznam nalog za uporabnika
 	    */
+	    $data['active']='mytasks';
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
 	    $this->load->view('footer');

@@ -86,7 +86,9 @@ textarea.addstory {
     margin-left:40px;
 }
 
-
+.active a:visited{
+    color:#000;
+}
 a:link {
     color:#996699;
     text-decoration:none;
@@ -113,8 +115,6 @@ li.menu {
 li.active {
     display:inline;
     margin-right: 3em;
-    color:black;
-    text-decoration:underline;
 }
 #footer {
     margin-right:15%;

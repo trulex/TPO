@@ -14,6 +14,7 @@ class Addstory extends CI_Controller {
 	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
+	    $data['active']='mytasks';
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';

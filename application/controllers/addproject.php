@@ -15,6 +15,7 @@ class Addproject extends CI_Controller {
 			if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
+	    $data['active']='administration';
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $this->load->view('addproject_view', $data);
