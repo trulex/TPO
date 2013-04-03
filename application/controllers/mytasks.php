@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start(); //we need to call PHP's session object to access it through CI
-class Administration extends CI_Controller { 
+class MyTasks extends CI_Controller { 
     function __construct() {
 	parent::__construct();
     }
@@ -14,9 +14,10 @@ class Administration extends CI_Controller {
 	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
-	    $data['active']='administration';
+	    /*Pridobimo seznam nalog za uporabnika
+	    */
 	    $this->load->view('header', $data);
-	    $this->load->view('administration', $data);
+	    $this->load->view('mytasks_view', $data);
 	    $this->load->view('footer');
 	} else {
 	//If no session, redirect to login page

@@ -10,3 +10,4 @@
     <p class="naslov-login">ScrumPro</p>
     <div style="clear: both;"></div>​
 </div>
+<hr>

@@ -27,17 +27,23 @@
 .glava {
     background-size:cover;
     background-color:#CCCCCC;
-    margin-bottom:-15px;
+    margin-bottom:-17px;
+}
+hr {
+    border:0;
+    height:1px;
+    background:black;
 }
 .glava-login {
     background-size:cover;
     background-color:#CCCCCC;
+    margin-bottom:-9px;
 }
 #menu {
     font-family: mentone;
     font-size:17;
-    word-spacing:50px;
 }
+
 body {
     font-family: Tahoma, Geneva, sans-serif;   
     margin:0;
@@ -68,10 +74,19 @@ body {
 textarea.addstory {
     resize:none;
 }
+#tasks {
+    margin-right:60%;
+    text-align:right;
+}
+#tasks li {
+    margin-left:65%;
+}
 #container {
     font-family: Tahoma, Geneva, sans-serif;
     margin-left:40px;
 }
+
+
 a:link {
     color:#996699;
     text-decoration:none;
@@ -87,13 +102,19 @@ a:active {
     text-decoration:underline;
     color:black;
 }
-
 ul.menu {
     margin-left:25%;
     margin-right:25%;   
 }
 li.menu {
     display:inline;
+    margin-right: 3em;
+}
+li.active {
+    display:inline;
+    margin-right: 3em;
+    color:black;
+    text-decoration:underline;
 }
 #footer {
     margin-right:15%;
