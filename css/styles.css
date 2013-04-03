@@ -51,6 +51,9 @@ body {
 #administration {
     margin-left:15%;
 }
+#krneki{
+	font-weight:bold
+}
 #administration p{
     font-weight:bold;
 }
