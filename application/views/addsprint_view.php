@@ -1,6 +1,6 @@
 <?php echo form_open('verifyaddsprint'); ?>
 
-<div id="addsprint">
+<div id="add">
 	<p>Add a new sprint</p>
     <label>Start date</label>
 	<input type="text" name="startdate" value="<?php echo set_value('startdate'); ?>" size="20"/>

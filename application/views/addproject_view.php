@@ -1,6 +1,6 @@
 <?php echo form_open('verifyaddproject'); ?>
 
-<div id="addproject">
+<div id="add">
     <p>Create a new project</p>
     <label>Project name</label>
 	<input type="text" name="projectname" value="<?php echo set_value('projectname'); ?>" size="20"/><br>

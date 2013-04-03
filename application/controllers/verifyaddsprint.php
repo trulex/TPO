@@ -18,8 +18,8 @@ class VerifyAddSprint extends CI_Controller {
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');
 			
-			$this->form_validation->set_rules('startdate', 'Start date', 'required|callback_date_check|callback_startdate_check|callback_startsprint_check');
-			$this->form_validation->set_rules('finishdate', 'Finish date', 'required|callback_date_check|callback_finishdate_check|callback_finishsprint_check');
+			$this->form_validation->set_rules('startdate', 'Start date', 'required|callback_invaliddate_check|callback_date_check|callback_startdate_check|callback_startsprint_check');
+			$this->form_validation->set_rules('finishdate', 'Finish date', 'required|callback_invaliddate_check|callback_date_check|callback_finishdate_check|callback_finishsprint_check');
 			$this->form_validation->set_rules('velocity', 'Sprint velocity', 'required|numeric');
 			
 			if ($this->form_validation->run() == FALSE) {
@@ -43,6 +43,17 @@ class VerifyAddSprint extends CI_Controller {
 	    redirect('login', 'refresh');
 		}
 	}
+	
+	public function invaliddate_check($str) {
+		$dolzina=strlen($str);
+		
+		if ($dolzina < 8) {
+			$this->form_validation->set_message('invaliddate_check', 'This is not a date!');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+    }
 	
 	public function date_check($str) {
 		//$input_date = strtotime($str);
