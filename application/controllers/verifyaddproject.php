@@ -10,6 +10,7 @@ class VerifyAddProject extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
+	    $data['active']='administration';
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
