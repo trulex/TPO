@@ -10,6 +10,15 @@
 
     <div><input type="submit" value="Create project" /></div>
 </div>
+<div id="add">
+	<p>Projects: </p><br>
+	<?php
+		foreach($results as $row){
+			echo $row->project_name;
+			echo "<br>";
+		}
+	?>
+</div>
 <div id="projectvalidation">
 	<?php echo validation_errors(); ?>
 </div>

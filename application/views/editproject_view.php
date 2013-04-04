@@ -7,6 +7,12 @@
 	
     <label>Project description</label>
 	<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
+	
+	<label>Project description</label>
+	<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
+	
+	<label>Project description</label>
+	<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
 
     <div><input type="submit" value="Create project" /></div>
 </div>

@@ -15,8 +15,8 @@ class Addsprint extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
 			
-			$this->load->model("get_db");
-			$data['results']= $this->get_db->getAll();
+			$this->load->model("get_sprints");
+			$data['results']= $this->get_sprints->getAll();
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));

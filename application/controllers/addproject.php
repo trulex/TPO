@@ -16,6 +16,10 @@ class Addproject extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
+		
+		$this->load->model("get_projects");
+		$data['results']= $this->get_projects->getAll();
+			
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $this->load->view('addproject_view', $data);
