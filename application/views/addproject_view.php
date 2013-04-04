@@ -15,6 +15,7 @@
 	<?php
 		foreach($results as $row){
 			echo $row->project_name;
+			echo " ".anchor('editproject', 'Edit!');
 			echo "<br>";
 		}
 	?>
