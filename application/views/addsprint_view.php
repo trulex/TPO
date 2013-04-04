@@ -28,7 +28,7 @@
 		}
 	?>
 </div>
-<div id="sprintvalidation">
+<div id="validation">
 	<?php echo validation_errors(); ?>
 </div>
 </form>

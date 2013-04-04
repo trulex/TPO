@@ -1,3 +1,4 @@
+<!--avtor:darko-->
 <div id="footer">
     TPO skupina 16
 </div>

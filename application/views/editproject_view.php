@@ -52,7 +52,7 @@
 	<div><input type="submit" value="Save changes" /></div>
 </div>
 
-<div id="projectvalidation">
+<div id="validation">
 	<?php echo validation_errors(); ?>
 </div>
 </form>

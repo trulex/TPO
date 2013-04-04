@@ -1,3 +1,4 @@
+/*avtor:darko*/
 @font-face {
     font-family: oldsans;
     src: url('OldSansBlack.ttf');
@@ -67,7 +68,7 @@ body {
 #add label {
     font-style:italic;
 }
-#uservalidation {
+#validation {
     margin-left:25%;
     color:red;
 }

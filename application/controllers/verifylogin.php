@@ -1,3 +1,4 @@
+<!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class VerifyLogin extends CI_Controller {

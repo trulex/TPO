@@ -1,8 +1,10 @@
+<!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class VerifyAddStory extends CI_Controller { 
     function __construct(){
 	parent::__construct();
+	$this->load->model('project');
     } 
 
     function index() {
@@ -11,10 +13,11 @@ class VerifyAddStory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='administration';
+	    $data['active']='productbacklog';
+	    $data['projects']=$this->project->getProjects();
+	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
-	    
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
@@ -29,21 +32,15 @@ class VerifyAddStory extends CI_Controller {
 		$tests=$this->input->post('tests');
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
-		/*if (strcmp($priority,"Must have")==0) {
-		    $priority='musthave';
-		} else if (strcmp($priority,"Could have")==0) {
-		    $priority='couldhave';
-		} else if (strcmp($priority,"Should have")==0){
-		    $priority='shouldhave';
-		} else {
-		    $priority='wonthave';
-		}*/
+		$project_name=$this->input->post('project_name');
+		
 		$userdata=array(
 		    'name'=>$name,
 		    'text'=>$text,
 		    'tests'=>$tests,
 		    'priority'=>$priority,
-		    'busvalue'=>$business_value );
+		    'busvalue'=>$business_value,
+		    'project_name'=>$project_name );
 		$this->db->insert('stories', $userdata);
 		$data['message']='Story successfully added.';
 		$this->load->view('addstory_view',$data);
