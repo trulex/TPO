@@ -1,3 +1,4 @@
+<!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Addstory extends CI_Controller { 

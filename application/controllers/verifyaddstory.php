@@ -18,6 +18,7 @@ class VerifyAddStory extends CI_Controller {
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
+	    $this->form_validation->set_rules('project_name', 'Project', 'required');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
