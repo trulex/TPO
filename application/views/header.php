@@ -1,4 +1,3 @@
-<!--avtor:darko-->
 <html>
 <head>
     <title>ScrumPro</title>

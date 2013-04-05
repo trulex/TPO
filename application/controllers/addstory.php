@@ -3,7 +3,6 @@
 class Addstory extends CI_Controller { 
     function __construct() {
 	parent::__construct();
-	$this->load->model('project');
     }
     
     function index() {
@@ -15,13 +14,10 @@ class Addstory extends CI_Controller {
 	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
-	    $data['active']='productbacklog';
+	    $data['active']='administration';
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';
-
-	    $data['projects']=$this->project->getProjects();
-	    
 	    $this->load->view('addstory_view', $data);
 	    $this->load->view('footer');
 	} else {

@@ -1,3 +1,4 @@
+<!--avtor:BOSTJAN-->
 <?php
 
 class Get_projects extends CI_Model{

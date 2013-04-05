@@ -1,3 +1,4 @@
+<!--avtor:BOSTJAN-->
 <?php echo form_open('editproject'); ?>
 
 <head>
@@ -19,7 +20,7 @@
 	<input type="text" name="startdate" value="<?php echo set_value('projectname'); ?>" size="20"/><br>
 	
     <label>Project description</label>
-	<textarea name="projectdescription" rows="4" value="<?php echo set_value('projectname'); ?>" cols="50"></textarea><br>
+	<textarea name="projectdescription" rows="4" value="<?php echo set_value('description'); ?>" cols="50"></textarea><br>
 	
     <label>Scrum master</label>
 	<select name="scrummaster">-
@@ -52,7 +53,7 @@
 	<div><input type="submit" value="Save changes" /></div>
 </div>
 
-<div id="validation">
+<div id="projectvalidation">
 	<?php echo validation_errors(); ?>
 </div>
 </form>

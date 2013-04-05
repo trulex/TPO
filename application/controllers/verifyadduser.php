@@ -1,4 +1,3 @@
-<!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class VerifyAddUser extends CI_Controller { 
@@ -18,7 +17,6 @@ class VerifyAddUser extends CI_Controller {
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');
 	    $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
-	    $this->form_validation->set_rules('confirm_password', 'Confirm password', 'trim|required|callback_password_confirmation');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
@@ -59,14 +57,6 @@ class VerifyAddUser extends CI_Controller {
 	$query=$this->db->get();
 	if ($query->num_rows() > 0) {
 	    $this->form_validation->set_message('username_check', 'The user already exists.');
-	    return FALSE;
-	} else {
-	    return TRUE;
-	}
-    }
-    public function password_confirmation($str) {
-	if (strcmp($this->input->post('password'),$str)!=0) {
-	    $this->form_validation->set_message('password_confirmation', 'Please make sure that passwords match.');
 	    return FALSE;
 	} else {
 	    return TRUE;

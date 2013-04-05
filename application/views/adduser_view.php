@@ -1,4 +1,3 @@
-<!--avtor:darko-->
 <?php echo form_open('verifyadduser'); 
 $msg=strcmp($message,'');
 ?>
@@ -7,9 +6,7 @@ $msg=strcmp($message,'');
     <label>Username</label>
     <input type="text" name="username" value="<?php if($msg==0) {echo set_value('username');} ?>" size="20"/><br />
     <label>Password</label>
-    <input type="password" name="password" value="<?php if($msg==0) {echo set_value('password');} ?>" size="20"/><br />
-    <label>Confirm password</label>
-    <input type="password" name="confirm_password" value="<?php if($msg==0) {echo set_value('confirm_password');} ?>" size="20"/><br />
+    <input type="text" name="password" value="<?php if($msg==0) {echo set_value('password');} ?>" size="20"/><br />
     <label>Name</label>
     <input type="text" name="name" value="<?php if($msg==0) {echo set_value('name');} ?>" size="20"/><br />
     <label>Surname
@@ -23,7 +20,7 @@ $msg=strcmp($message,'');
     </select>
     <div><input type="submit" value="Submit" /></div>
 </div>
-<div id="validation">
+<div id="uservalidation">
     <?php echo validation_errors(); ?>
 </div>
 <?php if($msg!=0) {
