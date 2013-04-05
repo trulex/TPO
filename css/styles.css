@@ -1,3 +1,4 @@
+/*avtor:darko*/
 @font-face {
     font-family: oldsans;
     src: url('OldSansBlack.ttf');
@@ -26,7 +27,7 @@
 }
 .glava {
     background-size:cover;
-    background-color:#DADADA;
+    background-color:#CCCCCC;
     margin-bottom:-17px;
 }
 hr {
@@ -36,7 +37,7 @@ hr {
 }
 .glava-login {
     background-size:cover;
-    background-color:#DADADA;
+    background-color:#CCCCCC;
     margin-bottom:-9px;
 }
 #menu {
@@ -67,7 +68,7 @@ body {
 #add label {
     font-style:italic;
 }
-#uservalidation {
+#validation {
     margin-left:25%;
     color:red;
 }

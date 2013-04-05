@@ -14,18 +14,17 @@ class VerifyAddSprint extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='productbacklog';			
+			$data['active']='productbacklog';
 			
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');
 			
-			$this->form_validation->set_rules('startdate', 'Start date', 'required|min_length[8]|callback_date_check|callback_startdate_check|callback_startsprint_check');
-			$this->form_validation->set_rules('finishdate', 'Finish date', 'required|min_length[8]|callback_date_check|callback_finishdate_check|callback_finishsprint_check');
-			$this->form_validation->set_rules('velocity', 'Sprint velocity', 'required|is_natural_no_zero');
+			$this->form_validation->set_rules('startdate', 'Start date', 'required|callback_invaliddate_check|callback_date_check|callback_startdate_check|callback_startsprint_check');
+			$this->form_validation->set_rules('finishdate', 'Finish date', 'required|callback_invaliddate_check|callback_date_check|callback_finishdate_check|callback_finishsprint_check');
+			$this->form_validation->set_rules('velocity', 'Sprint velocity', 'required|numeric');
 			
 			if ($this->form_validation->run() == FALSE) {
 				$this->load->view('addsprint_view',$data);
-				$this->session->set_flashdata('flashSuccess', '');
 			} else {
 				$startdate=$this->input->post('startdate');
 				$finishdate=$this->input->post('finishdate');
@@ -37,9 +36,7 @@ class VerifyAddSprint extends CI_Controller {
 					'velocity'=>$velocity
 					);
 				$this->db->insert('sprints', $userdata);
-				$this->session->set_flashdata('flashSuccess', 'Sprint successfully added.');
-				redirect('addsprint');
-				
+				$this->load->view('sprintsuccess');
 			}
 			$this->load->view('footer');
 		} else {
@@ -48,7 +45,19 @@ class VerifyAddSprint extends CI_Controller {
 		}
 	}
 	
+	public function invaliddate_check($str) {
+		$dolzina=strlen($str);
+		
+		if ($dolzina < 8) {
+			$this->form_validation->set_message('invaliddate_check', 'This is not a date!');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+    }
+	
 	public function date_check($str) {
+		//$input_date = strtotime($str);
 		$parse_date=date_parse($str);
 		$day=$parse_date["day"];
 		$month=$parse_date["month"];
@@ -60,7 +69,7 @@ class VerifyAddSprint extends CI_Controller {
 			$days[1]="29";
 		}
 		
-		if ($month > 12 || $day == 0) {
+		if ($month > 12) {
 			$this->form_validation->set_message('date_check', 'The inserted date is not possbile!');
 			return FALSE;
 		}else if($day > $days[$month-1]){
@@ -121,7 +130,7 @@ class VerifyAddSprint extends CI_Controller {
 		}
 
 		if ($index > 0) {
-			$this->form_validation->set_message('startsprint_check', 'The date collide with an existing sprint!');
+			$this->form_validation->set_message('startsprint_check', 'The dates collide with an existing sprint!');
 			return FALSE;
 		} else {
 			return TRUE;
@@ -149,7 +158,7 @@ class VerifyAddSprint extends CI_Controller {
 		}
 
 		if ($index > 0) {
-			$this->form_validation->set_message('finishsprint_check', 'The date collide with an existing sprint!');
+			$this->form_validation->set_message('finishsprint_check', 'The dates collide with an existing sprint!');
 			return FALSE;
 		} else {
 			return TRUE;

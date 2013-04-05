@@ -1,7 +1,9 @@
-<!--avtor:BOSTJAN-->
 <div id="administration">
-	<p>Sprint options</p>
+    <p>Product backlog</p>
     <ul>
-    <li><?php echo anchor('addsprint','Manage sprints'); ?></li>
+	<li><?php echo anchor('ustories','Unfinished stories'); ?></li>
+	<li><?php echo anchor('fstories','Finished stories'); ?></li>
+	<li><?php echo anchor('freleases','Future releases'); ?></li>
+	<li><?php echo anchor('addstory','Add new user stories'); ?></li>
     </ul>
 </div>

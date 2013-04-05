@@ -1,4 +1,3 @@
-<!--avtor:BOSTJAN-->
 <?php
 
 class Get_sprints extends CI_Model{

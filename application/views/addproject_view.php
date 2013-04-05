@@ -1,4 +1,3 @@
-<!--avtor:BOSTJAN-->
 <?php echo form_open('verifyaddproject'); ?>
 
 <div id="add">
@@ -16,12 +15,12 @@
 	<?php
 		foreach($results as $row){
 			echo $row->project_name;
-			echo " ".anchor('editproject', 'Edit');
+			echo " ".anchor('editproject', 'Edit!');
 			echo "<br>";
 		}
 	?>
 </div>
-<div id="projectvalidation">
+<div id="validation">
 	<?php echo validation_errors(); ?>
 </div>
 </form>

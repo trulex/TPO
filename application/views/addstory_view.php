@@ -1,8 +1,18 @@
+<!--avtor:darko-->
 <?php echo form_open('verifyaddstory'); 
 $msg=strcmp($message,'');
 ?>
 <div id="add">
     <p>Add a new user story</p>
+    <label>Project</label>
+    <select name="project_name">
+    <?php 
+	foreach ($projects as $project) {
+	    echo '<option value="'.$project.'">'.$project.'</option>';
+	}
+    ?>
+    </select>
+    <br />
     <label>Name</label>
     <input type="text" name="name" value="<?php if($msg==0) {echo set_value('name');} ?>" size="20"/><br />
     <label>Text</label>
@@ -18,15 +28,9 @@ $msg=strcmp($message,'');
 	<option value="couldhave">Could have</option>
 	<option value="wonthave">Won't have this time</option>
     </select>
-    <!--
-    <?php
-    $priorities=array('Must have','Should have','Could have', 'Won\'t have this time');
-    echo form_dropdown('priority', $priorities, $this->input->post('priority'));
-    ?>
-    -->
     <div><input type="submit" value="Submit" /></div>
 </div>
-<div id="uservalidation">
+<div id="validation">
     <?php echo validation_errors(); ?>
 </div>
 <?php if($msg!=0) {
