@@ -1,3 +1,4 @@
+<!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Editproject extends CI_Controller { 
@@ -36,7 +37,7 @@ class Editproject extends CI_Controller {
 				'project_name'=>$projectname,
 				'description'=>$description,
 				'scrummaster'=>$scrummaster,
-				'productowner'=>$productowner,
+				'productowner'=>$productowner
 				//'description'=>$description
 			);
 			
