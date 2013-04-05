@@ -31,12 +31,12 @@
 <div id="add">
 	<p>Sprints: </p><br>
 	<?php
-		foreach($results as $row){
+		foreach($results as $row):
 			echo $row->start_date." - ";
 			echo $row->finish_date;
 			echo ", velocity: ".$row->velocity;
 			echo "<br>";
-		}
+		endforeach
 	?>
 </div>
 </form>
