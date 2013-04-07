@@ -1,10 +1,11 @@
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+session_start();
 class VerifyAddUser extends CI_Controller { 
     function __construct(){
 	parent::__construct();
 	$this->load->model('user','',TRUE);
+	$this->load->model('project');
     }
     function index() {
 	if($this->session->userdata('logged_in')) {
@@ -13,7 +14,9 @@ class VerifyAddUser extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
-	    
+	    $data['id']=$session_data['id'];
+	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['project']=$this->session->userdata('project');
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');

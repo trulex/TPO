@@ -3,7 +3,7 @@
 
 class VerifyAddSprint extends CI_Controller { 
 
-	private $ceca;
+	private $date;
 
     function __construct(){
 		parent::__construct();
@@ -16,7 +16,6 @@ class VerifyAddSprint extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
-			
 			$this->load->model("get_sprints");
 			$data['results']= $this->get_sprints->getAll();
 			
@@ -65,10 +64,10 @@ class VerifyAddSprint extends CI_Controller {
 		}
 		
 		if ($month > 12 || $day == 0) {
-			$this->form_validation->set_message('date_check', 'The inserted date is not possible!');
+			$this->form_validation->set_message('date_check', 'The inserted date is not possbile!');
 			return FALSE;
 		}else if($day > $days[$month-1]){
-			$this->form_validation->set_message('date_check', 'The inserted date is not possible!');
+			$this->form_validation->set_message('date_check', 'The inserted date is not possbile!');
 			return FALSE;
 		} else {
 			return TRUE;
@@ -77,11 +76,12 @@ class VerifyAddSprint extends CI_Controller {
 	
 	public function startdate_check($str) {
 		$todays_date = date("Y-m-d");
-		$this->ceca=$str;
+		$this->date=$str;
 		
 		$today = strtotime($todays_date);
 		$input_date = strtotime($str);
 
+		
 		if ($input_date < $today) {
 			$this->form_validation->set_message('startdate_check', 'The date is invalid!');
 			return FALSE;
@@ -91,10 +91,10 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	public function finishdate_check($str) {
-		$start_date = strtotime($this->ceca);
+		$test = strtotime($this->date);
 		$input_date = strtotime($str);
 
-		if ($input_date <= $start_date) {
+		if ($input_date <= $test) {
 			$this->form_validation->set_message('finishdate_check', 'The finish date is invalid!');
 			return FALSE;
 		} else {

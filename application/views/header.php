@@ -9,9 +9,9 @@
 <body>
 <div class="glava">
     <p class="naslov">ScrumPro</p>
-    <?php echo '<p class="welcome">Welcome, <a href="#">'.$name.'</a>' ?>
-    <br/>
-    <a href="home/logout">Logout</a>
+    <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
+	Current project: <?php echo $this->session->userdata('project'); ?><br />
+	
     </p>
     <div style="clear: both;"></div>​
     <div id="menu">
