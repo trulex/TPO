@@ -1,5 +1,4 @@
 <!--avtor:darko-->
-<? $this->load->helper('form'); ?>
 <div id="content">
     <div id="left">
 	<p id="title">Administration options</p>
@@ -10,13 +9,8 @@
     </div>
     <div id="projects">
 	<p id="title">My projects</p>
-	    <form name="selectp" method="post" action="selectProject/select">
-	    <?php	    
-		foreach ($projects as $project) {
-		    echo '<button type="submit" value="'.$this->project->getProjectName($project).'" name="project">'.$this->project->getProjectName($project).'</button>';
-		    echo '<br />';
-		}
-	    ?>
-	    </form>
+	<ul>
+	    <li>Prvi projekt</li>
+	</ul>
     </div>
-</div><?
+</div>

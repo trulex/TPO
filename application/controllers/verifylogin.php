@@ -48,12 +48,10 @@ class VerifyLogin extends CI_Controller {
          'id' => $row->id,
          'username' => $row->username,
          'name' => $row->name,
-         'rights' => $row->rights,
-         'project' => '' );
+         'rights' => $row->rights
+       );
        $this->session->set_userdata('logged_in', $sess_array);
      }
-     session_start();
-     $_SESSION['project']='';
      return TRUE;
    }
    else
