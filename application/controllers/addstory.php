@@ -13,6 +13,9 @@ class Addstory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
+	    $data['id']=$session_data['id'];
+	    $data['project']=$session_data['project'];
+	    $data['projects']=$this->project->getProjects($data['id']);
 	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
@@ -20,8 +23,6 @@ class Addstory extends CI_Controller {
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';
-
-	    $data['projects']=$this->project->getProjects();
 	    
 	    $this->load->view('addstory_view', $data);
 	    $this->load->view('footer');
