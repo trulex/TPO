@@ -1,4 +1,4 @@
-/* /*avtor:darko*/ */
+/*avtor:darko*/
 @font-face {
     font-family: oldsans;
     src: url('OldSansBlack.ttf');
@@ -13,14 +13,12 @@
     float:left;
     margin-bottom:-15px;
     font-size:20px;
-    font-weight:bold;
 }
 .naslov-login {
     font-family:oldsans;
     margin-left:25%;
     float:left;
     font-size:20px;
-    font-weight:bold;
 }
 .welcome {
     float:right;
@@ -30,7 +28,7 @@
 .glava {
     background-size:cover;
     background-color:#CCCCCC;
-    margin-bottom:-9px;
+    margin-bottom:-17px;
 }
 hr {
     border:0;
@@ -45,7 +43,6 @@ hr {
 #menu {
     font-family: mentone;
     font-size:17;
-    padding-bottom:2px;
 }
 
 body {
@@ -68,27 +65,19 @@ body {
     background:lightgrey;
     position:absolute;
     right:15%;
-    padding-left:15px;
-    padding-right:15px;
 }
 #add {
+    margin-right:60%;
     text-align:right;
 }
 #add p {
     text-align:left;
-    margin-left:40%;
+    margin-left:60%;
     font-weight:bold;
     margin-top:5%;
 }
 #add label {
     font-style:italic;
-}
-#add div.error {
-    font-weight:normal;
-    font-size:10px;
-    color:red;
-    text-align:left;
-    margin-left:-80%;
 }
 #validation {
     margin-left:25%;
@@ -96,6 +85,9 @@ body {
 }
 textarea.addstory {
     resize:none;
+}
+#tasks {
+    
 }
 #container {
     font-family: Tahoma, Geneva, sans-serif;
@@ -133,7 +125,6 @@ li.active {
     margin-right: 3em;
 }
 #footer {
-    margin-top:5%;
     margin-right:15%;
     margin-left:15%;
     text-align:center;

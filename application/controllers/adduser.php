@@ -1,9 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-session_start();
+
 class Adduser extends CI_Controller { 
     function __construct() {
 	parent::__construct();
-	$this->load->model('project');
     }
     
     function index() {
@@ -12,12 +11,10 @@ class Adduser extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['id']=$session_data['id'];
 	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
-	    $data['projects']=$this->project->getProjects($data['id']);
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';

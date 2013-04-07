@@ -14,16 +14,15 @@ class VerifyAddStory extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-	    $data['id']=$session_data['id'];
-	    $data['project']=$session_data['project'];
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->project->getProjects();
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
+	    $this->form_validation->set_rules('project_name', 'Project', 'required');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
-	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|callback_busvalue|is_natural_no_zero');
+	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|is_natural_no_zero');
 	    
 	    if ($this->form_validation->run() == FALSE) {
 		$data['message']='';
@@ -34,14 +33,15 @@ class VerifyAddStory extends CI_Controller {
 		$tests=$this->input->post('tests');
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
-		$project=$this->session->userdata('project');
+		$project_name=$this->input->post('project_name');
+		
 		$userdata=array(
 		    'name'=>$name,
 		    'text'=>$text,
 		    'tests'=>$tests,
 		    'priority'=>$priority,
 		    'busvalue'=>$business_value,
-		    'project_name' => $project );
+		    'project_name'=>$project_name );
 		$this->db->insert('stories', $userdata);
 		$data['message']='Story successfully added.';
 		$this->load->view('addstory_view',$data);
@@ -61,14 +61,6 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_message('storyname_check', 'The story already exists.');
 	return FALSE;
 	} else {
-	    return TRUE;
-	}
-    }
-    public function busvalue($str) {
-	if(intval($str) > 100) {
-	   $this->form_validation->set_message('busvalue', 'The Business value field must contain a number less than one hundred.');
-	   return FALSE; 
-	 } else {
 	    return TRUE;
 	}
     }
