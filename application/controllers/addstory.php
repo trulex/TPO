@@ -10,8 +10,6 @@ class Addstory extends CI_Controller {
     function index() {
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
-		fuuuuusdfuasudfudgsbvhasku.dbvhkjs.dvh
-		asdbfg
 		hdfs
 		bg
 		dfsg
@@ -21,7 +19,6 @@ class Addstory extends CI_Controller {
 		dtrb
 		vdsy
 		ersbg
-	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    if(strcmp($data['rights'],'user')==0) {
