@@ -5,6 +5,7 @@ class Addproject extends CI_Controller {
 
     function __construct() {
 		parent::__construct();
+		$this->load->model('project');
     }
 	
 	function index() {
@@ -13,14 +14,15 @@ class Addproject extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-			if(strcmp($data['rights'],'user')==0) {
+	    $data['id']=$session_data['id'];
+	    if(strcmp($data['rights'],'user')==0) {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
-		
-		$this->load->model("get_projects");
-		$data['results']= $this->get_projects->getAll();
-			
+	    $data['projects']=$this->project->getProjects($data['id']);
+	    $this->load->model("get_projects");
+	    $data['results']= $this->get_projects->getAll();
+	
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $this->load->view('addproject_view', $data);

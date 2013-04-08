@@ -1,11 +1,14 @@
+<!--avtor:darko-->
 <div id="content">
     <div id="left">
     <p id="title">My tasks</p>
     <!-- V tabelo nalog se shrani trenutni cas-->
     <p>Currently working on: <input type="submit" value="Stop working"></p>
 	<ul>
-	    <li>Prva naloga <input type="submit" value="Start working"></li>
-	    <li>Druga naloga <input type="submit" value="Start working"></li>
+	    <form name="startTask" method="post" action="mytasks/startWork">
+	    <? foreach ($tasks as $task) {
+		echo '<li>'.$task.' <button type="submit" name="task" value="'.$task.'">Start working</button></li>';
+	    } ?>
 	</ul>
     </div>
     <div id="projects">

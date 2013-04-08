@@ -1,5 +1,5 @@
 <!--avtor:darko-->
-<? $this->load->helper('form'); ?>
+<?php $this->load->helper('form'); ?>
 <div id="content">
     <div id="left">
 	<p id="title">Administration options</p>

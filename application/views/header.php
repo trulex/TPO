@@ -3,15 +3,14 @@
 <head>
     <title>ScrumPro</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/styles.css" media="screen" />
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 <div class="glava">
     <p class="naslov">ScrumPro</p>
     <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
-	Current project: <?php echo $this->session->userdata('project'); ?><br />
-	
+	Current project: <?php echo $this->session->userdata('project'); ?><br />	
     </p>
     <div style="clear: both;"></div>​
     <div id="menu">
