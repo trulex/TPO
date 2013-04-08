@@ -9,6 +9,7 @@
 	    <? foreach ($tasks as $task) {
 		echo '<li>'.$task.' <button type="submit" name="task" value="'.$task.'">Start working</button></li>';
 	    } ?>
+	    </form>
 	</ul>
     </div>
     <div id="projects">

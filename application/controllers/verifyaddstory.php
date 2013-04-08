@@ -30,6 +30,8 @@ class VerifyAddStory extends CI_Controller {
 		$data['message']='';
 		if (strcmp($this->session->userdata('project'),'')==0) {
 		    $data['noproject']='Please select a project.';
+		} else if (!$this->hasRights()) {
+		    $data['noproject']='Warning: You do not have sufficient rights for this action.';
 		}
 		$this->load->view('addstory_view',$data);
 	    } else {
@@ -55,6 +57,29 @@ class VerifyAddStory extends CI_Controller {
 	} else {
 	    //If no session, redirect to login page
 	    redirect('login', 'refresh');
+	}
+    }
+    function hasRights() {
+	$session_data = $this->session->userdata('logged_in');
+	$userId=$session_data['id'];
+	
+	$this->db->select('id');
+	$this->db->from('projects');
+	$this->db->where('project_name', $this->session->userdata('project'));
+	$query=$this->db->get();
+	$projectId=$query->row()->id;
+	
+	$this->db->select('role');
+	$this->db->from('project_user');
+	$this->db->where('project_id', $projectId);
+	$this->db->where('user_id', $userId);
+	$query=$this->db->get();
+	$role=$query->row()->role;
+	
+	if($role == 0) {
+	    return false;
+	} else {
+	    return true;
 	}
     }
     public function storyname_check($str) {

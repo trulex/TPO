@@ -2,6 +2,7 @@
 <?php
 Class Project extends CI_Model {
     function getProjects($userid) {
+    //returns ids of projects of user with id $userid
 	$this->db->select('project_id');
 	$this->db->from('project_user');
 	$this->db->where('user_id',$userid);
