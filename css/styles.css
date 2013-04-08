@@ -1,4 +1,4 @@
-/* /*avtor:darko*/ */
+/*avtor:darko*/ 
 @font-face {
     font-family: oldsans;
     src: url('OldSansBlack.ttf');
@@ -6,6 +6,15 @@
 @font-face {
     font-family: mentone;
     src: url('mentone.otf');
+}
+.container {
+	border:1px solid #ccc; 
+	width:200px;
+	margin:auto;
+	margin-right:0%;
+	height: auto;
+	overflow-y: 
+	scroll;
 }
 .naslov {
     font-family:oldsans;
