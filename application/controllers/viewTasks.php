@@ -1,7 +1,7 @@
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AddTask extends CI_Controller {
+class ViewTasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
@@ -17,14 +17,14 @@ class AddTask extends CI_Controller {
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
-			$data['active']='addtask';
+			$data['active']='viewTasks';
 			$this->load->model("stories");
 			$data['stories']= $this->stories->getAll();	
 			$this->load->model("tasks");
 			$data['tasks']= $this->tasks->getAll();
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
-			$this->load->view('addtask',$data);
+			$this->load->view('viewTasks',$data);
 			$this->load->view('footer');
 		} 
 		else{
