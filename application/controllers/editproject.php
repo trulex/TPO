@@ -15,6 +15,9 @@ class Editproject extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='administration';
 			
+			$this->load->model("get_projects");
+			$data['results']= $this->get_projects->getAll();
+			
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');
 			
@@ -22,27 +25,25 @@ class Editproject extends CI_Controller {
 			$this->form_validation->set_rules('description', 'Project description');
 			$this->form_validation->set_rules('scrummaster', 'Scrum master');
 			$this->form_validation->set_rules('productowner', 'Product owner');
-			//$this->form_validation->set_rules('teammembers', 'Team members');
 			
 			if ($this->form_validation->run() == FALSE) {
 				$this->load->view('editproject_view',$data);
 			} else {
+			
 			$projectname=$this->input->post('projectname');
 			$description=$this->input->post('description');
 			$scrummaster=$this->input->post('scrummaster');
 			$productowner=$this->input->post('productowner');
-			//$teammembers=$this->input->post('teammembers');
 			
 			$userdata=array(
 				'project_name'=>$projectname,
 				'description'=>$description,
 				'scrummaster'=>$scrummaster,
 				'productowner'=>$productowner
-				//'description'=>$description
 			);
 			
-			$this->db->insert('projects', $userdata);
-			$this->load->view('projectsuccess');
+			$this->session->set_flashdata('flashSuccess', 'Project successfully edited.');
+			redirect('addproject');
 			}
 			$this->load->view('footer');
 		}else {

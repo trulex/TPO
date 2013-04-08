@@ -23,6 +23,7 @@ class Addstory extends CI_Controller {
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';
+	    $data['noproject']='';
 	    
 	    $this->load->view('addstory_view', $data);
 	    $this->load->view('footer');

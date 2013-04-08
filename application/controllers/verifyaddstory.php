@@ -17,6 +17,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['noproject']='';
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
@@ -25,8 +26,11 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
 	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|callback_busvalue|is_natural_no_zero');
 	    
-	    if ($this->form_validation->run() == FALSE) {
+	    if ($this->form_validation->run() == FALSE || strcmp($this->session->userdata('project'),'')==0) {
 		$data['message']='';
+		if (strcmp($this->session->userdata('project'),'')==0) {
+		    $data['noproject']='Please select a project.';
+		}
 		$this->load->view('addstory_view',$data);
 	    } else {
 		$name=$this->input->post('name');
@@ -44,6 +48,7 @@ class VerifyAddStory extends CI_Controller {
 		    'project_name' => $project );
 		$this->db->insert('stories', $userdata);
 		$data['message']='Story successfully added.';
+		$data['noproject']='';
 		$this->load->view('addstory_view',$data);
 	    }
 	    $this->load->view('footer');
