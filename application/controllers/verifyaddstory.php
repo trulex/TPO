@@ -26,11 +26,12 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
 	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|callback_busvalue|is_natural_no_zero');
 	    
-	    if ($this->form_validation->run() == FALSE || strcmp($this->session->userdata('project'),'')==0) {
+	    if ($this->form_validation->run() == FALSE || strcmp($this->session->userdata('project'),'')==0 || !$this->hasRights()) {
 		$data['message']='';
 		if (strcmp($this->session->userdata('project'),'')==0) {
 		    $data['noproject']='Please select a project.';
-		} else if (!$this->hasRights()) {
+		} 
+		if (!$this->hasRights()) {
 		    $data['noproject']='Warning: You do not have sufficient rights for this action.';
 		}
 		$this->load->view('addstory_view',$data);
