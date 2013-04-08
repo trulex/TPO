@@ -1,6 +1,6 @@
 <?php
 //Created by lovrenc
-class Get_stories extends CI_Model{
+class Stories extends CI_Model{
 	
 	function getAll(){
 		$query = $this->db->query("SELECT id, name, text FROM stories");
@@ -10,7 +10,7 @@ class Get_stories extends CI_Model{
 		$query = $this->db->query("select id, name, text from tasks where UID={$data['id']}");
 		return $query->result();
 	}
-	public function
+
 }
 	
 ?>
