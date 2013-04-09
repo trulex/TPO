@@ -16,9 +16,6 @@ class Addstory extends CI_Controller {
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->project->getProjects($data['id']);
-	    if(strcmp($data['rights'],'user')==0) {
-		redirect('home','refresh');
-	    }
 	    $data['active']='productbacklog';
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));

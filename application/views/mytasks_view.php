@@ -2,12 +2,23 @@
 <div id="content">
     <div id="left">
     <p id="title">My tasks</p>
-    <!-- V tabelo nalog se shrani trenutni cas-->
-    <p>Currently working on: <input type="submit" value="Stop working"></p>
+    <?php if(strcmp($this->session->userdata('taskActive'),'')!=0) {
+	echo '<p style="color:red">'.$this->session->userdata('taskActive').'</p>';
+    }?>
+    <?php if(strcmp($activeTask,'')!=0) {
+     echo '<form name="stopWork" method="post" action="mytasks/stopWork">';
+     echo '<p>Currently working on: <span style="text-decoration:underline">'.$activeTask.'</span> <input type="submit" name="stopWork" value="Stop working"></p></form>'; }?>
 	<ul>
 	    <form name="startTask" method="post" action="mytasks/startWork">
-	    <? foreach ($tasks as $task) {
-		echo '<li>'.$task.' <button type="submit" name="task" value="'.$task.'">Start working</button></li>';
+	    <? foreach ($tasks as $task=>$accepted) {
+		$completed=$this->task->isCompleted($task,$id);
+		if($accepted==1 && $completed==1) { 
+		    echo '<li><span style="font-size:small;color:blue">(Completed) </span>'.$task.' <button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
+		} else if ($accepted==1){
+		    echo '<li>'.$task.' <button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
+		} else if ($accepted==0) {
+		    echo '<li>'.$task.' <span style="font-size:small;color:orange">(Not yet accepted)</span></li>';
+		}
 	    } ?>
 	    </form>
 	</ul>
