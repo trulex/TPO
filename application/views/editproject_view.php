@@ -19,7 +19,7 @@
 		
 		<label>Scrum master</label>
 		<?php
-			$sql="SELECT id, username FROM users"; 
+			$sql="SELECT id, username FROM users ORDER BY username asc"; 
 			$result=mysql_query($sql); 
 
 			$options=""; 
@@ -37,7 +37,7 @@
 
 		<label>Product owner</label>
 		<?php
-			$sql="SELECT id, username FROM users"; 
+			$sql="SELECT id, username FROM users ORDER BY username asc"; 
 			$result=mysql_query($sql); 
 
 			$options=""; 
@@ -55,7 +55,7 @@
 
 		<label>Team members</label>
 		<?php
-			$sql="SELECT id, username FROM users"; 
+			$sql="SELECT id, username FROM users ORDER BY username asc"; 
 			$result=mysql_query($sql); 
 
 			$input=""; 
