@@ -5,10 +5,11 @@
 <?php foreach ($stories as $story): ?>
 	<h2> <?php echo $story->id.".)".$story->name ?></h2>
 	<div> <?php echo $story->text ?>
-	<ol><?php foreach ($tasks as $task): ?>
-		<h3><li> <?php echo $task->task_name ?> </li></h3>
-		 <?php echo $task->text ?> 
-	<?php endforeach?></div>
+	<?php foreach ($tasks as $task): 
+	if($story->id==$task->StID){?>
+		<h3><?php echo $task->task_name ?></h3>
+		<div><?php echo $task->text ?></div>
+	<?php } endforeach?></div>
 <?php endforeach ?>
 
     

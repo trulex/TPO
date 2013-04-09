@@ -3,12 +3,15 @@
 class Tasks extends CI_Model{
 	
 	function getAll(){
-		$query = $this->db->query("SELECT id, task_name, text FROM tasks");
+		$query = $this->db->query("SELECT id, task_name, text, StID FROM tasks");
 		return $query->result();
 	}
-	function getOwn(){
-		$query = $this->db->query("SELECT id, task_name, text FROM tasks where UID={$data['id']}");
+	function getOwn($id){
+		$query = $this->db->query("SELECT id, task_name, text, StID FROM tasks where UID=$id");
 		return $query->result();
+	}
+	function insert($row){
+		$this->db->insert('task',$row);
 	}
 }
 

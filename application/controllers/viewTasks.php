@@ -19,7 +19,7 @@ class ViewTasks extends CI_Controller {
 			}
 			$data['active']='viewTasks';
 			$this->load->model("stories");
-			$data['stories']= $this->stories->getAll();	
+			$data['stories']= $this->stories->getAll($data['id']);	
 			$this->load->model("tasks");
 			$data['tasks']= $this->tasks->getAll();
 			$this->load->view('header', $data);
