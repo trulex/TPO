@@ -24,7 +24,7 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
-	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|callback_busvalue|is_natural_no_zero');
+	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|is_natural_no_zero');
 	    
 	    if ($this->form_validation->run() == FALSE || strcmp($this->session->userdata('project'),'')==0 || !$this->hasRights()) {
 		$data['message']='';
@@ -32,7 +32,7 @@ class VerifyAddStory extends CI_Controller {
 		    $data['noproject']='Please select a project.';
 		} 
 		if (!$this->hasRights()) {
-		    $data['noproject']='Warning: You do not have sufficient rights for this action.';
+		    $data['noproject']='Error: You do not have sufficient rights for adding new stories to this project.';
 		}
 		$this->load->view('addstory_view',$data);
 	    } else {
@@ -63,7 +63,10 @@ class VerifyAddStory extends CI_Controller {
     function hasRights() {
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
-	
+	$rights=$session_data['rights'];
+	if(strcmp($rights,'admin')==0) {
+	    return true;
+	}
 	$this->db->select('id');
 	$this->db->from('projects');
 	$this->db->where('project_name', $this->session->userdata('project'));
@@ -92,14 +95,6 @@ class VerifyAddStory extends CI_Controller {
 	    $this->form_validation->set_message('storyname_check', 'The story already exists.');
 	return FALSE;
 	} else {
-	    return TRUE;
-	}
-    }
-    public function busvalue($str) {
-	if(intval($str) > 100) {
-	   $this->form_validation->set_message('busvalue', 'The Business value field must contain a number less than one hundred.');
-	   return FALSE; 
-	 } else {
 	    return TRUE;
 	}
     }
