@@ -1,59 +1,78 @@
 <!--avtor:BOSTJAN-->
-<?php echo form_open('editproject'); ?>
 
-<head>
-	<style type="text/css">
+<?php echo form_open('editproject');
+		if ($this->session->flashdata('flashSuccess') != ''): 
+			$this->session->flashdata('flashSuccess'); 
+		endif;
+?>
 
-	.container {
-		border:2px solid #ccc; 
-		width:300px; 
-		height: 100px;
-		overflow-y: 
-		scroll;
-	}
-	</style>
-</head>
+<div id="content">
+    <div id="left">
+	<div id="add">
+		<p>Edit project</p>
+		<span style="color:red">*</span><label>Project name</label>
+		<input type="text" name="projectname" value="<?php echo set_value($this->session->userdata('project')); ?>" size="20"/><br>
+		<small><span style="color:red;font-weight:normal"><?php echo form_error('projectname'); ?></span></small>
+		
+		<label>Project description</label>
+		<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
+		
+		<label>Scrum master</label>
+		<?php
+			$sql="SELECT id, username FROM users"; 
+			$result=mysql_query($sql); 
 
-<div id="add">
-    <p>Edit project</p>
-    <label>Project name</label>
-	<input type="text" name="startdate" value="<?php echo set_value('projectname'); ?>" size="20"/><br>
-	
-    <label>Project description</label>
-	<textarea name="projectdescription" rows="4" value="<?php echo set_value('projectname'); ?>" cols="50"></textarea><br>
-	
-    <label>Scrum master</label>
-	<select name="scrummaster">-
-		<option value="-" selected>-</option>
-		<option value="saab">Saab</option>
-		<option value="mercedes">Mercedes</option>
-		<option value="audi">Audi</option>
-	</select><br> 
-	
-	<label>Product owner</label>
-	<select name="productowner">-
-		<option value="-" selected>-</option>
-		<option value="saab">Saab</option>
-		<option value="mercedes">Mercedes</option>
-		<option value="audi">Audi</option>
-	</select><br>
-	
-	<label>Team members</label>
-	<div class="container">
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />
-		<input type="checkbox" /> test <br />		
+			$options=""; 
+
+			while ($row=mysql_fetch_array($result)) { 
+				$id=$row["id"]; 
+				$username=$row["username"]; 
+				$options.="<option value=\"$id\">".$username; 
+			} 
+		?> 
+		<select name="scrummaster"> 
+		<option value=0>- 
+			<?=$options?> 
+		</select><br> 
+
+		<label>Product owner</label>
+		<?php
+			$sql="SELECT id, username FROM users"; 
+			$result=mysql_query($sql); 
+
+			$options=""; 
+
+			while ($row=mysql_fetch_array($result)) { 
+				$id=$row["id"]; 
+				$username=$row["username"]; 
+				$options.="<option value=\"$id\">".$username; 
+			} 
+		?> 
+		<select name="productowner"> 
+		<option value=0>- 
+			<?=$options?> 
+		</select><br> 
+
+		<label>Team members</label>
+		<?php
+			$sql="SELECT id, username FROM users"; 
+			$result=mysql_query($sql); 
+
+			$input=""; 
+
+			while ($row=mysql_fetch_array($result)) { 
+				$id=$row["id"]; 
+				$username=$row["username"]; 
+				$input.="<input name=listofmembers[] type=checkbox value=\"$id\">".$username."</input><br>";
+			} 
+		?> 
+		<div class="container">
+			<?=$input?>
+		</div>
+
+		<div><input type="submit" value="Save changes" /></div>
+		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 	</div>
-	
-	<div><input type="submit" value="Save changes" /></div>
-</div>
-
-<div id="validation">
-	<?php echo validation_errors(); ?>
+	</div>
 </div>
 </form>

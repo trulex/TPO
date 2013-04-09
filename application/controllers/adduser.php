@@ -2,8 +2,8 @@
 session_start();
 class Adduser extends CI_Controller { 
     function __construct() {
-	parent::__construct();
-	$this->load->model('project');
+		parent::__construct();
+		$this->load->model('project');
     }
     
     function index() {

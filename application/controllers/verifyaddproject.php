@@ -11,13 +11,12 @@ class VerifyAddProject extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
-	    
+		
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 		
 	    $this->form_validation->set_rules('projectname', 'Project name', 'required|callback_projectname_check');
 	    $this->form_validation->set_rules('description', 'Project description');
-	    
 	    
 	    if ($this->form_validation->run() == FALSE) {
 			$this->load->view('addproject_view',$data);
@@ -27,9 +26,12 @@ class VerifyAddProject extends CI_Controller {
 		
 		$userdata=array(
 		    'project_name'=>$projectname,
-		    'description'=>$description);
+		    'description'=>$description
+			);
+		
 		$this->db->insert('projects', $userdata);
-		$this->load->view('projectsuccess');
+		$this->session->set_flashdata('flashSuccess', 'Project successfully added.');
+		redirect('addproject');
 	    }
 	    $this->load->view('footer');
 	}    else {
