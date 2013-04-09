@@ -13,7 +13,7 @@ class Addstory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['id']=$session_data['id'];
+		$data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->project->getProjects($data['id']);
 	    if(strcmp($data['rights'],'user')==0) {

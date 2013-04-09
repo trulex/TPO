@@ -19,10 +19,17 @@ class Addproject extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
+<<<<<<< HEAD
 	    $data['projects']=$this->project->getProjects($data['id']);
 	    $this->load->model("get_projects");
 	    $data['results']= $this->get_projects->getAll();
 	
+=======
+		
+		//$this->load->model("get_projects");
+		//$data['results']= $this->get_projects->getAll();
+			
+>>>>>>> origin/boco
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $this->load->view('addproject_view', $data);

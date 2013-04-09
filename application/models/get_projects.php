@@ -6,4 +6,8 @@ class Get_projects extends CI_Model{
 		return $query->result();
 	}
 }
+<<<<<<< HEAD
 ?> 
+=======
+?>
+>>>>>>> origin/boco

@@ -9,7 +9,11 @@
     <div id="left">
 	<div id="add">
 	<p>Add a new sprint</p>
+<<<<<<< HEAD
 	    <span style="color:red">*</span><label>Start date</label>
+=======
+		<span style="color:red">*</span><label>Start date</label>
+>>>>>>> origin/boco
 		<input type="text" name="startdate" value="<?php echo set_value('startdate'); ?>" size="20"/>
 		<small>(dd.mm.YYYY)</small><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('startdate'); ?></span></small>
@@ -23,24 +27,19 @@
 		<input type="text" name="velocity" value="<?php echo set_value('velocity'); ?>" size="3"/>
 		<small>(in story points)</small><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('velocity'); ?></span></small>
+<<<<<<< HEAD
 	    
 	    <div><form action="verifyaddsprint"><input type="submit" value="Create sprint" /></form></div>
 	    <span style="color:red;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 
+=======
+		
+		<div><form action="verifyaddsprint"><input type="submit" value="Create sprint" /></form></div>
+		<span style="color:red;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>
+		
 	</div>
-    </div>
-        <div id="projects">
-	    <p id="title">My projects</p>
-	    <form name="selectp" method="post" action="selectProject/select">
-	    <?php	    
-		foreach ($projects as $project) {
-		    echo '<button type="submit" value="'.$this->project->getProjectName($project).'" name="project">'.$this->project->getProjectName($project).'</button>';
-		    echo '<br />';
-		}
-	    ?>
-	    <input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
-	    </form>
-	</div>    
+>>>>>>> origin/boco
+	</div>
 </div>
 
 <div id="content">

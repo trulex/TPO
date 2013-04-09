@@ -6,4 +6,8 @@ class Get_sprints extends CI_Model{
 		return $query->result();
 	}
 }
+<<<<<<< HEAD
 ?> 
+=======
+?>
+>>>>>>> origin/boco

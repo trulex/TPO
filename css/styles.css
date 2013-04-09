@@ -1,4 +1,4 @@
-/* /*avtor:darko*/ */
+/*avtor:darko*/
 @font-face {
     font-family: oldsans;
     src: url('OldSansBlack.ttf');
@@ -15,6 +15,10 @@
 	height: auto;
 	overflow-y: 
 	scroll;
+<<<<<<< HEAD
+=======
+	text-align:left;
+>>>>>>> origin/boco
 }
 .naslov {
     font-family:oldsans;
@@ -22,14 +26,14 @@
     float:left;
     margin-bottom:-15px;
     font-size:20px;
-    font-weight:bold;
+	font-weight:bold;
 }
 .naslov-login {
     font-family:oldsans;
     margin-left:25%;
     float:left;
     font-size:20px;
-    font-weight:bold;
+	font-weight:bold;
 }
 .welcome {
     float:right;
@@ -54,7 +58,7 @@ hr {
 #menu {
     font-family: mentone;
     font-size:17;
-    padding-bottom:2px;
+	padding-bottom:2px;
 }
 
 body {
@@ -77,7 +81,7 @@ body {
     background:lightgrey;
     position:absolute;
     right:15%;
-    padding-left:15px;
+	padding-left:15px;
     padding-right:15px;
 }
 #add {
@@ -91,7 +95,7 @@ body {
 }
 #add label {
     font-style:italic;
-    vertical-align:top;
+	vertical-align:top;
 }
 #add div.error {
     font-weight:normal;

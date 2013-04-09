@@ -9,11 +9,15 @@
     <div id="left">
 	<div id="add">
 	    <p>Create a new project</p>
+<<<<<<< HEAD
 	    <span style="color:red">*</span><label>Project name</label>
+=======
+		<span style="color:red">*</span><label>Project name</label>
+>>>>>>> origin/boco
 		<input type="text" name="projectname" value="<?php echo set_value('projectname'); ?>" size="20"/><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('projectname'); ?></span></small>
 		
-	    <label>Project description</label>
+		<label>Project description</label>
 		<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
 		
 		<label>Scrum master</label>
@@ -52,6 +56,7 @@
 			<?=$options?> 
 		</select><br> 
 
+<<<<<<< HEAD
 		<label>Team members</label>
 		<?php
 			$sql="SELECT id, username FROM users"; 
@@ -95,5 +100,11 @@
 	    <input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
 	    </form>
     </div>
+=======
+		<div><input type="submit" value="Create project" /></div>
+		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
+	</div>
+	</div>	
+>>>>>>> origin/boco
 </div>
 </form>

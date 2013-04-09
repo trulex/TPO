@@ -12,19 +12,25 @@ class VerifyAddProject extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
+<<<<<<< HEAD
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->project->getProjects($data['id']);
 	    
 	    $this->load->model("get_projects");
 	    $data['results']= $this->get_projects->getAll();
+=======
+>>>>>>> origin/boco
 		
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 		
 	    $this->form_validation->set_rules('projectname', 'Project name', 'required|callback_projectname_check');
 	    $this->form_validation->set_rules('description', 'Project description');
+<<<<<<< HEAD
 		$this->form_validation->set_rules('scrummaster', 'Scrum master');
 	    $this->form_validation->set_rules('productowner', 'Product owner');
+=======
+>>>>>>> origin/boco
 	    
 	    if ($this->form_validation->run() == FALSE) {
 			$this->load->view('addproject_view',$data);
@@ -36,10 +42,16 @@ class VerifyAddProject extends CI_Controller {
 		
 		$userdata=array(
 		    'project_name'=>$projectname,
+<<<<<<< HEAD
 		    'description'=>$description,
 			'scrum_master'=>$scrummaster,
 			'product_owner'=>$productowner
 			);
+=======
+		    'description'=>$description
+			);
+		
+>>>>>>> origin/boco
 		$this->db->insert('projects', $userdata);
 		$this->session->set_flashdata('flashSuccess', 'Project successfully added.');
 		redirect('addproject');

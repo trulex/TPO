@@ -10,7 +10,12 @@
 <div class="glava">
     <p class="naslov">ScrumPro</p>
     <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
+<<<<<<< HEAD
 	Current project: <?php echo $this->session->userdata('project'); ?><br />	
+=======
+	Current project: <?php echo $this->session->userdata('project'); ?> - (<?php echo anchor('editproject','Edit'); ?>)<br> 
+	
+>>>>>>> origin/boco
     </p>
     <div style="clear: both;"></div>​
     <div id="menu">
