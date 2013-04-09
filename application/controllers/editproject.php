@@ -5,51 +5,7 @@ class Editproject extends CI_Controller {
 		parent::__construct();
 		$this->load->model('project');
     }
-<<<<<<< HEAD
-	
-	function index() {
-		if($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
-			$data['name'] = $session_data['name'];
-			$data['rights'] = $session_data['rights'];
-			$data['active']='administration';
-			
-			$this->load->model("get_projects");
-			$data['results']= $this->get_projects->getAll();
-			
-			$this->load->view('header',$data);
-			$this->load->library('form_validation');
-			
-			$this->form_validation->set_rules('projectname', 'Project name', 'required|callback_projectname_check');
-			$this->form_validation->set_rules('description', 'Project description');
-			$this->form_validation->set_rules('scrummaster', 'Scrum master');
-			$this->form_validation->set_rules('productowner', 'Product owner');
-			
-			if ($this->form_validation->run() == FALSE) {
-				$this->load->view('editproject_view',$data);
-			} else {
-			
-			$projectname=$this->input->post('projectname');
-			$description=$this->input->post('description');
-			$scrummaster=$this->input->post('scrummaster');
-			$productowner=$this->input->post('productowner');
-			
-			$userdata=array(
-				'project_name'=>$projectname,
-				'description'=>$description,
-				'scrummaster'=>$scrummaster,
-				'productowner'=>$productowner
-			);
-			
-			$this->session->set_flashdata('flashSuccess', 'Project successfully edited.');
-			redirect('addproject');
-			}
-			$this->load->view('footer');
-		}else {
-			//If no session, redirect to login page
-			redirect('login', 'refresh');
-=======
+
     function index() {
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
@@ -116,7 +72,6 @@ class Editproject extends CI_Controller {
 			'role'=> 0
 			);
 			$this->db->insert('product_user', $userdata);
->>>>>>> origin/boco
 		}
 		
 		$this->session->set_flashdata('flashSuccess', 'Project successfully edited.');
