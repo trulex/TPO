@@ -10,7 +10,9 @@
      echo '<p>Currently working on: <span style="text-decoration:underline">'.$activeTask.'</span> <input type="submit" name="stopWork" value="Stop working"></p></form>'; }?>
 	<ul>
 	    <form name="startTask" method="post" action="mytasks/startWork">
-	    <?  $previousStory='';foreach ($tasks as $task=>$accepted) {
+	    <?php  
+		$previousStory='';
+		foreach ($tasks as $task=>$accepted) {
 		$storyData=$this->task->getStory($task,$id);
 		$completed=$this->task->isCompleted($task,$id);
 		
