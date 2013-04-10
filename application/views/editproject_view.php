@@ -73,6 +73,5 @@
 		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 	</div>
 	</div>
->>>>>>> origin/boco
 </div>
 </form>

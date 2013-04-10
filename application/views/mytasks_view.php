@@ -10,7 +10,7 @@
      echo '<p>Currently working on: <span style="text-decoration:underline">'.$activeTask.'</span> <input type="submit" name="stopWork" value="Stop working"></p></form>'; }?>
 	<ul>
 	    <form name="startTask" method="post" action="mytasks/startWork">
-	    <? foreach ($tasks as $task=>$accepted) {
+	    <?php foreach ($tasks as $task=>$accepted) {
 		$completed=$this->task->isCompleted($task,$id);
 		if($accepted==1 && $completed==1) { 
 		    echo '<li><span style="font-size:small;color:blue">(Completed) </span>'.$task.' <button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
