@@ -7,21 +7,19 @@ class VerifyAddTask extends CI_Controller {
 		$this->load->model('tasks');
     } 
 
-    function index() {
+    function index($StID) {
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='productbacklog';
+	    $data['active']='verifyAddTask';
 	    $data['id']=$session_data['id'];
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
-	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
+	    $this->form_validation->set_rules('task_name', 'task_name', 'trim|required|callback_taskName_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
-	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
-	    $this->form_validation->set_rules('business_value', 'Business value', 'trim|required|callback_busvalue|is_natural_no_zero');
 	    
 	    if ($this->form_validation->run() == FALSE) {
 		$data['message']='';
@@ -36,14 +34,11 @@ class VerifyAddTask extends CI_Controller {
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
 		$project=$this->session->userdata('project');
-		$userdata=array(
-		    'name'=>$name,
+		$userdata=row(
+		    'task_name'=>$task_name,
 		    'text'=>$text,
-		    'tests'=>$tests,
-		    'priority'=>$priority,
-		    'busvalue'=>$business_value,
-		    'project_name' => $project );
-		$this->db->insert('stories', $userdata);
+			'StID'=>$StID);
+		$this->db->insert('tasks', $row);
 		$data['message']='Story successfully added.';
 		$data['noproject']='';
 		$this->load->view('addstory_view',$data);
@@ -77,8 +72,8 @@ class VerifyAddTask extends CI_Controller {
 	    return true;
 	}
     }
-    public function storyname_check($str) {
-    	$this->db->select('name');
+    public function taskName_check($str) {
+    	$this->db->select('taskname');
 	$this->db->from('stories');
 	$this->db->where('name', $str);
 	$query=$this->db->get();
