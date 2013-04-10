@@ -17,6 +17,23 @@
 	scroll;
 	text-align:left;
 }
+h4{
+    margin-top:0px;
+    margin-bottom:-10px;
+	font-weight:normal;
+}
+h5{
+	color:#303030  ;
+    margin-top:-10px;
+    margin-bottom:-10px;
+	font-weight:normal;
+}
+#zgodba{
+	border:1px solid gray;
+	padding-right:100px;
+	text-align:left;
+	margin-bottom:15px;
+}
 .naslov {
     font-family:oldsans;
     margin-left:25%;
