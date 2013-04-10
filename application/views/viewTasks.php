@@ -11,8 +11,7 @@
 		<li><h3><?php echo $task->task_name ?></h3>
 		<div><?php echo '"'.$task->text.'"' ?></div></li>
 	<?php } endforeach?></div></ul>
-	<button type="submit" action=addTask value="<?php echo $story->id?>" name="StID">add task</button>
-	<div><?php echo anchor('addTask','add Tasks',$story->id); ?></div>
+	<div><?php echo anchor('addTask','add Tasks'); ?></div>
 	<hr>
 <?php endforeach ?>
 
