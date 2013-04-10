@@ -4,11 +4,14 @@
 
 <?php foreach ($stories as $story): ?>
 	<h2> <?php echo $story->id.".)".$story->name ?></h2>
-	<div> <?php echo $story->text ?>
-	<ol><?php foreach ($tasks as $task): ?>
-		<h3><li> <?php echo $task->task_name ?> </li></h3>
-		 <?php echo $task->text ?> 
-	<?php endforeach?></div>
+	<div> <?php echo '"'.$story->text.'"'?>
+	<ul><?php foreach ($tasks as $task): 
+	if($story->id==$task->StID){?>
+		<li><h3><?php echo $task->task_name ?></h3>
+		<div><?php echo '"'.$task->text.'"' ?></div></li>
+	<?php } endforeach?></div></ul>
+	<button type="submit" value="<?php echo $story->id?>" name="StID">add task</button>
+	<hr>
 <?php endforeach ?>
 
     

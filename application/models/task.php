@@ -17,7 +17,25 @@ Class Task extends CI_Model {
 	}
 	return $activeTask;
     }
-
+    function getStory($taskName,$userId) { /* Returns story id of task $taskId */
+	$this -> db -> select('StID');
+	$this -> db -> from('tasks');
+	$this -> db -> where('task_name', $taskName);
+	$this -> db -> where('UID', $userId);
+	$query=$this->db->get();
+	$storyId=$query->row()->StID; // get story id
+	
+	$this -> db -> select('name,text,tests');
+	$this -> db -> from('stories');
+	$this -> db -> where('id', $storyId);
+	$query=$this->db->get();
+	$storyData=array(
+	    'name'=>$query->row()->name,
+	    'text'=>$query->row()->text,
+	    'tests'=>$query->row()->tests
+	);
+	return $storyData;
+    }
     function getTasks($userId) {
 	$this -> db -> select('task_name,accepted');
 	$this -> db -> from('tasks');
