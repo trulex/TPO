@@ -10,15 +10,35 @@
      echo '<p>Currently working on: <span style="text-decoration:underline">'.$activeTask.'</span> <input type="submit" name="stopWork" value="Stop working"></p></form>'; }?>
 	<ul>
 	    <form name="startTask" method="post" action="mytasks/startWork">
-	    <?php foreach ($tasks as $task=>$accepted) {
+	    <?  $previousStory='';foreach ($tasks as $task=>$accepted) {
+		$storyData=$this->task->getStory($task,$id);
 		$completed=$this->task->isCompleted($task,$id);
-		if($accepted==1 && $completed==1) { 
+		
+		if($accepted==1 && $completed==1) {
+		    if(strcmp($previousStory,$storyData['name'])!=0) {
+			echo '<br /><div style="font-weight:bold">'.$storyData['name'].'</div>';
+			echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
+			echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
+		    }
 		    echo '<li><span style="font-size:small;color:blue">(Completed) </span>'.$task.' <button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
+		
 		} else if ($accepted==1){
+		    if(strcmp($previousStory,$storyData['name'])!=0) {
+			echo '<br /><div style="font-weight:bold">'.$storyData['name'].'</div>';
+			echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
+			echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
+		    }
 		    echo '<li>'.$task.' <button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
+		
 		} else if ($accepted==0) {
+		    if(strcmp($previousStory,$storyData['name'])!=0) {
+			echo '<br /><div style="font-weight:bold">'.$storyData['name'].'</div>';
+			echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
+			echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
+		    }
 		    echo '<li>'.$task.' <span style="font-size:small;color:orange">(Not yet accepted)</span></li>';
 		}
+		$previousStory=$storyData['name'];
 	    } ?>
 	    </form>
 	</ul>

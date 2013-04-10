@@ -17,6 +17,42 @@
 		<label>Project description</label>
 		<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
 		
+		<label>Scrum master</label>
+		<?php
+			$sql="SELECT id, username FROM users"; 
+			$result=mysql_query($sql); 
+
+			$options=""; 
+
+			while ($row=mysql_fetch_array($result)) { 
+				$id=$row["id"]; 
+				$username=$row["username"]; 
+				$options.="<option value=\"$id\">".$username; 
+			} 
+		?> 
+		<select name="scrummaster"> 
+		<option value=0>- 
+			<?=$options?> 
+		</select><br> 
+
+		<label>Product owner</label>
+		<?php
+			$sql="SELECT id, username FROM users"; 
+			$result=mysql_query($sql); 
+
+			$options=""; 
+
+			while ($row=mysql_fetch_array($result)) { 
+				$id=$row["id"]; 
+				$username=$row["username"]; 
+				$options.="<option value=\"$id\">".$username; 
+			} 
+		?> 
+		<select name="productowner"> 
+		<option value=0>- 
+			<?=$options?> 
+		</select><br> 
+
 		<div><input type="submit" value="Create project" /></div>
 		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 	</div>
