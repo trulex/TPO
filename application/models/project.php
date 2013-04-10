@@ -2,17 +2,30 @@
 <?php
 Class Project extends CI_Model {
     function getProjects($userid) {
-	$this->db->select('project_id');
-	$this->db->from('project_user');
-	$this->db->where('user_id',$userid);
+	/* Check if admin */
+	$this->db->select('rights');
+	$this->db->from('users');
+	$this->db->where('id',$userid);
 	$query=$this->db->get();
-	
-	/*if (!$query->num_rows() > 0) {
-	    die("There are no projects yet.");
-	}*/
-	$projects = array();
-	foreach ($query->result() as $row) {
-	    $projects[] = $row->project_id;
+	$rights=$query->row()->rights;
+	if(strcmp($rights,'admin')==0) {
+	    $this->db->select('id');
+	    $this->db->from('projects');
+	    $query=$this->db->get();
+	    $projects = array();
+	    foreach ($query->result() as $row) {
+		$projects[] = $row->id;
+	    }
+	} else {
+	    //returns ids of projects of user with id $userid
+	    $this->db->select('project_id');
+	    $this->db->from('project_user');
+	    $this->db->where('user_id',$userid);
+	    $query=$this->db->get();
+	    $projects = array();
+	    foreach ($query->result() as $row) {
+		$projects[] = $row->project_id;
+	    }
 	}
 	return $projects;
     }

@@ -1,5 +1,4 @@
 <!--avtor:BOSTJAN-->
-
 <?php echo form_open('editproject');
 		if ($this->session->flashdata('flashSuccess') != ''): 
 			$this->session->flashdata('flashSuccess'); 
@@ -74,5 +73,6 @@
 		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 	</div>
 	</div>
+>>>>>>> origin/boco
 </div>
 </form>

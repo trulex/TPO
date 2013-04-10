@@ -105,6 +105,9 @@ body {
     margin-left:25%;
     color:red;
 }
+button.task {
+    font-size:80%;
+}
 textarea.addstory {
     resize:none;
 }
@@ -144,7 +147,7 @@ li.active {
     margin-right: 3em;
 }
 #footer {
-    margin-top:5%;
+    margin-top:10%;
     margin-right:15%;
     margin-left:15%;
     text-align:center;

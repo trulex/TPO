@@ -7,6 +7,7 @@ class VerifyAddSprint extends CI_Controller {
 
     function __construct(){
 		parent::__construct();
+		$this->load->model('project');
     }
 	
 	function index() {
@@ -16,7 +17,10 @@ class VerifyAddSprint extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
-			
+			$data['id']=$session_data['id'];
+			$data['project']=$session_data['project'];
+			$data['projects']=$this->project->getProjects($data['id']);
+
 			$this->load->model("get_sprints");
 			$data['results']= $this->get_sprints->getAll();
 			

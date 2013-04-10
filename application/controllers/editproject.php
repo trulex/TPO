@@ -5,6 +5,7 @@ class Editproject extends CI_Controller {
 		parent::__construct();
 		$this->load->model('project');
     }
+
     function index() {
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
