@@ -27,6 +27,6 @@
 					echo '<div>"'.$task->text.'"</div></li>';
 				
 			}}?></ul>
-			<button type="submit" name="task" action="addTask" value="<?php echo $story->id?>">add task</button>
+			<button type="submit" action="sprintBacklog/addTask/<?php echo $story->id?>" name="task" action="addTask" value="<?php echo $story->id?>">add task</button>
 		<?php endforeach ?>
 	</div>

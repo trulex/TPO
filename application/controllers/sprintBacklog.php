@@ -42,20 +42,4 @@ class SprintBacklog extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
-// 		public function storyname_check($str) {
-// 			$this->db->select('name');
-// 			$this->db->from('stories');
-// 			$this->db->where('name', $str);
-// 			$query=$this->db->get();
-// 			if ($query->num_rows() > 0) {
-// 				$this->form_validation->set_message('storyname_check', 'The story already exists.');
-// 				return FALSE;
-// 			} 
-// 			else {
-// 				return TRUE;
-// 			}	
-// 		}
-
-	
-
 }
