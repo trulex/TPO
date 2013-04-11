@@ -5,5 +5,6 @@ class Get_users extends CI_Model{
 		$query = $this->db->query("SELECT * FROM projects");
 		return $query->result();
 	}
+	
 }
 ?>
