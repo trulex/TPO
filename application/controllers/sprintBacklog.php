@@ -1,7 +1,7 @@
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class ViewTasks extends CI_Controller {
+class SprintBacklog extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
@@ -14,20 +14,20 @@ class ViewTasks extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
+			$data['project']=$this->session->userdata('project');
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
-			$data['active']='viewTasks';
+			$data['active']='sprintBacklog';
+			$this->load->model("project");
+			$data['PID']= $this->project->getProjectID($data['project']);	
 			$this->load->model("stories");
-			$data['stories']= $this->stories->getAll($data['id']);	
+			$data['stories']= $this->stories->getCurrent($data['PID']);	
 			$this->load->model("tasks");
 			$data['tasks']= $this->tasks->getAll();
-			$this->load->model('project');
-			$data['projects']=$this->project->getProjects($data['id']);
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
-			$this->load->view('viewTasks',$data);
-			$this->load->view('selProject');
+			$this->load->view('sprintBacklog',$data);
 			$this->load->view('footer');
 		} 
 		else{
