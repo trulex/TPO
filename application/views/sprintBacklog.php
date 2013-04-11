@@ -2,18 +2,31 @@
 
 
 <div id="content">
-	<h2>Sprint backlog <?php echo "(".$project.")"?></h2>
+	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 	<div id="left">
 		<?php foreach ($stories as $story): ?>
-			<h3> <?php echo $story->id.".)".$story->name ?></h3>
+			<h3> <?php echo $counter.".)".$story->name; $counter++; ?></h3>
 			<?php echo '"'.$story->text.'"'?>
-			<ul><?php foreach ($tasks as $task):
-			if($story->id==$task->StID){?>
-				<li><b><?php echo $task->task_name ?></b>
-				<div><?php echo '"'.$task->text.'"' ?></div></li>
-			<?php } endforeach?></ul>
+			<ul><?php foreach ($tasks as $task){
+				if($story->id == $task->StID){
+					echo '<li><div><b>'.$task->task_name.'</b>';
+					if($task->UID == 0){
+						echo '<button type="submit" value="'.$task->id.'" name="'.$task->id.'">Accept task</button>';
+					}
+					else{ 
+						if($id == $task->UID){
+							echo "(My task)";
+							echo '<button type="submit" value="0" name="'.$task->id.'">Release task</button>';
+							echo '<button type="submit" value="0" name="'.$task->id.'">Release task</button>';
+						}
+						else{
+							echo "(Handled by user: ".$this->get_users->getUserName($task->UID).")";
+						}
+					}
+					echo "</div>";
+					echo '<div>"'.$task->text.'"</div></li>';
+				
+			}}?></ul>
 			<button type="submit" name="task" action="addTask" value="<?php echo $story->id?>">add task</button>
-			<div><?php echo anchor('addTask','add Tasks', "$story->id"); ?></div>
 		<?php endforeach ?>
 	</div>
-</div>

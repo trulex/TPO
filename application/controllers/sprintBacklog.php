@@ -5,6 +5,10 @@ class SprintBacklog extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
+		$this->load->model("project");
+		$this->load->model("get_users");
+		$this->load->model("stories");
+		$this->load->model("tasks");
 	}
 
 	public function index()	{
@@ -15,26 +19,43 @@ class SprintBacklog extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
+			$data['active']='sprintBacklog';
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
-			}
-			$data['active']='sprintBacklog';
-			$this->load->model("project");
+			}	
+			$this->load->view('header',$data);
 			$data['PID']= $this->project->getProjectID($data['project']);	
-			$this->load->model("stories");
+			$data['projects']=$this->project->getProjects($data['id']);
+
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
-			$this->load->model("tasks");
+			
+// 			foreach ($data['stories'] as $story){
+// 				$data['tasks'][$story->name]=$this->tasks->getCurrent($story->id);
+// 			}
 			$data['tasks']= $this->tasks->getAll();
-			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('sprintBacklog',$data);
+			$this->load->view('selProject', $data);
 			$this->load->view('footer');
-		} 
+		}
 		else{
 			redirect('login', 'refresh');
 		}
-
 	}
+// 		public function storyname_check($str) {
+// 			$this->db->select('name');
+// 			$this->db->from('stories');
+// 			$this->db->where('name', $str);
+// 			$query=$this->db->get();
+// 			if ($query->num_rows() > 0) {
+// 				$this->form_validation->set_message('storyname_check', 'The story already exists.');
+// 				return FALSE;
+// 			} 
+// 			else {
+// 				return TRUE;
+// 			}	
+// 		}
+
 	
 
 }
