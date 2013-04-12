@@ -17,7 +17,7 @@
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
-	    <li class="menu"><a href="#">UserLink1</a>
+	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
 	    <?php echo $active == 'productbacklog' ? '<li class="active">'.anchor('productbacklog','Product backlog') : '<li class="menu">'.anchor('productbacklog','Product backlog'); ?>
 	    <?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
 	    <?php if (strcmp($rights,"admin")==0) {

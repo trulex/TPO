@@ -6,6 +6,7 @@ class Home extends CI_Controller {
  function __construct()
  {
    parent::__construct();
+   $this->load->model("projects");
  }
 
  function index() {
@@ -14,6 +15,8 @@ class Home extends CI_Controller {
 	$data['username'] = $session_data['username'];
 	$data['name'] = $session_data['name'];
 	$data['rights'] = $session_data['rights'];
+	$data['id']=$session_data['id'];
+	$data['projects']=$this->projects->getProjects($data['id']);
 	$data['active']='';
 	$this->load->view('header', $data);
 	$this->load->view('home_view', $data);
