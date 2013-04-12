@@ -5,6 +5,7 @@ class VerifyAddTask extends CI_Controller {
     function __construct(){
 		parent::__construct();
 		$this->load->model('tasks');
+		$this->load->model("sprints");
     } 
 
     function index() {
@@ -19,6 +20,9 @@ class VerifyAddTask extends CI_Controller {
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
+			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+
 			$this->load->view('header', $data);
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('StID', 'StID', 'trim|numeric');

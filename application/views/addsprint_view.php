@@ -26,7 +26,7 @@
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('velocity'); ?></span></small>
 		
 		<div><form action="verifyaddsprint"><input type="submit" value="Create sprint" /></form></div>
-		<span style="color:red;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>
+		<span style="color:green;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 		
 	</div>
 	</div>

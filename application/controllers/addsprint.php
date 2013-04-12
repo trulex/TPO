@@ -6,6 +6,8 @@ class Addsprint extends CI_Controller {
     function __construct() {
 		parent::__construct();
 		$this->load->model('projects');
+		$this->load->model("sprints");
+
     }
 	
 	function index() {
@@ -19,8 +21,10 @@ class Addsprint extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
+
+			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			
-			$this->load->model("sprints");
 			$data['results']= $this->sprints->getAll();
 			
 			$this->load->view('header', $data);

@@ -5,6 +5,7 @@ class ViewTasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
+		$this->load->model("sprints");
 	}
 
 	public function index()	{
@@ -24,6 +25,10 @@ class ViewTasks extends CI_Controller {
 			$data['tasks']= $this->tasks->getAll();
 			$this->load->model('projects');
 			$data['projects']=$this->projects->getProjects($data['id']);
+
+			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('viewTasks',$data);

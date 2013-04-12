@@ -28,11 +28,25 @@ h5{
     margin-bottom:-10px;
 	font-weight:normal;
 }
-#zgodba{
-	border:1px solid gray;
-	padding-right:100px;
-	text-align:left;
-	margin-bottom:15px;
+.zgodba
+{
+	border: 1px solid #808080;
+	background-color: #00BFFF;
+	padding-right: 500px;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #808080;
+	padding-bottom: 15px;
+}
+.taski
+{
+	border: 1px solid #808080;
+	border-top: none;
+	background-color: #E8E8E8;
+	padding-right: 100px;
+	text-align: left;
+	margin-bottom: -26px;
 }
 .naslov {
     font-family:oldsans;
