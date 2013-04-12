@@ -4,7 +4,7 @@
 class VerifyAddStory extends CI_Controller { 
     function __construct(){
 	parent::__construct();
-	$this->load->model('project');
+	$this->load->model('projects');
     } 
 
     function index() {
@@ -16,7 +16,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['active']='productbacklog';
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['noproject']='';
 	    
 	    $this->load->view('header',$data);

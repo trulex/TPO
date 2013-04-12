@@ -8,6 +8,8 @@
 	    <li><?php echo anchor('addstory','Add new user stories'); ?></li>
 	    <li><?php echo anchor('addsprint','Add new sprints'); ?></li>
 	    <li><?php echo anchor('viewTasks','View all Tasks'); ?></li>
+	    <li><?php echo anchor('sprintBacklog','Sprint backlog-za enkrat vsi storyji trenutnega projekta'); ?></li>
+	    <li><?php echo anchor('verifyAddTask','add Task'); ?></li>
 	</ul>
     </div>
     <div id="projects">
@@ -15,7 +17,7 @@
 	    <form name="selectp" method="post" action="selectProject/select">
 	    <?php
 		foreach ($projects as $project) {
-		    echo '<button type="submit" value="'.$this->project->getProjectName($project).'" name="project">'.$this->project->getProjectName($project).'</button>';
+		    echo '<button type="submit" value="'.$this->projects->getProjectName($project).'" name="project">'.$this->projects->getProjectName($project).'</button>';
 		    echo '<br />';
 		}
 	    ?>

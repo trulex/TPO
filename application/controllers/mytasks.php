@@ -4,8 +4,8 @@ session_start(); //we need to call PHP's session object to access it through CI
 class MyTasks extends CI_Controller { 
     function __construct() {
 	parent::__construct();
-	$this->load->model('project');
-	$this->load->model('task');
+	$this->load->model('projects');
+	$this->load->model('tasks');
 	$this->load->helper('date');
     }
     
@@ -17,9 +17,9 @@ class MyTasks extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
-	    $data['projects']=$this->project->getProjects($data['id']);
-	    $data['tasks']=$this->task->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
-	    $data['activeTask']=$this->task->getActive($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
+	    $data['tasks']=$this->tasks->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
+	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
@@ -68,7 +68,7 @@ class MyTasks extends CI_Controller {
     function stopWork() {
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
-	$activeTask=$this->task->getActive($userId);
+	$activeTask=$this->tasks->getActive($userId);
 	
 	$this->db->select('id');
 	$this->db->from('tasks');
