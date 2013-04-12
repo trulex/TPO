@@ -11,7 +11,7 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	function getCurrent($PID){
-		$query =$this->db->query("select id, name from stories where PID=$id");
+		$query =$this->db->query("select id, name from stories where PID=$PID ");
 		return $query->result();
 	}
 }
