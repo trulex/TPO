@@ -10,7 +10,7 @@
 			<?php echo '"'.$story->text.'"'?>
 			<ul><?php foreach ($tasks as $task){
 				if($story->id == $task->StID){
-					echo '<li><div><b>'.$task->task_name.'</b>';
+					echo '<li><div><b>'.$task->task_name.' ['.$task->time_estimate.'] </b>';
 					echo '<input name="TID" type="hidden" value="'.$task->id.'" />';
 					if($task->UID == 0){
 						echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
@@ -29,9 +29,10 @@
 					}
 					echo "</div>";
 					echo '<div>"'.$task->text.'"</div></li>';
+					echo "<br><br>";
 					echo '</form>';
 			}}?></ul>
 			<form name=cts method="post" action="verifyAddTask">
-			<button type="submit" value="<?php echo $story->id ?>" name="task" >add task</button></form>
+			<button type="submit" value="<?php echo $story->id ?>" name="task" >add task</button></form><hr>
 		<?php endforeach ?>
 	</div>

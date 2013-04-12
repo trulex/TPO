@@ -3,15 +3,15 @@
 class Tasks extends CI_Model{
 	
 	function getAll(){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID FROM tasks");
+		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate FROM tasks");
 		return $query->result();
 	}
 	function getOwn($id){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID FROM tasks where UID=$id");
+		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate FROM tasks where UID=$id");
 		return $query->result();
 	}
 	function getCurrent($StID){
-		$query=$this->db->query("SELECT id, task_name, text, StID, UID FROM tasks where StID=$StID");
+		$query=$this->db->query("SELECT id, task_name, text, StID, UID , time_estimate FROM tasks where StID=$StID");
 		return $query->result();
 	}
 	function insert($row){

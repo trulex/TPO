@@ -41,10 +41,6 @@ class VerifyAddTask extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
-	function callTaskCreator(){
-		$StID=$this->input->post('task');
-		redirect("verifyAddTask/index/$StID");
-	}
     public function taskName_check($str) {
     	$this->db->select('task_name');
 		$this->db->from('tasks');
@@ -59,13 +55,22 @@ class VerifyAddTask extends CI_Controller {
 		}
     }
     public function taskCreator(){
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$data['name'] = $session_data['name'];
+		$data['rights'] = $session_data['rights'];
+		$data['active']='verifyAddTask';
+		$data['id']=$session_data['id'];
+		$data['message']="";
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required');
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
-		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|numeric|max_length[3]');
+		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|greater_than[0]');
+		$this->form_validation->set_message('time_estimate', 'neveljeven  čas <br');
 		if ($this->form_validation->run() == FALSE) {
 			$data['message']='';
-			redirect("verifyAddTask/index/$StID");
+			$this->load->view('addTask', $data);
+			$this->load->view('footer');
 		}
 		else {
 			$name=$this->input->post('task_name');
