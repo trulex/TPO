@@ -6,6 +6,7 @@ class VerifyAddUser extends CI_Controller {
 	parent::__construct();
 	$this->load->model('users','',TRUE);
 	$this->load->model('projects');
+	$this->load->model("sprints");
     }
     function index() {
 	if($this->session->userdata('logged_in')) {
@@ -17,6 +18,8 @@ class VerifyAddUser extends CI_Controller {
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['project']=$this->session->userdata('project');
+		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');

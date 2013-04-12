@@ -4,6 +4,7 @@ class Administration extends CI_Controller {
     function __construct() {
 	parent::__construct();
 	$this->load->model('projects');
+	$this->load->model("sprints");
     }
     
     function index() {
@@ -19,6 +20,8 @@ class Administration extends CI_Controller {
 	    }
 	    $data['active']='administration';
 	    $data['projects']=$this->projects->getProjects($data['id']);
+		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	    $this->load->view('header', $data);
 	    $this->load->view('administration', $data);
 	    $this->load->view('footer');
