@@ -27,7 +27,6 @@ class ViewTasks extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('viewTasks',$data);
-			$this->load->view('selProject');
 			$this->load->view('footer');
 		} 
 		else{

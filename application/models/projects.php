@@ -30,11 +30,12 @@ Class Projects extends CI_Model {
 	return $projects;
     }
     function getProjectName($projectId) {
-		$this->db->select('project_name');
-		$this->db->from('projects');
-		$this->db->where('id',$projectId);
-		$query=$this->db->get();
-		return $query->row()->project_name;
+	$this->db->select('project_name');
+	$this->db->from('projects');
+	$this->db->where('id',$projectId);
+	$query=$this->db->get();
+	
+	return $query->row()->project_name;
     }
     function getProjectID($projectName) {
 		$this->db->select('id');

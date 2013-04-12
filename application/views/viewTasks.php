@@ -14,5 +14,6 @@
 			<?php } endforeach?></ul>
 		<?php endforeach ?>
 	</div>
+>>>>>>> master
 
    

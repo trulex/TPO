@@ -5,7 +5,7 @@ class MyTasks extends CI_Controller {
     function __construct() {
 	parent::__construct();
 	$this->load->model('projects');
-	$this->load->model('tasks');
+	$this->load->model('task');
 	$this->load->helper('date');
     }
     
@@ -18,8 +18,8 @@ class MyTasks extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-	    $data['tasks']=$this->tasks->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
-	    $data['activeTask']=$this->tasks->getActive($data['id']);
+	    $data['tasks']=$this->task->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
+	    $data['activeTask']=$this->task->getActive($data['id']);
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
