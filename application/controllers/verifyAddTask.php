@@ -69,7 +69,7 @@ class VerifyAddTask extends CI_Controller {
 			$time_estimate=$this->input->post('time_estimate');
 			$StID=$this->input->post('StID');
 			$taskData=array(
-				'task_name'=>$task_name,
+				'task_name'=>$name,
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate);
