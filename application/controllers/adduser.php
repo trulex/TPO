@@ -3,7 +3,7 @@ session_start();
 class Adduser extends CI_Controller { 
     function __construct() {
 		parent::__construct();
-		$this->load->model('project');
+		$this->load->model('projects');
     }
     
     function index() {
@@ -17,7 +17,7 @@ class Adduser extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';

@@ -5,8 +5,8 @@ class SprintBacklog extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
-		$this->load->model("project");
-		$this->load->model("get_users");
+		$this->load->model("projects");
+		$this->load->model("users");
 		$this->load->model("stories");
 		$this->load->model("tasks");
 	}
@@ -21,8 +21,8 @@ class SprintBacklog extends CI_Controller {
 			$data['project']=$this->session->userdata('project');
 			$data['active']='sprintBacklog';	
 			$this->load->view('header',$data);
-			$data['PID']= $this->project->getProjectID($data['project']);	
-			$data['projects']=$this->project->getProjects($data['id']);
+			$data['PID']= $this->projects->getProjectID($data['project']);	
+			$data['projects']=$this->projects->getProjects($data['id']);
 
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
 			

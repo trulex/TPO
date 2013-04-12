@@ -24,7 +24,7 @@
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button></form>';
 						}
 						else{
-							echo "(Handled by user: ".$this->get_users->getUserName($task->UID).")";
+							echo "(Handled by user: ".$this->users->getUserName($task->UID).")";
 						}
 					}
 					echo "</div>";

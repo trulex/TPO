@@ -3,7 +3,7 @@
 class Administration extends CI_Controller { 
     function __construct() {
 	parent::__construct();
-	$this->load->model('project');
+	$this->load->model('projects');
     }
     
     function index() {
@@ -18,7 +18,7 @@ class Administration extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $this->load->view('header', $data);
 	    $this->load->view('administration', $data);
 	    $this->load->view('footer');

@@ -22,8 +22,8 @@ class ViewTasks extends CI_Controller {
 			$data['stories']= $this->stories->getAll($data['id']);	
 			$this->load->model("tasks");
 			$data['tasks']= $this->tasks->getAll();
-			$this->load->model('project');
-			$data['projects']=$this->project->getProjects($data['id']);
+			$this->load->model('projects');
+			$data['projects']=$this->projects->getProjects($data['id']);
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('viewTasks',$data);

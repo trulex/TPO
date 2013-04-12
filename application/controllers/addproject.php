@@ -5,7 +5,7 @@ class Addproject extends CI_Controller {
 
     function __construct() {
 		parent::__construct();
-		$this->load->model('project');
+		$this->load->model('projects');
     }
 	
 	function index() {
@@ -19,9 +19,9 @@ class Addproject extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
-	    $data['projects']=$this->project->getProjects($data['id']);
-	    $this->load->model("get_projects");
-	    $data['results']= $this->get_projects->getAll();
+	    $data['projects']=$this->projects->getProjects($data['id']);
+	    $this->load->model("projects");
+	    $data['results']= $this->projects->getAll();
 
 		//$this->load->model("get_projects");
 		//$data['results']= $this->get_projects->getAll();

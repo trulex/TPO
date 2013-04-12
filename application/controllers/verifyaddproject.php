@@ -3,7 +3,7 @@
 class VerifyAddProject extends CI_Controller { 
     function __construct(){
 		parent::__construct();
-		$this->load->model('project');
+		$this->load->model('projects');
     }
     function index() {
 	if($this->session->userdata('logged_in')) {
@@ -14,10 +14,9 @@ class VerifyAddProject extends CI_Controller {
 	    $data['active']='administration';
 
 	    $data['id']=$session_data['id'];
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
 	    
-	    $this->load->model("get_projects");
-	    $data['results']= $this->get_projects->getAll();
+	    $data['results']= $this->projects->getAll();
 		
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');

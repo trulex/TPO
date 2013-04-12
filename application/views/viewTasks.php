@@ -1,7 +1,7 @@
 <!--avtor:Lovrenc-->
 
 <div id="content">
-	<h2>Sprint backlog</h2>
+	<h2>All task</h2>
 	<div id="left">
 		<?php $counter=1;
 		foreach ($stories as $story): ?>
