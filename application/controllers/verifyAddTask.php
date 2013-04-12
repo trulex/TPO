@@ -6,6 +6,7 @@ class VerifyAddTask extends CI_Controller {
 		parent::__construct();
 		$this->load->model('tasks');
 		$this->load->model("sprints");
+		$this->load->model("projects");
     } 
 
     function index() {
