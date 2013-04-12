@@ -9,6 +9,7 @@ class SprintBacklog extends CI_Controller {
 		$this->load->model("users");
 		$this->load->model("stories");
 		$this->load->model("tasks");
+		$this->load->model("sprints");
 	}
 
 	public function index()	{
@@ -23,6 +24,8 @@ class SprintBacklog extends CI_Controller {
 			$this->load->view('header',$data);
 			$data['PID']= $this->projects->getProjectID($data['project']);	
 			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
 			
