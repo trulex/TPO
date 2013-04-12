@@ -1,6 +1,6 @@
 <!--avtor:darko-->
 <?php
-Class Project extends CI_Model {
+Class Projects extends CI_Model {
     function getProjects($userid) {
 	/* Check if admin */
 	$this->db->select('rights');
@@ -42,5 +42,13 @@ Class Project extends CI_Model {
 		$this->db->where('project_name',$projectName);
 		$query=$this->db->get();
 		return $query->row()->id;
+	}
+	function getAll(){
+		$query = $this->db->query("SELECT * FROM projects");
+		return $query->result();
+	}
+	function getID($UName){
+		$query = $this->db->query("SELECT id FROM projects WHERE project_name='$UName'");
+		return $query->result();
 	}
 }

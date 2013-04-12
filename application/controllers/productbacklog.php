@@ -3,7 +3,7 @@ session_start();
 class Productbacklog extends CI_Controller { 
     function __construct() {
 	parent::__construct();
-	$this->load->model('project');
+	$this->load->model('projects');
     }
 	
 	function index() {
@@ -14,7 +14,7 @@ class Productbacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
-			$data['projects']=$this->project->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['id']);
 			$this->load->view('header', $data);
 			$this->load->view('productbacklog');
 			$this->load->view('footer');

@@ -1,10 +1,11 @@
 <!--avtor:Lovrenc-->
 
 <div id="content">
-	<h2>Sprint backlog</h2>
+	<h2>All task</h2>
 	<div id="left">
-		<?php foreach ($stories as $story): ?>
-			<h3> <?php echo $story->id.".)".$story->name ?></h3>
+		<?php $counter=1;
+		foreach ($stories as $story): ?>
+			<h3> <?php echo $counter.".)".$story->name; $counter++; ?></h3>
 			<?php echo '"'.$story->text.'"'?>
 			<ul><?php foreach ($tasks as $task):
 			if($story->id==$task->StID){?>

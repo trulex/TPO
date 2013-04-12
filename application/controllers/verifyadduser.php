@@ -4,8 +4,8 @@ session_start();
 class VerifyAddUser extends CI_Controller { 
     function __construct(){
 	parent::__construct();
-	$this->load->model('user','',TRUE);
-	$this->load->model('project');
+	$this->load->model('users','',TRUE);
+	$this->load->model('projects');
     }
     function index() {
 	if($this->session->userdata('logged_in')) {
@@ -15,7 +15,7 @@ class VerifyAddUser extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
 	    $data['id']=$session_data['id'];
-	    $data['projects']=$this->project->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['project']=$this->session->userdata('project');
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');

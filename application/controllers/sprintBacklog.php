@@ -5,6 +5,10 @@ class SprintBacklog extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
+		$this->load->model("projects");
+		$this->load->model("users");
+		$this->load->model("stories");
+		$this->load->model("tasks");
 	}
 
 	public function index()	{
@@ -15,26 +19,35 @@ class SprintBacklog extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
-			if(strcmp($data['rights'],'user')==0){
-					redirect('home','refresh');
-			}
-			$data['active']='sprintBacklog';
-			$this->load->model("project");
-			$data['PID']= $this->project->getProjectID($data['project']);	
-			$this->load->model("stories");
+			$data['active']='sprintBacklog';	
+			$this->load->view('header',$data);
+			$data['PID']= $this->projects->getProjectID($data['project']);	
+			$data['projects']=$this->projects->getProjects($data['id']);
+
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
-			$this->load->model("tasks");
+			
+// 			foreach ($data['stories'] as $story){
+// 				$data['tasks'][$story->name]=$this->tasks->getCurrent($story->id);
+// 			}
 			$data['tasks']= $this->tasks->getAll();
-			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('sprintBacklog',$data);
+			$this->load->view('selProject', $data);
 			$this->load->view('footer');
-		} 
+		}
 		else{
 			redirect('login', 'refresh');
 		}
-
 	}
-	
-
+	function takeTask(){
+		$TID=$this->input->post('TID');
+		$UID=$this->input->post('UID');
+		$this->tasks->setUID($TID,$UID);
+		redirect('sprintBacklog');
+	}
+	function releaseTask(){
+		$TID=$this->input->post('TID');
+		$this->tasks->setUID($TID,0);	
+		redirect('sprintBacklog');
+	}
 }

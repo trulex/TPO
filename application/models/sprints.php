@@ -1,5 +1,5 @@
 <?php
-class Get_sprints extends CI_Model{
+class Sprints extends CI_Model{
 	
 	function getAll(){
 		$query = $this->db->query("SELECT * FROM sprints");
