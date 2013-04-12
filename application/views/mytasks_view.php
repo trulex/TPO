@@ -13,9 +13,9 @@
 	    <?php  
 		$previousStory='';
 		foreach ($tasks as $task=>$accepted) {
-		$storyData=$this->task->getStory($task,$id); //get story name,text and tests
-		$completed=$this->task->isCompleted($task,$id); //check if task is completed
-		$time=$this->task->getTime($task,$id); //get time spent on task
+		$storyData=$this->tasks->getStory($task,$id); //get story name,text and tests
+		$completed=$this->tasks->isCompleted($task,$id); //check if task is completed
+		$time=$this->tasks->getTime($task,$id); //get time spent on task
 		if($accepted==1 && $completed==1) {
 		    if(strcmp($previousStory,$storyData['name'])!=0) {
 			echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';

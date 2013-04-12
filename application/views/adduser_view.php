@@ -45,3 +45,4 @@ $msg=strcmp($message,'');
 <?php if($msg!=0) {
 	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';
     } ?>
+</form>

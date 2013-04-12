@@ -5,7 +5,7 @@ class MyTasks extends CI_Controller {
     function __construct() {
 	parent::__construct();
 	$this->load->model('projects');
-	$this->load->model('task');
+	$this->load->model('tasks');
 	$this->load->helper('date');
     }
     
@@ -18,8 +18,8 @@ class MyTasks extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-	    $data['tasks']=$this->task->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
-	    $data['activeTask']=$this->task->getActive($data['id']);
+	    $data['tasks']=$this->tasks->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
+	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
@@ -33,7 +33,7 @@ class MyTasks extends CI_Controller {
 	/* Check if some taks is already being worked on */
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
-	if(strcmp($this->task->getActive($userId),'')!=0) {
+	if(strcmp($this->tasks->getActive($userId),'')!=0) {
 	    $this->session->set_userdata('taskActive','Stop working on current task to begin with work on another.');
 	    redirect('mytasks');
 	} else {
