@@ -15,7 +15,7 @@ class Tasks extends CI_Model{
 		return $query->result();
 	}
 	function insert($row){
-		$this->db->insert('task',$row);
+		$this->db->insert('tasks',$row);
 	}
 	function setUID($id,$UID){
 		$this->db->query("UPDATE tasks SET UID=$UID WHERE id=$id");

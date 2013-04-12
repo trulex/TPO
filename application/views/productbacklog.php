@@ -9,6 +9,7 @@
 	    <li><?php echo anchor('addsprint','Add new sprints'); ?></li>
 	    <li><?php echo anchor('viewTasks','View all Tasks'); ?></li>
 	    <li><?php echo anchor('sprintBacklog','Sprint backlog-za enkrat vsi storyji trenutnega projekta'); ?></li>
+	    <li><?php echo anchor('verifyAddTask','add Task'); ?></li>
 	</ul>
     </div>
     <div id="projects">
