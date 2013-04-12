@@ -21,13 +21,13 @@ class SprintBacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
 			$data['active']='sprintBacklog';	
-			$this->load->view('header',$data);
 			$data['PID']= $this->projects->getProjectID($data['project']);	
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
+			$this->load->view('header',$data);
 			
 // 			foreach ($data['stories'] as $story){
 // 				$data['tasks'][$story->name]=$this->tasks->getCurrent($story->id);
