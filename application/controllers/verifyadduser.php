@@ -47,7 +47,6 @@ class VerifyAddUser extends CI_Controller {
 		$this->db->insert('users', $userdata);
 		$data['message']='User successfully added.';
 		$this->load->view('adduser_view',$data);
-		//redirect('adduser',$data);
 	    }
 	    $this->load->view('footer');
 	}    else {
