@@ -7,11 +7,11 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	function getOwn($id){
-		$query = $this->db->query("select id, name, text from stories where id=(select StID from tasks where UID=$id)");
+		$query = $this->db->query("SELECT id, name, text FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
 		return $query->result();
 	}
 	function getCurrent($PID){
-		$query =$this->db->query("select id, name from stories where PID=$PID ");
+		$query = $this->db->query("SELECT id, name, text FROM stories WHERE PID=$PID");
 		return $query->result();
 	}
 }
