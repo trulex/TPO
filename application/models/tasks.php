@@ -82,6 +82,17 @@ class Tasks extends CI_Model{
 	$query=$this->db->get();
 	return $query->row()->completed;
     }
+    function getTime($taskName,$userId) { /* Returns hours spent on task $taskName */
+	$this -> db -> select('time_sum');
+	$this -> db -> from('tasks');
+	$this -> db -> where('task_name', $taskName);
+	$this -> db -> where('UID', $userId);
+	$query=$this->db->get();
+	$time=$query->row()->time_sum;
+	$time/=3600; // Convert seconds to hours
+	$time=round($time,2);
+	return $time;
+    }
 }
 
 ?>

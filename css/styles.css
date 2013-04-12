@@ -137,7 +137,7 @@ body {
     color:red;
 }
 button.task {
-    font-size:80%;
+    float:right;
 }
 textarea.addstory {
     resize:none;

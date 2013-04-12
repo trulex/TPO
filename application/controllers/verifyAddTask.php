@@ -20,6 +20,7 @@ class VerifyAddTask extends CI_Controller {
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
+
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			$this->load->view('header', $data);
