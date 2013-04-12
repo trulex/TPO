@@ -19,10 +19,8 @@ class MyTasks extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-
 	    $data['tasks']=$this->tasks->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
 	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    

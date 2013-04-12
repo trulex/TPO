@@ -22,7 +22,6 @@ class VerifyAddTask extends CI_Controller {
 			}
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-
 			$this->load->view('header', $data);
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('StID', 'StID', 'trim|numeric');

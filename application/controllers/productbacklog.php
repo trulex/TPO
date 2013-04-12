@@ -16,10 +16,8 @@ class Productbacklog extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
 			$data['projects']=$this->projects->getProjects($data['id']);
-
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-
 			$this->load->view('header', $data);
 			$this->load->view('productbacklog');
 			$this->load->view('footer');
