@@ -21,7 +21,8 @@ Class SelectProject extends CI_Controller {
 			
 		 }	}
 	$this->session->set_userdata('noproject', '');
-	redirect($this->input->post('redirect'));
+	echo $this->session->userdata('SpID');
+// 	redirect($this->input->post('redirect'));
     }
 }
 ?>

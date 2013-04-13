@@ -1,4 +1,4 @@
-<!--avtor:Lovrenc-->
+<!-- avtor:Lovrenc -->
 
 
 <div id="content">
