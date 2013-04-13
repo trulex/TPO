@@ -19,6 +19,9 @@ class Home extends CI_Controller {
 	$data['id']=$session_data['id'];
 	$data['projects']=$this->projects->getProjects($data['id']);
 	$data['active']='';
+	$data['id']=$session_data['id'];
+	$data['project']=$session_data['project'];
+	$data['projects']=$this->projects->getProjects($data['id']);
 	$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	$this->load->view('header', $data);

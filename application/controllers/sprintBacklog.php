@@ -25,7 +25,8 @@ class SprintBacklog extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			
+			$this->load->view('header',$data);
+
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
 			$this->load->view('header',$data);
 			
