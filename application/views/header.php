@@ -12,12 +12,15 @@
     <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
 
 	Current project: <?php echo $this->session->userdata('project'); ?> - (<?php echo anchor('editproject','Edit'); ?>)<br>
-	Current sprint: <?php	foreach($currentsprints as $row):
-								$today = strtotime(date("Y-m-d"));
-								if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
-									echo $row->start_date." - ".$row->finish_date;
-								endif;
-							endforeach;
+	Current sprint: <?php	if($currentsprints){
+								foreach($currentsprints as $row):
+									$today = strtotime(date("Y-m-d"));
+									if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
+										echo $row->start_date." - ".$row->finish_date;
+										$this->session->set_userdata('SpID', $row->id);
+									endif;
+								endforeach;
+							}
 					?>
 	
     </p>
