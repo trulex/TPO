@@ -7,6 +7,7 @@ class Unfinishedstories extends CI_Controller {
 		parent::__construct();
 		$this->load->model('projects');
 		$this->load->model("sprints");
+		$this->load->model("stories");
     }
 	
 	function index() {
@@ -21,15 +22,13 @@ class Unfinishedstories extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			
-			$this->load->model("stories");
-			$data['results']= $this->stories->getAll();
+			$data['results']= $this->stories->getAll();			
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('unfinishedstories_view',$data);
-			$this->session->set_flashdata('flashSuccess', 'Stories successfully added to current sprint.');
 			$this->load->view('footer');
 		} else {
 		//If no session, redirect to login page

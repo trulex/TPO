@@ -8,7 +8,7 @@ class VerifyAddSprint extends CI_Controller {
     function __construct(){
 		parent::__construct();
 		$this->load->model('projects');
-		$this->load->model("sprints");
+		$this->load->model('sprints');
     }
 	
 	function index() {
@@ -110,12 +110,13 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	public function startsprint_check($str) {
-		
+		$pid=$data['currentproject'];
 		$input_date = strtotime($str);
 		$this->date=$input_date; 
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
+		$this->db->where('PID', $pid);
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;
@@ -139,11 +140,12 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	public function finishsprint_check($str) {
-		
+		$pid=$data['currentproject'];
 		$input_date = strtotime($str);
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
+		$this->db->where('PID', $pid);
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;

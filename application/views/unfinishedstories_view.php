@@ -14,7 +14,9 @@
 			echo "<br>";
 			?>
 			</div>
-			<div><input type="submit" value="Add to sprint" /></div>
+			<?php if($row->SpID == 0): ?>
+				<div class="gumb"><input type="submit" value="Add to sprint" /></div>
+			<?php endif ?>
 		<?php endforeach ?>
 	</div>	
 	</div>
