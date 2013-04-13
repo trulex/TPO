@@ -27,7 +27,7 @@ Class Users extends CI_Model {
 	}
 	
 	function getID($uname){
-		$query = $this->db->query("SELECT id FROM users WHERE username=$uname");
+		$query = $this->db->query("SELECT id FROM users WHERE username='$uname'");
 		return $query->row()->id;
 	}
 	function getAllFromProject($PID){
