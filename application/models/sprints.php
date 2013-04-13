@@ -6,8 +6,8 @@ class Sprints extends CI_Model{
 		return $query->result();
 	}
 	
-	function getProjectSprints($projectid){
-		$query = $this->db->query("SELECT id, start_date, finish_date FROM sprints WHERE PID='$projectid'");
+	 function getProjectSprints($projectid){
+		$query = $this->db->query("SELECT id, start_date, finish_date, velocity FROM sprints WHERE PID='$projectid' ORDER BY start_date");
 		return $query->result();
 	}
 }
