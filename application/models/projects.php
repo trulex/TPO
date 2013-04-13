@@ -1,4 +1,5 @@
 <!--avtor:darko-->
+<!-- table "projects":[id|project_name|description] -->
 <?php
 Class Projects extends CI_Model {
     function getProjects($userid) {

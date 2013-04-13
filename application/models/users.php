@@ -1,3 +1,4 @@
+<!-- table "users": [id|username|password|name|surname|email|rights] -->
 <?php
 Class Users extends CI_Model {
     function login($username, $password) {
