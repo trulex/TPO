@@ -1,3 +1,4 @@
+<!-- table "sprints": [id|start_date|finish_date|velocity|PID] -->
 <?php
 class Sprints extends CI_Model{
 	
@@ -7,7 +8,7 @@ class Sprints extends CI_Model{
 	}
 	
 	function getProjectSprints($projectid){
-		$query = $this->db->query("SELECT id, start_date, finish_date FROM sprints WHERE PID='$projectid'");
+		$query = $this->db->query("SELECT id, start_date, finish_date, velocity FROM sprints WHERE PID='$projectid'");
 		return $query->result();
 	}
 }

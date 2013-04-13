@@ -28,6 +28,7 @@ class SprintBacklog extends CI_Controller {
 			$this->load->view('header',$data);
 
 			$data['stories']= $this->stories->getCurrent($data['PID']);	
+			$this->load->view('header',$data);
 			
 // 			foreach ($data['stories'] as $story){
 // 				$data['tasks'][$story->name]=$this->tasks->getCurrent($story->id);
@@ -46,11 +47,23 @@ class SprintBacklog extends CI_Controller {
 		$TID=$this->input->post('TID');
 		$UID=$this->input->post('UID');
 		$this->tasks->setUID($TID,$UID);
+		$this->tasks->accept($TID);
 		redirect('sprintBacklog');
 	}
 	function releaseTask(){
 		$TID=$this->input->post('TID');
-		$this->tasks->setUID($TID,0);	
+		$this->tasks->setUID($TID,0);
+		$this->tasks->decline($TID);
 		redirect('sprintBacklog');
+	}
+	function changeTime(){
+		$timeEstimate=$this->input->post('timeEstimate');
+		if (is_numeric($timeEstimate)){
+			if ( $timeEstimate>0){
+				$this->tasks->setTimeEstimate($this->input->post('TID'), $timeEstimate);
+			}
+		}
+		redirect('sprintBacklog');
+		
 	}
 }

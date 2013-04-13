@@ -24,7 +24,6 @@ class VerifyAddSprint extends CI_Controller {
 			
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			$data['results']= $this->sprints->getAll();
 			
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');

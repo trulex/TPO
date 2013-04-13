@@ -1,3 +1,4 @@
+<!-- table "users": [id|username|password|name|surname|email|rights] -->
 <?php
 Class Users extends CI_Model {
     function login($username, $password) {
@@ -26,8 +27,12 @@ Class Users extends CI_Model {
 	}
 	
 	function getID($uname){
-		$query = $this->db->query("SELECT id FROM users WHERE username=$uname");
+		$query = $this->db->query("SELECT id FROM users WHERE username='$uname'");
 		return $query->row()->id;
+	}
+	function getAllFromProject($PID){
+		$query=$this->db->query("SELECT user_id FROM project_user WHERE project_id=$PID");
+		return $query->result();
 	}
 //     function addUser($username, $password, $name, $surname, $email, $rights) {
 //     

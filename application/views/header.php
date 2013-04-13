@@ -13,7 +13,7 @@
 
 	Current project: <?php echo $this->session->userdata('project'); ?> - (<?php echo anchor('editproject','Edit'); ?>)<br>
 	Current sprint: <?php	foreach($currentsprints as $row):
-								$today =strtotime(date("Y-m-d"));
+								$today = strtotime(date("Y-m-d"));
 								if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
 									echo $row->start_date." - ".$row->finish_date;
 								endif;
@@ -24,7 +24,7 @@
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
-	    <li class="menu"><a href="#">UserLink1</a>
+	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
 	    <?php echo $active == 'productbacklog' ? '<li class="active">'.anchor('productbacklog','Product backlog') : '<li class="menu">'.anchor('productbacklog','Product backlog'); ?>
 	    <?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
 	    <?php if (strcmp($rights,"admin")==0) {

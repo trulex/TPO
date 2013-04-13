@@ -6,6 +6,8 @@ class VerifyAddTask extends CI_Controller {
 		parent::__construct();
 		$this->load->model('tasks');
 		$this->load->model("sprints");
+		$this->load->model("projects");
+		
     } 
 
     function index() {
@@ -17,9 +19,12 @@ class VerifyAddTask extends CI_Controller {
 			$data['active']='verifyAddTask';
 			$data['id']=$session_data['id'];
 			$data['message']="";
+			$data['task_name']='';
+			$data['text']='';
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
+
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			$this->load->view('header', $data);
@@ -40,11 +45,7 @@ class VerifyAddTask extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
-	function callTaskCreator(){
-		$StID=$this->input->post('task');
-		redirect("verifyAddTask/index/$StID");
-	}
-    public function taskName_check($str) {
+    public function taskName_check($str, $StID) {
     	$this->db->select('task_name');
 		$this->db->from('tasks');
 		$this->db->where('task_name', $str);
@@ -58,13 +59,30 @@ class VerifyAddTask extends CI_Controller {
 		}
     }
     public function taskCreator(){
+		$session_data = $this->session->userdata('logged_in');
+		$data['username'] = $session_data['username'];
+		$data['name'] = $session_data['name'];
+		$data['rights'] = $session_data['rights'];
+		$data['active']='verifyAddTask';
+		$data['id']=$session_data['id'];
+		$data['message']="";
+		$data['task_name'] = $this->input->post('task_name');
+		$data['text'] = $this->input->post('text');
+		$name=$this->input->post('task_name');
+		$data['StID']=$this->input->post('StID');
+		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required');
+		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$name, $data["StID"]]');
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
-		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|numeric|max_length[3]');
+		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|greater_than[0]');
+		$this->form_validation->set_message('greater_than', 'Time estimate must be positive!');
+		$this->form_validation->set_message('taskName_check', 'Task Name must be unique! <br>');
+		$this->form_validation->set_message('required', 'Fields marked with <span style="color:red;vertical-align:top">*</span> are required! <br>');
+		$this->load->view('header', $data);
 		if ($this->form_validation->run() == FALSE) {
-			$data['message']='';
-			redirect("verifyAddTask/index/$StID");
+			$data['message']=validation_errors();
+			$this->load->view('addTask', $data);
 		}
 		else {
 			$name=$this->input->post('task_name');
@@ -79,6 +97,7 @@ class VerifyAddTask extends CI_Controller {
 			$this->db->insert('tasks',$taskData);
 			redirect('sprintBacklog');
 		}
+		$this->load->view('footer');
 	}
 }
 ?>

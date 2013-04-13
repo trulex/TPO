@@ -16,6 +16,8 @@ class Home extends CI_Controller {
 	$data['username'] = $session_data['username'];
 	$data['name'] = $session_data['name'];
 	$data['rights'] = $session_data['rights'];
+	$data['id']=$session_data['id'];
+	$data['projects']=$this->projects->getProjects($data['id']);
 	$data['active']='';
 	$data['id']=$session_data['id'];
 	$data['project']=$session_data['project'];
@@ -24,6 +26,7 @@ class Home extends CI_Controller {
 	$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	$this->load->view('header', $data);
 	$this->load->view('home_view', $data);
+	$this->load->view('selProject',$data);
 	$this->load->view('footer');
     }
     else {
