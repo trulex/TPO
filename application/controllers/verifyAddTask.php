@@ -7,6 +7,7 @@ class VerifyAddTask extends CI_Controller {
 		$this->load->model('tasks');
 		$this->load->model("sprints");
 		$this->load->model("projects");
+		
     } 
 
     function index() {
@@ -42,7 +43,7 @@ class VerifyAddTask extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
-    public function taskName_check($str) {
+    public function taskName_check($str, $StID) {
     	$this->db->select('task_name');
 		$this->db->from('tasks');
 		$this->db->where('task_name', $str);
@@ -63,15 +64,21 @@ class VerifyAddTask extends CI_Controller {
 		$data['active']='verifyAddTask';
 		$data['id']=$session_data['id'];
 		$data['message']="";
+		$name=$this->input->post('task_name');
+		$data['StID']=$this->input->post('StID');
+		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required');
+		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$name, $data["StID"]]');
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
 		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|greater_than[0]');
-		$this->form_validation->set_message('time_estimate', 'neveljeven  čas <br');
+		$this->form_validation->set_message('greater_than', 'Time estimate must be positive!');
+		$this->form_validation->set_message('taskName_check', 'Task Name must be unique! <br>');
+		$this->form_validation->set_message('required', 'Fields marked with <span style="color:red;vertical-align:top">*</span> are required! <br>');
+		$this->load->view('header', $data);
 		if ($this->form_validation->run() == FALSE) {
-			$data['message']='';
+			$data['message']=validation_errors();
 			$this->load->view('addTask', $data);
-			$this->load->view('footer');
 		}
 		else {
 			$name=$this->input->post('task_name');
@@ -86,6 +93,7 @@ class VerifyAddTask extends CI_Controller {
 			$this->db->insert('tasks',$taskData);
 			redirect('sprintBacklog');
 		}
+		$this->load->view('footer');
 	}
 }
 ?>

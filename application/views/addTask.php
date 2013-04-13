@@ -1,5 +1,5 @@
 <!--avtor:Lovrenc-->
-
+<?php echo form_open('verifyAddTask/taskCreator'); ?>
 <div id="content">
     <div id="left">
 	<div id="add">
@@ -14,6 +14,7 @@
 			<input name="StID" type="hidden" value="<?php echo $StID?>" />
 			<input type="submit" value="submit" />
 		</form>
+		<?php echo $message?>
 	</div>
 	</div>
 </div>
