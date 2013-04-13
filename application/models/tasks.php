@@ -3,15 +3,15 @@
 class Tasks extends CI_Model{
 	
 	function getAll(){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate FROM tasks");
+		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted FROM tasks");
 		return $query->result();
 	}
 	function getOwn($id){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate FROM tasks where UID=$id");
+		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted FROM tasks where UID=$id");
 		return $query->result();
 	}
 	function getCurrent($StID){
-		$query=$this->db->query("SELECT id, task_name, text, StID, UID , time_estimate FROM tasks where StID=$StID");
+		$query=$this->db->query("SELECT id, task_name, text, StID, UID , time_estimate, accepted FROM tasks where StID=$StID");
 		return $query->result();
 	}
 	function insert($row){
@@ -19,6 +19,9 @@ class Tasks extends CI_Model{
 	}
 	function setUID($id,$UID){
 		$this->db->query("UPDATE tasks SET UID=$UID WHERE id=$id");
+	}
+	function setTimeEstimate($TID,$TimeEstimate){
+		$thid->db->query("UPDATE tasks SET time_estimate=$TimeEstimate WHERE id=$TID");
 	}
 	function getActive($userId) {
     /* Checks if there is a task that is being worked on, return name of it, or empty string if none is active. */

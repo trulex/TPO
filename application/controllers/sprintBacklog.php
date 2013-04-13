@@ -54,4 +54,10 @@ class SprintBacklog extends CI_Controller {
 		$this->tasks->setUID($TID,0);	
 		redirect('sprintBacklog');
 	}
+	function changeTime(){
+		$timeEstimate=$this->input->post('timeEstimate');
+		$this->tasks->setTimeEstimate;
+		redirect('sprintBacklog');
+		
+	}
 }

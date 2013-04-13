@@ -19,6 +19,8 @@ class VerifyAddTask extends CI_Controller {
 			$data['active']='verifyAddTask';
 			$data['id']=$session_data['id'];
 			$data['message']="";
+			$data['task_name']='';
+			$data['text']='';
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
@@ -64,6 +66,8 @@ class VerifyAddTask extends CI_Controller {
 		$data['active']='verifyAddTask';
 		$data['id']=$session_data['id'];
 		$data['message']="";
+		$data['task_name'] = $this->input->post('task_name');
+		$data['text'] = $this->input->post('text');
 		$name=$this->input->post('task_name');
 		$data['StID']=$this->input->post('StID');
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
