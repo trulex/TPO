@@ -26,7 +26,6 @@ class Home extends CI_Controller {
 	$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	$this->load->view('header', $data);
 	$this->load->view('home_view', $data);
-	$this->load->view('selProject',$data);
 	$this->load->view('footer');
     }
     else {

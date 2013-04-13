@@ -49,3 +49,4 @@
 			<button type="submit" value="<?php echo $story->id ?>" name="task" >add task</button></form><hr>
 		<?php endforeach ?>
 	</div>
+</div>

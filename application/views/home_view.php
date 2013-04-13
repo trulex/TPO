@@ -4,4 +4,5 @@
     <h2>Welcome <?php echo $username; ?>!</h2>
      Get your shit together it's time to work, pick a project and SCRUMMMMMMmmmm!!!!
      </div>
-	
+	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+</div>

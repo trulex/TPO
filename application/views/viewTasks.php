@@ -14,5 +14,5 @@
 			<?php } endforeach?></ul>
 		<?php endforeach ?>
 	</div>
-	<?php echo $this->session->userdata('SpID')."hahahhahahahha"; ?>
-   
+<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+</div>
