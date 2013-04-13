@@ -56,7 +56,11 @@ class SprintBacklog extends CI_Controller {
 	}
 	function changeTime(){
 		$timeEstimate=$this->input->post('timeEstimate');
-		$this->tasks->setTimeEstimate;
+		if (is_numeric($timeEstimate)){
+			if ( $timeEstimate>0){
+				$this->tasks->setTimeEstimate($this->input->post('TID'), $timeEstimate);
+			}
+		}
 		redirect('sprintBacklog');
 		
 	}

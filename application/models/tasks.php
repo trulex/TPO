@@ -21,7 +21,7 @@ class Tasks extends CI_Model{
 		$this->db->query("UPDATE tasks SET UID=$UID WHERE id=$id");
 	}
 	function setTimeEstimate($TID,$TimeEstimate){
-		$thid->db->query("UPDATE tasks SET time_estimate=$TimeEstimate WHERE id=$TID");
+		$this->db->query("UPDATE tasks SET time_estimate=$TimeEstimate WHERE id=$TID");
 	}
 	function getActive($userId) {
     /* Checks if there is a task that is being worked on, return name of it, or empty string if none is active. */
