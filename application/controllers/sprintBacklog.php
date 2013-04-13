@@ -47,11 +47,13 @@ class SprintBacklog extends CI_Controller {
 		$TID=$this->input->post('TID');
 		$UID=$this->input->post('UID');
 		$this->tasks->setUID($TID,$UID);
+		$this->tasks->accept($TID);
 		redirect('sprintBacklog');
 	}
 	function releaseTask(){
 		$TID=$this->input->post('TID');
-		$this->tasks->setUID($TID,0);	
+		$this->tasks->setUID($TID,0);
+		$this->tasks->decline($TID);
 		redirect('sprintBacklog');
 	}
 	function changeTime(){

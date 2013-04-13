@@ -23,6 +23,12 @@ class Tasks extends CI_Model{
 	function setTimeEstimate($TID,$TimeEstimate){
 		$this->db->query("UPDATE tasks SET time_estimate=$TimeEstimate WHERE id=$TID");
 	}
+	function accept($TID){
+		$this->db->query("UPDATE tasks SET accepted=1 WHERE id=$TID");
+	}
+	function decline($TID){
+		$this->db->query("UPDATE tasks SET accepted=0 WHERE id=$TID");
+	}
 	function getActive($userId) {
     /* Checks if there is a task that is being worked on, return name of it, or empty string if none is active. */
 	$activeTask='';
