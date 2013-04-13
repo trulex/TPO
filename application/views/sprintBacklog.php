@@ -11,7 +11,8 @@
 			<ul><?php foreach ($tasks as $task){
 				if($story->id == $task->StID){
 					echo '<li><div><b>'.$task->task_name;
-					if(!$task->accepted ){
+					if(!$task->accepted ){ 
+// 						spreminjanje časa
 						echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
 						echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
 						echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
@@ -21,17 +22,21 @@
 						echo ' ['.$task->time_estimate.'] </b>';
 					}
 					if($task->UID == 0){
+// 						accept task
+						if()
 						echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
 						echo '<input name="UID" type="hidden" value="'.$id.'" />';
 						echo '<button type="submit" value="'.$task->id.'" name="TID">Accept task</button></form>';
 					}
 					else{ 
-						if($id == $task->UID){
+						if($id == $task->UID){ /*if task is asigned to me*/
+// 							release task
 							echo "(My task)";
 							echo '<form name=cts method="post" action="sprintBacklog/releaseTask">';
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button></form>';
 						}
 						else{
+// 							or if it's handled by someone else
 							echo "(Handled by user: ".$this->users->getUserName($task->UID).")";
 						}
 					}
