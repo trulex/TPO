@@ -10,17 +10,13 @@
 			<ul><?php foreach ($tasks as $task){
 				if($story->id == $task->StID){
 					echo '<li><div><b>'.$task->task_name;
-					if($task->accepted==0 and ( $rights=="admin" || $role==1 ) ){ 
-						echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
-						echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
-						echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-						echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
-					}
-					else{
-						echo ' ['.$task->time_estimate.'] </b>';
-					}
+					echo ' ['.$task->time_estimate.'] </b>';
 					if($task->UID == 0){
 						if ( $rights=="admin" || $role==1 ){
+							echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
+							echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
+							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
+							echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
 							echo '<form name="asign" method="post" action="sprintBacklog/asignTask">';
 							echo '<select name="UID">' ;
 							foreach ($projectUsers as $user){
