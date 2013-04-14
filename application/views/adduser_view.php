@@ -29,18 +29,6 @@ $msg=strcmp($message,'');
 	    <?php echo validation_errors(); ?>
 	</div>
     </div>
-        <div id="projects">
-	    <p id="title">My projects</p>
-	    <form name="selectp" method="post" action="selectProject/select">
-	    <?php	    
-		foreach ($projects as $project) {
-		    echo '<button type="submit" value="'.$this->projects->getProjectName($project).'" name="project">'.$this->projects->getProjectName($project).'</button>';
-		    echo '<br />';
-		}
-	    ?>
-	    <input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
-	    </form>
-	</div>
 </div>
 <?php if($msg!=0) {
 	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';

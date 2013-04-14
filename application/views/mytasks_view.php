@@ -38,7 +38,9 @@
 			echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
 			echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
 		    }
-		    echo '<li style="list-style-type:square">'.$task.'</span> <span style="font-size:small;color:orange">(Not yet accepted)</span></li>';
+		    echo '<form name="acceptTask" method="post" action="tasks/accept">';
+		    echo '<li style="list-style-type:square;margin-top:6px">'.$task.'</span> <span style="font-size:small;color:orange">(Not yet accepted)</span><button class="task" type="submit" name="task" value="'.$task.'">Accept task</button></li>';
+		    echo '</form>';
 		}
 		$previousStory=$storyData['name'];
 	    } ?>

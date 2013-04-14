@@ -30,10 +30,6 @@ Class Users extends CI_Model {
 		$query = $this->db->query("SELECT id FROM users WHERE username='$uname'");
 		return $query->row()->id;
 	}
-	function getAllFromProject($PID){
-		$query=$this->db->query("SELECT user_id FROM project_user WHERE project_id=$PID");
-		return $query->result();
-	}
 //     function addUser($username, $password, $name, $surname, $email, $rights) {
 //     
 //     }

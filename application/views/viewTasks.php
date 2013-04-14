@@ -1,7 +1,7 @@
 <!--avtor:Lovrenc-->
 
 <div id="content">
-	<h2>All task</h2>
+	<h2>All tasks</h2>
 	<div id="left">
 		<?php $counter=1;
 		foreach ($stories as $story): ?>
@@ -14,5 +14,5 @@
 			<?php } endforeach?></ul>
 		<?php endforeach ?>
 	</div>
-	<?php echo $this->session->userdata('SpID')."hahahhahahahha"; ?>
+
    

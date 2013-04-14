@@ -10,6 +10,7 @@ class SprintBacklog extends CI_Controller {
 		$this->load->model("stories");
 		$this->load->model("tasks");
 		$this->load->model("sprints");
+		$this->load->model("project_user");
 	}
 
 	public function index()	{
@@ -20,23 +21,17 @@ class SprintBacklog extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
-			$data['active']='sprintBacklog';	
-			$data['PID']= $this->projects->getProjectID($data['project']);	
+			$data['active']='sprintBacklog';
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			$this->load->view('header',$data);
-
-			$data['stories']= $this->stories->getCurrent($data['PID']);	
-			$this->load->view('header',$data);
-			
-// 			foreach ($data['stories'] as $story){
-// 				$data['tasks'][$story->name]=$this->tasks->getCurrent($story->id);
-// 			}
+			$data['stories']= $this->stories->getCurrent($this->session->userdata['SpID']);	
+			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
 			$data['tasks']= $this->tasks->getAll();
 			$this->load->helper(array('form'));
+			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);
-			$this->load->view('selProject', $data);
 			$this->load->view('footer');
 		}
 		else{
@@ -48,7 +43,16 @@ class SprintBacklog extends CI_Controller {
 		$UID=$this->input->post('UID');
 		$this->tasks->setUID($TID,$UID);
 		$this->tasks->accept($TID);
+		$this->tasks->accept($TID);
 		redirect('sprintBacklog');
+	}
+	
+	function asignTask(){
+		$TID=$this->input->post('TID');
+		$UID=$this->input->post('UID');
+		$this->tasks->setUID($TID,$UID);
+		redirect('sprintBacklog');
+		
 	}
 	function releaseTask(){
 		$TID=$this->input->post('TID');
@@ -56,6 +60,7 @@ class SprintBacklog extends CI_Controller {
 		$this->tasks->decline($TID);
 		redirect('sprintBacklog');
 	}
+	
 	function changeTime(){
 		$timeEstimate=$this->input->post('timeEstimate');
 		if (is_numeric($timeEstimate)){

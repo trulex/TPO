@@ -16,12 +16,16 @@ Class SelectProject extends CI_Controller {
 		$this->session->set_userdata('PID', $PID);
 		$sprints=$this->sprints->getProjectSprints($PID);
 		$today =strtotime(date("Y-m-d")); /*in tukej dodamo še podatek o trenutnem sprintu*/
-		echo $PID.">>>>";
+		$found=FALSE;
 		if($sprints){
 			foreach ($sprints as $sprint){
 				if($today >= strtotime($sprint->start_date) && $today <= strtotime($sprint->finish_date)){
 					$this->session->set_userdata('SpID', $sprint->id);
+					$found=TRUE;
 				}
+			}
+			if(!$found){
+				$this->session->set_userdata('SpID', '0');
 			}
 		}
 		else{

@@ -59,22 +59,22 @@ class Editproject extends CI_Controller {
 		    'user_id'=>$scrummaster,
 			'role'=> 1
 			);
-		$this->db->insert('product_user', $userdata);
+		$this->db->update('product_user', $userdata);
 		
 		$userdata=array(
 		    'project_id'=>$id,
 		    'user_id'=>$productowner,
 			'role'=> 2
 			);
-		$this->db->insert('product_user', $userdata);
+		$this->db->update('product_user', $userdata);
 		
 		foreach($teammembers as $member){
 			$userdata=array(
-		    'project_id'=>$id,
-		    'user_id'=>$member,
-			'role'=> 0
+				'project_id'=>$id,
+				'user_id'=>$member,
+				'role'=> 0
 			);
-			$this->db->insert('product_user', $userdata);
+			$this->db->update('product_user', $userdata);
 		}
 		
 		$this->session->set_flashdata('flashSuccess', 'Project successfully edited.');

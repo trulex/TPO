@@ -35,5 +35,20 @@ class Unfinishedstories extends CI_Controller {
 		redirect('login', 'refresh');
 		}
     }
+	
+	
+	function entry_SpID(){ 
+		$this->load->database();
+
+		$name=$this->input->post('submitstories');
+		$data = array(
+			'SpID'=>$this->session->userdata('SpID')
+		); 
+
+		$this->db->where('id',$name); 
+		$this->db->update('stories',$data);
+		redirect($this->input->post('redirect'));
+	} 
+
 }
 ?>

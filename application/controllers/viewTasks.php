@@ -21,7 +21,7 @@ class ViewTasks extends CI_Controller {
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
-			$data['active']='viewTasks';
+			$data['active']='productbacklog';
 			$data['stories']= $this->stories->getAll($data['id']);	
 			$data['tasks']= $this->tasks->getAll();
 			$data['projects']=$this->projects->getProjects($data['id']);
@@ -36,7 +36,6 @@ class ViewTasks extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('viewTasks',$data);
-			$this->load->view('selProject');
 			$this->load->view('footer');
 		} 
 		else{
