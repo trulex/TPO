@@ -10,7 +10,7 @@
 			<ul><?php foreach ($tasks as $task){
 				if($story->id == $task->StID){
 					echo '<li><div><b>'.$task->task_name;
-					if(!$task->accepted && ( $rights==1 || $role==1 ) ){ 
+					if($task->accepted==0 and ( $rights=="admin" || $role==1 ) ){ 
 						echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
 						echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
 						echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
