@@ -28,7 +28,7 @@ $msg=strcmp($message,'');
 	<div id="validation">
 	    <?php echo validation_errors(); ?>
 	</div>
-    <?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+    </div>
 </div>
 <?php if($msg!=0) {
 	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';
