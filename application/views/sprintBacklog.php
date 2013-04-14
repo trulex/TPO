@@ -44,7 +44,12 @@
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button></form>';
 						}
 						else{
-							echo "(Handled by user: ".$this->users->getUserName($task->UID).")";
+							if ($task->accepted==1){
+								echo "(Handled by user: ".$this->users->getUserName($task->UID).")";
+							}
+							else{
+								echo "(Asigned to user: ".$this->users->getUserName($task->UID).")";
+							}
 						}
 					}
 					echo "</div>";
