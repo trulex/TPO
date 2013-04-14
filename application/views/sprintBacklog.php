@@ -16,8 +16,10 @@
 							echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
 							echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
 							echo '<form name="asign" method="post" action="sprintBacklog/asignTask">';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<select name="UID">' ;
 							foreach ($projectUsers as $user){
 								echo ' <option value="'.$user->user_id.'">'.$this->users->getUserName($user->user_id).'</option>';
@@ -29,7 +31,8 @@
 						else{
 							echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
 							echo '<input name="UID" type="hidden" value="'.$id.'" />';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Accept task</button></form>';
+							echo '<button type="submit" value="'.$task->id.'" name="TID">Take task</button>';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 						}
 					}
 					else{ 
@@ -37,7 +40,8 @@
 // 							release task
 							echo "(My task)";
 							echo '<form name=cts method="post" action="sprintBacklog/releaseTask">';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button></form>';
+							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button>';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 						}
 						else{
 							if ($task->accepted==1){

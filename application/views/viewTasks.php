@@ -4,7 +4,7 @@
 	<h2>All tasks</h2>
 	<div id="left">
 		<?php $counter=1;
-		foreach ($stories as $story): ?>
+		foreach ($stories as $story=>$tasks): ?>
 			<h3> <?php echo $counter.".)".$story->name; $counter++; ?></h3>
 			<?php echo '"'.$story->text.'"'?>
 			<ul><?php foreach ($tasks as $task):
@@ -14,5 +14,5 @@
 			<?php } endforeach?></ul>
 		<?php endforeach ?>
 	</div>
-
+</div>
    
