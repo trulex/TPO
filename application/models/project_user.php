@@ -4,8 +4,12 @@
 class Project_user extends CI_Model{
 	
 	function getRole($UID, $PID){
-		$query = $this->db->query("SELECT rights FROM project_users WHERE project_id=$UID and user_id=$PID");
-		return $query->row()->user_id;
+		$query = $this->db->query("SELECT role FROM project_user WHERE project_id=$PID and user_id=$UID");
+		return $query->result();
+	}
+		function getAllFromProject($PID){
+		$query=$this->db->query("SELECT user_id FROM project_user WHERE project_id=$PID");
+		return $query->result();
 	}
 }
 ?>

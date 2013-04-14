@@ -14,8 +14,8 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	
-	function getCurrent($PID){
-		$query = $this->db->query("SELECT id, name, text FROM stories WHERE PID=$PID");
+	function getCurrent($SpID){
+		$query = $this->db->query("SELECT id, name, text FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
 	function getSprintID($SpID){

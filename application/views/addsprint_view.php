@@ -27,16 +27,19 @@
 		
 	</div>
 	</div>
+	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>
 
 <div id="content">
 	<p>Sprints: </p><br>
 	<?php
-		foreach($currentsprints as $row):
-			echo $row->start_date." - ";
-			echo $row->finish_date.", velocity: ";
-			echo $row->velocity."<br>";
-		endforeach;
+		if($currentsprints ){
+			foreach($currentsprints as $row):
+				echo $row->start_date." - ";
+				echo $row->finish_date.", velocity: ";
+				echo $row->velocity."<br>";
+			endforeach;
+		}
 	?>
 </div>
 </form>
