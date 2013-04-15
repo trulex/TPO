@@ -34,15 +34,11 @@ class ViewTasks extends CI_Controller {
 			$storyTuple=array();
 			foreach ($stories as $story){
 				$tasks=$this->tasks->getCurrent($story->id);
-// 				echo "story name:".$story->name."<br>";
-// 				foreach ($tasks as $task){
-// 					echo "task: ".$task->task_name."<br>";
-// 				}
-				$storyTuple=array_push($storyTuple,array($story,$tasks);
+				array_push($storyTuple,array($story,$tasks));
 			}
 			$data['storyTuple']=$storyTuple;
 			$this->load->view('header', $data);
-// 			$this->load->view('viewTasks',$data);
+			$this->load->view('viewTasks',$data);
 			$this->load->view('footer');
 		}
 		else{
