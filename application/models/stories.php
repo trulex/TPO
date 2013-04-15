@@ -5,7 +5,7 @@
 class Stories extends CI_Model{
 // 	Get all stories
 	function getAll(){
-		$query = $this->db->query("SELECT id, name, text, SpID FROM stories");
+		$query = $this->db->query("SELECT id, name, text, SpID,difficulty FROM stories");
 		return $query->result();
 	}
 	

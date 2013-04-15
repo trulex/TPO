@@ -33,6 +33,7 @@ class ProductBacklog extends CI_Controller {
 			}
 			$data['storyTuple']=$storyTuple;
 			$this->load->view('header', $data);
+			$this->load->view('submenu');
 			$this->load->view('productBacklog',$data);
 			$this->load->view('footer');
 		}
