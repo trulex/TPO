@@ -1,26 +1,4 @@
 /*avtor:darko*/
-/*+clearfix {*/
-.taski:after
-{
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
-	font-size: 0;
-}
-.taski
-{
-	display: inline-block;
-}
-.taski
-{
-/*\*/
-	display: block;
-/**/
-	-height: 1px;
-}
-/*+}*/
 @font-face
 {
 	font-family: oldsans;
