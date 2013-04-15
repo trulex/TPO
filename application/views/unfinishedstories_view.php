@@ -17,7 +17,8 @@
 			<?php if($row->SpID == 0): ?>
 				<div class="gumb">
 					<form action="unfinishedstories/entry_SpID" method="post">
-						<input type="submit" id=<?php echo $row->id ?> class="submitstorie" name="submitstories" value=<?php echo $row->id ?> />
+						<input type="submit" name="submitbutton" value="Add to sprint" />
+						<input type="hidden" name="submitstories" value=<?php echo $row->id ?> />
 						<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
 					</form>
 				</div>
