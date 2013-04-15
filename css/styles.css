@@ -1,41 +1,65 @@
 /*avtor:darko*/
-@font-face {
-    font-family: oldsans;
-    src: url('OldSansBlack.ttf');
+/*+clearfix {*/
+.taski:after
+{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
 }
-@font-face {
-    font-family: mentone;
-    src: url('mentone.otf');
+.taski
+{
+	display: inline-block;
 }
-.container {
-	border:1px solid #ccc; 
-	width:200px;
-	margin:auto;
-	margin-right:0%;
+.taski
+{
+/*\*/
+	display: block;
+/**/
+	-height: 1px;
+}
+/*+}*/
+@font-face
+{
+	font-family: oldsans;
+	src: url('OldSansBlack.ttf');
+}
+@font-face
+{
+	font-family: mentone;
+	src: url('mentone.otf');
+}
+.container
+{
+	border: 1px solid #CCC;
+	width: 200px;
+	margin: auto;
+	margin-right: 0%;
 	height: auto;
-	overflow-y: 
-	scroll;
-	text-align:left;
+	overflow-y: scroll;
+	text-align: left;
 }
-h4{
-    margin-top:0px;
-    margin-bottom:-10px;
-	font-weight:normal;
+H4
+{
+	margin-top: 0px;
+	margin-bottom: -10px;
+	font-weight: normal;
 }
-h5{
-	color:#303030  ;
-    margin-top:-10px;
-    margin-bottom:-10px;
-	font-weight:normal;
+H5
+{
+	color: #303030;
+	margin-top: -10px;
+	margin-bottom: -10px;
+	font-weight: normal;
 }
 .zgodba
 {
 	border: 1px solid #808080;
-	background-color: #00BFFF;
+	background-color: #55D4FF;
 	padding-right: 500px;
 	text-align: left;
-	margin-top: 10px;
-	margin-bottom: 10px;
 	border-bottom: 1px solid #808080;
 	padding-bottom: 15px;
 }
@@ -44,144 +68,169 @@ h5{
 	border: 1px solid #808080;
 	border-top: none;
 	background-color: #E8E8E8;
-	padding-right: 100px;
 	text-align: left;
-	margin-bottom: -26px;
 }
-.naslov {
-    font-family:oldsans;
-    margin-left:25%;
-    float:left;
-    margin-bottom:-15px;
-    font-size:20px;
-	font-weight:bold;
+.naslov
+{
+	font-family: oldsans;
+	margin-left: 25%;
+	float: left;
+	margin-bottom: -15px;
+	font-size: 20px;
+	font-weight: bold;
 }
-.naslov-login {
-    font-family:oldsans;
-    margin-left:25%;
-    float:left;
-    font-size:20px;
-	font-weight:bold;
+.naslov-login
+{
+	font-family: oldsans;
+	margin-left: 25%;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
 }
-.welcome {
-    float:right;
-    margin-right:25%; 
-    margin-bottom:-20px;
+.welcome
+{
+	float: right;
+	margin-right: 25%;
+	margin-bottom: -20px;
 }
-.glava {
-    background-size:cover;
-    background-color:#CCCCCC;
-    margin-bottom:-9px;
+.glava
+{
+	background-size: cover;
+	background-color: #CCCCCC;
+	margin-bottom: -9px;
 }
-hr {
-    border:0;
-    height:1px;
-    background:black;
+HR
+{
+	border: 0;
+	height: 1px;
+	background: #000000;
 }
-.glava-login {
-    background-size:cover;
-    background-color:#CCCCCC;
-    margin-bottom:-9px;
+.glava-login
+{
+	background-size: cover;
+	background-color: #CCCCCC;
+	margin-bottom: -9px;
 }
-#menu {
-    font-family: mentone;
-    font-size:17;
-	padding-bottom:2px;
+#menu
+{
+	font-family: mentone;
+	font-size: 17;
+	padding-bottom: 2px;
 }
-
-body {
-    font-family: Tahoma, Geneva, sans-serif;   
-    margin:0;
+BODY
+{
+	font-family: Tahoma, Geneva, sans-serif;
+	margin: 0;
 }
-#title{
-    font-weight:bold;
+#title
+{
+	font-weight: bold;
 }
-#content {
-    margin-left:15%;
-    width:65%;
-    display:inline-block;
+#content
+{
+	margin-left: 15%;
+	width: 65%;
+	display: inline-block;
 }
-#left {
-    float:left;
+#left
+{
+	float: left;
 }
-#projects {
-    float:right;
-    background:lightgrey;
-    position:absolute;
-    right:15%;
-	padding-left:15px;
-    padding-right:15px;
+#projects
+{
+	float: right;
+	background: #D3D3D3;
+	position: absolute;
+	right: 15%;
+	padding-left: 15px;
+	padding-right: 15px;
 }
-#add {
-    text-align:right;
+#add
+{
+	text-align: right;
 }
-#add p {
-    text-align:left;
-    margin-left:40%;
-    font-weight:bold;
-    margin-top:5%;
+#add P
+{
+	text-align: left;
+	margin-left: 40%;
+	font-weight: bold;
+	margin-top: 5%;
 }
-#add label {
-    font-style:italic;
-	vertical-align:top;
+#add LABEL
+{
+	font-style: italic;
+	vertical-align: top;
 }
-#add div.error {
-    font-weight:normal;
-    font-size:10px;
-    color:red;
-    text-align:left;
-    margin-left:-80%;
+#add DIV.error
+{
+	font-weight: normal;
+	font-size: 10px;
+	color: #FF0000;
+	text-align: left;
+	margin-left: -80%;
 }
-#validation {
-    margin-left:25%;
-    color:red;
+#validation
+{
+	margin-left: 25%;
+	color: #FF0000;
 }
-button.task {
-    float:right;
+BUTTON.task
+{
+	float: right;
 }
-textarea.addstory {
-    resize:none;
+TEXTAREA.addstory
+{
+	resize: none;
 }
-#container {
-    font-family: Tahoma, Geneva, sans-serif;
-    margin-left:40px;
+#container
+{
+	font-family: Tahoma, Geneva, sans-serif;
+	margin-left: 40px;
 }
-
-.active a:visited{
-    color:#000;
+.active A:visited
+{
+	color: #000;
 }
-a:link {
-    color:#996699;
-    text-decoration:none;
+A:link
+{
+	color: #996699;
+	text-decoration: none;
 }
-a:visited {
-    color:#996699;
-    text-decoration:none;
+A:visited
+{
+	color: #996699;
+	text-decoration: none;
 }
-a:hover {
-    text-decoration:underline;
+A:hover
+{
+	text-decoration: underline;
 }
-a:active {
-    text-decoration:underline;
-    color:black;
+A:active
+{
+	text-decoration: underline;
+	color: #000000;
 }
-ul.menu {
-    margin-left:25%;
-    margin-right:25%;   
+UL.menu
+{
+	margin-left: 25%;
+	margin-right: 25%;
 }
-li.menu {
-    display:inline;
-    margin-right: 3em;
+LI.menu
+{
+	display: inline;
+	margin-right: 3em;
 }
-li.active {
-    display:inline;
-    margin-right: 3em;
+LI.active
+{
+	display: inline;
+	margin-right: 3em;
 }
-#footer {
-    margin-top:10%;
-    margin-right:15%;
-    margin-left:15%;
-    text-align:center;
-    background-color:#006699;
-    color:white;
+#footer
+{
+	margin-top: 10%;
+	margin-right: 15%;
+	margin-left: 15%;
+	text-align: center;
+	background-color: #006699;
+	color: #FFFFFF;
 }
