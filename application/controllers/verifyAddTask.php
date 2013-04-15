@@ -17,7 +17,7 @@ class VerifyAddTask extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='verifyAddTask';
+			$data['active']='meni';
 			$data['id']=$session_data['id'];
 			$data['message']="";
 			$data['task_name']='';

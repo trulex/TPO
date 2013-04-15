@@ -13,7 +13,7 @@ class VerifyAddProject extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='administration';
+	    $data['active']='meni';
 
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
