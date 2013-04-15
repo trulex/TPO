@@ -1,6 +1,6 @@
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-if (! $this->session->userdata('PID')) redirect(home, refresh);
+
 
 class ViewTasks extends CI_Controller {
 
@@ -25,21 +25,22 @@ class ViewTasks extends CI_Controller {
 			}
 			$data['active']='productbacklog';
 // 			$data['stories']= $this->stories->getAll($data['id']);	
-// 			$data['tasks']= $this->tasks->getAll();
+			$data['tasks']= $this->tasks->getAll();
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			
 			$stories=$this->stories->getCurrent($this->session->userdata('PID'));
-			$data['stories']=array();
+			$storyStruct=array();
 			foreach ($stories as $story){
 				$tasks=$this->tasks->getCurrent($story->id);
-				array_push($data['stories'],$story=>$tasks);
+				array_push($storyStruct,array_merge(array($story),$tasks);
 			}
+			$data['stories']=$storyStruct;
 			$this->load->view('header', $data);
-			$this->load->helper(array('form'));
 			$this->load->view('viewTasks',$data);
 			$this->load->view('footer');
-		} 
+		}
 		else{
 			redirect('login', 'refresh');
 		}

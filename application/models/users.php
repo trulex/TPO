@@ -30,6 +30,17 @@ Class Users extends CI_Model {
 		$query = $this->db->query("SELECT id FROM users WHERE username='$uname'");
 		return $query->row()->id;
 	}
+	
+	
+	function storeLastPID($PID, $UID){
+		$this->db->query("UPDATE users SET LastPID=$PID WHERE id=$UID");
+	}
+	
+	function getLastPID($UID){
+		$query = $this->db->query("SELECT LastPID FROM users WHERE id='$UID'");
+		return $query->row()->LastPID;
+	}
+	
 //     function addUser($username, $password, $name, $surname, $email, $rights) {
 //     
 //     }

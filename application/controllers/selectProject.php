@@ -8,6 +8,7 @@ Class SelectProject extends CI_Controller {
 		parent::__construct();
 		$this->load->model("sprints");
 		$this->load->model("projects");
+		$this->load->model('users');
 	}
 
     public function select() {
@@ -31,6 +32,7 @@ Class SelectProject extends CI_Controller {
 		else{
 			$this->session->set_userdata('SpID', '0');
 		}
+		$this->users->storeLastPID($PID,$this->session->userdata('UID'));
 		$this->session->set_userdata('noproject', '');
 		redirect($this->input->post('redirect'));
     }

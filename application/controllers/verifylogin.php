@@ -52,7 +52,7 @@ class VerifyLogin extends CI_Controller {
          'project' => '');
        $this->session->set_userdata('logged_in', $sess_array);
        $this->session->set_userdata('UID',$row->id);
-       $this->session->set_userdata('PID', 0);
+       $this->session->set_userdata('PID', $this->users->getLastPID($row->id));
      }
      session_start();
      $_SESSION['project']='';
