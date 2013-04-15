@@ -40,7 +40,7 @@
 					echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
 					echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
 				}
-				echo '<li style="list-style-type:square">'.$task.' <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
+				echo '<li style="list-style-type:square">'.$task.'</li>';
 
 			}
 			$previousStory=$storyData['name'];
