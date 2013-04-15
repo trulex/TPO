@@ -27,8 +27,8 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	function getUnasigned($PID){
-		$query=$this->db->query("SELECT id, name, text,diffficulty FROM stories WHERE PID=$PID");
-		return $query->result;
+		$query=$this->db->query("SELECT id, name, text,difficulty FROM stories WHERE PID=$PID and SpID=0");
+		return $query->result();
 	}
 	
 // 	Get id-s of stories from this sprint
@@ -43,7 +43,7 @@ class Stories extends CI_Model{
 	}
 	
 // 	Set task difficulty estimate(time estimate)
-	function setDifficulty($StIT,$difficulty){
+	function setDifficulty($StID,$difficulty){
 		$this->db->query("UPDATE stories SET difficulty=$difficulty WHERE id=$StID");
 	}
 }
