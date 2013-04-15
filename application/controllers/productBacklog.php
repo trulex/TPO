@@ -20,9 +20,6 @@ class ProductBacklog extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
-			if(strcmp($data['rights'],'user')==0){
-					redirect('home','refresh');
-			}
 			$data['active']='productBacklog';
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));

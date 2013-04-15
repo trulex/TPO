@@ -23,12 +23,12 @@ class UnasignedStories extends CI_Controller {
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);	
 			$data['rights'] = $session_data['rights'];
+			$data['active']='productBacklog';
 			$data['projects']=$this->projects->getProjects($session_data['id']);
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
 			
-			$data['active']='menu';
 			$stories=$this->stories->getUnasigned($this->session->userdata('PID'));
 			$storyTuple=array();
 			foreach ($stories as $story){
