@@ -7,10 +7,12 @@
 			<div class="zgodba">
 			<?php
 			echo "<h4>".$row->name."(".$row->difficulty." pts.)</h4><br>";
-			echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
-			echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
-			echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-			echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
+			if($tow->SpID==0){
+				echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
+				echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
+				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+				echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
+			}
 			?>
 			</div><div class="taski">
 			<?php
