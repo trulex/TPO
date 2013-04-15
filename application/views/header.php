@@ -28,10 +28,9 @@
     <div id="menu">
 	<ul class="menu">
 	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
-	    <?php echo $active == 'meni' ? '<li class="active">'.anchor('meni','Glavni meni') : '<li class="menu">'.anchor('meni','Glavni meni'); ?>
-	    <?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
-	    <?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('productBacklog','Product Backlog') : '<li class="menu">'.anchor('productBacklog','Product Backlog'); ?>
+		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('productBacklog','Product Backlog') : '<li class="menu">'.anchor('productBacklog','Product Backlog'); ?>
 	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('sprintBacklog','Sprint Backlog') : '<li class="menu">'.anchor('sprintBacklog','Sprint Backlog'); ?>
+		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
 	    <?php if (strcmp($rights,"admin")==0) {
 		echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); } ?>
 	</ul>

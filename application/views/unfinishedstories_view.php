@@ -7,7 +7,7 @@
 			if($row->PID == $PID): ?>
 				<div class="zgodba">
 				<?php
-				echo "<h4>".$row->name."</h4><br>";
+				echo "<h4>".$row->name."(".$row->difficulty." pts.)</h4><br>";
 				echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
 				echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
 				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
@@ -29,8 +29,9 @@
 					</div>
 				<?php endif ?>
 			<?php endif ?>	
-		<?php endforeach ?>	
-	</div>	
+	<?php endforeach ?>	
+	</div>
+	<li><?php echo anchor('addsprint','Add new sprints'); ?></li>
 	</div>
 </div>
 </form>
