@@ -25,20 +25,24 @@ class ViewTasks extends CI_Controller {
 			}
 			$data['active']='productbacklog';
 // 			$data['stories']= $this->stories->getAll($data['id']);	
-			$data['tasks']= $this->tasks->getAll();
+// 			$data['tasks']= $this->tasks->getAll();
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			
-			$stories=$this->stories->getCurrent($this->session->userdata('PID'));
-			$storyStruct=array();
+			$stories=$this->stories->getFromProject($this->session->userdata('PID'));
+			$storyTuple=array();
 			foreach ($stories as $story){
 				$tasks=$this->tasks->getCurrent($story->id);
-				array_push($storyStruct,array_merge(array($story),$tasks);
+// 				echo "story name:".$story->name."<br>";
+// 				foreach ($tasks as $task){
+// 					echo "task: ".$task->task_name."<br>";
+// 				}
+				$storyTuple=array_push($storyTuple,array($story,$tasks);
 			}
-			$data['stories']=$storyStruct;
+			$data['storyTuple']=$storyTuple;
 			$this->load->view('header', $data);
-			$this->load->view('viewTasks',$data);
+// 			$this->load->view('viewTasks',$data);
 			$this->load->view('footer');
 		}
 		else{
