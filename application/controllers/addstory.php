@@ -9,6 +9,7 @@ class Addstory extends CI_Controller {
     }
     
     function index() {
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];
@@ -19,7 +20,7 @@ class Addstory extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['id']);
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $data['active']='productbacklog';
+	    $data['active']='meni';
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';

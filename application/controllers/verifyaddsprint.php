@@ -12,12 +12,13 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	function index() {
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='productbacklog';
+			$data['active']='meni';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);

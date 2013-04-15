@@ -11,13 +11,14 @@ class MyTasks extends CI_Controller {
     }
     
     function index() {
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['id']=$session_data['id'];
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='mytasks';
+	    $data['active']='meni';
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);

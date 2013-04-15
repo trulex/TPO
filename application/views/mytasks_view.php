@@ -31,7 +31,10 @@
 			echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
 		    }
 		    echo '<li style="list-style-type:square">'.$task.' <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>';
-		
+// 			echo '<form name=cts method="post" action="sprintBacklog/releaseTask">';
+// 			echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button>';
+// 			echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
+			
 		} else if ($accepted==0) {
 		    if(strcmp($previousStory,$storyData['name'])!=0) {
 			echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
@@ -41,6 +44,10 @@
 		    echo '<form name="acceptTask" method="post" action="tasks/accept">';
 		    echo '<li style="list-style-type:square;margin-top:6px">'.$task.'</span> <span style="font-size:small;color:orange">(Not yet accepted)</span><button class="task" type="submit" name="task" value="'.$task.'">Accept task</button></li>';
 		    echo '</form>';
+// 		    echo '<form name=acceptTask method="post" action="sprintBacklog/acceptTask">';
+// 			echo '<input name="UID" type="hidden" value="'.$id.'" />';
+// 			echo '<button type="submit" value="'.$task->id.'" name="TID">Accept task</button>';
+// 			echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 		}
 		$previousStory=$storyData['name'];
 	    } ?>
