@@ -18,11 +18,11 @@ class MyTasks extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='meni';
+	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $data['tasks']=$this->tasks->getTasks($data['id']); //Gets key-value array of tasks and accepted indices
+	    $data['tasks']=$this->tasks->getOwn($data['id']); //Gets key-value array of tasks and accepted indices
 	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    
 	    $this->load->view('header', $data);

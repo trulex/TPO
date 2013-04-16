@@ -24,7 +24,7 @@ class ProductBacklog extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			
+		    
 			$stories=$this->stories->getFromProject($this->session->userdata('PID'));
 			$storyTuple=array();
 			foreach ($stories as $story){

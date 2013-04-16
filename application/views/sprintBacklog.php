@@ -2,8 +2,8 @@
 
 
 <div id="content">
-	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 	<div id="left">
+	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 		<?php foreach ($storyTuple as $tuple):
 			$story=$tuple[0];
 			$tasks=$tuple[1];?>
