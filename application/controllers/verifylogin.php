@@ -7,6 +7,8 @@ class VerifyLogin extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('users','',TRUE);
+   $this->load->model("projects");
+   $this->load->model("sprints");
  }
 
  function index()
@@ -53,6 +55,8 @@ class VerifyLogin extends CI_Controller {
        $this->session->set_userdata('logged_in', $sess_array);
        $this->session->set_userdata('UID',$row->id);
        $this->session->set_userdata('PID', $this->users->getLastPID($row->id));
+       $this->session->set_userdata('project', $this->projects->getProjectName($this->session->userdata('PID')));
+		
      }
      session_start();
      $_SESSION['project']='';

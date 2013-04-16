@@ -56,7 +56,7 @@ class Unfinishedstories extends CI_Controller {
 	function changeDifficulty(){
 		$difficulty=$this->input->post('difficulty');
 		if (is_numeric($difficulty)){
-			if ( $difficulty>0){
+			if ( $difficulty>=0){
 				$this->stories->setDifficulty($this->input->post('StID'), $difficulty);
 			}
 		}
