@@ -52,7 +52,7 @@ class VerifyAddStory extends CI_Controller {
 		    'tests'=>$tests,
 		    'priority'=>$priority,
 		    'busvalue'=>$business_value,
-		    'project_name' => $project );
+		    'PID' => $this->session->userdata('PID') );
 		$this->db->insert('stories', $userdata);
 		$data['message']='Story successfully added.';
 		$data['noproject']='';

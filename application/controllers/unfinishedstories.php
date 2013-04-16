@@ -17,7 +17,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='meni';
+			$data['active']='unfinishedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
@@ -28,6 +28,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['results']= $this->stories->getAll();			
 			
 			$this->load->view('header', $data);
+			$this->load->view('submenu');
 			$this->load->helper(array('form'));
 			$this->load->view('unfinishedstories_view',$data);
 			$this->load->view('footer');
@@ -50,6 +51,18 @@ class Unfinishedstories extends CI_Controller {
 		$this->db->update('stories',$data);
 		redirect($this->input->post('redirect'));
 	} 
+	
+	function changeDifficulty(){
+		$difficulty=$this->input->post('difficulty');
+		if (is_numeric($difficulty)){
+			if ( $difficulty>0){
+				$this->stories->setDifficulty($this->input->post('StID'), $difficulty);
+			}
+		}
+		redirect($this->input->post('redirect'));
+		
+	}
+	
 
 }
 ?>
