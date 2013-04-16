@@ -19,6 +19,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='meni';
 			$data['id']=$session_data['id'];
+			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
