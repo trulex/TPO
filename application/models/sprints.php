@@ -16,5 +16,19 @@ class Sprints extends CI_Model{
 			return $query->result();
 		}
 	}
+	
+	function getCurrentSprint($projectId) {
+	    $sprints=$this->getProjectSprints($projectId);
+	    if ($sprints != FALSE) {
+		foreach($sprints as $row):
+		    $today = strtotime(date("Y-m-d"));
+		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
+			return $row->id;
+		endif;
+		endforeach;
+	    } else {
+		return 0;
+	    }
+	}
 }
 ?> 

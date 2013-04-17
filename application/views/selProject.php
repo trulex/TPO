@@ -13,3 +13,5 @@
 	    </form>
 	    <?php if($this->session->userdata('PID')==0) echo '<p style="color:red">Please select<br> a project</p>';?>
 </div>
+
+</div>

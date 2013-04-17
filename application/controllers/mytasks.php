@@ -7,7 +7,7 @@ class MyTasks extends CI_Controller {
 	$this->load->model('projects');
 	$this->load->model('tasks');
 	$this->load->helper('date');
-	$this->load->model("sprints");
+	$this->load->model('sprints');
     }
     
     function index() {
@@ -20,13 +20,15 @@ class MyTasks extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
+	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project')); // current project id
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $data['tasks']=$this->tasks->getOwn($data['id']); //Gets key-value array of tasks and accepted indices
+	    $data['currentsprint']=$this->sprints->getCurrentSprint($data['currentproject']);
+	    $data['tasks']=$this->tasks->getOwn($data['id'],$data['currentsprint']); //Get tasks data
 	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
+	    $this->load->view('selProject',$data);
 	    $this->load->view('footer');
 	} else {
 	//If no session, redirect to login page
@@ -37,40 +39,29 @@ class MyTasks extends CI_Controller {
 	/* Check if some taks is already being worked on */
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
-	if(strcmp($this->tasks->getActive($userId),'')!=0) {
+	if($this->tasks->getActive($userId)!=0) {
 	    $this->session->set_userdata('taskActive','Stop working on current task to begin with work on another.');
 	    redirect('mytasks');
 	} else {
-	    $this->db->select('id');
-	    $this->db->from('tasks');
-	    $this->db->where('task_name', $this->input->post('task'));
-	    $this->db->where('UID', $userId);
-	    $query=$this->db->get();
-	    foreach ($query->result() as $row)
-	    {
-		$taskId=$row->id;
-	    }
-	    
+	    $taskId=$this->input->post('taskID');
 	    /* Update start time in database */
 	    $newStart=array(
 		'start_time'=>date('Y-m-d H:i:s') );
-	    $this->db->where('task_name', $this->input->post('task'));
-	    $this->db->where('UID', $userId);
 	    $this->db->where('id', $taskId);
 	    $this->db->update('tasks', $newStart);
 	    /* Mark task as active */
 	    $newStart=array(
 		'active'=>'1' );
-	    $this->db->where('task_name', $this->input->post('task'));
-	    $this->db->where('UID', $userId);
 	    $this->db->where('id', $taskId);
 	    $this->db->update('tasks', $newStart);
 	    $this->session->set_userdata('taskActive','');
+	    
 	    redirect('mytasks'); //redirect to previous page
 	}
     }
     function stopWork() {
-	$session_data = $this->session->userdata('logged_in');
+	$taskId=$this->input->post('taskID');
+	/*$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
 	$activeTask=$this->tasks->getActive($userId);
 	
@@ -82,20 +73,16 @@ class MyTasks extends CI_Controller {
 	foreach ($query->result() as $row) {
 	    $taskId=$row->id;
 	}
-	    
+	 */   
 	/* Update stop time in database */
 	$newStop=array(
 	'end_time'=>date('Y-m-d H:i:s') );	
-	$this->db->where('task_name', $activeTask);
-	$this->db->where('UID', $userId);
 	$this->db->where('id', $taskId);
 	$this->db->update('tasks', $newStop);
 	
 	/* Mark task as inactive */
 	$newStop=array(
 	    'active'=>'0' );
-	$this->db->where('task_name', $activeTask);
-	$this->db->where('UID', $userId);
 	$this->db->where('id', $taskId);
 	$this->db->update('tasks', $newStop);
 	$this->session->set_userdata('taskActive','');
@@ -104,8 +91,8 @@ class MyTasks extends CI_Controller {
 	$sql="
 	UPDATE `tasks` 
 	SET `time_sum` = TIME_TO_SEC( TIMEDIFF(  `end_time` ,  `start_time` ) ) +  `time_sum` 
-	WHERE  `UID` =  ? AND `task_name` = ? ";
-	$this->db->query($sql, array($userId, $activeTask));
+	WHERE  `id` =  ? ";
+	$this->db->query($sql, array($taskId));
 	redirect('mytasks'); /* redirect to previous page */
     }
 }

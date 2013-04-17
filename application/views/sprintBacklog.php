@@ -28,7 +28,7 @@
 							}
 							echo '</select>';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Asign</button></form></b>';
+							echo '<button type="submit" value="'.$task->id.'" name="TID">Assign</button></form></b>';
 						}
 						else{
 							echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
@@ -59,7 +59,7 @@
 					echo "<br><br>";
 			}}?></ul>
 			<form name=cts method="post" action="verifyAddTask">
-			<button type="submit" value="<?php echo $story->id ?>" name="task" >add task</button></form><hr>
+			<button type="submit" value="<?php echo $story->id ?>" name="task" >Add a task</button></form><hr>
 		<?php endforeach ?>
 	</div>
 	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>

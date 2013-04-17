@@ -9,8 +9,8 @@ class Tasks extends CI_Model{
 		return $query->result();
 	}
 	
-	function getOwn($id){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$id");
+	function getOwn($userId, $sprintId){
+		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$userId and SpID=$sprintId");
 		return $query->result();
 	}
 	
@@ -40,16 +40,16 @@ class Tasks extends CI_Model{
 	}
 	
 	function getActive($userId) {
-    /* Checks if there is a task that is being worked on, return name of it, or empty string if none is active. */
-	$activeTask='';
+    /* Checks if there is a task that is being worked on, return id of it, or empty string if none is active. */
+	$activeTask=0;
 	
-	$this -> db -> select('active,task_name');
+	$this -> db -> select('active,id');
 	$this -> db -> from('tasks');
 	$this -> db -> where('UID', $userId);
 	$query=$this->db->get();
 	foreach ($query->result() as $row) {
 	    if($row->active==1) {
-		$activeTask=$row->task_name;
+		$activeTask=$row->id;
 		return $activeTask;
 	    }
 	}
@@ -116,6 +116,17 @@ class Tasks extends CI_Model{
 	$time=round($time,2);
 	return $time;
     }
+    
+    function getTaskName($taskId) {
+	$this->db->select('task_name');
+	$this->db->from('tasks');
+	$this->db->where('id',$taskId);
+	$query=$this->db->get();
+	$name=$query->row()->task_name;
+	
+	return $name;
+    }
+    
 }
 
 ?>
