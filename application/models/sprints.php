@@ -24,7 +24,7 @@ class Sprints extends CI_Model{
 		    $today = strtotime(date("Y-m-d"));
 		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
 			return $row->id;
-		endif;
+		    endif;
 		endforeach;
 	    } else {
 		return 0;
