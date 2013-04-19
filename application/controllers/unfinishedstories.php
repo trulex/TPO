@@ -8,6 +8,7 @@ class Unfinishedstories extends CI_Controller {
 		$this->load->model('projects');
 		$this->load->model("sprints");
 		$this->load->model("stories");
+		$this->load->model('project_user');
     }
 	
 	function index() {
@@ -24,7 +25,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			
+			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getAll();			
 			
 			$this->load->view('header', $data);

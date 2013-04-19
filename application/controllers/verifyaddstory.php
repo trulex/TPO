@@ -15,7 +15,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='meni';
+	    $data['active']='productBacklog';
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
@@ -24,6 +24,7 @@ class VerifyAddStory extends CI_Controller {
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 	    
 	    $this->load->view('header',$data);
+	    $this->load->view('submenu');
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
@@ -45,14 +46,16 @@ class VerifyAddStory extends CI_Controller {
 		$tests=$this->input->post('tests');
 		$priority=$this->input->post('priority');
 		$business_value=$this->input->post('business_value');
-		$project=$this->session->userdata('project');
+		$projectId=$this->session->userdata('PID');
+		$sprintId=$this->session->userdata('SpID');
 		$userdata=array(
 		    'name'=>$name,
 		    'text'=>$text,
 		    'tests'=>$tests,
 		    'priority'=>$priority,
 		    'busvalue'=>$business_value,
-		    'PID' => $this->session->userdata('PID') );
+		    'PID' => $projectId
+			);
 		$this->db->insert('stories', $userdata);
 		$data['message']='Story successfully added.';
 		$data['noproject']='';

@@ -12,5 +12,6 @@
 	    <input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
 	    </form>
 	    <?php if($this->session->userdata('PID')==0) echo '<p style="color:red">Please select<br> a project</p>';?>
-    </div>
+</div>
+
 </div>

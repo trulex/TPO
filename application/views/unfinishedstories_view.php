@@ -33,8 +33,10 @@
 					<?php endif ?>
 				<?php endif ?>	
 			<?php endforeach ?>	
-			</div>
-			<li><?php echo anchor('addsprint','Add new sprints'); ?></li>
+			</div><br>
+			<form action="addsprint" method="post">
+				<input type="submit" name="submitbutton" value="Manage sprints" />
+			</form>
 		</div>
 	</div>
 </form>
