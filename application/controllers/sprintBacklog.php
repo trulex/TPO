@@ -29,7 +29,7 @@ class SprintBacklog extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
-			$stories=$this->stories->getFromProject($this->session->userdata('PID'));
+			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
 			$storyTuple=array();
 			foreach ($stories as $story){
 				$tasks=$this->tasks->getCurrent($story->id);
