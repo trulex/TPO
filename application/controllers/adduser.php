@@ -20,8 +20,7 @@ class Adduser extends CI_Controller {
 	    }
 	    $data['active']='administration';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));
 	    $data['message']='';

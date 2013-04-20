@@ -13,9 +13,9 @@
 {
 	border: 1px solid #CCC;
 	width: 200px;
+	height: 150px;
 	margin: auto;
 	margin-right: 0%;
-	height: auto;
 	overflow-y: scroll;
 	text-align: left;
 }

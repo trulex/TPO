@@ -17,8 +17,7 @@ class VerifyAddProject extends CI_Controller {
 
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
-		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    
 	    $data['results']= $this->projects->getAll();
 		

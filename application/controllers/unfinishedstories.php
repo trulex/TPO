@@ -23,8 +23,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
-			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getAll();			
 			

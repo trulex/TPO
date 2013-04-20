@@ -18,8 +18,7 @@ class AddTask extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='meni';
 			$data['StID']=$StID;
-			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			if(strcmp($data['rights'],'user')==0){
 					redirect('home','refresh');
 			}
