@@ -32,7 +32,7 @@
 	
 	<?php
 		if($currentsprints ){
-			 echo '<p>Sprints: </p><br>';
+			echo '<p>Sprints: </p><br>';
 			foreach($currentsprints as $row) {
 			echo $row->start_date." - ";
 			echo $row->finish_date;

@@ -20,9 +20,8 @@ class MyTasks extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='mytasks';
 	    $data['projects']=$this->projects->getProjects($data['id']);
-	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project')); // current project id
-	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $data['currentsprint']=$this->sprints->getCurrentSprint($data['currentproject']);
+	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+	    $data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
 	    $data['tasks']=$this->tasks->getTasks($data['id'],$data['currentsprint']); //Get tasks data
 	    $data['activeTask']=$this->tasks->getActive($data['id']);
 	    

@@ -37,6 +37,15 @@ Class Projects extends CI_Model {
 		$query=$this->db->get();
 		return $query->row()->project_name;
     }
+	
+	function getDescription($projectId){
+		$this->db->select('description');
+		$this->db->from('projects');
+		$this->db->where('id',$projectId);
+		$query=$this->db->get();
+		return $query->row()->description;
+	}
+	
     function getProjectID($projectName) {
 		$this->db->select('id');
 		$this->db->from('projects');
@@ -51,5 +60,10 @@ Class Projects extends CI_Model {
 	function getID($UName){
 		$query = $this->db->query("SELECT id FROM projects WHERE project_name='$UName'");
 		return $query->result();
+	}
+	
+	function ifExists($projectName){
+		$query = $this->db->query("SELECT project_name FROM projects WHERE project_name='$projectName'");
+		return $query->num_rows();
 	}
 }
