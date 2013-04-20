@@ -1,0 +1,33 @@
+<!--avtor:darko-->
+<?php echo form_open('profile/verifyEdit'); 
+$msg=strcmp($message,'');
+?>
+<div id="content">
+    <div id="left">
+	<div id="add">
+	    <p>Edit profile</p>
+	    <span style="color:red">*</span><label>Username</label>
+	    <input type="text" name="username" value="<?php echo set_value('username',$username); ?>" size="20" /><br />
+	    <span style="color:red;font-weight:normal"><?php echo form_error('username'); ?></span></small>
+	    
+	    <span style="color:red">*</span><label>Password</label>
+	    <input type="password" name="password" size="20" /><br />
+	    <span style="color:red">*</span><label>Confirm password</label>
+	    <input type="password" name="confirm_password" size="20" /><br />
+	    <span style="color:red">*</span><label>Name</label>
+	    <input type="text" name="name" value="<?php echo set_value('name',$name) ?>" size="20"/><br />
+	    <span style="color:red">*</span><label>Surname</label>
+	    <input type="text" name="surname" value="<?php echo set_value('surname',$surname) ?>" size="20"/><br />
+	    <label>Email</label>
+	    <input type="text" name="email" value="<?php echo set_value('email',$email) ?>" size="20"/><br />
+	    <div><form name="submit" action="profile/verifyEdit"><input type="submit" value="Submit"/></form></div>
+	</div>
+    </div>
+    <div id="validation">
+	<?php echo validation_errors(); ?>
+    </div>
+</div>
+<?php if($msg!=0) {
+	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';
+    } ?>
+</form>

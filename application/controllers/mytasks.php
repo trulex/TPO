@@ -11,7 +11,7 @@ class MyTasks extends CI_Controller {
     }
     
     function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+	if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['id']=$session_data['id'];
@@ -60,20 +60,7 @@ class MyTasks extends CI_Controller {
 	}
     }
     function stopWork() {
-	$taskId=$this->input->post('taskID');
-	/*$session_data = $this->session->userdata('logged_in');
-	$userId=$session_data['id'];
-	$activeTask=$this->tasks->getActive($userId);
-	
-	$this->db->select('id');
-	$this->db->from('tasks');
-	$this->db->where('task_name', $activeTask);
-	$this->db->where('UID', $userId);
-	$query=$this->db->get();
-	foreach ($query->result() as $row) {
-	    $taskId=$row->id;
-	}
-	 */   
+	$taskId=$this->input->post('taskID'); 
 	/* Update stop time in database */
 	$newStop=array(
 	'end_time'=>date('Y-m-d H:i:s') );	
