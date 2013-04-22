@@ -30,5 +30,44 @@ class Sprints extends CI_Model{
 		return 0;
 	    }
 	}
+	
+	function getStartDate($sprintID){
+		$this->db->select('start_date');
+		$this->db->from('sprints');
+		$this->db->where('id',$sprintID);
+		$query=$this->db->get();
+		
+		if($query->num_rows() > 0){
+			return $query->row()->start_date;
+		}else{
+			return 0;
+		}
+	}
+	
+	function getFinishDate($sprintID){
+		$this->db->select('finish_date');
+		$this->db->from('sprints');
+		$this->db->where('id',$sprintID);
+		$query=$this->db->get();
+		
+		if($query->num_rows() > 0){
+			return $query->row()->finish_date;
+		}else{
+			return 0;
+		}
+	}
+	
+	function getVelocity($sprintID){
+		$this->db->select('velocity');
+		$this->db->from('sprints');
+		$this->db->where('id',$sprintID);
+		$query=$this->db->get();
+		
+		if($query->num_rows() > 0){
+			return $query->row()->velocity;
+		}else{
+			return 0;
+		}
+	}
 }
 ?> 
