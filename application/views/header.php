@@ -9,7 +9,7 @@
 <body>
 <div class="glava">
     <p class="naslov">ScrumPro</p>
-    <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
+    <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
 	Current project: <?php echo $this->session->userdata('project'); ?> - (<?php echo anchor('editproject','Edit'); ?>)<br>
 	Current sprint: <?php	if($currentsprints){
@@ -22,7 +22,6 @@
 								endforeach;
 							}
 					?>
-	
     </p>
     <div style="clear: both;"></div>​
     <div id="menu">

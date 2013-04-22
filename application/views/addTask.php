@@ -12,7 +12,7 @@
 			<label>Time estimate</label>
 			<input type="text" name="time_estimate"  size="6"/><br>
 			<input name="StID" type="hidden" value="<?php echo $StID?>" />
-			<input type="submit" value="submit" />
+			<input type="submit" value="Submit" />
 		</form>
 		<?php echo $message?>
 	</div>
