@@ -23,16 +23,15 @@ class VerifyAddTask extends CI_Controller {
 			$data['task_name']='';
 			$data['text']='';
 			if(strcmp($data['rights'],'user')==0){
-					redirect('home','refresh');
+				redirect('home','refresh');
 			}
 
-			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('StID', 'StID', 'trim|numeric');
 			if ($this->form_validation->run()==false) {
-				$data['message']="nekej ne štima";
+				$data['message']="nekej ne štima"; // popraviti to
 				echo $this->input->post('task');
 			}
 			else{
@@ -47,13 +46,13 @@ class VerifyAddTask extends CI_Controller {
 		}
 	}
     public function taskName_check($str, $StID) {
-    	$this->db->select('task_name');
+		$this->db->select('task_name');
 		$this->db->from('tasks');
 		$this->db->where('task_name', $str);
 		$this->db->where('StID', $StID);
 		$query=$this->db->get();
 		if ($query->num_rows() > 0) {
-			$this->form_validation->set_message('taskName_check', 'Story with such name allready exists.');
+			$this->form_validation->set_message('taskName_check', 'Story with such name already exists.');
 		return FALSE;
 		} else {
 			return TRUE;
@@ -73,6 +72,7 @@ class VerifyAddTask extends CI_Controller {
 		$data['StID']=$this->input->post('StID');
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+		$data['currentsprint']=$this->sprints->getCurrentSprint($data['currentproject']);
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$name, $data["StID"]]');
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
@@ -94,7 +94,9 @@ class VerifyAddTask extends CI_Controller {
 				'task_name'=>$name,
 				'text'=>$text,
 				'StID'=>$StID,
-				'time_estimate'=>$time_estimate);
+				'time_estimate'=>$time_estimate,
+				'SpID' => $data['currentsprint']
+				);
 			$this->db->insert('tasks',$taskData);
 			redirect('sprintBacklog');
 		}

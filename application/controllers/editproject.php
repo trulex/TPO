@@ -5,6 +5,7 @@ class Editproject extends CI_Controller {
 		parent::__construct();
 		$this->load->model('projects');
 		$this->load->model("sprints");
+		$this->load->model("project_user");
     }
 
     function index() {
@@ -16,22 +17,23 @@ class Editproject extends CI_Controller {
 		$data['id']=$session_data['id'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
+		$data['PID']=$this->session->userdata('PID');
 		$data['projects']=$this->projects->getProjects($data['id']);
-		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-		
-		//$this->load->model("get_projects");
-		//$data['results']= $this->get_projects->getAll();
-		
+		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+				
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 		
 	    $this->form_validation->set_rules('projectname', 'Project name', 'required|callback_projectname_check');
-	    $this->form_validation->set_rules('description', 'Project description');
-		$this->form_validation->set_rules('scrummaster', 'Scrum master');
-	    $this->form_validation->set_rules('productowner', 'Product owner');
+		$this->form_validation->set_rules('checkbox_name', 'listofmembers', 'trim');
 	    
 	    if ($this->form_validation->run() == FALSE) {
+			$data['projectname']=$this->projects->getProjectName($data['PID']);
+			$data['description']=$this->projects->getDescription($data['PID']);
+			$data['scrummaster']=$this->project_user->getScrumMaster($data['PID']);
+			$data['mastername']=$this->project_user->getName($data['scrummaster']);
+			$data['productowner']=$this->project_user->getProductOwner($data['PID']);
+			$data['ownername']=$this->project_user->getName($data['productowner']);
 			$this->load->view('editproject_view',$data);
 	    } else {
 		$projectname=$this->input->post('projectname');
@@ -39,47 +41,92 @@ class Editproject extends CI_Controller {
 		$scrummaster=$this->input->post('scrummaster');
 		$productowner=$this->input->post('productowner');
 		$teammembers=$this->input->post('listofmembers');
+		$this->session->set_userdata('project', $projectname);
 		
 		$userdata=array(
 		    'project_name'=>$projectname,
 		    'description'=>$description
 			);
-		
+			
+		$this->db->where('id', $data['PID']);
 		$this->db->update('projects', $userdata);
 		
-		$this->db->select('id, project_name');
-		$this->db->from('projects');
-		$this->db->where('project_name', $projectname);
-		$query=$this->db->get();
-		$id=$query->result('id');
+		$userdata=array(
+		    'project_id'=>$data['PID'],
+			'user_id'=>$scrummaster,
+			'role'=>1
+			);
 		
-		//if ($query->num_rows() > 0)
+		if($scrummaster != 0){
+			if($this->project_user->getScrumMaster($data['PID']) != 0){
+				$userdata=array(
+					'user_id'=>$scrummaster,
+				);
+				$this->db->where('project_id', $data['PID']);
+				$this->db->where('role', 1);
+				$this->db->update('project_user', $userdata);
+			}else{
+				$this->db->insert('project_user', $userdata);
+			}
+		}
+		
+		if($scrummaster == 0 && $this->project_user->getScrumMaster($data['PID']) != 0){
+			$this->db->where('project_id', $data['PID']);
+			$this->db->where('role', 1);
+			$this->db->delete('project_user'); 
+		}
 		
 		$userdata=array(
-		    'project_id'=>$id,
-		    'user_id'=>$scrummaster,
-			'role'=> 1
+		    'project_id'=>$data['PID'],
+			'user_id'=>$productowner,
+			'role'=>2
 			);
-		$this->db->update('product_user', $userdata);
 		
-		$userdata=array(
-		    'project_id'=>$id,
-		    'user_id'=>$productowner,
-			'role'=> 2
-			);
-		$this->db->update('product_user', $userdata);
+		if($productowner != 0){
+			if($this->project_user->getProductOwner($data['PID']) != 0){
+				$userdata=array(
+					'user_id'=>$productowner,
+				);
+				$this->db->where('project_id', $data['PID']);
+				$this->db->where('role', 2);
+				$this->db->update('project_user', $userdata);
+			}else{
+				$this->db->insert('project_user', $userdata);
+			}
+		}
 		
-		foreach($teammembers as $member){
-			$userdata=array(
-				'project_id'=>$id,
-				'user_id'=>$member,
-				'role'=> 0
-			);
-			$this->db->update('product_user', $userdata);
+		if($productowner == 0 && $this->project_user->getProductOwner($data['PID']) != 0){
+			$this->db->where('project_id', $data['PID']);
+			$this->db->where('role', 2);
+			$this->db->delete('project_user'); 
+		}
+
+		if($this->project_user->getTeamMembersID($data['PID'] == 0)){
+			foreach($teammembers as $member){
+				$userdata=array(
+					'project_id'=>$data['PID'],
+					'user_id'=>$member,
+					'role'=> 0
+				);
+				$this->db->insert('project_user', $userdata);
+			}
+		}else{
+			$this->db->where('project_id', $data['PID']);
+			$this->db->where('role', 0);
+			$this->db->delete('project_user');
+			
+			foreach($teammembers as $member){
+				$userdata=array(
+					'project_id'=>$data['PID'],
+					'user_id'=>$member,
+					'role'=> 0
+				);
+				$this->db->insert('project_user', $userdata);
+			}
 		}
 		
 		$this->session->set_flashdata('flashSuccess', 'Project successfully edited.');
-		redirect('addproject');
+		redirect('editproject');
 	    }
 	    $this->load->view('footer');
 	}    else {
@@ -87,12 +134,13 @@ class Editproject extends CI_Controller {
 	    redirect('login', 'refresh');
 	}
     }
+	
     public function projectname_check($str) {
-	$this->db->select('project_name');
+	$this->db->select('id, project_name');
 	$this->db->from('projects');
 	$this->db->where('project_name', $str);
 	$query=$this->db->get();
-	if ($query->num_rows() > 0) {
+	if ($query->num_rows() > 0 && $query->row()->id != $this->session->userdata('PID')) {
 	    $this->form_validation->set_message('projectname_check', 'A project with the same name already exists.');
 	    return FALSE;
 	} else {

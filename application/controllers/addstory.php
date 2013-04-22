@@ -18,8 +18,7 @@ class Addstory extends CI_Controller {
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
-	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['active']='productBacklog';
 	    $this->load->view('header', $data);
 	    $this->load->view('submenu');
