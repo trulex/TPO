@@ -7,6 +7,7 @@ class VerifyLogin extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('users','',TRUE);
+	$this->load->model("projects");
  }
 
  function index()
@@ -39,20 +40,22 @@ class VerifyLogin extends CI_Controller {
    //query the database
    $result = $this->users->login($username, $password);
 
-   if($result)
-   {
-     $sess_array = array();
-     foreach($result as $row)
-     {
-       $sess_array = array(
-         'id' => $row->id,
-         'username' => $row->username,
-         'name' => $row->name,
-         'rights' => $row->rights,
-         'project' => '');
-       $this->session->set_userdata('logged_in', $sess_array);
-       $this->session->set_userdata('UID',$row->id);
-       $this->session->set_userdata('PID', $this->users->getLastPID($row->id));
+	if($result)
+	{
+	$sess_array = array();
+	foreach($result as $row)
+	{
+		$sess_array = array(
+		'id' => $row->id,
+		'username' => $row->username,
+		'name' => $row->name,
+		'rights' => $row->rights,
+		'project' => '');
+		$this->session->set_userdata('logged_in', $sess_array);
+		$this->session->set_userdata('UID',$row->id);
+		$this->session->set_userdata('PID', $this->users->getLastPID($row->id));
+       	$this->session->set_userdata('PID', $this->users->getLastPID($row->id));
+		$this->session->set_userdata('project', $this->projects->getProjectName($this->session->userdata('PID')));
      }
      session_start();
      $_SESSION['project']='';
