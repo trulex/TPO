@@ -10,7 +10,7 @@ Class Users extends CI_Model {
 	
 	$query=$this->db->get();
 	if($query -> num_rows() == 1) {
-		return $query->result();
+		return $query->row();
 	} else {
 		return false;
 	}
@@ -36,12 +36,12 @@ Class Users extends CI_Model {
 		return $query->row()->id;
 	}	
 	function storeLastPID($PID, $UID){
-		$this->db->query("UPDATE users SET LastPID=$PID WHERE id=$UID");
+		$this->db->query("UPDATE users SET lastPID=$PID WHERE id=$UID");
 	}
 	
 	function getLastPID($UID){
-		$query = $this->db->query("SELECT LastPID FROM users WHERE id='$UID'");
-		return $query->row()->LastPID;
+		$query = $this->db->query("SELECT lastPID FROM users WHERE id='$UID'");
+		return $query->row()->lastPID;
 	}
 } 
 ?>

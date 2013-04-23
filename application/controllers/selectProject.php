@@ -21,17 +21,18 @@ Class SelectProject extends CI_Controller {
 		if($sprints){
 			foreach ($sprints as $sprint){
 				if($today >= strtotime($sprint->start_date) && $today <= strtotime($sprint->finish_date)){
-					$this->session->set_userdata('SpID', $sprint->id);
+					$SpID=$sprint->id;
 					$found=TRUE;
 				}
 			}
 			if(!$found){
-				$this->session->set_userdata('SpID', '0');
+				$SpID=0;
 			}
 		}
 		else{
-			$this->session->set_userdata('SpID', '0');
+			$SpID=0;
 		}
+		$this->session->set_userdata('SpID', $SpID);
 		$this->users->storeLastPID($PID,$this->session->userdata('UID'));
 		$this->session->set_userdata('noproject', '');
 		redirect($this->input->post('redirect'));

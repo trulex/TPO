@@ -16,9 +16,9 @@
 		foreach($currentsprints as $row):
 		    $today = strtotime(date("Y-m-d"));
 		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
-				echo $row->start_date." - ".$row->finish_date;
-				$this->session->set_userdata('SpID', $row->id);
-			endif;
+			echo $row->start_date." - ".$row->finish_date;
+			$this->session->set_userdata('SpID', $row->id);
+		endif;
 		endforeach;
 	}
 	?>

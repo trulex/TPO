@@ -11,7 +11,7 @@ class Tasks extends CI_Model{
 	
 	function getTasks($userId, $sprintId){
 		if($sprintId != 0) {
-		    $query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$userId and SpID=$sprintId");
+		    $query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$userId ");
 		    return $query->result();
 		 } else {
 		    return array();
@@ -54,8 +54,8 @@ class Tasks extends CI_Model{
 	$query=$this->db->get();
 	foreach ($query->result() as $row) {
 	    if($row->active==1) {
-		$activeTask=$row->id;
-		return $activeTask;
+			$activeTask=$row->id;
+			return $activeTask;
 	    }
 	}
 	return $activeTask;
