@@ -1,5 +1,13 @@
 <!--avtor:BOSTJAN-->
 <div id="content">
+	<?php 
+				if( $this->session->userdata('varError')==1){
+					echo '<span style="color:red">Time must be non-negative!</span>';
+				}
+				else if($this->session->userdata('varError')==2){
+					echo '<span style="color:red">Time must be numeric</span>';
+				}
+				$this->session->set_userdata('varError',0);?>
     <div id="left">
 		<div id="add">
 			<p>Stories: </p><br>

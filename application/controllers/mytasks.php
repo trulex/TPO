@@ -27,7 +27,6 @@ class MyTasks extends CI_Controller {
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('mytasks_view', $data);
-	    $this->load->view('selProject',$data);
 	    $this->load->view('footer');
 	} else {
 	//If no session, redirect to login page
