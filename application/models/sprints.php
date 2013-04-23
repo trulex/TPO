@@ -30,5 +30,9 @@ class Sprints extends CI_Model{
 		return 0;
 	    }
 	}
+	function getSprint($SpID){
+		$query=$this->db->query("SELECT start_date, finish_date, velocity, id FROM sprints WHERE id=$SpID");
+		return $qurey->row();
+	}
 }
 ?> 

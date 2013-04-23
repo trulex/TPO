@@ -58,6 +58,12 @@ class Unfinishedstories extends CI_Controller {
 			if ( $difficulty>0){
 				$this->stories->setDifficulty($this->input->post('StID'), $difficulty);
 			}
+			else{
+				echo '<script alert("Time must be non-negative");</script>';
+			}
+		}
+		else{
+			echo '<script alert("Time must numeric");</script>';
 		}
 		redirect($this->input->post('redirect'));
 		
