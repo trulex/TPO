@@ -69,3 +69,6 @@
 	    ?>
 	</ul>
     </div>
+   	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+</div>
+

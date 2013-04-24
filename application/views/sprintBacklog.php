@@ -58,7 +58,7 @@
 					echo '<div>"'.$task->text.'"</div></li>';
 					echo "<br><br>";
 			}}?></ul>
-			<form name=cts method="post" action="verifyAddTask">
+			<form name="cts" method="post" action="verifyAddTask">
 			<button type="submit" value="<?php echo $story->id ?>" name="task" >Add a task</button></form><hr>
 		<?php endforeach ?>
 	</div>

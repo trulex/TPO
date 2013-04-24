@@ -9,7 +9,8 @@ class VerifyAddUser extends CI_Controller {
 	$this->load->model("sprints");
     }
     function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+	if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+	
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];
@@ -19,7 +20,8 @@ class VerifyAddUser extends CI_Controller {
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['project']=$this->session->userdata('project');
-		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');
@@ -50,7 +52,6 @@ class VerifyAddUser extends CI_Controller {
 		$this->db->insert('users', $userdata);
 		$data['message']='User successfully added.';
 		$this->load->view('adduser_view',$data);
-		//redirect('adduser',$data);
 	    }
 	    $this->load->view('footer');
 	}    else {

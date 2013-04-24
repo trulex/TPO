@@ -9,7 +9,7 @@
 <body>
 <div class="glava">
     <p class="naslov">ScrumPro</p>
-    <p class="welcome">Welcome, <a href="#"><?php echo $name?></a><br/>
+    <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
 	Current project: <?php echo $this->session->userdata('project'); ?> - (<?php echo anchor('editproject','Edit'); ?>)<br>
 	Current sprint: <?php	if($currentsprints){
@@ -17,6 +17,7 @@
 		    $today = strtotime(date("Y-m-d"));
 		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
 			echo $row->start_date." - ".$row->finish_date;
+			$this->session->set_userdata('SpID', $row->id);
 		endif;
 		endforeach;
 	}

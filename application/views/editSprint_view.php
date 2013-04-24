@@ -25,14 +25,18 @@
 		<div><form action="verifyaddsprint"><input type="submit" value="Save changes" /></form></div>
 		<span style="color:green;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>	
 	</div>
+	</div>
 	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>
 
 <div id="content">
+	<div id="left">
 	<?php
 		if($currentsprints ){
 			echo '<p>Sprints: </p><br>';
-			foreach($currentsprints as $row) {
+			foreach($currentsprints as $row) { ?>
+				<div class="sprintbox">
+				<?php
 				echo form_hidden('sprintid', $row->id);
 				echo $row->start_date." - ";
 				echo $row->finish_date;
@@ -45,12 +49,15 @@
 					<span style="color:green;font-weight:normal">FINISHED</span>
 				<?php }else{ ?>
 					<span style="color:red;font-weight:normal">FUTURE</span>
-				<?php }
+				<?php } ?>
+				</div>
+				<?php
 				 echo "<br>"; }
 		} else { /* No sprints yet */
 		echo '<p>Sprints: </p><br>';
 		echo 'No sprints have been added yet.';
 		}
 	?>
+	</div>
 </div>
 </form>
