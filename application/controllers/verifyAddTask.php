@@ -22,10 +22,6 @@ class VerifyAddTask extends CI_Controller {
 			$data['message']="";
 			$data['task_name']='';
 			$data['text']='';
-			if(strcmp($data['rights'],'user')==0){
-				redirect('home','refresh');
-			}
-
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->library('form_validation');
@@ -95,7 +91,7 @@ class VerifyAddTask extends CI_Controller {
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate,
-				'SpID' => $data['currentsprint']
+				'SpID' => $this->session->userdata('SpID')
 				);
 			$this->db->insert('tasks',$taskData);
 			redirect('sprintBacklog');

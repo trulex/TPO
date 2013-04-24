@@ -6,20 +6,27 @@
 	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 		<?php foreach ($storyTuple as $tuple):
 			$story=$tuple[0];
-			$tasks=$tuple[1];?>
-			<h3> <?php echo $counter.".)".$story->name; $counter++; ?></h3>
-			<?php echo '"'.$story->text.'"'?>
-			<ul><?php foreach ($tasks as $task){
+			$tasks=$tuple[1];
+			echo '<h3>'.$counter.".)".$story->name.'</h3>'; 
+			$counter++;
+			echo '"'.$story->text.'"<ul>';
+			 foreach ($tasks as $task){
 				if($story->id == $task->StID){
 					echo '<li><div><b>'.$task->task_name;
 					echo ' ['.$task->time_estimate.'] </b>';
 					if($task->UID == 0){
 						if ( $rights=="admin" || $role==1 ){
-							echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
-							echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
+// 							Edit task form
+							echo '<form name="editTask" method="post" action="editTask">';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
+							echo '<button type="submit">Edit</button></form></b>';
+// 							Change estimate form
+// 							echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
+// 							echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
+// 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
+// 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+// 							echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
+// 							Asign task form
 							echo '<form name="asign" method="post" action="sprintBacklog/asignTask">';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<select name="UID">' ;
@@ -29,8 +36,11 @@
 							echo '</select>';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Assign</button></form></b>';
+
+							
 						}
 						else{
+// 							take task
 							echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
 							echo '<input name="UID" type="hidden" value="'.$id.'" />';
 							echo '<button type="submit" value="'.$task->id.'" name="TID">Take task</button>';
@@ -57,10 +67,12 @@
 					echo "</div>";
 					echo '<div>"'.$task->text.'"</div></li>';
 					echo "<br><br>";
-			}}?></ul>
-			<form name=cts method="post" action="verifyAddTask">
-			<button type="submit" value="<?php echo $story->id ?>" name="task" >Add a task</button></form><hr>
-		<?php endforeach ?>
+				}
+			}
+			echo '</ul>';
+			echo '<form name=cts method="post" action="verifyAddTask">';
+			echo '<button type="submit" value="'.$story->id.'" name="task" >Add a task</button></form><hr>';
+		endforeach ?>
 	</div>
 	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>

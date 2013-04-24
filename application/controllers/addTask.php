@@ -19,10 +19,6 @@ class AddTask extends CI_Controller {
 			$data['active']='meni';
 			$data['StID']=$StID;
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			if(strcmp($data['rights'],'user')==0){
-					redirect('home','refresh');
-			}
-// 			$this->load->view('header',$data);
 			$this->load->helper(array('form'));
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$StID]');
