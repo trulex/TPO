@@ -63,7 +63,7 @@
 				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 
 			}
-			if (!$completed){
+			if (!$completed && $accepted){
 				echo '<form name="finishTask" method="post" action="sprintBacklog/finishTask">';
 				echo '<button type="submit" value="'.$tas->id.'" name="TID">finish Task</button>';
 				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
