@@ -1,7 +1,7 @@
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Allstories extends CI_Controller { 
+class AllStories extends CI_Controller { 
 
     function __construct() {
 		parent::__construct();
@@ -18,7 +18,7 @@ class Allstories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='allstories';
+			$data['active']='allStories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
