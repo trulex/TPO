@@ -45,8 +45,13 @@ class Tasks extends CI_Model{
 		$this->db->insert('tasks',$row);
 	}
 	
+// 	Delete task
+	function deleteTask($TID){
+		$this->db->query("DELETE FROM tasks WHERE id=$TID");
+	}
+	
 //	set all the stuff:
-function editTask($TID,$name, $text, $time_estimate, $UID, $accepted, $time_sum, $completed){
+	function editTask($TID,$name, $text, $time_estimate, $UID, $accepted, $time_sum, $completed){
 		$this->db->query("UPDATE tasks SET name='$name', text='$text', time_estimate=$time_estimate, UID=$UID, accepted=$accepted, time_sum=$time_sum, completed=$completed WHERE id=$TID");
 	}
 // 	Set loads of stuff one by one:

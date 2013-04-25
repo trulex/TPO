@@ -92,6 +92,10 @@ class EditTask extends CI_Controller {
 		else{
 			$data['TCompleted']=0;
 		}
+		if($data['TUID']==0){
+			$data['TAccepted']=0;
+			$data['TCompleted']=0;
+		}
 		if ($this->form_validation->run() == FALSE) {
 			$data['message']=validation_errors();
 			$this->load->view('editTask', $data);
@@ -102,6 +106,10 @@ class EditTask extends CI_Controller {
 		}
 		$this->load->view('footer');
 	}
+	 function taskDestroyer(){
+		$this->tasks->deleteTask($this->input->post('TID'));
+		redirect('sprintBacklog');
+	 }
 	public function taskName_check($str, $StID) {
 		$this->db->select('name');
 		$this->db->from('tasks');

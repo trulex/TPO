@@ -15,6 +15,7 @@
 				<input type="text" name="time_sum" value="<?php echo $TTimeSum?>" size="6"/><br>
 				<label>assigned to</label>
 				<?php echo '<select name="UID">' ;
+								echo ' <option value="0"><not asigned></option>';
 								foreach ($projectUsers as $user){
 									if($user->UID == $TUID){
 										$selected=" selected ";
@@ -32,6 +33,13 @@
 				<input name="TID" type="hidden" value="<?php echo $TID?>" />
 				<input type="submit" value="Submit" />
 			</form>
+			<?php if (!$TUID){
+					echo form_open('editTask/taskDestroyer');
+					echo '<input name="TID" type="hidden" value="'.$TID.'" />';
+					echo '<input type="submit" value="Delete task" />';
+					echo '</form>';
+				}
+			?>
 			<?php echo $message ?>
 		</div>
 	</div>
