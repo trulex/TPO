@@ -24,6 +24,7 @@ class VerifyAddTask extends CI_Controller {
 			$data['text']='';
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$this->load->view('header', $data);
+			$this->load->helper('form');
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('StID', 'StID', 'trim|numeric');
 			if ($this->form_validation->run()==false) {
@@ -62,6 +63,7 @@ class VerifyAddTask extends CI_Controller {
 		$data['active']='verifyAddTask';
 		$data['id']=$session_data['id'];
 		$data['message']="";
+		$this->load->helper('form');
 		$data['task_name'] = $this->input->post('task_name');
 		$data['text'] = $this->input->post('text');
 		$name=$this->input->post('task_name');

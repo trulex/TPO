@@ -1,7 +1,6 @@
 <!-- avtor: Lovrenc -->
 
 <?php
-// First things first, zavrne dostop če se dostopa nepravilno
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class EditTask extends CI_Controller {
@@ -69,9 +68,9 @@ class EditTask extends CI_Controller {
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
 		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|numeric|greater_than[-1]');
 		$this->form_validation->set_rules('time_sum', 'Work done', 'trim|numeric|greater_than[-1]');
-		$this->form_validation->set_message('greater_than', 'Time estimate must be positive!<br>');
+		$this->form_validation->set_message('greater_than', 'Time must be positive!<br>');
 		$this->form_validation->set_message('taskName_check', 'Task Name must be unique! <br>');
-		$this->form_validation->set_message('', 'Task Name must be unique! <br>');
+		$this->form_validation->set_message('taskName_check', 'Task Name must be unique! <br>');
 		$this->form_validation->set_message('required', 'Fields marked with <span style="color:red;vertical-align:top">*</span> are required! <br>');
 		$this->load->view('header', $data);
 		$data['TID']=$this->input->post('TID');
@@ -79,9 +78,20 @@ class EditTask extends CI_Controller {
 		$data['TText']=$this->input->post('text');
 		$data['TTimeEstimate']=$this->input->post('time_estimate');
 		$data['TUID']=$this->input->post('UID');
-		$data['TAccepted']=$this->input->post('accepted');
+		if($this->input->post('accepted')){
+			$data['TAccepted']=1;
+		}
+		else{
+			$data['TAccepted']=0;
+		}
 		$data['TTimeSum']=$this->input->post('time_sum');
-		$data['TCompleted']=$this->input->post('completed');
+		
+		if($this->input->post('completed')){
+			$data['TCompleted']=1;
+		}
+		else{
+			$data['TCompleted']=0;
+		}
 		if ($this->form_validation->run() == FALSE) {
 			$data['message']=validation_errors();
 			$this->load->view('editTask', $data);
@@ -93,9 +103,9 @@ class EditTask extends CI_Controller {
 		$this->load->view('footer');
 	}
 	public function taskName_check($str, $StID) {
-		$this->db->select('task_name');
+		$this->db->select('name');
 		$this->db->from('tasks');
-		$this->db->where('task_name', $str);
+		$this->db->where('name', $str);
 		$this->db->where('StID', $StID);
 		$query=$this->db->get();
 		if ($query->num_rows() > 1) {
