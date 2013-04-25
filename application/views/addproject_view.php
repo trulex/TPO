@@ -18,7 +18,7 @@
 		<textarea name="description" rows="5" value="<?php echo set_value('description'); ?>" cols="20"></textarea><br>
 
 		<div><input type="submit" value="Create project" /></div>
-		<span style="color:red"><?php echo $this->session->flashdata('flashSuccess') ?></span>
+		<span style="color:green; font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>
 	</div>
 	</div>	
 </div>

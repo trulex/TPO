@@ -21,13 +21,11 @@ class Addsprint extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
 			
-			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('addsprint_view',$data);
-// 			$this->load->view('selProject',$data);
 			$this->load->view('footer');
 		} else {
 		//If no session, redirect to login page

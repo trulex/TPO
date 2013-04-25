@@ -2,8 +2,8 @@
 
 
 <div id="content">
-	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 	<div id="left">
+	<h2>Sprint backlog <?php echo "(".$project.")"; $counter=1;?></h2>
 		<?php foreach ($storyTuple as $tuple):
 			$story=$tuple[0];
 			$tasks=$tuple[1];?>
@@ -28,7 +28,7 @@
 							}
 							echo '</select>';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Asign</button></form></b>';
+							echo '<button type="submit" value="'.$task->id.'" name="TID">Assign</button></form></b>';
 						}
 						else{
 							echo '<form name=cts method="post" action="sprintBacklog/takeTask">';
@@ -58,8 +58,8 @@
 					echo '<div>"'.$task->text.'"</div></li>';
 					echo "<br><br>";
 			}}?></ul>
-			<form name=cts method="post" action="verifyAddTask">
-			<button type="submit" value="<?php echo $story->id ?>" name="task" >add task</button></form><hr>
+			<form name="cts" method="post" action="verifyAddTask">
+			<button type="submit" value="<?php echo $story->id ?>" name="task" >Add a task</button></form><hr>
 		<?php endforeach ?>
 	</div>
 	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>

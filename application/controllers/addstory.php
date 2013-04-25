@@ -15,13 +15,13 @@ class Addstory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-		$data['id']=$session_data['id'];
+	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['id']);
-		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $data['active']='meni';
+	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+	    $data['active']='productBacklog';
 	    $this->load->view('header', $data);
+	    $this->load->view('submenu');
 	    $this->load->helper(array('form'));
 	    $data['message']='';
 	    $data['noproject']='';

@@ -23,8 +23,7 @@ class VerifyAddSprint extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
 			
-			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
-			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['results']= $this->sprints->getAll();
 			
 			$this->load->view('header',$data);
@@ -36,7 +35,6 @@ class VerifyAddSprint extends CI_Controller {
 			
 			if ($this->form_validation->run() == FALSE) {
 				$this->load->view('addsprint_view',$data);
-				$this->session->set_flashdata('flashSuccess', '');
 			} else {
 				$startdate=$this->input->post('startdate');
 				$finishdate=$this->input->post('finishdate');
@@ -46,7 +44,7 @@ class VerifyAddSprint extends CI_Controller {
 					'start_date'=>$startdate,
 					'finish_date'=>$finishdate,
 					'velocity'=>$velocity,
-					'PID'=>$data['currentproject']
+					'PID'=>$this->session->userdata('PID')
 					);
 				$this->db->insert('sprints', $userdata);
 				$this->session->set_flashdata('flashSuccess', 'Sprint successfully added.');
@@ -111,7 +109,7 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	public function startsprint_check($str) {
-		$pid=$data['currentproject'];
+		$pid=$this->session->userdata('PID');
 		$input_date = strtotime($str);
 		$this->date=$input_date; 
 		
@@ -141,7 +139,7 @@ class VerifyAddSprint extends CI_Controller {
     }
 	
 	public function finishsprint_check($str) {
-		$pid=$data['currentproject'];
+		$pid=$this->session->userdata('PID');
 		$input_date = strtotime($str);
 		
 		$this->db->select('start_date, finish_date');
@@ -168,5 +166,19 @@ class VerifyAddSprint extends CI_Controller {
 			return TRUE;
 		}
     }
+	
+	function deleteSprint(){ 
+		$sprint=$this->input->post('sprintid');
+
+		$this->db->where('id',$sprint); 
+		$this->db->delete('sprints');
+		redirect('addsprint');
+	}
+
+	function editSprint(){	
+		$sprint=$this->input->post('sprintid');
+		$this->session->set_userdata('sprint', $sprint);
+		redirect('editSprint');
+	} 
 	
 }
