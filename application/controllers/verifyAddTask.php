@@ -42,9 +42,9 @@ class VerifyAddTask extends CI_Controller {
 		}
 	}
     public function taskName_check($str, $StID) {
-		$this->db->select('task_name');
+		$this->db->select('name');
 		$this->db->from('tasks');
-		$this->db->where('task_name', $str);
+		$this->db->where('name', $str);
 		$this->db->where('StID', $StID);
 		$query=$this->db->get();
 		if ($query->num_rows() > 0) {
@@ -87,7 +87,7 @@ class VerifyAddTask extends CI_Controller {
 			$time_estimate=$this->input->post('time_estimate');
 			$StID=$this->input->post('StID');
 			$taskData=array(
-				'task_name'=>$name,
+				'name'=>$name,
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate,

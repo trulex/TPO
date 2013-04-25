@@ -14,7 +14,7 @@ class ViewTasks extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
-			if(strcmp($data['rights'],'user')==0){
+			if(!$data['rights']) {
 					redirect('home','refresh');
 			}
 			$data['active']='viewTasks';

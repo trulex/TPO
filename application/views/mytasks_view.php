@@ -13,7 +13,7 @@
 	    <?php  
 		$previousStory='';
 		foreach ($tasks as $tas) {
-			$task=$tas->task_name;
+			$task=$tas->name;
 			$accepted=$tas->accepted;
 			$storyData=$this->tasks->getStory($task,$id); //get story name,text and tests
 			$completed=$this->tasks->isCompleted($task,$id); //check if task is completed

@@ -1,5 +1,5 @@
 <!-- Created by lovrenc -->
-<!-- table "stories": [id|name|text|tests|difficulty|priority|busvalue|SpID|PID|project_name] -->
+<!-- table "stories": [id|name|text|tests|difficulty|priority|busvalue|SpID|PID] -->
 
 <?php
 class Stories extends CI_Model{

@@ -1,32 +1,56 @@
 <!-- Created by lovrenc -->
-<!-- table "tasks": [id|task_name|StID|text|time_estimate|UID|accepted|start_time|end_time|time_sum|active|completed] -->
+<!-- table "tasks": [id|name|StID|text|time_estimate|UID|accepted|start_time|end_time|time_sum|active|completed] -->
 
 <?php
 class Tasks extends CI_Model{
 	
+// 	Get all asks
 	function getAll(){
-		$query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks");
+		$query = $this->db->query("SELECT id, name, text, StID, UID, time_estimate, accepted, completed FROM tasks");
 		return $query->result();
 	}
 	
+// 	Get tasks from user(if any)
 	function getTasks($userId, $sprintId){
 		if($sprintId != 0) {
-		    $query = $this->db->query("SELECT id, task_name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$userId ");
+		    $query = $this->db->query("SELECT id, name, text, StID, UID, time_estimate, accepted, completed FROM tasks where UID=$userId ");
 		    return $query->result();
 		 } else {
 		    return array();
 		 }
 	}
 	
+// 	Get tasks from current sprint
 	function getCurrent($StID){
-		$query=$this->db->query("SELECT id, task_name, text, StID, UID , time_estimate, accepted, completed FROM tasks where StID=$StID");
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed FROM tasks where StID=$StID");
 		return $query->result();
 	}
 	
+// 	Get all my tasks from current sprint
+	getMyCurrent($UID, $SpID){
+		$query=$this->db->query("");
+	}
+	function getTask($TID){
+		$query=$this->db->query("SELECT * FROM tasks WHERE id=$TID");
+		if($query->num_rows==1){
+			return $query->row();
+		}
+		else{
+			return FALSE;
+		}
+	}
+	
+// 	Insert new task
 	function insert($row){
 		$this->db->insert('tasks',$row);
 	}
 	
+//	set all the stuff:
+function editTask($TID,$name, $text, $time_estimate, $UID, $accepted, $time_sum, $completed){
+		$this->db->query("UPDATE tasks SET name='$name' text='$text' time_estimate=$time_estimate UID=$UID accepted=$accepted time_sum=$time_sum completed=$completed WHERE id=$TID");
+	}
+// 	Set loads of stuff one by one:
+//--------------------------------------------------------------------------------------
 	function setUID($id,$UID){
 		$this->db->query("UPDATE tasks SET UID=$UID WHERE id=$id");
 	}
@@ -42,7 +66,7 @@ class Tasks extends CI_Model{
 	function decline($TID){
 		$this->db->query("UPDATE tasks SET accepted=0 WHERE id=$TID");
 	}
-	
+//---------------------------------------------------------------------------------------
 	
 	function getActive($userId) {
     /* Checks if there is a task that is being worked on, return id of it, or empty string if none is active. */
@@ -64,7 +88,7 @@ class Tasks extends CI_Model{
     function getStory($taskName,$userId) { /* Returns story id of task $taskId */
 	$this -> db -> select('StID');
 	$this -> db -> from('tasks');
-	$this -> db -> where('task_name', $taskName);
+	$this -> db -> where('name', $taskName);
 	$this -> db -> where('UID', $userId);
 	$query=$this->db->get();
 	$storyId=$query->row()->StID; // get story id
@@ -84,7 +108,7 @@ class Tasks extends CI_Model{
     function isCompleted($taskName,$userId) { /* Return 1 if task is completed */
 	$this -> db -> select('completed');
 	$this -> db -> from('tasks');
-	$this -> db -> where('task_name', $taskName);
+	$this -> db -> where('name', $taskName);
 	$this -> db -> where('UID', $userId);
 	$query=$this->db->get();
 	return $query->row()->completed;
@@ -93,7 +117,7 @@ class Tasks extends CI_Model{
     function getTime($taskName,$userId) { /* Returns hours spent on task $taskName */
 	$this -> db -> select('time_sum');
 	$this -> db -> from('tasks');
-	$this -> db -> where('task_name', $taskName);
+	$this -> db -> where('name', $taskName);
 	$this -> db -> where('UID', $userId);
 	$query=$this->db->get();
 	$time=$query->row()->time_sum;
@@ -103,11 +127,11 @@ class Tasks extends CI_Model{
     }
     
     function getTaskName($taskId) {
-	$this->db->select('task_name');
+	$this->db->select('name');
 	$this->db->from('tasks');
 	$this->db->where('id',$taskId);
 	$query=$this->db->get();
-	$name=$query->row()->task_name;
+	$name=$query->row()->name;
 	
 	return $name;
     }

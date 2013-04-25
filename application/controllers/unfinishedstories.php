@@ -22,7 +22,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getAll();			
@@ -33,8 +33,8 @@ class Unfinishedstories extends CI_Controller {
 			$this->load->view('unfinishedstories_view',$data);
 			$this->load->view('footer');
 		} else {
-		//If no session, redirect to login page
-		redirect('login', 'refresh');
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
 		}
     }
 	

@@ -15,7 +15,7 @@
 				if($row->PID == $PID): ?>
 					<div class="zgodba">
 						<?php
-							echo "<h4>".$row->name."(".$row->difficulty." pts.)</h4><br>";
+							echo "<h4 >".$row->name."(".round($row->difficulty,2)." pts.)</h4><br>";
 							if($row->SpID == 0):
 								echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
 								echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';

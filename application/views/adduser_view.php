@@ -20,8 +20,8 @@ $msg=strcmp($message,'');
 	    <input type="text" name="email" value="<?php if($msg==0) {echo set_value('email');} ?>" size="20"/><br />
 	    <label>Rights</label>
 	    <select name="rights">
-		<option value="user">User</option>
-		<option value="admin">Administrator</option>
+		<option value="0">User</option>
+		<option value="1">Administrator</option>
 	    </select>
 	    <div><form name="submit" action="verifyadduser"><input type="submit" value="Submit"/></form></div>
 	</div>

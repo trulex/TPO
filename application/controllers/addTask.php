@@ -39,7 +39,7 @@ class AddTask extends CI_Controller {
 		$this->db->where('StID', $StID);
 		$query=$this->db->get();
 		if ($query->num_rows() > 0) {
-			$this->form_validation->set_message('taskName_check', 'Story with such name allready exists.');
+			$this->form_validation->set_message('taskName_check', 'Task with such name allready exists.');
 		return FALSE;
 		} else {
 			return TRUE;

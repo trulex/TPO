@@ -12,26 +12,16 @@
 			echo '"'.$story->text.'"<ul>';
 			 foreach ($tasks as $task){
 				if($story->id == $task->StID){
-					echo '<li><div><b>'.$task->task_name;
+					echo '<li><div><b>'.$task->name;
 					echo ' ['.$task->time_estimate.'] </b>';
+// 					Edit task form
 					if($task->UID == 0){
-						if ( $rights=="admin" || $role==1 ){
-// 							Edit task form
-							echo '<form name="editTask" method="post" action="editTask">';
-							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-							echo '<button type="submit">Edit</button></form></b>';
-// 							Change estimate form
-// 							echo '<form name="chTime" method="post" action="sprintBacklog/changeTime">';
-// 							echo '<input name="timeEstimate" type="text" size="3" value="'.$task->time_estimate.'"/>';
-// 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
-// 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-// 							echo '<button type="submit" value="'.$task->id.'" name="TID">Change time</button></form></b>';
-// 							Asign task form
+						if ( $rights || $role==1 ){			
 							echo '<form name="asign" method="post" action="sprintBacklog/asignTask">';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<select name="UID">' ;
 							foreach ($projectUsers as $user){
-								echo ' <option value="'.$user->user_id.'">'.$this->users->getUserName($user->user_id).'</option>';
+								echo ' <option value="'.$user->UID.'">'.$this->users->getUserName($user->UID).'</option>';
 							}
 							echo '</select>';
 							echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
@@ -51,9 +41,6 @@
 						if($id == $task->UID){ 
 // 							release task
 							echo "(My task)";
-							echo '<form name=cts method="post" action="sprintBacklog/releaseTask">';
-							echo '<button type="submit" value="'.$task->id.'" name="TID">Release task</button>';
-							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 						}
 						else{
 							if ($task->accepted==1){
@@ -64,6 +51,9 @@
 							}
 						}
 					}
+					echo '<form name="editTask" method="post" action="editTask">';
+					echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
+					echo '<button type="submit">Edit</button></form></b>';
 					echo "</div>";
 					echo '<div>"'.$task->text.'"</div></li>';
 					echo "<br><br>";

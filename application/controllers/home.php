@@ -17,11 +17,10 @@ class Home extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
-			$data['projects']=$this->projects->getProjects($data['id']);
 			$data['active']='';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->view('home_view', $data);

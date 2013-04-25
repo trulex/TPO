@@ -30,7 +30,7 @@
 		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('productBacklog','Product Backlog') : '<li class="menu">'.anchor('productBacklog','Product Backlog'); ?>
 	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('sprintBacklog','Sprint Backlog') : '<li class="menu">'.anchor('sprintBacklog','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
-	    <?php if (strcmp($rights,"admin")==0) {
+	    <?php if ($rights) {
 		echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); } ?>
 	</ul>
     </div>

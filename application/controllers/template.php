@@ -37,7 +37,7 @@ class Template extends CI_Controller {
 			
 // 			Če je ta stran namenjena le administratorjem, se tukaj preusmeri uporabnika domov:
 			
-			if(strcmp($data['rights'],'user')==0){
+			if(!$data['rights']) {
 					redirect('home','refresh');
 			}
 			

@@ -18,7 +18,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['active']='productBacklog';
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
-	    $data['projects']=$this->projects->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['noproject']='';
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    
@@ -70,7 +70,7 @@ class VerifyAddStory extends CI_Controller {
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
 	$rights=$session_data['rights'];
-	if(strcmp($rights,'admin')==0) {
+	if($data['rights']) { {
 	    return true;
 	}
 	$this->db->select('id');

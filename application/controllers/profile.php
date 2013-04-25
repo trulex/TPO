@@ -41,7 +41,7 @@ Class Profile extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='';
 	    $data['id']=$session_data['id'];
-	    $data['projects']=$this->projects->getProjects($data['id']);
+	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['project']=$this->session->userdata('project');
 	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
