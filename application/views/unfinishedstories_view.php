@@ -15,6 +15,7 @@
 				if($row->PID == $PID): ?>
 					<div class="zgodba">
 						<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; 
+						
 						 if($row->SpID == 0): ?>
 							<div class="difficulty">
 							<?php echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
@@ -25,7 +26,7 @@
 						<?php endif	?>
 					</div>
 					<div class="taski">
-						
+						<?php echo $row->text ?>;
 					</div>
 					<?php if($row->SpID == 0 && $row->difficulty != 0): ?>
 					<div class="gumb">

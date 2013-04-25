@@ -64,5 +64,6 @@
 			echo '<button type="submit" value="'.$story->id.'" name="task" >Add a task</button></form><hr>';
 		endforeach ?>
 	</div>
-	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+		<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
+
 </div>
