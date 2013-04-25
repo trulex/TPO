@@ -34,7 +34,7 @@ class Stories extends CI_Model{
 	}
 	
 // 	Get all completed stories
-	function getCompleted()
+	function getCompleted(){}
 // 	Get ids of stories from this sprint
 	function getSprintID($SpID){
 		$query = $this->db->query("SELECT id, FROM stories WHERE SpID=$SpID");
