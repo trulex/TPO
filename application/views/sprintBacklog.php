@@ -7,12 +7,13 @@
 		<?php foreach ($storyTuple as $tuple):
 			$story=$tuple[0];
 			$tasks=$tuple[1];
-			echo '<h3>'.$counter.".)".$story->name.'</h3>'; 
+			echo '<div class="zgodba"><h3>'.$counter.".)".$story->name.'</h3>'; 
 			$counter++;
-			echo '"'.$story->text.'"<ul>';
+			echo '"'.$story->text.'"</div>';
+			echo '<div class="taski">';
 			 foreach ($tasks as $task){
 				if($story->id == $task->StID){
-					echo '<li><div><b>'.$task->name;
+					echo '<b>'.$task->name;
 					echo ' ['.$task->time_estimate.'] </b>';
 // 					Edit task form
 					if($task->UID == 0){
@@ -54,13 +55,12 @@
 					echo '<form name="editTask" method="post" action="editTask">';
 					echo '<input name="TID" type="hidden" value="'.$task->id.'"/>';
 					echo '<button type="submit">Edit</button></form></b>';
-					echo "</div>";
-					echo '<div>"'.$task->text.'"</div></li>';
+					echo $task->text;
 					echo "<br><br>";
 				}
 			}
-			echo '</ul>';
-			echo '<form name=cts method="post" action="verifyAddTask">';
+			
+			echo '</div><form name=cts method="post" action="verifyAddTask">';
 			echo '<button type="submit" value="'.$story->id.'" name="task" >Add a task</button></form><hr>';
 		endforeach ?>
 	</div>
