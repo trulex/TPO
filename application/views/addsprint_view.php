@@ -25,14 +25,18 @@
 		<div><form action="verifyaddsprint"><input type="submit" value="Create sprint" /></form></div>
 		<span style="color:green;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>	
 	</div>
+	</div>
 	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>
 
 <div id="content">
+	<div id="left">
 	<?php
 		if($currentsprints ){
 			echo '<p>Sprints: </p><br>';
-			foreach($currentsprints as $row) {
+			foreach($currentsprints as $row) { ?>
+				<div class="sprintbox">
+				<?php
 				echo $row->start_date." - ";
 				echo $row->finish_date;
 				echo ", velocity: ".$row->velocity;
@@ -40,29 +44,44 @@
 				
 				<?php if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)){ ?>
 					<span style="color:orange;font-weight:normal">IN PROGRESS</span>
-					<form action="verifyaddsprint/editSprint" method="post">
-						<input type="submit" name="editbutton" value="Edit" />
-						<input type="hidden" name="sprintid" value=<?php echo $row->id ?> />
-					</form>
+					<div class="editbutton">
+					<?php 
+					echo form_open('verifyaddsprint/editSprint');
+					echo form_submit('editbutton', 'Edit');
+					echo form_hidden('sprintid', $row->id);
+					echo form_close();					
+					?>
+					</div>
 				<?php }elseif($today >= strtotime($row->start_date) && $today >= strtotime($row->finish_date)){ ?>
 					<span style="color:green;font-weight:normal">FINISHED</span>
 				<?php }else{ ?>
 					<span style="color:red;font-weight:normal">FUTURE</span>
-					<form action="verifyaddsprint/editSprint" method="post">
-						<input type="submit" name="editbutton" value="Edit" />
-						<input type="hidden" name="sprintid" value=<?php echo $row->id ?> />
-					</form>
-					<form action="verifyaddsprint/deleteSprint" method="post">
-						<input type="submit" name="deletebutton" value="Delete" />
-						<input type="hidden" name="sprintid" value=<?php echo $row->id ?> />
-					</form>
-				<?php }
+					<div class="editbutton">
+					<?php 
+					echo form_open('verifyaddsprint/editSprint');
+					echo form_submit('editbutton', 'Edit');
+					echo form_hidden('sprintid', $row->id);
+					echo form_close();
+					?>					
+					</div>
+					<div class="deletebutton">
+					<?php 
+					echo form_open('verifyaddsprint/deleteSprint');
+					echo form_submit('editbutton', 'Delete');
+					echo form_hidden('sprintid', $row->id);
+					echo form_close();					
+					?>
+					</div>
+				<?php } ?>
+				</div>
+				 <?php
 				 echo "<br>"; }
 		} else { /* No sprints yet */
 		echo '<p>Sprints: </p><br>';
 		echo 'No sprints have been added yet.';
 		}
 	?>
+	</div>
 </div>
 </form>
 
