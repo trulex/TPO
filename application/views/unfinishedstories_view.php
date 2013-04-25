@@ -1,5 +1,13 @@
 <!--avtor:BOSTJAN-->
 <div id="content">
+	<?php 
+				if( $this->session->userdata('varError')==1){
+					echo '<span style="color:red">Time must be non-negative!</span>';
+				}
+				else if($this->session->userdata('varError')==2){
+					echo '<span style="color:red">Time must be numeric</span>';
+				}
+				$this->session->set_userdata('varError',0);?>
     <div id="left">
 		<div id="add">
 			<p>Stories: </p><br>
@@ -18,8 +26,16 @@
 					</div>
 					<div class="taski">
 						<?php
+
 							echo "<h5>".$row->text."</h5>";
 							echo "<br>";
+							echo "<h4 >".$row->name."(".round($row->difficulty,2)." pts.)</h4><br>";
+							if($row->SpID == 0):
+								echo '<form name="chDifficulty" method="post" action="unfinishedstories/changeDifficulty">';
+								echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
+								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+								echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
+							endif
 						?>
 					</div>
 					<?php if($row->SpID == 0 && $row->difficulty != 0): ?>

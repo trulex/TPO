@@ -19,10 +19,9 @@ class AddTask extends CI_Controller {
 			$data['active']='meni';
 			$data['StID']=$StID;
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			if(strcmp($data['rights'],'user')==0){
+			if($data['rights']){
 					redirect('home','refresh');
 			}
-// 			$this->load->view('header',$data);
 			$this->load->helper(array('form'));
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$StID]');
@@ -43,7 +42,7 @@ class AddTask extends CI_Controller {
 		$this->db->where('StID', $StID);
 		$query=$this->db->get();
 		if ($query->num_rows() > 0) {
-			$this->form_validation->set_message('taskName_check', 'Story with such name allready exists.');
+			$this->form_validation->set_message('taskName_check', 'Task with such name allready exists.');
 		return FALSE;
 		} else {
 			return TRUE;

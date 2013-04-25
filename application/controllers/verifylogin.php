@@ -26,6 +26,7 @@ class VerifyLogin extends CI_Controller {
 		else
 		{
 		//Go to private area
+			$this->session->set_userdata('varError',0);
 			redirect('home', 'refresh');
 		}
 		$this->load->view('footer');

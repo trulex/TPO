@@ -21,7 +21,7 @@ class VerifyAddSprint extends CI_Controller {
 			$data['active']='meni';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['results']= $this->sprints->getAll();
@@ -53,8 +53,8 @@ class VerifyAddSprint extends CI_Controller {
 			}
 			$this->load->view('footer');
 		} else {
-	    //If no session, redirect to login page
-	    redirect('login', 'refresh');
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
 		}
 	}
 	

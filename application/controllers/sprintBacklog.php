@@ -24,7 +24,7 @@ class SprintBacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
 			$data['active']='sprintBacklog';
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
@@ -80,6 +80,9 @@ class SprintBacklog extends CI_Controller {
 			}
 		}
 		redirect($this->input->post('redirect'));
-		
+	}
+	function finishTask(){
+		$this->tasks->finish($this->input->post('TID'));
+		redirect($this->input->post('redirect'));
 	}
 }

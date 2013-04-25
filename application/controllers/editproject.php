@@ -18,7 +18,7 @@ class Editproject extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='administration';
 		$data['PID']=$this->session->userdata('PID');
-		$data['projects']=$this->projects->getProjects($data['id']);
+		$data['projects']=$this->projects->getProjects($data['rights']);
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 				
 	    $this->load->view('header',$data);
@@ -52,17 +52,17 @@ class Editproject extends CI_Controller {
 		$this->db->update('projects', $userdata);
 		
 		$userdata=array(
-		    'project_id'=>$data['PID'],
-			'user_id'=>$scrummaster,
+		    'PID'=>$data['PID'],
+			'UID'=>$scrummaster,
 			'role'=>1
 			);
 		
 		if($scrummaster != 0){
 			if($this->project_user->getScrumMaster($data['PID']) != 0){
 				$userdata=array(
-					'user_id'=>$scrummaster,
+					'UID'=>$scrummaster,
 				);
-				$this->db->where('project_id', $data['PID']);
+				$this->db->where('PID', $data['PID']);
 				$this->db->where('role', 1);
 				$this->db->update('project_user', $userdata);
 			}else{
@@ -71,23 +71,23 @@ class Editproject extends CI_Controller {
 		}
 		
 		if($scrummaster == 0 && $this->project_user->getScrumMaster($data['PID']) != 0){
-			$this->db->where('project_id', $data['PID']);
+			$this->db->where('PID', $data['PID']);
 			$this->db->where('role', 1);
 			$this->db->delete('project_user'); 
 		}
 		
 		$userdata=array(
-		    'project_id'=>$data['PID'],
-			'user_id'=>$productowner,
+		    'PID'=>$data['PID'],
+			'UID'=>$productowner,
 			'role'=>2
 			);
 		
 		if($productowner != 0){
 			if($this->project_user->getProductOwner($data['PID']) != 0){
 				$userdata=array(
-					'user_id'=>$productowner,
+					'UID'=>$productowner,
 				);
-				$this->db->where('project_id', $data['PID']);
+				$this->db->where('PID', $data['PID']);
 				$this->db->where('role', 2);
 				$this->db->update('project_user', $userdata);
 			}else{
@@ -96,7 +96,7 @@ class Editproject extends CI_Controller {
 		}
 		
 		if($productowner == 0 && $this->project_user->getProductOwner($data['PID']) != 0){
-			$this->db->where('project_id', $data['PID']);
+			$this->db->where('PID', $data['PID']);
 			$this->db->where('role', 2);
 			$this->db->delete('project_user'); 
 		}
@@ -104,21 +104,21 @@ class Editproject extends CI_Controller {
 		if($this->project_user->getTeamMembersID($data['PID'] == 0)){
 			foreach($teammembers as $member){
 				$userdata=array(
-					'project_id'=>$data['PID'],
-					'user_id'=>$member,
+					'PID'=>$data['PID'],
+					'UID'=>$member,
 					'role'=> 0
 				);
 				$this->db->insert('project_user', $userdata);
 			}
 		}else{
-			$this->db->where('project_id', $data['PID']);
+			$this->db->where('PID', $data['PID']);
 			$this->db->where('role', 0);
 			$this->db->delete('project_user');
 			
 			foreach($teammembers as $member){
 				$userdata=array(
-					'project_id'=>$data['PID'],
-					'user_id'=>$member,
+					'PID'=>$data['PID'],
+					'UID'=>$member,
 					'role'=> 0
 				);
 				$this->db->insert('project_user', $userdata);

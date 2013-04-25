@@ -13,7 +13,7 @@ Class SelectProject extends CI_Controller {
 
     public function select() {
 		$this->session->set_userdata('project', $this->input->post('project'));
-		$PID= $this->projects->getProjectID($this->input->post('project'));
+		$PID=$this->input->post('PID');
 		$this->session->set_userdata('PID', $PID);
 		$sprints=$this->sprints->getProjectSprints($PID);
 		$today =strtotime(date("Y-m-d")); /*in tukej dodamo še podatek o trenutnem sprintu*/

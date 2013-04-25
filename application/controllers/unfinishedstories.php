@@ -22,7 +22,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getAll();			
@@ -33,8 +33,8 @@ class Unfinishedstories extends CI_Controller {
 			$this->load->view('unfinishedstories_view',$data);
 			$this->load->view('footer');
 		} else {
-		//If no session, redirect to login page
-		redirect('login', 'refresh');
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
 		}
     }
 	
@@ -55,20 +55,19 @@ class Unfinishedstories extends CI_Controller {
 	function changeDifficulty(){
 		$difficulty=$this->input->post('difficulty');
 		if (is_numeric($difficulty)){
-			if ( $difficulty>0){
+			if ( $difficulty>=0){
 				$this->stories->setDifficulty($this->input->post('StID'), $difficulty);
 			}
-			else{
-				echo '<script alert("Time must be non-negative");</script>';
+		else{
+			echo '<script alert("Time must numeric");</script>';
+				$this->session->set_userdata("varError",1);
 			}
 		}
 		else{
-			echo '<script alert("Time must numeric");</script>';
+			$this->session->set_userdata("varError",2);
 		}
 		redirect($this->input->post('redirect'));
 		
 	}
-	
-
 }
 ?>

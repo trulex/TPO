@@ -1,10 +1,10 @@
 <!-- Created by: Lovrenc -->
-<!-- table "project_user": [project_id|user_id|role] -->
+<!-- table "project_user": [PID|UID|role] -->
 <?php
 class Project_user extends CI_Model{
 	
 	function getRole($UID, $PID){
-		$query = $this->db->query("SELECT role FROM project_user WHERE project_id=$PID and user_id=$UID");
+		$query = $this->db->query("SELECT role FROM project_user WHERE PID=$PID and UID=$UID");
 		if ($query->num_rows==0){
 			return 0;
 		}
@@ -13,19 +13,19 @@ class Project_user extends CI_Model{
 		}
 	}
 		function getAllFromProject($PID){
-			$query=$this->db->query("SELECT user_id FROM project_user WHERE project_id=$PID");
+			$query=$this->db->query("SELECT UID FROM project_user WHERE PID=$PID");
 			return $query->result();
 	}
 	
 	function getScrumMaster($PID){
-		$this->db->select('user_id');
+		$this->db->select('UID');
 		$this->db->from('project_user');
-		$this->db->where('project_id',$PID);
+		$this->db->where('PID',$PID);
 		$this->db->where('role',1);
 		$query=$this->db->get();
 		
 		if($query->num_rows() > 0){
-			return $query->row()->user_id;
+			return $query->row()->UID;
 		}else{
 			return 0;
 		}
@@ -41,30 +41,30 @@ class Project_user extends CI_Model{
 	}
 	
 	function getProductOwner($PID){
-		$this->db->select('user_id');
+		$this->db->select('UID');
 		$this->db->from('project_user');
-		$this->db->where('project_id',$PID);
+		$this->db->where('PID',$PID);
 		$this->db->where('role',2);
 		$query=$this->db->get();
 		
 		if($query->num_rows() > 0){
-			return $query->row()->user_id;
+			return $query->row()->UID;
 		}else{
 			return 0;
 		}
 	}
 	
 	function getTeamMembersID($PID){
-		$this->db->select('user_id');
+		$this->db->select('UID');
 		$this->db->from('project_user');
-		$this->db->where('project_id',$PID);
+		$this->db->where('PID',$PID);
 		$this->db->where('role',0);
 		$query=$this->db->get();
 		
 		if($query->num_rows() > 0){
 			$teammembers = array();
 			foreach ($query->result() as $row) {
-				$teammembers[] = $row->user_id;
+				$teammembers[] = $row->UID;
 			}
 		}else{
 			return 0;

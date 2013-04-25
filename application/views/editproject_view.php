@@ -79,7 +79,7 @@
 				$id=$row["id"]; 
 				$username=$row["username"];
 				
-				$query=$this->db->query("SELECT user_id FROM project_user WHERE project_id=$PID AND user_id=$id AND role=0");
+				$query=$this->db->query("SELECT UID FROM project_user WHERE PID=$PID AND UID=$id AND role=0");
 				if($query->num_rows() > 0){
 					$input.="<input type=checkbox name=listofmembers[] value=\"$id\" checked=yes>".$username."</input><br>";
 				}else{

@@ -20,7 +20,6 @@ class Addsprint extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
-			
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);

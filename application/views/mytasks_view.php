@@ -13,13 +13,13 @@
 	    <?php  
 		$previousStory='';
 		foreach ($tasks as $tas) {
-			$task=$tas->task_name;
+			$task=$tas->name;
 			$accepted=$tas->accepted;
 			$storyData=$this->tasks->getStory($task,$id); //get story name,text and tests
 			$completed=$this->tasks->isCompleted($task,$id); //check if task is completed
 			$time=$this->tasks->getTime($task,$id); //get time spent on task
 			$taskId=$tas->id;
-			if($accepted==1 && $completed==1) {
+			if($accepted && $completed) {
 				if(strcmp($previousStory,$storyData['name'])!=0) {
 				echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
 				echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
@@ -62,6 +62,11 @@
 				echo '<button type="submit" value="'.$tas->id.'" name="TID">Accept task</button>';
 				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 
+			}
+			if (!$completed){
+				echo '<form name="finishTask" method="post" action="sprintBacklog/finishTask">';
+				echo '<button type="submit" value="'.$tas->id.'" name="TID">finish Task</button>';
+				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 			}
 			$previousStory=$storyData['name'];
 			echo "</form>";
