@@ -26,11 +26,15 @@ class Stories extends CI_Model{
 		$query = $this->db->query("SELECT id, name, text FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
+	
+// 	Get all unasigned stories
 	function getUnasigned($PID){
 		$query=$this->db->query("SELECT id, name, text,difficulty FROM stories WHERE PID=$PID and SpID=0");
 		return $query->result();
 	}
 	
+// 	Get all completed stories
+	function getCompleted()
 // 	Get ids of stories from this sprint
 	function getSprintID($SpID){
 		$query = $this->db->query("SELECT id, FROM stories WHERE SpID=$SpID");
