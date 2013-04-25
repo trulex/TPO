@@ -46,5 +46,6 @@ class Stories extends CI_Model{
 	function setDifficulty($StID,$difficulty){
 		$this->db->query("UPDATE stories SET difficulty=$difficulty WHERE id=$StID");
 	}
+
 }
 ?>

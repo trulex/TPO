@@ -80,6 +80,9 @@ class SprintBacklog extends CI_Controller {
 			}
 		}
 		redirect($this->input->post('redirect'));
-		
+	}
+	function finishTask(){
+		$this->tasks->finish($this->input->post('TID'));
+		redirect($this->input->post('redirect'));
 	}
 }

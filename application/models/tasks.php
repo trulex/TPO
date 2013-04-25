@@ -71,6 +71,9 @@ class Tasks extends CI_Model{
 	function decline($TID){
 		$this->db->query("UPDATE tasks SET accepted=0 WHERE id=$TID");
 	}
+	function finish($TID){
+		$this->db->query("UPDATE tasks SET completed=1 WHERE id=$TID");
+	}
 //---------------------------------------------------------------------------------------
 	
 	function getActive($userId) {
