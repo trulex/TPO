@@ -27,7 +27,7 @@ class Tasks extends CI_Model{
 	}
 	
 // 	Get all my tasks from current sprint
-	getMyCurrent($UID, $SpID){
+	function getMyCurrent($UID, $SpID){
 		$query=$this->db->query("");
 	}
 	function getTask($TID){
