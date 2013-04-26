@@ -12,64 +12,69 @@
 	<ul>
 	    <?php  
 		$previousStory='';
-		foreach ($tasks as $tas) {
-			$task=$tas->name;
-			$accepted=$tas->accepted;
-			$storyData=$this->tasks->getStory($task,$id); //get story name,text and tests
-			$completed=$this->tasks->isCompleted($task,$id); //check if task is completed
-			$time=$this->tasks->getTime($task,$id); //get time spent on task
-			$taskId=$tas->id;
-			if($accepted && $completed) {
-				if(strcmp($previousStory,$storyData['name'])!=0) {
-				echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
-				echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
-				echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
-				}
-				echo '<form name="startTask" method="post" action="mytasks/startWork">';
-				echo '<li style="list-style-type:square"><span style="font-size:small;color:blue">(Completed) </span>'.$task.'  <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>
-				<input name="taskID" type="hidden" value="'.$taskId.'" />
-				</form>';
-				
-				echo '<form name="releaseTask" method="post" action="sprintBacklog/releaseTask">';
-				echo '<button type="submit" value="'.$tas->id.'" name="TID">Release task</button>';
-				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
-			
-			} else if ($accepted==1){
-				if(strcmp($previousStory,$storyData['name'])!=0) {
+		if($tasks){
+			foreach ($tasks as $tas) {
+				$task=$tas->name;
+				$accepted=$tas->accepted;
+				$storyData=$this->tasks->getStory($task,$id); //get story name,text and tests
+				$completed=$this->tasks->isCompleted($task,$id); //check if task is completed
+				$time=$this->tasks->getTime($task,$id); //get time spent on task
+				$taskId=$tas->id;
+				if($accepted && $completed) {
+					if(strcmp($previousStory,$storyData['name'])!=0) {
 					echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
 					echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
 					echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
-				}
-				echo '<form name="startTask" method="post" action="mytasks/startWork">';
-				echo '<li style="list-style-type:square">'.$task.' <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>
-				<input name="taskID" type="hidden" value="'.$taskId.'" />
-				</form>';
+					}
+					echo '<form name="startTask" method="post" action="mytasks/startWork">';
+					echo '<li style="list-style-type:square"><span style="font-size:small;color:blue">(Completed) </span>'.$task.'  <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>
+					<input name="taskID" type="hidden" value="'.$taskId.'" />
+					</form>';
+					
+					echo '<form name="releaseTask" method="post" action="sprintBacklog/releaseTask">';
+					echo '<button type="submit" value="'.$tas->id.'" name="TID">Release task</button>';
+					echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 				
-				echo '<form name="releaseTask" method="post" action="sprintBacklog/releaseTask">';
-				echo '<button type="submit" value="'.$tas->id.'" name="TID">Release task</button>';
-				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
-				
-			} else if ($accepted==0) {
-				if(strcmp($previousStory,$storyData['name'])!=0) {
-					echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
-					echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
-					echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
-				}
-				echo '<li style="list-style-type:square">'.$task.'</li>';
-				
-				echo '<form name="acceptTask" method="post" action="sprintBacklog/acceptTask">';
-				echo '<input name="UID" type="hidden" value="'.$id.'" />';
-				echo '<button type="submit" value="'.$tas->id.'" name="TID">Accept task</button>';
-				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
+				} else if ($accepted==1){
+					if(strcmp($previousStory,$storyData['name'])!=0) {
+						echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
+						echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
+						echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
+					}
+					echo '<form name="startTask" method="post" action="mytasks/startWork">';
+					echo '<li style="list-style-type:square">'.$task.' <span style="font-size:12px">['.$time.' hours spent]</span><button class="task" type="submit" name="task" value="'.$task.'">Start working</button></li>
+					<input name="taskID" type="hidden" value="'.$taskId.'" />
+					</form>';
+					
+					echo '<form name="releaseTask" method="post" action="sprintBacklog/releaseTask">';
+					echo '<button type="submit" value="'.$tas->id.'" name="TID">Release task</button>';
+					echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
+					
+				} else if ($accepted==0) {
+					if(strcmp($previousStory,$storyData['name'])!=0) {
+						echo '<hr><div style="font-weight:bold">'.$storyData['name'].'</div>';
+						echo '<div style="color:grey;font-size:12">'.$storyData['text'].'</div>';
+						echo '<div style="color:00CC66;font-size:12">'.$storyData['tests'].'</div>';
+					}
+					echo '<li style="list-style-type:square">'.$task.'</li>';
+					
+					echo '<form name="acceptTask" method="post" action="sprintBacklog/acceptTask">';
+					echo '<input name="UID" type="hidden" value="'.$id.'" />';
+					echo '<button type="submit" value="'.$tas->id.'" name="TID">Accept task</button>';
+					echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 
+				}
+				if (!$completed && $accepted){
+					echo '<form name="finishTask" method="post" action="sprintBacklog/finishTask">';
+					echo '<button type="submit" value="'.$tas->id.'" name="TID">finish Task</button>';
+					echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
+				}
+				$previousStory=$storyData['name'];
+				echo "</form>";
 			}
-			if (!$completed && $accepted){
-				echo '<form name="finishTask" method="post" action="sprintBacklog/finishTask">';
-				echo '<button type="submit" value="'.$tas->id.'" name="TID">finish Task</button>';
-				echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
-			}
-			$previousStory=$storyData['name'];
-			echo "</form>";
+		}
+		else{
+			echo "You have no tasks to do at the moment.";
 		}
 	    ?>
 	</ul>

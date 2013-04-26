@@ -21,6 +21,9 @@
 		endif;
 		endforeach;
 	}
+	else{
+		$this->session->set_userdata('SpID', 0);
+	}
 	?>
     </p>
     <div style="clear: both;"></div>​
