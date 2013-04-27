@@ -51,8 +51,8 @@ Class Profile extends CI_Controller {
 	    
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');
-	    $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
-	    $this->form_validation->set_rules('confirm_password', 'Confirm password', 'trim|required|callback_password_confirmation');
+	    $this->form_validation->set_rules('password', 'Password', 'trim|alpha_numeric');
+	    $this->form_validation->set_rules('confirm_password', 'Confirm password', 'trim|callback_password_confirmation');
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('surname', 'Surname', 'trim|required|alphasi');
 	    $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
