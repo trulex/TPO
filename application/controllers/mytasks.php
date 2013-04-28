@@ -22,7 +22,7 @@ class MyTasks extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
-			$data['tasks']=$this->tasks->getTasks($data['id'],$data['currentsprint']); //Get tasks data
+			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
 			
 			$this->load->view('header', $data);

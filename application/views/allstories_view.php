@@ -6,7 +6,7 @@
 			<?php foreach($results as $row):
 				if($row->PID == $PID): ?>
 					<div class="zgodba">
-						<?php echo "<h4>".$row->name." (Estimate: ".$row->difficulty." pts.)</h4><br>"; ?>
+						<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
 					</div>
 					<div class="taski">
 						<?php

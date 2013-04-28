@@ -44,7 +44,7 @@ class Editproject extends CI_Controller {
 		$this->session->set_userdata('project', $projectname);
 		
 		$userdata=array(
-		    'project_name'=>$projectname,
+		    'name'=>$projectname,
 		    'description'=>$description
 			);
 			
@@ -136,9 +136,9 @@ class Editproject extends CI_Controller {
     }
 	
     public function projectname_check($str) {
-	$this->db->select('id, project_name');
+	$this->db->select('id, name');
 	$this->db->from('projects');
-	$this->db->where('project_name', $str);
+	$this->db->where('name', $str);
 	$query=$this->db->get();
 	if ($query->num_rows() > 0 && $query->row()->id != $this->session->userdata('PID')) {
 	    $this->form_validation->set_message('projectname_check', 'A project with the same name already exists.');

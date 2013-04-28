@@ -21,13 +21,16 @@
 		endif;
 		endforeach;
 	}
+	else{
+		$this->session->set_userdata('SpID', 0);
+	}
 	?>
     </p>
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
 	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
-		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('productBacklog','Product Backlog') : '<li class="menu">'.anchor('productBacklog','Product Backlog'); ?>
+		<?php echo $active == 'productbacklog' ? '<li class="active">'.anchor('productbacklog','Product Backlog') : '<li class="menu">'.anchor('productbacklog','Product Backlog'); ?>
 	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('sprintBacklog','Sprint Backlog') : '<li class="menu">'.anchor('sprintBacklog','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
 	    <?php if ($rights) {

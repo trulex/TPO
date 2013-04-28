@@ -63,8 +63,8 @@ class EditTask extends CI_Controller {
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 		$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
 		$this->load->library('form_validation');
-		$data['project_users']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
-		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required|callback_taskName_check[$name, $data["StID"]]');
+		$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
+		$this->form_validation->set_rules('task_name', 'Task name', 'trim|required');
 		$this->form_validation->set_rules('text', 'Text', 'trim|required');
 		$this->form_validation->set_rules('time_estimate', 'Time estimate', 'trim|numeric|greater_than[-1]');
 		$this->form_validation->set_rules('time_sum', 'Work done', 'trim|numeric|greater_than[-1]');
@@ -110,18 +110,5 @@ class EditTask extends CI_Controller {
 		$this->tasks->deleteTask($this->input->post('TID'));
 		redirect('sprintBacklog');
 	 }
-	public function taskName_check($str, $StID) {
-		$this->db->select('name');
-		$this->db->from('tasks');
-		$this->db->where('name', $str);
-		$this->db->where('StID', $StID);
-		$query=$this->db->get();
-		if ($query->num_rows() > 1) {
-			$this->form_validation->set_message('taskName_check', 'Story with such name already exists.');
-		return FALSE;
-		} else {
-			return TRUE;
-		}
-    }
 }
 ?>

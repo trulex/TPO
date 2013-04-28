@@ -28,8 +28,16 @@ class Tasks extends CI_Model{
 	
 // 	Get all my tasks from current sprint
 	function getMyCurrent($UID, $SpID){
-		$query=$this->db->query("");
+		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE stories.SpID=$SpID AND tasks.UID=$UID;");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
 	}
+	
+	
 	function getTask($TID){
 		$query=$this->db->query("SELECT * FROM tasks WHERE id=$TID");
 		if($query->num_rows==1){
@@ -77,40 +85,40 @@ class Tasks extends CI_Model{
 //---------------------------------------------------------------------------------------
 	
 	function getActive($userId) {
-    /* Checks if there is a task that is being worked on, return id of it, or empty string if none is active. */
-	$activeTask=0;
-	
-	$this -> db -> select('active,id');
-	$this -> db -> from('tasks');
-	$this -> db -> where('UID', $userId);
-	$query=$this->db->get();
-	foreach ($query->result() as $row) {
-	    if($row->active==1) {
-			$activeTask=$row->id;
-			return $activeTask;
-	    }
-	}
-	return $activeTask;
+		/* Checks if there is a task that is being worked on, return id of it, or empty string if none is active. */
+		$activeTask=0;
+		
+		$this -> db -> select('active,id');
+		$this -> db -> from('tasks');
+		$this -> db -> where('UID', $userId);
+		$query=$this->db->get();
+		foreach ($query->result() as $row) {
+			if($row->active==1) {
+				$activeTask=$row->id;
+				return $activeTask;
+			}
+		}
+		return $activeTask;
     }
     
     function getStory($taskName,$userId) { /* Returns story id of task $taskId */
-	$this -> db -> select('StID');
-	$this -> db -> from('tasks');
-	$this -> db -> where('name', $taskName);
-	$this -> db -> where('UID', $userId);
-	$query=$this->db->get();
-	$storyId=$query->row()->StID; // get story id
-	
-	$this -> db -> select('name,text,tests');
-	$this -> db -> from('stories');
-	$this -> db -> where('id', $storyId);
-	$query=$this->db->get();
-	$storyData=array(
-	    'name'=>$query->row()->name,
-	    'text'=>$query->row()->text,
-	    'tests'=>$query->row()->tests
-	);
-	return $storyData;
+		$this -> db -> select('StID');
+		$this -> db -> from('tasks');
+		$this -> db -> where('name', $taskName);
+		$this -> db -> where('UID', $userId);
+		$query=$this->db->get();
+		$storyId=$query->row()->StID; // get story id
+		
+		$this -> db -> select('name,text,tests');
+		$this -> db -> from('stories');
+		$this -> db -> where('id', $storyId);
+		$query=$this->db->get();
+		$storyData=array(
+			'name'=>$query->row()->name,
+			'text'=>$query->row()->text,
+			'tests'=>$query->row()->tests
+		);
+		return $storyData;
     }
     
     function isCompleted($taskName,$userId) { /* Return 1 if task is completed */

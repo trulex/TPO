@@ -1,7 +1,7 @@
-<!--avtor:BOSTJAN-->
+<!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AllStories extends CI_Controller { 
+class FinishedStories extends CI_Controller { 
 
     function __construct() {
 		parent::__construct();
@@ -18,24 +18,22 @@ class AllStories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='allStories';
+			$data['active']='finishedStories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-			$data['results']= $this->stories->getAll();			
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productbacklog',$data);
 			$this->load->view('submenu1');
-			$this->load->view('allstories_view',$data);
+			$this->load->view('finishedStories',$data);
 			$this->load->view('footer');
 		} else {
-		//If no session, redirect to login page
-		redirect('login', 'refresh');
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
 		}
     }
 }

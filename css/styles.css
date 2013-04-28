@@ -1,16 +1,13 @@
 /*avtor:darko*/
-@font-face
-{
+@font-face{
 	font-family: oldsans;
 	src: url('OldSansBlack.ttf');
 }
-@font-face
-{
+@font-face{
 	font-family: mentone;
 	src: url('mentone.otf');
 }
-.container
-{
+.container{
 	border: 1px solid #CCC;
 	width: 200px;
 	height: 150px;
@@ -19,21 +16,18 @@
 	overflow-y: scroll;
 	text-align: left;
 }
-h4
-{
+h4{
 	margin-top: 0px;
 	margin-bottom: -10px;
 	font-weight: normal;
 }
-h5
-{
+h5{
 	color: #303030;
 	margin-top: -10px;
 	margin-bottom: -10px;
 	font-weight: normal;
 }
-.zgodba
-{
+.zgodba{
 	border: 1px solid #808080;
 	background-color: #55D4FF;
 	padding-right: 500px;
@@ -47,8 +41,7 @@ h5
 	margin-top: -6px;
 	margin-bottom: -36px;
 }
-.taski
-{
+.taski{
 	border: 1px solid #808080;
 	border-top: none;
 	background-color: #E8E8E8;
@@ -60,8 +53,7 @@ h5
 	margin-top: -56px;
 	margin-bottom: 30px;
 }
-.sprintbox
-{
+.sprintbox{
 	border: 1px solid #808080;
 	background-color: #E8E8E8;
 	padding-top: 7px;
@@ -73,17 +65,16 @@ h5
 .editbutton{
 	margin-top: -22px;
 	margin-bottom: -20px;
-	margin-left: 464px;
+	margin-left: 511px;
 	margin-right: -150px;
 }
 .deletebutton{
 	margin-top: -42px;
 	margin-bottom: -20px;
-	margin-left: 406px;
+	margin-left: 450px;
 	margin-right: -150px;
 }
-.naslov
-{
+.naslov{
 	font-family: oldsans;
 	margin-left: 25%;
 	float: left;
@@ -91,65 +82,54 @@ h5
 	font-size: 20px;
 	font-weight: bold;
 }
-.naslov-login
-{
+.naslov-login{
 	font-family: oldsans;
 	margin-left: 25%;
 	float: left;
 	font-size: 20px;
 	font-weight: bold;
 }
-.welcome
-{
+.welcome{
 	float: right;
 	margin-right: 25%;
 	margin-bottom: -20px;
 }
-.glava
-{
+.glava{
 	background-size: cover;
 	background-color: #CCCCCC;
 	margin-bottom: -9px;
 }
-hr
-{
+hr{
 	border: 0;
 	height: 1px;
 	background: #000000;
 }
-.glava-login
-{
+.glava-login{
 	background-size: cover;
 	background-color: #CCCCCC;
 	margin-bottom: -9px;
 }
-#menu
-{
+#menu{
 	font-family: mentone;
 	font-size: 17;
 	padding-bottom: 2px;
 }
-body
-{
+body{
 	font-family: Tahoma, Geneva, sans-serif;
 	margin: 0;
 }
-#title
-{
+#title{
 	font-weight: bold;
 }
-#content
-{
+#content{
 	margin-left: 15%;
 	width: 65%;
 	display: inline-block;
 }
-#left
-{
+#left{
 	float: left;
 }
-#projects
-{
+#projects{
 	float: right;
 	background: #D3D3D3;
 	position: absolute;
@@ -157,85 +137,63 @@ body
 	padding-left: 15px;
 	padding-right: 15px;
 }
-#add
-{
+#add{
 	text-align: right;
 }
-#add p
-{
+#add p{
 	text-align: left;
 /*	margin-left: 40%;*/
 	font-weight: bold;
 	margin-top: 5%;
 }
-#add label
-{
+#add label{
 	font-style: italic;
 	vertical-align: top;
 }
-#add div.error
-{
+#add div.error{
 	font-weight: normal;
 	font-size: 10px;
 	color: #FF0000;
 	text-align: left;
 	margin-left: -80%;
 }
-#validation
-{
+#validation{
 	/*margin-left: 25%;*/
 	color: #FF0000;
 	font-weight:normal;
 	font-size:small;
 }
-button.task
-{
+button.task{
 	float: right;
 }
-textarea.addstory
-{
+textarea.addstory{
 	resize: none;
 }
-#container
-{
+#container{
 	font-family: Tahoma, Geneva, sans-serif;
 	margin-left: 40px;
 }
-.active a:visited
-{
-	color: #000;
-}
-a:link
-{
-	color: #996699;
-	text-decoration: none;
-}
-a:visited
-{
-	color: #996699;
-	text-decoration: none;
-}
-a:hover
-{
-	text-decoration: underline;
-}
-a:active
-{
-	text-decoration: underline;
+.active a:visited{
 	color: #000000;
 }
-ul.menu
-{
-	margin-left: 25%;
-	margin-right: 25%;
+a:link, a:visited{
+	color: #996699;
+	text-decoration: none;
+	padding:4px;
+	width:120px;
+	text-align:center;
 }
-li.menu
-{
-	display: inline;
+a:hover, a:active{
+	color: #000000;
+}
+ul.menu{
+	margin-left: 15%;
+}
+li.menu{
+	display: inline-block;
 	margin-right: 3em;
 }
-li.active
-{
+li.active{
 	display: inline;
 	margin-right: 3em;
 }
