@@ -1,5 +1,8 @@
-<!--avtor:Lovrenc-->
 <div id="content">
-	<p>Finished stories: </p><br>
-</div>
-   
+    <div id="left">
+		<div id="add">
+			<p>Finished stories: </p><br>
+			</div><br>
+		</div>
+	</div>
+</form>
