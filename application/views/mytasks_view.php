@@ -1,7 +1,7 @@
 <!--avtor:darko-->
 <div id="content">
     <div id="left" style="width:500px">
-    <p id="title">My tasks</p>
+    <h2>My tasks</h2>
     <?php if(strcmp($this->session->userdata('taskActive'),'')!=0) {
 	echo '<p style="color:red">'.$this->session->userdata('taskActive').'</p>';
     }?>

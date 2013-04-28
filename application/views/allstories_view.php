@@ -1,12 +1,12 @@
 <!--avtor:BOSTJAN-->
 <div id="content">
     <div id="left">
-	<div id="add">
-		<p>All stories: </p><br>
-		<?php foreach($results as $row):
-			if($row->PID == $PID): ?>
-				<div class="zgodba">
-					<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
+		<div id="add">
+			<p>All stories: </p><br>
+			<?php foreach($results as $row):
+				if($row->PID == $PID): ?>
+					<div class="zgodba">
+						<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
 					</div>
 					<div class="taski">
 					<?php

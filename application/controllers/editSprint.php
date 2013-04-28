@@ -104,12 +104,15 @@ class editSprint extends CI_Controller {
 	
 	public function startsprint_check($str) {
 		$pid=$this->session->userdata('PID');
+		$sprint=$this->session->userdata('sprint');
 		$input_date = strtotime($str);
 		$this->date=$input_date; 
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
+		$this->db->where('id !=', $sprint);
+
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;
@@ -134,11 +137,14 @@ class editSprint extends CI_Controller {
 	
 	public function finishsprint_check($str) {
 		$pid=$this->session->userdata('PID');
+		$sprint=$this->session->userdata('sprint');
 		$input_date = strtotime($str);
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
+		$this->db->where('id !=', $sprint);
+
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;

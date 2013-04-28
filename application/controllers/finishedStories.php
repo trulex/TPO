@@ -18,7 +18,7 @@ class FinishedStories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='unfinishedstories';
+			$data['active']='finishedStories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
@@ -26,6 +26,10 @@ class FinishedStories extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);
+			$this->load->helper(array('form'));
+			$this->load->view('productbacklog',$data);
+			$this->load->view('submenu1');
+			$this->load->view('finishedStories',$data);
 			$this->load->view('footer');
 		} else {
 			//If no session, redirect to login page

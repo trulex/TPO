@@ -19,13 +19,15 @@ class Addstory extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['active']='productBacklog';
-			$this->load->view('header', $data);
-			$this->load->view('submenu');
-			$this->load->helper(array('form'));
+			$data['active']='addstory';
+			
 			$data['message']='';
 			$data['noproject']='';
 			
+			$this->load->view('header', $data);
+			$this->load->helper(array('form'));
+			$this->load->view('productbacklog',$data);
+			$this->load->view('submenu1');
 			$this->load->view('addstory_view', $data);
 			$this->load->view('footer');
 		} 
