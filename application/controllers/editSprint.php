@@ -112,6 +112,7 @@ class editSprint extends CI_Controller {
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
 		$this->db->where('id !=', $sprint);
+
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;
@@ -143,6 +144,7 @@ class editSprint extends CI_Controller {
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
 		$this->db->where('id !=', $sprint);
+
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;

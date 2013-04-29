@@ -68,6 +68,9 @@ h5{
 	margin-left: 511px;
 	margin-right: -150px;
 }
+.editUsers {
+    display:inline;
+}
 .deletebutton{
 	margin-top: -42px;
 	margin-bottom: -20px;

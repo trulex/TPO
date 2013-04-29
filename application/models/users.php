@@ -15,6 +15,20 @@ Class Users extends CI_Model {
 		return false;
 	}
     }
+    	/* Return usernames,names and surnames of all users, except the current user's, for administrative user editing */
+	function getAllUsers($username) {
+	    $this->db->select('username,name,surname');
+	    $this->db->from('users');
+	    $this->db->where('username !=', $username);
+	    $this->db->order_by("username", "asc"); 
+	    
+	    $query=$this->db->get();
+	    if($query -> num_rows() > 0) {
+		return $query->result();
+	    } else {
+		return array();
+	    }
+    }
     /* Get surname and email, required for editing profile. */
     function getSurnameEmail($userId) {
 	$query = $this->db->query("SELECT surname,email FROM users WHERE id=$userId");
