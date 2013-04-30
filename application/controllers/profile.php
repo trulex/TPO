@@ -68,7 +68,6 @@ Class Profile extends CI_Controller {
 		$name=$this->input->post('name');
 		$surname=$this->input->post('surname');
 		$email=$this->input->post('email');
-		$rights=$this->input->post('rights');
 		$userdata=array(
 		    'username'=>$username,
 		    'password'=>$password,
