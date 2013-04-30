@@ -50,7 +50,12 @@ class VerifyLogin extends CI_Controller {
 			$this->session->set_userdata('logged_in', $sess_array);
 			$this->session->set_userdata('UID',$result->id);
 			$this->session->set_userdata('PID', $this->users->getLastPID($result->id));
-			$this->session->set_userdata('project', $this->projects->getProjectName($this->session->userdata('PID')));
+			if($this->session->userdata('PID')){
+				$this->session->set_userdata('project', $this->projects->getProjectName($this->session->userdata('PID')));
+			}
+			else{
+				$this->session->set_userdata('project',"No project selected");
+			}
 			session_start();
 			$_SESSION['project']='';
 			return TRUE;
