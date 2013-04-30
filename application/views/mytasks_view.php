@@ -66,7 +66,7 @@
 				}
 				if (!$completed && $accepted){
 					echo '<form name="finishTask" method="post" action="sprintBacklog/finishTask">';
-					echo '<button type="submit" value="'.$tas->id.'" name="TID">finish Task</button>';
+					echo '<button type="submit" value="'.$tas->id.'" name="TID">Mark task as completed</button>';
 					echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';
 				}
 				$previousStory=$storyData['name'];

@@ -140,6 +140,10 @@ body{
 	padding-left: 15px;
 	padding-right: 15px;
 }
+.selectProject {
+    text-align:left;
+    font-size:small;
+}
 #add{
 	text-align: right;
 }
