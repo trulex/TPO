@@ -1,8 +1,7 @@
-<!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class SprintBacklog extends CI_Controller {
+class Assignedtasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
@@ -24,48 +23,23 @@ class SprintBacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
 			$data['active']='sprintBacklog';
-			$data['activesubmenu3']='';
+			$data['activesubmenu3']='assignedtasks';
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
-			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
-			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));				
+			
+			$data['stories']= $this->stories->getCurrent($this->session->userdata('SpID'));
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);
 			$this->load->view('submenu3');
+			$this->load->view('assignedtasks_view',$data);
 			$this->load->view('footer');
 		}
 		else{
 			redirect('login', 'refresh');
 		}
-	}
-	
-	function acceptTask(){
-		$TID=$this->input->post('TID');
-		$this->tasks->accept($TID);
-		redirect($this->input->post('redirect'));
-	}
-	
-	function releaseTask(){
-		$TID=$this->input->post('TID');
-		$this->tasks->setUID($TID,0);
-		$this->tasks->decline($TID);
-		redirect($this->input->post('redirect'));
-	}
-	
-	function changeTime(){
-		$timeEstimate=$this->input->post('timeEstimate');
-		if (is_numeric($timeEstimate)){
-			if ( $timeEstimate>0){
-				$this->tasks->setTimeEstimate($this->input->post('TID'), $timeEstimate);
-			}
-		}
-		redirect($this->input->post('redirect'));
-	}
-	function finishTask(){
-		$this->tasks->finish($this->input->post('TID'));
-		redirect($this->input->post('redirect'));
 	}
 }

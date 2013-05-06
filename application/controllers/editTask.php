@@ -40,8 +40,11 @@ class EditTask extends CI_Controller {
 					redirect('home','refresh');
 			}
 			
-			$data['active']='productbacklog';
+			$data['active']='sprintBacklog';
+			$data['activesubmenu3']='unassignedtasks';
 			$this->load->view('header', $data);
+			$this->load->view('sprintBacklog',$data);
+			$this->load->view('submenu3');
 			$this->load->view('editTask',$data);
 			$this->load->view('footer');
 		}
@@ -54,7 +57,8 @@ class EditTask extends CI_Controller {
 		$data['username'] = $session_data['username'];
 		$data['name'] = $session_data['name'];
 		$data['rights'] = $session_data['rights'];
-		$data['active']='verifyAddTask';
+		$data['active']='sprintBacklog';
+		$data['activesubmenu3']='unassignedtasks';
 		$data['id']=$session_data['id'];
 		$data['message']='';
 		$data['task_name'] = $this->input->post('task_name');
@@ -102,13 +106,13 @@ class EditTask extends CI_Controller {
 		}
 		else {
 			$this->tasks->editTask($data['TID'],$data['TName'],$data['TText'],$data['TTimeEstimate'],$data['TUID'],$data['TAccepted'],$data['TTimeSum'],$data['TCompleted']);
-			redirect('sprintBacklog');
+			redirect('allTasks');
 		}
 		$this->load->view('footer');
 	}
 	 function taskDestroyer(){
 		$this->tasks->deleteTask($this->input->post('TID'));
-		redirect('sprintBacklog');
+		redirect('allTasks');
 	 }
 }
 ?>

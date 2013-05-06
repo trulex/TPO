@@ -20,9 +20,9 @@ class Tasks extends CI_Model{
 		 }
 	}
 	
-// 	Get tasks from current sprint
+// 	Get tasks from current story
 	function getCurrent($StID){
-		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed FROM tasks where StID=$StID");
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID");
 		return $query->result();
 	}
 	
@@ -36,7 +36,6 @@ class Tasks extends CI_Model{
 			return FALSE;
 		}
 	}
-	
 	
 	function getTask($TID){
 		$query=$this->db->query("SELECT * FROM tasks WHERE id=$TID");

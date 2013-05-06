@@ -16,7 +16,9 @@ class editSprint extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='meni';
+			$data['active']='productbacklog';
+			$data['activesubmenu1']='unfinishedstories';
+			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['id']);
@@ -34,6 +36,9 @@ class editSprint extends CI_Controller {
 				$data['startdate']=$this->sprints->getStartDate($this->session->userdata('sprint'));
 				$data['finishdate']=$this->sprints->getFinishDate($this->session->userdata('sprint'));
 				$data['velocity']=$this->sprints->getVelocity($this->session->userdata('sprint'));
+				$this->load->view('productbacklog',$data);
+				$this->load->view('submenu1');
+				$this->load->view('submenu2');
 				$this->load->view('editSprint_view',$data);
 			} else {
 				$startdate=$this->input->post('startdate');

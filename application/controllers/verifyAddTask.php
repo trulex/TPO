@@ -17,7 +17,8 @@ class VerifyAddTask extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='meni';
+			$data['active']='sprintBacklog';
+			$data['activesubmenu3']='unassignedtasks';
 			$data['id']=$session_data['id'];
 			$data['message']="";
 			$data['task_name']='';
@@ -33,6 +34,8 @@ class VerifyAddTask extends CI_Controller {
 			else{
 				$StID=$this->input->post('task');
 				$data['StID']=$StID;
+				$this->load->view('sprintBacklog',$data);
+				$this->load->view('submenu3');
 				$this->load->view('addTask', $data);
 				$this->load->view('footer');
 			}
@@ -59,7 +62,8 @@ class VerifyAddTask extends CI_Controller {
 		$data['username'] = $session_data['username'];
 		$data['name'] = $session_data['name'];
 		$data['rights'] = $session_data['rights'];
-		$data['active']='verifyAddTask';
+		$data['active']='sprintBacklog';
+		$data['activesubmenu3']='unassignedtasks';
 		$data['id']=$session_data['id'];
 		$data['message']="";
 		$data['task_name'] = $this->input->post('task_name');
@@ -79,6 +83,8 @@ class VerifyAddTask extends CI_Controller {
 		$this->load->view('header', $data);
 		if ($this->form_validation->run() == FALSE) {
 			$data['message']=validation_errors();
+			$this->load->view('sprintBacklog',$data);
+			$this->load->view('submenu3');
 			$this->load->view('addTask', $data);
 		}
 		else {
@@ -94,7 +100,7 @@ class VerifyAddTask extends CI_Controller {
 				'SpID' => $this->session->userdata('SpID')
 				);
 			$this->db->insert('tasks',$taskData);
-			redirect('sprintBacklog');
+			redirect('unassignedtasks');
 		}
 		$this->load->view('footer');
 	}
