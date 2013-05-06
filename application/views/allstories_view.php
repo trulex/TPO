@@ -18,5 +18,5 @@
 		<?php endforeach ?>	
 		</div><br>
 	</div>
-    </div>
+</div>
 </form>

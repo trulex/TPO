@@ -33,7 +33,6 @@
 	<div id="left">
 	<?php
 		if($currentsprints ){
-			echo '<p>Sprints: </p><br>';			
 			foreach($currentsprints as $name=>$row) { ?>
 				<div class="sprintbox">
 				<?php

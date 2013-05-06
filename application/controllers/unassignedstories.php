@@ -18,7 +18,9 @@ class Unassignedstories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='unassignedstories';
+			$data['active']='productbacklog';
+			$data['activesubmenu1']='unfinishedstories';
+			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];

@@ -77,6 +77,29 @@ h5{
 	margin-left: 450px;
 	margin-right: -150px;
 }
+.editTaskButton{
+	margin-top: -26px;
+	margin-bottom: 0px;
+	margin-left: 715px;
+	margin-right: 0px;
+}
+.workingLabel{
+	margin-top: -20px;
+	margin-bottom: 0px;
+	margin-left: 500px;
+	margin-right: 0px;
+}
+.assignTaskUser{
+	margin-top: -20px;
+	margin-bottom: 0px;
+	margin-left: 570px;
+	margin-right: 0px;
+}
+.addTaskButton{
+	margin-top: -30px;
+	margin-bottom: 20px;
+	margin-right: 0px;
+}
 .naslov{
 	font-family: oldsans;
 	margin-left: 25%;

@@ -43,6 +43,6 @@
 			<form action="addsprint" method="post">
 				<input type="submit" name="submitbutton" value="Manage sprints" />
 			</form>
-		</div>
 	</div>
+</div>
 </form>
