@@ -6,6 +6,7 @@ class EditUsers extends CI_Controller {
 	$this->load->model('projects');
 	$this->load->model('sprints');
 	$this->load->model('users');
+	$this->load->model("project_user");
     }
     function index() {
     	if($this->session->userdata('logged_in')) {
@@ -22,6 +23,8 @@ class EditUsers extends CI_Controller {
 	    $data['active']='administration';
 	    $data['projects']=$this->projects->getProjects($data['id']);
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['users']=$this->users->getAllUsers($data['username']); //get usernames,names and surnames of all users
 	    $this->load->helper('form');
 	    

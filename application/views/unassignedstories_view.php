@@ -17,7 +17,9 @@
 					<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; 
 					 if($row->SpID == 0): ?>
 						<div class="difficulty">
-						<?php echo '<form name="chDifficulty" method="post" action="unassignedstories/changeDifficulty" style="display:inline;">';
+						<?php 
+						if($rights == 1 || $ScrumMaster == $UID){
+						echo '<form name="chDifficulty" method="post" action="unassignedstories/changeDifficulty" style="display:inline;">';
 						echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>'; ?>
@@ -26,10 +28,11 @@
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; ?>
 						
-						<?php echo '<form name="editStory" method="post" action="editStory" style="display:inline;">';
+						<?php echo '<form name="editStory" method="post" action="unassignedstories/editStory" style="display:inline;">';
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-						echo '<button type="submit" value="'.$row->id.'" name="StID">Edit</button></form>'; ?>
-						
+						echo '<button type="submit" value="'.$row->id.'" name="StID">Edit</button></form>';
+						}
+						?>						
 						</div>
 					<?php endif	?>
 				</div>
@@ -37,21 +40,25 @@
 					<h5><?php echo $row->text ?></h5>
 					<br>
 				</div>
-				<?php if($row->difficulty != 0): ?>
-				<div class="gumb">
-					<form action="unassignedstories/entry_SpID" method="post">
-						<input type="submit" name="submitbutton" value="Add to sprint" />
-						<input type="hidden" name="submitstories" value=<?php echo $row->id ?> />
-						<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
-					</form>
-				</div>
-				<?php endif ?>
+				<?php if($rights == 1 || $ScrumMaster == $UID){
+						if($row->difficulty != 0): ?>
+						<div class="gumb">
+							<form action="unassignedstories/entry_SpID" method="post">
+								<input type="submit" name="submitbutton" value="Add to sprint" />
+								<input type="hidden" name="submitstories" value=<?php echo $row->id ?> />
+								<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
+							</form>
+						</div>
+						<?php endif ?>
+					<?php } ?>
 			<?php endif ?>	
 		<?php endforeach ?>	
 		</div><br>
+		<?php if($rights == 1 || $ScrumMaster == $UID){ ?>
 		<form action="addsprint" method="post">
 			<input type="submit" name="submitbutton" value="Manage sprints" />
 		</form>
+		<?php } ?>
     </div>
 </div>
 </form>

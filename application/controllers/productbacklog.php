@@ -30,6 +30,8 @@ class productbacklog extends CI_Controller {
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
 			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);

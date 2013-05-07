@@ -36,6 +36,8 @@ class EditTask extends CI_Controller {
 			$data['TTimeSum']=$TData->time_sum;
 			$data['TCompleted']=$TData->completed;
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if(!$data['rights']) {
 					redirect('home','refresh');
 			}

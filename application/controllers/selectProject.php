@@ -9,6 +9,7 @@ Class SelectProject extends CI_Controller {
 		$this->load->model("sprints");
 		$this->load->model("projects");
 		$this->load->model('users');
+		$this->load->model("project_user");
 	}
 
     public function select() {

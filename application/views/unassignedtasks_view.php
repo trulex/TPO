@@ -30,7 +30,7 @@
 								}
 								else{
 									//take task
-									echo '<form name="takeTask" method="post" action="unassignedtasks/takeTask">';
+									echo '<form name="takeTask" class="takeTaskButton" method="post" action="unassignedtasks/takeTask">';
 									echo '<input name="UID" type="hidden" value="'.$id.'" />';
 									echo '<button type="submit" value="'.$task->id.'" name="TID">Take task</button>';
 									echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" /></form>';

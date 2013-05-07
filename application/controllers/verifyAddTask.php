@@ -7,6 +7,7 @@ class VerifyAddTask extends CI_Controller {
 		$this->load->model('tasks');
 		$this->load->model("sprints");
 		$this->load->model("projects");
+		$this->load->model("project_user");
 		
     } 
 
@@ -24,6 +25,8 @@ class VerifyAddTask extends CI_Controller {
 			$data['task_name']='';
 			$data['text']='';
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('StID', 'StID', 'trim|numeric');
