@@ -20,7 +20,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
 			$data['activesubmenu1']='unfinishedstories';
-			$data['activesubmenu2']='';
+			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
@@ -36,6 +36,7 @@ class Unfinishedstories extends CI_Controller {
 			$this->load->view('productbacklog',$data);
 			$this->load->view('submenu1');
 			$this->load->view('submenu2');
+			$this->load->view('unassignedstories_view',$data);
 			$this->load->view('footer');
 		} else {
 			//If no session, redirect to login page
