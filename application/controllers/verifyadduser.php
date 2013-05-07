@@ -7,6 +7,7 @@ class VerifyAddUser extends CI_Controller {
 	$this->load->model('users','',TRUE);
 	$this->load->model('projects');
 	$this->load->model("sprints");
+	$this->load->model("project_user");
     }
     function index() {
 	if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
@@ -21,6 +22,8 @@ class VerifyAddUser extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['project']=$this->session->userdata('project');
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');

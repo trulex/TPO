@@ -7,6 +7,7 @@ Class Profile extends CI_Controller {
 		$this->load->model('projects');
 		$this->load->model('sprints');
 		$this->load->model('users');
+		$this->load->model("project_user");
 	}
 	
     function index() {
@@ -20,6 +21,8 @@ Class Profile extends CI_Controller {
 		$data['message']='';
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 		$surnameEmail=$this->users->getSurnameEmail($data['id']);
 		$data['surname']=$surnameEmail->surname;
 		$data['email']=$surnameEmail->email;

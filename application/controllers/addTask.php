@@ -6,7 +6,8 @@ class AddTask extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('tasks');
-		$this->load->model("sprints");		
+		$this->load->model("sprints");
+		$this->load->model("project_user");
 	}
 
 	public function index($StID)	{
@@ -19,6 +20,8 @@ class AddTask extends CI_Controller {
 			$data['active']='meni';
 			$data['StID']=$StID;
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if($data['rights']){
 					redirect('home','refresh');
 			}

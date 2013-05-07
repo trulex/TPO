@@ -5,6 +5,7 @@ class ViewTasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
+		$this->load->model("project_user");
 	}
 
 	public function index()	{
@@ -14,6 +15,8 @@ class ViewTasks extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if(!$data['rights']) {
 					redirect('home','refresh');
 			}

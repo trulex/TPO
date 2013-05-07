@@ -6,6 +6,7 @@ class Addstory extends CI_Controller {
 	parent::__construct();
 	$this->load->model('projects');
 	$this->load->model("sprints");
+	$this->load->model("project_user");
     }
     
     function index() {
@@ -21,7 +22,8 @@ class Addstory extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['active']='addstory';
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$data['message']='';
 			$data['noproject']='';
