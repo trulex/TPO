@@ -26,7 +26,7 @@
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; ?>
 						
-						<?php echo '<form name="editStory" method="post" action="unassignedstories/editStory" style="display:inline;">';
+						<?php echo '<form name="editStory" method="post" action="editStory" style="display:inline;">';
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Edit</button></form>'; ?>
 						

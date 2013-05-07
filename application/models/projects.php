@@ -10,7 +10,7 @@ Class Projects extends CI_Model {
 		else {
 			//returns ids of projects of user with id $userid
 			$UID=$this->session->userdata('UID');
-			$query=$this->db->query(" select id, name, max(role) from projects left JOIN project_user on(project_user.PID=projects.id) where project_user.UID=$UID group by id");
+			$query=$this->db->query("select id, name, max(role) as role from projects left JOIN project_user on(project_user.PID=projects.id) where project_user.UID=$UID group by id");
 			return $query->result();
 		}
 	}
