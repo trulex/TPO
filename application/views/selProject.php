@@ -4,10 +4,10 @@
 	<p id="title">My projects</p>
 	    <?php
 		foreach ($projects as $project) {
-		    if(! isset($project->role)) {
+		    if(!isset($project->role)) {
 			$role='Administrator';
 		    } else {
-			switch($role) {
+			switch($project->role) {
 			case 0: $role='Team member';
 			break;
 			case 1: $role='Scrum master';

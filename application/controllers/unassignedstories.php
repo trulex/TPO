@@ -27,8 +27,8 @@ class Unassignedstories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-			$data['results']= $this->stories->getAll();			
-			
+			$data['results']= $this->stories->getAll();
+
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productbacklog',$data);
@@ -72,6 +72,13 @@ class Unassignedstories extends CI_Controller {
 		}
 		redirect($this->input->post('redirect'));
 		
+	}
+	
+	function deleteStory() {
+	    $storyId=$this->input->post('StID');
+	    $this->db->where('id', $storyId);
+	    $this->db->delete('stories');
+	    redirect($this->input->post('redirect'));
 	}
 }
 ?>
