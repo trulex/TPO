@@ -8,6 +8,7 @@ class MyTasks extends CI_Controller {
 	$this->load->model('tasks');
 	$this->load->helper('date');
 	$this->load->model('sprints');
+	$this->load->model("project_user");
     }
     
     function index() {
@@ -22,6 +23,8 @@ class MyTasks extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
 			

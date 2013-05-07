@@ -13,7 +13,7 @@
 						echo "<h5>".$row->text."</h5>";
 						echo "<br>";
 					?>
-				</div>
+					</div>
 			<?php endif ?>	
 		<?php endforeach ?>	
 		</div><br>

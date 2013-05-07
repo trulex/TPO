@@ -9,16 +9,22 @@ Class Projects extends CI_Model {
 		}
 		else {
 			//returns ids of projects of user with id $userid
-			$query=$this->db->query(" select id, name, max(role) from projects left JOIN project_user on(project_user.PID=projects.id) where project_user.UID=$this->session->userdata('UID') group by id");
+			$UID=$this->session->userdata('UID');
+			$query=$this->db->query(" select id, name, max(role) from projects left JOIN project_user on(project_user.PID=projects.id) where project_user.UID=$UID group by id");
 			return $query->result();
 		}
 	}
-    function getProjectName($projectId) {
-		$this->db->select('name');
-		$this->db->from('projects');
-		$this->db->where('id',$projectId);
-		$query=$this->db->get();
-		return $query->row()->name;
+    function getProjectName($PID) {
+		if($PID){
+			$this->db->select('name');
+			$this->db->from('projects');
+			$this->db->where('id',$PID);
+			$query=$this->db->get();
+			return $query->row()->name;
+		}
+		else{
+			return "";
+		}
     }
 	
 	function getDescription($projectId){

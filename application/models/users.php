@@ -34,6 +34,14 @@ Class Users extends CI_Model {
 	$query = $this->db->query("SELECT surname,email FROM users WHERE id=$userId");
 	return $query->row();
     }
+    /* Get all user data for user $username, required for administrative editing. */
+    function getAllData($username) {
+	$this->db->select('name,surname,email,rights');
+	$this->db->from('users');
+	$this->db->where('username', $username); 
+	$query=$this->db->get();
+	return $query->result();
+    }
     
 	function getAll(){
 		$query = $this->db->query("SELECT * FROM projects");

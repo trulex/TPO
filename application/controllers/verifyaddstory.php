@@ -6,10 +6,11 @@ class VerifyAddStory extends CI_Controller {
 	parent::__construct();
 	$this->load->model('projects');
 	$this->load->model("sprints");
+	$this->load->model("project_user");
     } 
 
     function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+	if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];
@@ -22,10 +23,14 @@ class VerifyAddStory extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['noproject']='';
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
+	    $this->load->view('productbacklog',$data);
 	    $this->load->view('submenu1');
 	    $this->load->library('form_validation');
+	    
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
 	    $this->form_validation->set_rules('tests', 'Tests', 'trim|required');
@@ -39,7 +44,9 @@ class VerifyAddStory extends CI_Controller {
 		if (!$this->hasRights()) {
 		    $data['noproject']='Error: You do not have sufficient rights for adding new stories to this project.';
 		}
+		
 		$this->load->view('addstory_view',$data);
+	    
 	    } else {
 		$name=$this->input->post('name');
 		$text=$this->input->post('text');
@@ -71,7 +78,7 @@ class VerifyAddStory extends CI_Controller {
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
 	$rights=$session_data['rights'];
-	if($data['rights']) { {
+	if($rights) {
 	    return true;
 	}
 	$this->db->select('id');
@@ -93,7 +100,7 @@ class VerifyAddStory extends CI_Controller {
 	    return true;
 	}
     }
-    public function storyname_check($str) {
+    function storyname_check($str) {
     	$this->db->select('name');
 	$this->db->from('stories');
 	$this->db->where('name', $str);
