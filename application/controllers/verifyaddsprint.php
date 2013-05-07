@@ -18,7 +18,9 @@ class VerifyAddSprint extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='meni';
+			$data['active']='productbacklog';
+			$data['activesubmenu1']='unfinishedstories';
+			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
@@ -34,6 +36,9 @@ class VerifyAddSprint extends CI_Controller {
 			$this->form_validation->set_rules('velocity', 'Sprint velocity', 'required|is_natural_no_zero');
 			
 			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('productbacklog',$data);
+				$this->load->view('submenu1');
+				$this->load->view('submenu2');
 				$this->load->view('addsprint_view',$data);
 			} else {
 				$startdate=$this->input->post('startdate');

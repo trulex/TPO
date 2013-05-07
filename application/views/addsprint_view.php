@@ -33,10 +33,10 @@
 	<div id="left">
 	<?php
 		if($currentsprints ){
-			echo '<p>Sprints: </p><br>';
-			foreach($currentsprints as $row) { ?>
+			foreach($currentsprints as $name=>$row) { ?>
 				<div class="sprintbox">
 				<?php
+				echo "<b>Sprint ".($name+1)."</b> ";
 				echo $row->start_date." - ";
 				echo $row->finish_date;
 				echo ", velocity: ".$row->velocity;

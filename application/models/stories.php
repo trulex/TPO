@@ -23,7 +23,7 @@ class Stories extends CI_Model{
 	
 // 	Get all stories from current sprint
 	function getCurrent($SpID){
-		$query = $this->db->query("SELECT id, name, text FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT id, name, text, difficulty FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
