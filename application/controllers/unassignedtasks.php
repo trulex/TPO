@@ -70,7 +70,9 @@ class Unassignedtasks extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));				
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$this->load->helper('form');
 			$data['active']='productbacklog';
 			$data['return']=$this->input->post('return');
@@ -79,7 +81,7 @@ class Unassignedtasks extends CI_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('return', 'Return path', 'trim');
 			$this->load->view('header', $data);
-// 			$this->load->view('editNote', $data);
+			$this->load->view('editNote', $data);
 			$this->load->view('footer');
 			if ($this->form_validation->run() == FALSE) {
 				

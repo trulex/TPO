@@ -48,6 +48,10 @@
 							echo '<br>';
 						 endforeach ?>
 					</div>
+					<div class="notes">
+						<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
+						<br>
+					</div>
 					<div class="gumbR">
 						<form name="createTask" class="addTaskButton" action="verifyAddTask" method="post">
 							<input type="submit" name="task" value="Add a task" />

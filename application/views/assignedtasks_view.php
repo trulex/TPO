@@ -24,6 +24,10 @@
 						<?php } ?>
 					<?php endforeach ?>
 				</div>
+				<div class="notes">
+					<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
+					<br>
+				</div>
 		<?php endforeach ?>	
 		</div><br>
 	</div>
