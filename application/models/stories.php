@@ -26,7 +26,7 @@ class Stories extends CI_Model{
 		$query = $this->db->query("SELECT id, name, text, difficulty, note, finished FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
-	
+
 // 	Get all unasigned stories
 	function getUnasigned($PID){
 		$query=$this->db->query("SELECT id, name, text,difficulty, note, finished FROM stories WHERE PID=$PID and SpID=0");

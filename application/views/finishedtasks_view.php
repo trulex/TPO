@@ -8,14 +8,14 @@
 				<div class="zgodba">
 					<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
 						<?php
-								if($role==2){
-									if(!$row->finished){
-										echo '<form name="endStory" method="post" action="unassignedtasks/endStory" style="display:inline;">';
-										echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-										echo '<button type="submit" value="'.$row->id.'" name="StID">Confirm</button></form>';
-									}
+							if($role==2){
+								if(!$row->finished && !$this->tasks->getCurrentUnfinished($row->id)){
+									echo '<form name="endStory" method="post" action="unassignedtasks/endStory" style="display:inline;">';
+									echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+									echo '<button type="submit" value="'.$row->id.'" name="StID">Confirm</button></form>';
 								}
-							?>
+							}
+						?>
 				</div>
 				<div class="taski">
 				<?php

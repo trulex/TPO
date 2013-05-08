@@ -19,11 +19,41 @@ class Tasks extends CI_Model{
 		    return array();
 		 }
 	}
-	
-// 	Get tasks from current story
+// 	Get unasigned tasks of current story
+	function getCurrentUnasigned($StID){
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND UID=0");
+		return $query->result();
+	}
+// 	Get asigned tasks of curent story
+	function getCurrentAsigned($StID){
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND UID!=0");
+		return $query->result();
+	}
+
+	// 	Get tasks from current story
 	function getCurrent($StID){
 		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID");
 		return $query->result();
+	}
+	
+	function getCurrentFinished($StID){
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND completed=1");
+		if($query->num_rows>0){
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
+	}
+	
+	function getCurrentUnfinished($StID){
+		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND completed=0");
+		if($query->num_rows>0){
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
 	}
 	
 // 	Get all my tasks from current sprint
