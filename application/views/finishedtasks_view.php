@@ -1,4 +1,5 @@
 <!--avtor:BOSTJAN-->
+
 <div id="content">
     <div id="left">
 		<div id="add">
@@ -14,6 +15,10 @@
 									echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 									echo '<button type="submit" value="'.$row->id.'" name="StID">Confirm</button></form>';
 								}
+								echo '<form name="endStory" method="post" action="unassignedtasks/rejectStory" style="display:inline;">';
+								echo '<input name="return" type="hidden" value="'.$this->uri->uri_string().'" />';
+								echo '<button type="submit" value="'.$row->id.'" name="StID">Reject</button></form>';
+								
 							}
 						?>
 				</div>

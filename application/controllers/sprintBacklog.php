@@ -36,7 +36,7 @@ class SprintBacklog extends CI_Controller {
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
-			$this->load->view('sprintbacklog', $data);
+			$this->load->view('sprintBacklog', $data);
 			$this->load->view('submenu3');
 			$this->load->view('alltasks_view',$data);
 			$this->load->view('footer');

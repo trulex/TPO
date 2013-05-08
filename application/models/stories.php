@@ -78,5 +78,9 @@ class Stories extends CI_Model{
 	function endStory($StID){
 		$this->db->query("UPDATE stories SET finished=1 WHERE id=$StID");
 	}
+	
+	function reopenStory($StID){
+		$this->db->query("UPDATE stories SET finished=0 WHERE id=$StID");
+	}
 }
 ?>
