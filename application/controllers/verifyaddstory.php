@@ -6,6 +6,7 @@ class VerifyAddStory extends CI_Controller {
 	parent::__construct();
 	$this->load->model('projects');
 	$this->load->model("sprints");
+	$this->load->model("project_user");
     } 
 
     function index() {
@@ -22,6 +23,8 @@ class VerifyAddStory extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['noproject']='';
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
 	    $this->load->view('productbacklog',$data);

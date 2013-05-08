@@ -24,17 +24,21 @@ class SprintBacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['project']=$this->session->userdata('project');
 			$data['active']='sprintBacklog';
-			$data['activesubmenu3']='';
+			$data['activesubmenu3']='alltasks';
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
-			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
+			$data['stories']= $this->stories->getCurrent($this->session->userdata('SpID'));
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);
 			$this->load->view('submenu3');
+			$this->load->view('alltasks_view',$data);
 			$this->load->view('footer');
 		}
 		else{

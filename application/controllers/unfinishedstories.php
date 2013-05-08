@@ -20,20 +20,23 @@ class Unfinishedstories extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
 			$data['activesubmenu1']='unfinishedstories';
-			$data['activesubmenu2']='';
+			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-			$data['results']= $this->stories->getAll();			
+			$data['results']= $this->stories->getAll();
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productbacklog',$data);
 			$this->load->view('submenu1');
 			$this->load->view('submenu2');
+			$this->load->view('unassignedstories_view',$data);
 			$this->load->view('footer');
 		} else {
 			//If no session, redirect to login page

@@ -22,19 +22,24 @@ class productbacklog extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
+			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$this->session->userdata('project');
 			$data['active']='productbacklog';
-			$data['activesubmenu1']='';
+			$data['activesubmenu1']='allStories';
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
-			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID')); 
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
+			$data['results']= $this->stories->getAll();			
 			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('productbacklog',$data);
 			$this->load->view('submenu1');
+			$this->load->view('allstories_view',$data);
 			$this->load->view('footer');
 		}
 		else{

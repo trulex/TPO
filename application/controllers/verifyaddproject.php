@@ -5,6 +5,7 @@ class VerifyAddProject extends CI_Controller {
 		parent::__construct();
 		$this->load->model('projects');
 		$this->load->model("sprints");
+		$this->load->model("project_user");
     }
     function index() {
 		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
@@ -18,6 +19,8 @@ class VerifyAddProject extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$data['results']= $this->projects->getAll();
 			
