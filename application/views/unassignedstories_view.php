@@ -19,7 +19,7 @@
 					 if($row->SpID == 0): ?>
 						<div class="difficulty">
 						<?php 
-						if($rights == 1 || $ScrumMaster == $UID){
+						if($rights == 1 || $ScrumMaster == $UID || $ProductOwner == $UID){
 							echo '<form name="chDifficulty" method="post" action="unassignedstories/changeDifficulty" style="display:inline;">';
 							echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
