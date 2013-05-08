@@ -25,11 +25,11 @@
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
 							
-							echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;margin-left:10px;">';
+							echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;">';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-							echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>';
+							echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; 
 							
-							echo '<form name="editStory" method="post" action="editStory" style="display:inline;">';
+							echo '<form name="editStory" method="post" action="unassignedstories/editStory" style="display:inline;">';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<button type="submit" value="'.$row->id.'" name="StID">Edit</button></form>';
 							
@@ -47,7 +47,7 @@
 					<div class="gumbR">
 						<form name="editNote" method="post" action="editNote" style="display:inline;">
 							<input name="redirect" type="hidden" value="<?php echo $this->uri->uri_string(); ?>" />
-							<button type="submit" value="<?php echo $row->id; ?>" name="StID">Edit</button>
+							<button type="submit" value="<?php echo $row->id; ?>" name="StID">Notes</button>
 						</form>
 					</div>
 					<br>

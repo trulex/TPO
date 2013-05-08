@@ -23,6 +23,7 @@ class Assignedstories extends CI_Controller {
 			$data['activesubmenu2']='assignedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
+			$data['SpID']=$this->session->userdata('SpID');
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
