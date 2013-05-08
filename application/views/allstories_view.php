@@ -15,9 +15,15 @@
 					?>
 					</div>
 					<div class="notes">
-						<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
-						<br>
+					<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
+					<div class="gumbR">
+						<form name="editNote" method="post" action="editNote" style="display:inline;">
+							<input name="redirect" type="hidden" value="<?php echo $this->uri->uri_string(); ?>" />
+							<button type="submit" value="<?php echo $row->id; ?>" name="StID">Notes</button>
+						</form>
 					</div>
+					<br>
+				</div>
 			<?php endif ?>	
 		<?php endforeach ?>	
 		</div><br>

@@ -9,6 +9,10 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	
+	function getFinished(){
+		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories WHERE finished=1");
+		return $query->result();
+	} 
 // 	Get all stories from this user
 	function getOwn($id){
 		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
@@ -26,7 +30,7 @@ class Stories extends CI_Model{
 		$query = $this->db->query("SELECT id, name, text, difficulty, note, finished FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
-
+	
 // 	Get all unasigned stories
 	function getUnasigned($PID){
 		$query=$this->db->query("SELECT id, name, text,difficulty, note, finished FROM stories WHERE PID=$PID and SpID=0");
