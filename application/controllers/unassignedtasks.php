@@ -58,4 +58,9 @@ class Unassignedtasks extends CI_Controller {
 		$this->tasks->setUID($TID,$UID);
 		redirect($this->input->post('redirect'));	
 	}
+	function endStory(){
+		$StID=$this->input->post('StID');
+		$this->stories->endStory($StID);
+		redirect($this->input->post('redirect'));
+	}
 }

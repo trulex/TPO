@@ -5,31 +5,31 @@
 class Stories extends CI_Model{
 // 	Get all stories
 	function getAll(){
-		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID FROM stories");
+		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories");
 		return $query->result();
 	}
 	
 // 	Get all stories from this user
 	function getOwn($id){
-		$query = $this->db->query("SELECT id, name, text FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
+		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
 		return $query->result();
 	}
 	
 // 	Get all stories from this project
 	function getFromProject($PID){
-		$query = $this->db->query("SELECT id, name, text FROM stories WHERE PID=$PID");
+		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE PID=$PID");
 		return $query->result();
 	}
 	
 // 	Get all stories from current sprint
 	function getCurrent($SpID){
-		$query = $this->db->query("SELECT id, name, text, difficulty FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT id, name, text, difficulty, note, finished FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
 // 	Get all unasigned stories
 	function getUnasigned($PID){
-		$query=$this->db->query("SELECT id, name, text,difficulty FROM stories WHERE PID=$PID and SpID=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty, note, finished FROM stories WHERE PID=$PID and SpID=0");
 		return $query->result();
 	}
 	
@@ -53,11 +53,30 @@ class Stories extends CI_Model{
 	
 	/* Get story data */
 	function getData($storyId) {
-	    $this->db->select('name,text,tests,busvalue,priority');
+	    $this->db->select('name,text,tests,busvalue,priority,note');
 	    $this->db->where('id', $storyId);
 	    $query=$this->db->get('stories');
 	    
 	    return $query->row();
+	}
+	
+// 	Edit note
+	function editNote($StID,$note){
+		$this->db->query("UPDATE stories SET note='$note' WHERE id=$StID");
+	}
+	
+	function getStory($StID){
+		$query=$this->db->query("SELECT name, note, id FROM stories WHERE id=$StID");
+		if($query->num_rows){
+			return $query->row();
+		}
+		else{
+		return FALSE;
+		}
+	}
+	
+	function endStory($StID){
+		$this->db->query("UPDATE stories SET finished=1 WHERE id=$StID");
 	}
 }
 ?>
