@@ -22,7 +22,7 @@
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>'; ?>
 						
-						<?php echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;">';
+						<?php echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;margin-left:10px;">';
 						echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 						echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; ?>
 						
