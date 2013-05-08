@@ -47,11 +47,22 @@ h5{
 	background-color: #E8E8E8;
 	padding-bottom: 10px;
 	text-align: left;
+	margin-bottom: 10px;
+}
+.notes{
+	border: 1px solid #808080;
+	border-top: none;
+	background-color:#99CCCC;
+	padding-bottom: 10px;
+	text-align: left;
 	margin-bottom: 30px;
 }
 .gumb{
 	margin-top: -56px;
 	margin-bottom: 30px;
+}
+.gumbR{
+	text-align: right;
 }
 .sprintbox{
 	border: 1px solid #808080;
@@ -169,6 +180,7 @@ body{
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
 .selectProject {
     text-align:left;
     font-size:small;

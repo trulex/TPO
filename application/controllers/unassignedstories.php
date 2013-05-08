@@ -82,5 +82,10 @@ class Unassignedstories extends CI_Controller {
 	    $this->db->delete('stories');
 	    redirect($this->input->post('redirect'));
 	}
+	function editNote(){
+		$note=$this->input->post('note');
+		$this->stories->editNote($note);
+	}
+	
 }
 ?>
