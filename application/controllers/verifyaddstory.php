@@ -17,7 +17,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-		$data['activesubmenu1']='addstory';
+	    $data['activesubmenu1']='addstory';
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['rights']);
@@ -25,6 +25,7 @@ class VerifyAddStory extends CI_Controller {
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 		$data['UID']=$this->session->userdata('UID');
 		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+		$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
 	    $this->load->view('productbacklog',$data);

@@ -23,6 +23,7 @@ class Assignedstories extends CI_Controller {
 			$data['activesubmenu2']='assignedstories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
+			$data['SpID']=$this->session->userdata('SpID');
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
@@ -30,6 +31,7 @@ class Assignedstories extends CI_Controller {
 			$data['results']= $this->stories->getAll();
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));

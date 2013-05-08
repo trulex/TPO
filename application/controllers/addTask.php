@@ -20,6 +20,7 @@ class AddTask extends CI_Controller {
 			$data['active']='meni';
 			$data['StID']=$StID;
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if($data['rights']){

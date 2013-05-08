@@ -9,6 +9,7 @@ class EditNote extends CI_Controller {
 		$this->load->model("sprints");
 		$this->load->model("stories");
 		$this->load->model("projects");
+		$this->load->model("project_user");
 	}
 	
 	
@@ -23,6 +24,9 @@ class EditNote extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
+			$data['UID']=$this->session->userdata('UID');
+			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->helper('form');	
 			$data['active']='productbacklog';
@@ -30,6 +34,7 @@ class EditNote extends CI_Controller {
 			$data['StID']=$this->input->post('StID');
 			$data['story']=$this->stories->getStory($data['StID']);
 			$this->load->view('header', $data);
+			$this->load->view('productBacklog', $data);
 			$this->load->view('editNote');
 			$this->load->view('footer');
 		}

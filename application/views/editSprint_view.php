@@ -26,7 +26,6 @@
 		<span style="color:green;font-weight:normal"><?php echo $this->session->flashdata('flashSuccess') ?></span>	
 	</div>
 	</div>
-	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>
 
 <div id="content">

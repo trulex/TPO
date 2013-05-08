@@ -12,7 +12,7 @@
 		<div id="add">
 			<p>Assigned stories: </p><br>
 			<?php foreach($results as $row):
-				if($row->PID == $PID && $row->SpID != 0): ?>
+				if($row->PID == $PID && $row->SpID == $SpID): ?>
 					<div class="zgodba">
 						<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
 					</div>

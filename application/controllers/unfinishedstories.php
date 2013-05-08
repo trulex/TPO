@@ -30,6 +30,7 @@ class Unfinishedstories extends CI_Controller {
 			$data['results']= $this->stories->getAll();
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
