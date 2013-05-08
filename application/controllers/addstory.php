@@ -24,6 +24,7 @@ class Addstory extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			
 			$data['message']='';
 			$data['noproject']='';

@@ -18,11 +18,11 @@ class Addsprint extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productbacklog';
-			$data['activesubmenu1']='unfinishedstories';
-			$data['activesubmenu2']='unassignedstories';
+			$data['activesubmenu1']='';
+			$data['activesubmenu2']='';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
-			$data['projects']=$this->projects->getProjects($data['id']);
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
@@ -30,8 +30,6 @@ class Addsprint extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productbacklog',$data);
-			$this->load->view('submenu1');
-			$this->load->view('submenu2');
 			$this->load->view('addsprint_view',$data);
 			$this->load->view('footer');
 		} else {

@@ -7,6 +7,7 @@
 	    $this->load->model('sprints');
 	    $this->load->model('projects');
 	    $this->load->model('stories');
+	    $this->load->model('project_user');
     }
 
     function index() {
@@ -16,13 +17,17 @@
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-	    $data['activesubmenu1']='unfinishedstories';
-	    $data['activesubmenu2']='unassignedstories';
+	    $data['activesubmenu1']='';
+	    $data['activesubmenu2']='';
 	    $data['id']=$session_data['id'];
 	    $data['PID']=$this->session->userdata('PID');
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
+		$data['UID']=$this->session->userdata('UID');
+		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+		$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 	    $data['storyData']=$this->stories->getData($this->input->post('StID'));
 	    $this->session->set_userdata('StoryID',$this->input->post('StID'));
 	    $data['message']='';
@@ -33,8 +38,6 @@
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('productbacklog',$data);
-	    $this->load->view('submenu1');
-	    $this->load->view('submenu2');
 	    $this->load->view('editStory_view', $data);
 	    $this->load->view('footer');
 	}
