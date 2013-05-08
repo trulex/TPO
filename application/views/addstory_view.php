@@ -12,7 +12,7 @@ $err=strcmp($noproject,'');
 	    <?php echo form_error('name','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Text</label>
-	    <textarea name="text" class="addstory" cols="19" rows="3"> <?php if($msg==0) {echo set_value('text');} ?> </textarea>
+	    <textarea name="text" class="addstory" cols="19" rows="3"><?php if($msg==0) {echo set_value('text');} ?></textarea>
 	    <?php echo form_error('text','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Tests</label>

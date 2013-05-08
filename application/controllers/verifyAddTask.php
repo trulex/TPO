@@ -24,6 +24,7 @@ class VerifyAddTask extends CI_Controller {
 			$data['message']="";
 			$data['task_name']='';
 			$data['text']='';
+			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
