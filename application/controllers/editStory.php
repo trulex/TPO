@@ -17,8 +17,8 @@
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-	    $data['activesubmenu1']='unfinishedstories';
-	    $data['activesubmenu2']='unassignedstories';
+	    $data['activesubmenu1']='';
+	    $data['activesubmenu2']='';
 	    $data['id']=$session_data['id'];
 	    $data['PID']=$this->session->userdata('PID');
 	    $data['project']=$session_data['project'];
@@ -38,8 +38,6 @@
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('productbacklog',$data);
-	    $this->load->view('submenu1');
-	    $this->load->view('submenu2');
 	    $this->load->view('editStory_view', $data);
 	    $this->load->view('footer');
 	}

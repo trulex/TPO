@@ -39,7 +39,6 @@ class VerifyAddTask extends CI_Controller {
 				$StID=$this->input->post('task');
 				$data['StID']=$StID;
 				$this->load->view('sprintBacklog',$data);
-				$this->load->view('submenu3');
 				$this->load->view('addTask', $data);
 				$this->load->view('footer');
 			}
