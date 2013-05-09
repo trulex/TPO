@@ -1,3 +1,4 @@
+<!-- activeTasks_view -->
 <!--avtor:BOSTJAN-->
 <div id="content">
     <div id="left">

@@ -1,3 +1,5 @@
+<!-- submenu3 -->
+<!-- avtor: BOSTJAN -->
 <div>
 	<ul class="menu">
 	    <?php

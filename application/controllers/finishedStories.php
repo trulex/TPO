@@ -28,9 +28,6 @@ class FinishedStories extends CI_Controller {
 			$data['results']= $this->stories->getFinished($this->session->userdata('SpID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['mode']=3;
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));

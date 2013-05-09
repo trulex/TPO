@@ -1,7 +1,7 @@
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Unfinishedstories extends CI_Controller { 
+class Unassignedstories extends CI_Controller { 
 
     function __construct() {
 		parent::__construct();
@@ -19,8 +19,8 @@ class Unfinishedstories extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productBacklog';
-			$data['activesubmenu1']='unfinishedstories';
-			$data['activesubmenu2']='unassignedstories';
+			$data['activesubmenu1']='unfinishedStories';
+			$data['activesubmenu2']='unassignedStories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$session_data['project'];
@@ -28,9 +28,6 @@ class Unfinishedstories extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getUnassigned();
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['mode']=0;
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
@@ -44,5 +41,49 @@ class Unfinishedstories extends CI_Controller {
 			redirect('login', 'refresh');
 		}
     }
+	
+	
+	function entry_SpID(){ 
+		$this->load->database();
+
+		$name=$this->input->post('submitstories');
+		$data = array(
+			'SpID'=>$this->session->userdata('SpID')
+		); 
+
+		$this->db->where('id',$name); 
+		$this->db->update('stories',$data);
+		redirect($this->input->post('redirect'));
+	} 
+	
+	function changeDifficulty(){
+		$difficulty=$this->input->post('difficulty');
+		if (is_numeric($difficulty)){
+			if ( $difficulty>=0){
+				$this->stories->setDifficulty($this->input->post('StID'), $difficulty);
+			}
+		else{
+			echo '<script alert("Time must numeric");</script>';
+				$this->session->set_userdata("varError",1);
+			}
+		}
+		else{
+			$this->session->set_userdata("varError",2);
+		}
+		redirect($this->input->post('redirect'));
+		
+	}
+	
+	function deleteStory() {
+	    $storyId=$this->input->post('StID');
+	    $this->db->where('id', $storyId);
+	    $this->db->delete('stories');
+	    redirect($this->input->post('redirect'));
+	}
+	function editNote(){
+		$note=$this->input->post('note');
+		$this->stories->editNote($note);
+	}
+	
 }
 ?>

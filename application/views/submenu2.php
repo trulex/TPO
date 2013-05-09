@@ -1,8 +1,10 @@
+<!-- submenu 2 -->
+<!-- avtor: BOSTJAN -->
 <div>
 	<ul class="menu">
 	    <?php
-		echo $activesubmenu2 == 'unassignedstories' ? '<li class="active">'.anchor('unassignedstories','Unassigned stories') : '<li class="menu">'.anchor('unassignedstories','Unassigned stories');
-	    echo $activesubmenu2 == 'assignedstories' ? '<li class="active">'.anchor('assignedstories','Assigned stories') : '<li class="menu">'.anchor('assignedstories','Assigned stories');
+		echo $activesubmenu2 == 'unassignedStories' ? '<li class="active">'.anchor('unassignedStories','Unassigned stories') : '<li class="menu">'.anchor('unassignedStories','Unassigned stories');
+	    echo $activesubmenu2 == 'assignedStories' ? '<li class="active">'.anchor('assignedStories','Assigned stories') : '<li class="menu">'.anchor('assignedStories','Assigned stories');
 		?>
 	</ul>
 </div>

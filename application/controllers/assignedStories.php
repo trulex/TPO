@@ -1,7 +1,7 @@
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Assignedstories extends CI_Controller { 
+class AssignedStories extends CI_Controller { 
 
     function __construct() {
 		parent::__construct();
@@ -20,8 +20,8 @@ class Assignedstories extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['active']='productBacklog';
-			$data['activesubmenu1']='unfinishedstories';
-			$data['activesubmenu2']='assignedstories';
+			$data['activesubmenu1']='unfinishedStories';
+			$data['activesubmenu2']='assignedStories';
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['SpID']=$this->session->userdata('SpID');
@@ -30,9 +30,6 @@ class Assignedstories extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 			$data['results']= $this->stories->getAssigned();
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['mode']=1;
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
