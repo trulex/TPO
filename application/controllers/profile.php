@@ -23,9 +23,8 @@ Class Profile extends CI_Controller {
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 		$data['UID']=$this->session->userdata('UID');
 		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-		$surnameEmail=$this->users->getSurnameEmail($data['id']);
-		$data['surname']=$surnameEmail->surname;
-		$data['email']=$surnameEmail->email;
+
+		$data['userData']=$this->users->getData($data['id']);
 		
 		$this->load->view('header', $data);
 		$this->load->helper(array('form'));
@@ -44,13 +43,16 @@ Class Profile extends CI_Controller {
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='';
 	    $data['id']=$session_data['id'];
+	    $data['PID']=$this->session->userdata('PID');
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['project']=$this->session->userdata('project');
 	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-	    $surnameEmail=$this->users->getSurnameEmail($data['id']);
-	    $data['surname']=$surnameEmail->surname;
-	    $data['email']=$surnameEmail->email;
+	    $data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
+	    $data['UID']=$this->session->userdata('UID');
+	    $data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+	    $data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));	    
+	    $data['userData']=$this->users->getData($data['id']);
 	    
 	    $this->load->library('form_validation');
 	    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha|callback_username_check');
@@ -67,19 +69,28 @@ Class Profile extends CI_Controller {
 		$this->load->view('profile_view',$data);
 	    } else {
 		$username=$this->input->post('username');
-		$password=md5($this->input->post('password'));
 		$name=$this->input->post('name');
 		$surname=$this->input->post('surname');
 		$email=$this->input->post('email');
-		$userdata=array(
-		    'username'=>$username,
-		    'password'=>$password,
-		    'name'=>$name,
-		    'surname'=>$surname,
-		    'email'=>$email );
+		if(strcmp($this->input->post('password'),'')!=0){
+		    $password=md5($this->input->post('password'));
+		    $userdata=array(
+			'username'=>$username,
+			'password'=>$password,
+			'name'=>$name,
+			'surname'=>$surname,
+			'email'=>$email );
+		} else {
+		    $userdata=array(
+			'username'=>$username,
+			'name'=>$name,
+			'surname'=>$surname,
+			'email'=>$email );
+		}
+		$data['username']=$username;
 		$this->db->where('id',$data['id']);
 		$this->db->update('users', $userdata);
-		$data['message']='Profile successfully updated. The changes will be seen at next login.';
+		$data['message']='Profile successfully updated.';
 		
 		$this->load->view('profile_view',$data);
 	    }
@@ -98,13 +109,18 @@ Class Profile extends CI_Controller {
 	$row=$query->row();
 	$session_data = $this->session->userdata('logged_in');
 	$username = $session_data['username'];
-	if ($row->username == $username) { // The usernames are the same
+	if ($query->num_rows() == 0) {
 	    return true;
-	} else if ($query->num_rows() > 0) {
-	    $this->form_validation->set_message('username_check', 'This username is already taken.');
-	    return false;
-	} else {
-	    return true;
+	}
+	if(!is_null($row->username)) {
+	    if ($row->username == $username) { // The usernames are the same
+		return true;
+	    } else if ($query->num_rows() > 0) {
+		$this->form_validation->set_message('username_check', 'This username is already taken.');
+		return false;
+	    } else {
+		return true;
+	    }
 	}
     }
     public function password_confirmation($str) {

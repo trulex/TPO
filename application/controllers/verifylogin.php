@@ -39,6 +39,10 @@ class VerifyLogin extends CI_Controller {
 		$username = $this->input->post('username');
 		//query the database
 		$result = $this->users->login($username, $password);
+		if ($result->deactivated == 1) {
+		    $this->form_validation->set_message('check_database', 'Your account has been disabled');
+		    return false; 
+		}
 		if($result)
 		{
 			$sess_array = array();

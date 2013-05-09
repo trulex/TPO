@@ -23,18 +23,15 @@ class EditUser extends CI_Controller {
 	    $data['active']='administration';
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-		$data['UID']=$this->session->userdata('UID');
-		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+	    $data['UID']=$this->session->userdata('UID');
+	    $data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    
 	    $username=$this->input->post('editUser');
 	    $username=str_replace('"',"",$username);
-	    $userData=$this->users->getAllData($username);
+	    $userId=$this->users->getID($username); //ID of selected user
+	    $this->session->set_userdata('userId',$userId);
+	    $data['userData']=$this->users->getAllData($userId);
 	    $this->session->set_userdata('username1',$username);
-	    $data['username1']=$username;
-	    $data['name1']=$userData[0]->name;
-	    $data['surname1']=$userData[0]->surname;
-	    $data['email1']=$userData[0]->email;
-	    $data['rights1']=$userData[0]->rights;
 	    $this->load->helper('form');
 	    $this->load->helper(array('form'));
 	    
@@ -72,14 +69,7 @@ class EditUser extends CI_Controller {
 	    
 	    if ($this->form_validation->run() == FALSE) {
 		$data['message']='';
-		$username=$this->session->userdata('username1');
-		$username=str_replace('"',"",$username);
-		$userData=$this->users->getAllData($username);
-		$data['username1']=$username;
-		$data['name1']=$userData[0]->name;
-		$data['surname1']=$userData[0]->surname;
-		$data['email1']=$userData[0]->email;
-		$data['rights1']=$userData[0]->rights;
+		$data['userData']=$this->users->getAllData($this->session->userdata('userId'));
 		$this->load->view('editUser_view',$data);
 	    } else {
 		$username=$this->input->post('username');
@@ -88,25 +78,30 @@ class EditUser extends CI_Controller {
 		$surname=$this->input->post('surname');
 		$email=$this->input->post('email');
 		$rights=$this->input->post('rights');
-		$userdata=array(
-		    'username'=>$username,
-		    'password'=>$password,
-		    'name'=>$name,
-		    'surname'=>$surname,
-		    'email'=>$email,
-		    'rights'=>$rights);
+		if(strcmp($this->input->post('password'),'')!=0){
+		    $password=md5($this->input->post('password'));
+		    $userdata=array(
+			'username'=>$username,
+			'password'=>$password,
+			'name'=>$name,
+			'surname'=>$surname,
+			'rights'=>$rights,
+			'email'=>$email );
+		} else {
+		    $userdata=array(
+			'username'=>$username,
+			'name'=>$name,
+			'surname'=>$surname,
+			'rights'=>$rights,
+			'email'=>$email );
+		}
 		$this->db->where('username',$this->session->userdata('username1'));
 		$this->db->update('users', $userdata);
 		$data['message']='Profile successfully updated.';
 		
-		$username=$this->input->post('username');
 		$username=str_replace('"',"",$username);
-		$userData=$this->users->getAllData($username);
-		$data['username1']=$username;
-		$data['name1']=$userData[0]->name;
-		$data['surname1']=$userData[0]->surname;
-		$data['email1']=$userData[0]->email;
-		$data['rights1']=$userData[0]->rights;		
+		$data['userData']=$this->users->getAllData($this->session->userdata('userId'));
+		$data['username1']=$username;		
 		
 		$this->load->view('editUser_view',$data);
 	    }
