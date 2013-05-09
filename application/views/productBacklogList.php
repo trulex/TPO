@@ -69,8 +69,8 @@
 					<br>
 				</div>
 				<?php 
-					if($rights == 1 || $ScrumMaster == $UID){
-						if($row->difficulty != 0){
+					if(!$mode && ($rights || $role == 1)){
+						if($row->difficulty ){
 				?>
 							<div class="gumb">
 								<form action="unassignedstories/entry_SpID" method="post">

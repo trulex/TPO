@@ -34,14 +34,14 @@ class Stories extends CI_Model{
 // 	Get all unasigned stories
 	function getUnassigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID and SpID=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID AND SpID=0 AND finished=0");
 		return $query->result();
 	}
 	
 // 		Get all assigned stories
 	function getAssigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID and SpID!=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID AND SpID!=0 AND finished=0");
 		return $query->result();
 	}
 	
