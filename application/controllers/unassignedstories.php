@@ -30,14 +30,14 @@ class Unassignedstories extends CI_Controller {
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
-			$data['results']= $this->stories->getAll();
-
+			$data['results']= $this->stories->getUnassigned();
+			$data['mode']=0;
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productBacklog',$data);
 			$this->load->view('submenu1');
 			$this->load->view('submenu2');
-			$this->load->view('unassignedstories_view',$data);
+			$this->load->view('productBacklogList',$data);
 			$this->load->view('footer');
 		} else {
 			//If no session, redirect to login page

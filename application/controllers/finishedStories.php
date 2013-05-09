@@ -31,12 +31,12 @@ class FinishedStories extends CI_Controller {
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
-			
+			$data['mode']=3;
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productBacklog',$data);
 			$this->load->view('submenu1');
-			$this->load->view('finishedStories',$data);
+			$this->load->view('productBacklogList',$data);
 			$this->load->view('footer');
 		} else {
 			//If no session, redirect to login page
