@@ -55,7 +55,8 @@
 						}?>
 					</div>
 				<div class="taski">
-					<h5><?php echo $row->text ?></h5>
+					<h5><?php echo $row->text ?></h5><br>
+					<div style="color:001FFF;font-size:12;margin-top:-10;"><?php echo $row->tests ?></div>
 					<br>
 				</div>
 				<div class="notes">

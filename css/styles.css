@@ -91,7 +91,13 @@ h5{
 .workingLabel{
 	margin-top: -20px;
 	margin-bottom: 0px;
-	margin-left: 500px;
+	margin-left: 350px;
+	margin-right: 0px;
+}
+.timeRemaining{
+	margin-top: -20px;
+	margin-bottom: 0px;
+	margin-left: 520px;
 	margin-right: 0px;
 }
 .editTaskButton{

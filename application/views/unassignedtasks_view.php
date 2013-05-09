@@ -4,7 +4,8 @@
 		<div id="add">
 			<p>Unassigned tasks: </p><br>
 			<?php foreach($stories as $row):
-					$tasks=$this->tasks->getCurrent($row->id)?>
+					$tasks=$this->tasks->getCurrent($row->id);
+					?>
 					<div class="zgodba">
 						<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4>"; ?>
 						<div class="gumbR">
@@ -14,8 +15,9 @@
 					<div class="taski">
 					<?php
 						echo "<h5>".$row->text."</h5><br>";
-						
-						echo "<h4><b>Tasks</b></h4>";
+						echo "<div style=color:001FFF;font-size:12;margin-top:-10;>".$row->tests."</div><br>";
+						echo "<hr>";
+						echo "<div style=float:left;font-weight:bold;>Tasks</div><br>";
 						echo "<hr>";
 						
 						foreach($tasks as $task):

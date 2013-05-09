@@ -12,7 +12,9 @@
 				<div class="taski">
 				<?php
 					echo "<h5>".$row->text."</h5><br>";
-					echo "<h4><b>Tasks</b></h4>";
+					echo "<div style=color:001FFF;font-size:12;margin-top:-10;>".$row->tests."</div><br>";
+					echo "<hr>";
+					echo "<div style=float:left;font-weight:bold;>Tasks</div><br>";
 					echo "<hr>";
 					foreach($tasks as $task):?>
 						<?php 
