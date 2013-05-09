@@ -5,43 +5,43 @@
 class Stories extends CI_Model{
 // 	Get all stories
 	function getAll(){
-		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, PID, note, finished FROM stories");
 		return $query->result();
 	}
 	
 	function getFinished(){
-		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories WHERE finished=1");
+		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished,tests FROM stories WHERE finished=1");
 		return $query->result();
 	} 
 // 	Get all stories from this user
 	function getOwn($id){
-		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
+		$query = $this->db->query("SELECT id, name, text, note, finished, tests FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
 		return $query->result();
 	}
 	
 // 	Get all stories from this project
 	function getFromProject($PID){
-		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE PID=$PID");
+		$query = $this->db->query("SELECT id, name, text, note, finished,tests FROM stories WHERE PID=$PID");
 		return $query->result();
 	}
 	
 // 	Get all stories from current sprint
 	function getCurrent($SpID){
-		$query = $this->db->query("SELECT id, name, text, difficulty, note, finished FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, note, finished FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
 // 	Get all unasigned stories
 	function getUnassigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID and SpID=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished, tests FROM stories WHERE PID=$PID and SpID=0");
 		return $query->result();
 	}
 	
 // 		Get all assigned stories
 	function getAssigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished FROM stories WHERE PID=$PID and SpID!=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished, tests FROM stories WHERE PID=$PID and SpID!=0");
 		return $query->result();
 	}
 	
@@ -83,7 +83,7 @@ class Stories extends CI_Model{
 			return $query->row();
 		}
 		else{
-		return FALSE;
+			return FALSE;
 		}
 	}
 	

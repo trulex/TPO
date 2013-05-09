@@ -129,6 +129,20 @@ class Tasks extends CI_Model{
 		}
 		return $activeTask;
     }
+	
+	function getStoryActive($StID){
+		$this->db->select('id');
+		$this->db->from('tasks');
+		$this->db->where('StID', $StID);
+		$this->db->where('active', 1);
+		$query=$this->db->get();
+		
+		if($query->num_rows() > 0){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
     
     function getStory($taskName,$userId) { /* Returns story id of task $taskId */
 		$this -> db -> select('StID');
