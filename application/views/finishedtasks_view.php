@@ -1,4 +1,5 @@
 <!--avtor:BOSTJAN-->
+
 <div id="content">
     <div id="left">
 		<div id="add">
@@ -8,19 +9,25 @@
 				<div class="zgodba">
 					<?php echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; ?>
 						<?php
-								if($role==2){
-									if(!$row->finished){
-										echo '<form name="endStory" method="post" action="unassignedtasks/endStory" style="display:inline;">';
-										echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
-										echo '<button type="submit" value="'.$row->id.'" name="StID">Confirm</button></form>';
-									}
+							if($role==2){
+								if(!$row->finished && !$this->tasks->getCurrentUnfinished($row->id)){
+									echo '<form name="endStory" method="post" action="unassignedtasks/endStory" style="display:inline;">';
+									echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+									echo '<button type="submit" value="'.$row->id.'" name="StID">Confirm</button></form>';
 								}
-							?>
+								echo '<form name="endStory" method="post" action="unassignedtasks/rejectStory" style="display:inline;">';
+								echo '<input name="return" type="hidden" value="'.$this->uri->uri_string().'" />';
+								echo '<button type="submit" value="'.$row->id.'" name="StID">Reject</button></form>';
+								
+							}
+						?>
 				</div>
 				<div class="taski">
 				<?php
 					echo "<h5>".$row->text."</h5><br>";
-					echo "<h4><b>Tasks</b></h4>";
+					echo "<div style=color:001FFF;font-size:12;margin-top:-10;>".$row->tests."</div><br>";
+					echo "<hr>";
+					echo "<div style=float:left;font-weight:bold;>Tasks</div><br>";
 					echo "<hr>";
 					foreach($tasks as $task):?>
 						<?php 
@@ -30,7 +37,11 @@
 						}
 						?>
 					<?php endforeach ?>	
-				</div>	
+				</div>
+				<div class="notes">
+					<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
+					<br>
+				</div>
 		<?php endforeach ?>	
 		</div><br>
 	</div>

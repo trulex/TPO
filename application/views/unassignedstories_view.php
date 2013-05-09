@@ -24,7 +24,8 @@
 							echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
-							
+						}
+						if($rights == 1 || $ScrumMaster == $UID || $ProductOwner == $UID){
 							echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;">';
 							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 							echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; 
@@ -38,7 +39,8 @@
 					<?php endif	?>
 				</div>
 				<div class="taski">
-					<h5><?php echo $row->text ?></h5>
+					<h5><?php echo $row->text ?></h5><br>
+					<div style="color:001FFF;font-size:12;margin-top:-10;"><?php echo $row->tests ?></div>
 					<br>
 				</div>
 				<div class="notes">

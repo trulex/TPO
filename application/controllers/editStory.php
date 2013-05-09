@@ -68,8 +68,6 @@
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('productbacklog',$data);
-	    $this->load->view('submenu1');
-	    $this->load->view('submenu2');
 	    
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');

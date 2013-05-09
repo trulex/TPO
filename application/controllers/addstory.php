@@ -32,7 +32,6 @@ class Addstory extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
 			$this->load->view('productbacklog',$data);
-			$this->load->view('submenu1');
 			$this->load->view('addstory_view', $data);
 			$this->load->view('footer');
 		} 

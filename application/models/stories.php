@@ -5,10 +5,14 @@
 class Stories extends CI_Model{
 // 	Get all stories
 	function getAll(){
-		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, PID, note, finished FROM stories");
 		return $query->result();
 	}
 	
+	function getFinished(){
+		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished FROM stories WHERE finished=1");
+		return $query->result();
+	} 
 // 	Get all stories from this user
 	function getOwn($id){
 		$query = $this->db->query("SELECT id, name, text, note, finished FROM stories WHERE id=(SELECT StID FROM tasks WHERE UID=$id)");
@@ -23,7 +27,7 @@ class Stories extends CI_Model{
 	
 // 	Get all stories from current sprint
 	function getCurrent($SpID){
-		$query = $this->db->query("SELECT id, name, text, difficulty, note, finished FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, note, finished FROM stories WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
@@ -71,12 +75,16 @@ class Stories extends CI_Model{
 			return $query->row();
 		}
 		else{
-		return FALSE;
+			return FALSE;
 		}
 	}
 	
 	function endStory($StID){
 		$this->db->query("UPDATE stories SET finished=1 WHERE id=$StID");
+	}
+	
+	function reopenStory($StID){
+		$this->db->query("UPDATE stories SET finished=0 WHERE id=$StID");
 	}
 }
 ?>
