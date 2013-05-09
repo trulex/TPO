@@ -74,7 +74,7 @@ class Unassignedtasks extends CI_Controller {
 			$data['UID']=$this->session->userdata('UID');
 			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$this->load->helper('form');
-			$data['active']='productbacklog';
+			$data['active']='productBacklog';
 			$data['return']=$this->input->post('return');
 			$data['StID']=$this->input->post('StID');
 			$data['story']=$this->stories->getStory($data['StID']);

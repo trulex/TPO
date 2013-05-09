@@ -17,7 +17,7 @@ class Addsprint extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='productbacklog';
+			$data['active']='productBacklog';
 			$data['activesubmenu1']='';
 			$data['activesubmenu2']='';
 			$data['id']=$session_data['id'];
@@ -29,7 +29,7 @@ class Addsprint extends CI_Controller {
 			
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
-			$this->load->view('productbacklog',$data);
+			$this->load->view('productBacklog',$data);
 			$this->load->view('addsprint_view',$data);
 			$this->load->view('footer');
 		} else {

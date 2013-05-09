@@ -42,7 +42,7 @@ class Template extends CI_Controller {
 			}
 			
 // 			Katera stran je aktivna. omembno, da se pravi link na strani obarva
-			$data['active']='productbacklog';
+			$data['active']='productBacklog';
 			
 // 			In potem loadaš viewe. Najprej header nato tvoj view, na koncu footer
 			$this->load->view('header', $data);

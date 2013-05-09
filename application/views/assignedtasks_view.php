@@ -25,7 +25,7 @@
 					<?php endforeach ?>
 				</div>
 				<div class="notes">
-					<h5 id="note" onclick="editNote()"><?php echo $row->note?></h5>
+					<h5 id="note"><?php foreach(explode("\n", $row->note) as $note) { echo $note.'<br>';}?></h5>
 					<br>
 				</div>
 		<?php endforeach ?>	

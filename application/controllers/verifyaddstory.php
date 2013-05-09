@@ -16,7 +16,7 @@ class VerifyAddStory extends CI_Controller {
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='productbacklog';
+	    $data['active']='productBacklog';
 	    $data['activesubmenu1']='addstory';
 	    $data['id']=$session_data['id'];
 	    $data['project']=$session_data['project'];
@@ -28,7 +28,7 @@ class VerifyAddStory extends CI_Controller {
 		$data['ProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
-	    $this->load->view('productbacklog',$data);
+	    $this->load->view('productBacklog',$data);
 	    $this->load->view('submenu1');
 	    $this->load->library('form_validation');
 	    

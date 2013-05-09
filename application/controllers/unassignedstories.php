@@ -18,7 +18,7 @@ class Unassignedstories extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
-			$data['active']='productbacklog';
+			$data['active']='productBacklog';
 			$data['activesubmenu1']='unfinishedstories';
 			$data['activesubmenu2']='unassignedstories';
 			$data['id']=$session_data['id'];
@@ -34,7 +34,7 @@ class Unassignedstories extends CI_Controller {
 
 			$this->load->view('header', $data);
 			$this->load->helper(array('form'));
-			$this->load->view('productbacklog',$data);
+			$this->load->view('productBacklog',$data);
 			$this->load->view('submenu1');
 			$this->load->view('submenu2');
 			$this->load->view('unassignedstories_view',$data);

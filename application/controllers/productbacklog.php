@@ -24,7 +24,7 @@ class productbacklog extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['PID']=$this->session->userdata('PID');
 			$data['project']=$this->session->userdata('project');
-			$data['active']='productbacklog';
+			$data['active']='productBacklog';
 			$data['activesubmenu1']='allStories';
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
@@ -38,7 +38,7 @@ class productbacklog extends CI_Controller {
 			
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
-			$this->load->view('productbacklog',$data);
+			$this->load->view('productBacklog',$data);
 			$this->load->view('submenu1');
 			$this->load->view('allstories_view',$data);
 			$this->load->view('footer');
