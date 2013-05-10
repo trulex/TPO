@@ -29,8 +29,6 @@ class SprintBacklog extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$stories=$this->stories->getCurrent($this->session->userdata('SpID'));
 			$data['stories']= $this->stories->getCurrent($this->session->userdata('SpID'));
 			

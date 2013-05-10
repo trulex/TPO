@@ -47,7 +47,10 @@
 							echo '<div style="float:left;font-weight:bold;">Tasks</div>';
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Remaining</div>';
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Member</div>';
-							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Status</div><br>';
+							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Status</div><br><hr>';
+						}else{
+							echo '<div style="float:left;font-weight:bold;">Tasks</div><br>';
+							echo '<hr>';
 						}
 						echo '<ul>';
 						foreach($tasks as $task){

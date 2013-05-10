@@ -34,7 +34,7 @@ class Template extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-			
+			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 // 			Če je ta stran namenjena le administratorjem, se tukaj preusmeri uporabnika domov:
 			
 			if(!$data['rights']) {

@@ -9,6 +9,7 @@ class FinishedStories extends CI_Controller {
 		$this->load->model("sprints");
 		$this->load->model("stories");
 		$this->load->model('project_user');
+		$this->load->model("tasks");
     }
 	
 	function index() {

@@ -19,9 +19,7 @@ class VerifyAddProject extends CI_Controller {
 			$data['id']=$session_data['id'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			
+			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 			$data['results']= $this->projects->getAll();
 			
 			$this->load->view('header',$data);

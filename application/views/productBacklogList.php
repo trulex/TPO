@@ -33,16 +33,28 @@
 	    <?php 
 			foreach($results as $story){
 				echo '<div class="zgodba">';
-						echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,2)." pts.)</h4><br>"; 
+						echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,2)." pts.)</h4><br>";
+						if($role==2 && $mode%2){
+							if(!$story->finished && !$this->tasks->getCurrentUnfinished($story->id)){
+								echo '<form name="endStory" method="post" action="unassignedTasks/endStory" style="display:inline;">';
+								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+								echo '<button type="submit" value="'.$story->id.'" name="StID">Confirm</button></form>';
+							}
+							if(!$this->tasks->getCurrentUnfinished($story->id)){
+								echo '<form name="endStory" method="post" action="unassignedTasks/rejectStory" style="display:inline;">';
+								echo '<input name="return" type="hidden" value="'.$this->uri->uri_string().'" />';
+								echo '<button type="submit" value="'.$story->id.'" name="StID">Reject</button></form>';
+							}
+						}
 						if(!$mode){
 							echo '<div class="difficulty">';
-							if($rights == 1 || $ScrumMaster == $UID){
+							if($rights  || $role==1){
 								echo '<form name="chDifficulty" method="post" action="unassignedStories/changeDifficulty" style="display:inline;">';
 								echo '<input name="difficulty" type="text" size="3" value="'.$story->difficulty.'"/>';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 								echo '<button type="submit" value="'.$story->id.'" name="StID">Change pts</button></form>';
 							}
-							if($rights == 1 || $ScrumMaster == $UID || $ProductOwner == $UID){
+							if($rights  || $role){
 								echo '<form name="deleteStory" method="post" action="unassignedStories/deleteStory" style="display:inline;margin-left:15px">';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 								echo '<button type="submit" value="'.$story->id.'" name="StID">Delete</button></form>'; 

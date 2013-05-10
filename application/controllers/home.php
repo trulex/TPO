@@ -23,8 +23,7 @@ class Home extends CI_Controller {
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->view('home_view', $data);
 			$this->load->view('footer');
