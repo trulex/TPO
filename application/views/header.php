@@ -1,3 +1,4 @@
+<!-- header -->
 <!--avtor:darko-->
 <html>
 <head>
@@ -31,7 +32,7 @@
 	<ul class="menu">
 	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
 		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); ?>
-	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('sprintBacklog','Sprint Backlog') : '<li class="menu">'.anchor('sprintBacklog','Sprint Backlog'); ?>
+	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
 	    <?php if ($rights) {
 		echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); } ?>

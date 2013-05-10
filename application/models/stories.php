@@ -26,7 +26,8 @@ class Stories extends CI_Model{
 	}
 	
 // 	Get all stories from current sprint
-	function getCurrent($SpID){
+	function getCurrent(){
+		$SpID=$this->session->userdata('SpID');
 		$query = $this->db->query("SELECT id, name, text, tests, difficulty, note, finished FROM stories LEFT JOIN sprint_story ON(sprint_story.StID=stories.id) WHERE SpID=$SpID");
 		return $query->result();
 	}
