@@ -5,12 +5,12 @@
 class Stories extends CI_Model{
 // 	Get all stories
 	function getAll(){
-		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, PID, note, finished FROM stories");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, PID, note, finished FROM stories");
 		return $query->result();
 	}
 	
 	function getFinished(){
-		$query = $this->db->query("SELECT id, name, text, difficulty, SpID, PID, note, finished,tests FROM stories WHERE finished=1");
+		$query = $this->db->query("SELECT id, name, text, difficulty, PID, note, finished,tests FROM stories WHERE finished=1");
 		return $query->result();
 	} 
 // 	Get all stories from this user
@@ -27,21 +27,21 @@ class Stories extends CI_Model{
 	
 // 	Get all stories from current sprint
 	function getCurrent($SpID){
-		$query = $this->db->query("SELECT id, name, text, tests, difficulty, SpID, note, finished FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT id, name, text, tests, difficulty, note, finished FROM stories LEFT JOIN sprint_story ON(sprint_story.StID=stories.id) WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
 // 	Get all unasigned stories
 	function getUnassigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note, finished, tests FROM stories WHERE PID=$PID AND SpID=0 AND finished=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty , note, finished, tests FROM stories WHERE PID=$PID AND NOT EXISTS (SELECT * from sprint_story WHERE StID=stories.id) AND finished=0");
 		return $query->result();
 	}
 	
 // 		Get all assigned stories
 	function getAssigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty, SpID, note,tests, finished FROM stories WHERE PID=$PID AND SpID!=0 AND finished=0");
+		$query=$this->db->query("SELECT id, name, text,difficulty , note, finished, tests FROM stories WHERE PID=$PID AND EXISTS (SELECT * from sprint_story WHERE StID=stories.id) AND finished=0");
 		return $query->result();
 	}
 	
@@ -49,14 +49,10 @@ class Stories extends CI_Model{
 	function getCompleted(){}
 // 	Get ids of stories from this sprint
 	function getSprintID($SpID){
-		$query = $this->db->query("SELECT id, FROM stories WHERE SpID=$SpID");
+		$query = $this->db->query("SELECT StID, FROM sprint_story WHERE SpID=$SpID");
 		return $query->result();
 	}
 	
-// 	Set sprint for this story
-	function setSprint($ID,$SpID){
-		$this->db->query("UPDATE stories SET SpID=$SpID WHERE id=$ID");
-	}
 	
 // 	Set task difficulty estimate(time estimate)
 	function setDifficulty($StID,$difficulty){

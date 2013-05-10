@@ -9,6 +9,7 @@ class Unassignedstories extends CI_Controller {
 		$this->load->model("sprints");
 		$this->load->model("stories");
 		$this->load->model('project_user');
+		$this->load->model('sprint_story');
     }
 	
 	function index() {
@@ -44,16 +45,17 @@ class Unassignedstories extends CI_Controller {
 	
 	
 	function entry_SpID(){ 
-		$this->load->database();
-
-		$name=$this->input->post('submitstories');
-		$data = array(
-			'SpID'=>$this->session->userdata('SpID')
-		); 
-
-		$this->db->where('id',$name); 
-		$this->db->update('stories',$data);
-		redirect($this->input->post('redirect'));
+		$this->sprint_story->setSprint($this->input->post('submitstories'),$this->session->userdata('SpID'));
+// 		$this->load->database();
+// 
+// 		$name=$this->input->post('submitstories');
+// 		$data = array(
+// 			'SpID'=>$this->session->userdata('SpID')
+// 		); 
+// 
+// 		$this->db->where('id',$name); 
+// 		$this->db->update('stories',$data);
+// 		redirect($this->input->post('redirect'));
 	} 
 	
 	function changeDifficulty(){

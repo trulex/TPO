@@ -58,7 +58,7 @@ class Tasks extends CI_Model{
 	
 // 	Get all my tasks from current sprint
 	function getMyCurrent($UID, $SpID){
-		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE stories.SpID=$SpID AND tasks.UID=$UID;");
+		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID");
 		if($query->num_rows() > 0){
 			return $query->result();
 		}

@@ -34,16 +34,16 @@
 			foreach($results as $row){
 				echo '<div class="zgodba">';
 						echo "<h4>".$row->name." (Estimate: ".round($row->difficulty,2)." pts.)</h4><br>"; 
-						if($row->SpID == 0){
+						if(!$mode){
 							echo '<div class="difficulty">';
 							if($rights == 1 || $ScrumMaster == $UID){
-								echo '<form name="chDifficulty" method="post" action="unassignedstories/changeDifficulty" style="display:inline;">';
+								echo '<form name="chDifficulty" method="post" action="unassignedStories/changeDifficulty" style="display:inline;">';
 								echo '<input name="difficulty" type="text" size="3" value="'.$row->difficulty.'"/>';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 								echo '<button type="submit" value="'.$row->id.'" name="StID">Change pts</button></form>';
 							}
 							if($rights == 1 || $ScrumMaster == $UID || $ProductOwner == $UID){
-								echo '<form name="deleteStory" method="post" action="unassignedstories/deleteStory" style="display:inline;margin-left:15px">';
+								echo '<form name="deleteStory" method="post" action="unassignedStories/deleteStory" style="display:inline;margin-left:15px">';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 								echo '<button type="submit" value="'.$row->id.'" name="StID">Delete</button></form>'; 
 								

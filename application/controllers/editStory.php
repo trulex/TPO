@@ -16,9 +16,9 @@
 	    $data['username'] = $session_data['username'];
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
-	    $data['active']='productbacklog';
-	    $data['activesubmenu1']='unfinishedstories';
-	    $data['activesubmenu2']='unassignedstories';
+	    $data['active']='productBacklog';
+	    $data['activesubmenu1']='unfinishedStories';
+	    $data['activesubmenu2']='unassignedStories';
 	    $data['id']=$session_data['id'];
 	    $data['PID']=$this->session->userdata('PID');
 	    $data['project']=$session_data['project'];
@@ -37,7 +37,7 @@
 	    $this->load->helper(array('form'));
 	    
 	    $this->load->view('header', $data);
-	    $this->load->view('productbacklog',$data);
+	    $this->load->view('productBacklog',$data);
 	    $this->load->view('submenu1');
 	    $this->load->view('submenu2');	    
 	    $this->load->view('editStory_view', $data);
@@ -56,8 +56,8 @@
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-	    $data['activesubmenu1']='unfinishedstories';
-	    $data['activesubmenu2']='unassignedstories';
+	    $data['activesubmenu1']='unfinishedStories';
+	    $data['activesubmenu2']='unassignedStories';
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['project']=$this->session->userdata('project');
@@ -69,7 +69,7 @@
 	    $this->load->library('form_validation');
 	    
 	    $this->load->view('header', $data);
-	    $this->load->view('productbacklog',$data);
+	    $this->load->view('productBacklog',$data);
 	    
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
 	    $this->form_validation->set_rules('text', 'Text', 'trim|required');
