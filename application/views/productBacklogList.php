@@ -56,7 +56,11 @@
 					</div>
 				<div class="taski">
 					<h5><?php echo $row->text ?></h5><br>
-					<div style="color:001FFF;font-size:12;margin-top:-10;"><?php echo $row->tests ?></div>
+					<?php
+					echo "<div style=color:001FFF;font-size:12;margin-top:-10;>";
+						foreach(explode("\n", $row->tests) as $test) {
+							echo $test.'<br>';
+						}?>
 					<br>
 				</div>
 				<div class="notes">

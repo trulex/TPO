@@ -37,7 +37,11 @@
 					<div class="taski">
 					<?php
 						echo "<h5>".$story->text."</h5><br>";
-						echo "<div style=color:001FFF;font-size:12;margin-top:-10;>".$story->tests."</div><br>";
+						echo "<div style=color:001FFF;font-size:12;margin-top:-10;>";
+						foreach(explode("\n", $story->tests) as $test) {
+							echo $test.'<br>';
+						}
+						echo '</div>';
 						echo '<hr>';
 						if($mode==1){
 							echo '<div style="float:left;font-weight:bold;">Tasks</div>';
