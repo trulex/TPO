@@ -49,8 +49,9 @@
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Member</div>';
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Status</div><br>';
 						}
-						foreach($tasks as $task):
-							echo "-".$task->name;
+						echo '<ul>';
+						foreach($tasks as $task){
+							echo "<li>".$task->name;
 							if($mode==1){
 								echo ' [Estimate: '.$task->time_estimate.'h]';
 								echo '<div style="float:right;display:inline-block;margin-right:20px;min-width:85px;text-align:right">'.($task->time_estimate - $this->tasks->getTime($task->name, $task->UID))."h".'</div>';
@@ -88,7 +89,9 @@
 								echo '</form>';
 								echo '<br>';
 							}
-						endforeach ?>
+							echo '</li>';
+						}
+					?>
 					</div>
 					<div class="notes">
 						<h5 id="note"><?php foreach(explode("\n", $story->note) as $note) { echo $note.'<br>';}?></h5>
