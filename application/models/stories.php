@@ -35,7 +35,8 @@ class Stories extends CI_Model{
 // 	Get all unasigned stories
 	function getUnassigned(){
 		$PID=$this->session->userdata('PID');
-		$query=$this->db->query("SELECT id, name, text,difficulty , note, finished, tests FROM stories WHERE PID=$PID AND NOT EXISTS (SELECT * from sprint_story WHERE StID=stories.id) AND finished=0");
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text,difficulty , note, finished, tests FROM stories WHERE PID=$PID AND NOT EXISTS (SELECT * from sprint_story WHERE StID=stories.id AND SpID=$SpID) AND finished=0");
 		return $query->result();
 	}
 	
