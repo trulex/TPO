@@ -54,7 +54,12 @@
 							echo '<hr>';
 						}
 						foreach($tasks as $task){
-							echo '-'.$task->name;
+							if($mode==1){
+								echo '-'.$task->name;
+							}else{
+								echo '-'.$task->name.'<br>';
+							}
+							
 							if($mode==1){
 								echo ' [Estimate: '.$task->time_estimate.'h]';
 								echo '<div style="float:right;display:inline-block;margin-right:20px;min-width:85px;text-align:right">'.($task->time_estimate - $this->tasks->getTime($task->name, $task->UID))."h".'</div>';
@@ -91,7 +96,6 @@
 								echo '<input type="hidden" name="TID" value='.$task->id.'" />';
 								echo '</form>';
 							}
-							echo '<br>';
 						}
 					?>
 					</div>
