@@ -47,14 +47,14 @@
 							echo '<div style="float:left;font-weight:bold;">Tasks</div>';
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Remaining</div>';
 							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Member</div>';
-							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Status</div><br><hr>';
+							echo '<div style="float:right;font-weight:bold;margin-left:30px;margin-right:20px;">Status</div><br>';
+							echo '<hr>';
 						}else{
 							echo '<div style="float:left;font-weight:bold;">Tasks</div><br>';
 							echo '<hr>';
 						}
-						echo '<ul>';
 						foreach($tasks as $task){
-							echo "<li>".$task->name;
+							echo '-'.$task->name;
 							if($mode==1){
 								echo ' [Estimate: '.$task->time_estimate.'h]';
 								echo '<div style="float:right;display:inline-block;margin-right:20px;min-width:85px;text-align:right">'.($task->time_estimate - $this->tasks->getTime($task->name, $task->UID))."h".'</div>';
@@ -90,9 +90,8 @@
 								echo '<input type="submit" name="TID" value="Edit" />';
 								echo '<input type="hidden" name="TID" value='.$task->id.'" />';
 								echo '</form>';
-								echo '<br>';
 							}
-							echo '</li>';
+							echo '<br>';
 						}
 					?>
 					</div>
