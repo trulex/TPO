@@ -95,6 +95,7 @@
 								echo '<input type="submit" name="TID" value="Edit" />';
 								echo '<input type="hidden" name="TID" value='.$task->id.'" />';
 								echo '</form>';
+								echo '<br>';
 							}
 						}
 					?>
