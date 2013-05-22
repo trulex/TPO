@@ -21,7 +21,7 @@ class Stories extends CI_Model{
 	
 // 	Get all stories from this project
 	function getFromProject($PID){
-		$query = $this->db->query("SELECT id, name, text, note, finished,tests FROM stories WHERE PID=$PID");
+		$query = $this->db->query("SELECT * FROM stories WHERE PID=$PID");
 		return $query->result();
 	}
 	
