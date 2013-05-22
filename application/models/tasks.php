@@ -36,6 +36,60 @@ class Tasks extends CI_Model{
 		return $query->result();
 	}
 	
+// 	Returns an array of tuples where the first element is a story and the second is an array of unassigned tasks.
+	function getUnassigned(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND UID=0");
+			array_push($result, array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
+	// 	Returns an array of tuples where the first element is a story and the second is an array of assigned tasks.
+	function getAssigned(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID!=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND UID!=0");
+			array_push($result,array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
+	function getAllTupled(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID ");
+			array_push($result,array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
+	function getActiveTupled(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND active=1 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND active=1");
+			array_push($result,array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
 	function getCurrentFinished($StID){
 		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND completed=1");
 		if($query->num_rows>0){
@@ -58,7 +112,7 @@ class Tasks extends CI_Model{
 	
 // 	Get all my tasks from current sprint
 	function getMyCurrent($UID, $SpID){
-		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE stories.SpID=$SpID AND tasks.UID=$UID;");
+		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID");
 		if($query->num_rows() > 0){
 			return $query->result();
 		}

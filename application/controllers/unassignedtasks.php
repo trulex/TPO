@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Unassignedtasks extends CI_Controller {
+class UnassignedTasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
@@ -28,16 +28,13 @@ class Unassignedtasks extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));				
-			$data['UID']=$this->session->userdata('UID');
-			$data['SpID']=$this->session->userdata('SpID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['stories']= $this->stories->getCurrent($this->session->userdata('SpID'));
-			
+			$data['mode']=0;
+			$data['tuples']=$this->tasks->getUnassigned();
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);
 			$this->load->view('submenu3');
-			$this->load->view('unassignedtasks_view',$data);
+			$this->load->view('sprintBacklogList',$data);
 			$this->load->view('footer');
 		}
 		else{

@@ -23,8 +23,7 @@ class MyTasks extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
 			

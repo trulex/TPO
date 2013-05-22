@@ -25,8 +25,7 @@ class Addproject extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['results']= $this->projects->getAll();
-		$data['UID']=$this->session->userdata('UID');
-		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 
 		//$this->load->model("get_projects");
 		//$data['results']= $this->get_projects->getAll();

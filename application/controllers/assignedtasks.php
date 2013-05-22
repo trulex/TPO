@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Assignedtasks extends CI_Controller {
+class AssignedTasks extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();
@@ -27,16 +27,14 @@ class Assignedtasks extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
-			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));				
-			$data['UID']=$this->session->userdata('UID');
-			$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['stories']= $this->stories->getCurrent($this->session->userdata('SpID'));
-			
+			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
+			$data['mode']=1;
+			$data['tuples']=$this->tasks->getAssigned();
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);
 			$this->load->view('submenu3');
-			$this->load->view('assignedtasks_view',$data);
+			$this->load->view('sprintBacklogList',$data);
 			$this->load->view('footer');
 		}
 		else{

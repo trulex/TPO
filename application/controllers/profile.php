@@ -21,9 +21,7 @@ Class Profile extends CI_Controller {
 		$data['message']='';
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
-		$data['UID']=$this->session->userdata('UID');
-		$data['ScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-
+		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 		$data['userData']=$this->users->getData($data['id']);
 		
 		$this->load->view('header', $data);

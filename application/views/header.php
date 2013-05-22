@@ -1,3 +1,4 @@
+<!-- header -->
 <!--avtor:darko-->
 <html>
 <head>
@@ -11,7 +12,7 @@
     <p class="naslov">ScrumPro</p>
     <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
-	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $ScrumMaster == $UID)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
+	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	if($currentsprints){
 		foreach($currentsprints as $row):
 		    $today = strtotime(date("Y-m-d"));
@@ -31,8 +32,9 @@
 	<ul class="menu">
 	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
 		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); ?>
-	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('sprintBacklog','Sprint Backlog') : '<li class="menu">'.anchor('sprintBacklog','Sprint Backlog'); ?>
+	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
+		<?php echo $active == 'progressReport' ? '<li class="active">'.anchor('progressReport','Progress report') : '<li class="menu">'.anchor('progressReport','Progress report'); ?>
 	    <?php if ($rights) {
 		echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); } ?>
 	</ul>

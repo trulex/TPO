@@ -13,7 +13,7 @@ class Project_user extends CI_Model{
 		}
 	}
 		function getAllFromProject($PID){
-			$query=$this->db->query("SELECT UID FROM project_user WHERE PID=$PID");
+			$query=$this->db->query("SELECT UID, users.name FROM project_user LEFT JOIN users ON(project_user.UID=users.id) WHERE PID=$PID");
 			return $query->result();
 	}
 	
