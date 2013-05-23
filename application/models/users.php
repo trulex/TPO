@@ -77,7 +77,6 @@ Class Users extends CI_Model {
 		$query = $this->db->query("SELECT username FROM users WHERE id=$id");
 		return $query->row()->username;
 	}
-	
 	function getID($uname){
 		$query = $this->db->query("SELECT id FROM users WHERE username='$uname'");
 		return $query->row()->id;
@@ -88,7 +87,11 @@ Class Users extends CI_Model {
 	
 	function getLastPID($UID){
 		$query = $this->db->query("SELECT lastPID FROM users WHERE id='$UID'");
-		return $query->row()->lastPID;
+		if ($query->row()->lastPID){
+		    return $query->row()->lastPID;
+		} else {
+		    return 0;
+		}
 	}
 } 
 ?>

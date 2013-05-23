@@ -9,6 +9,9 @@ class Home extends CI_Controller {
 		$this->load->model("sprints");
 		$this->load->model("projects");
 		$this->load->model("project_user");
+		$this->load->model("users");
+		$this->load->model('posts');
+		$this->load->helper('form');
 	}
 
 	function index() {
@@ -18,12 +21,13 @@ class Home extends CI_Controller {
 			$data['name'] = $session_data['name'];
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
-			$data['active']='home';
+			$data['active']='wall';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+			$data['wallPosts']=$this->posts->getWallPosts($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->view('home_view', $data);
 			$this->load->view('footer');
@@ -33,7 +37,14 @@ class Home extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
-
+    /* Post something to the wall */
+    function wallPost() {
+	$text = $this->input->post('wallPost');
+	$PID = $this->session->userdata('PID');
+	$UID = $this->session->userdata('UID');
+	$this->posts->addPost($text, $PID, $UID);
+	redirect('home','refresh');
+    }
 	function logout() {
 		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('project');

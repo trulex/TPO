@@ -30,7 +30,7 @@
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
-	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
+	    <?php echo $active == 'wall' ? '<li class="active">'.anchor('home','Wall') : '<li class="menu">'.anchor('home','Wall'); ?>
 		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); ?>
 	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
