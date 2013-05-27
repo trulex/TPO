@@ -26,6 +26,15 @@ Class Projects extends CI_Model {
 			return "";
 		}
     }
+    
+    function getDocumentation($PID){
+		$query=$this->db->query("SELECT documentation FROM projects WHERE id=$PID");
+		return $query->result();
+    }
+    
+    function setDocumentation($doc, $PID){
+		$query=$this->db->query("UPDATE projects SET documentation=$doc WHERE id=$PID");
+    }
 	
 	function getDescription($projectId){
 		$this->db->select('description');

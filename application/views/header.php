@@ -14,6 +14,7 @@
 
 	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	if($currentsprints){
+		$this->session->set_userdata('SpID', 0);
 		foreach($currentsprints as $row):
 		    $today = strtotime(date("Y-m-d"));
 		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
@@ -30,13 +31,17 @@
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
-	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
-		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); ?>
-	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); ?>
-		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>
-		<?php echo $active == 'progressReport' ? '<li class="active">'.anchor('progressReport','Progress report') : '<li class="menu">'.anchor('progressReport','Progress report'); ?>
-	    <?php if ($rights) {
-		echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); } ?>
+		<?php
+	     echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); 
+		 echo $active == 'documentation' ? '<li class="active">'.anchor('documentation','Documentation') : '<li class="menu">'.anchor('documentation','Documentation'); 
+		 echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); 
+	     echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); 
+		 echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); 
+		 echo $active == 'progressReport' ? '<li class="active">'.anchor('progressReport','Progress report') : '<li class="menu">'.anchor('progressReport','Progress report'); 
+	     if ($rights) {
+			echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); 
+		} 
+		?>
 	</ul>
     </div>
 </div>
