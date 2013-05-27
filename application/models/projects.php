@@ -43,7 +43,6 @@ Class Projects extends CI_Model {
 		$query=$this->db->get();
 		return $query->row()->description;
 	}
-	
     function getProjectID($projectName) {
 		$this->db->select('id');
 		$this->db->from('projects');
