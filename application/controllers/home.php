@@ -22,6 +22,7 @@ class Home extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
 			$data['active']='wall';
+			$data['active2']='wall';
 			$data['id']=$session_data['id'];
 			$data['project']=$session_data['project'];
 			$data['projects']=$this->projects->getProjects($data['rights']);
@@ -29,6 +30,7 @@ class Home extends CI_Controller {
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 			$data['wallPosts']=$this->posts->getWallPosts($this->session->userdata('PID'));
 			$this->load->view('header', $data);
+			$this->load->view('homeSubmenu', $data);
 			$this->load->view('home_view', $data);
 			$this->load->view('footer');
 		}

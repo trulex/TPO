@@ -1,5 +1,5 @@
 <!--avtor:darko-->
-<!-- table "projects":[id|project_name|description] -->
+<!-- table "projects":[id|name|description|documentation] -->
 <?php
 Class Projects extends CI_Model {
     function getProjects($rights) {
@@ -14,6 +14,14 @@ Class Projects extends CI_Model {
 			return $query->result();
 		}
 	}
+	
+// 	Get all data of current project_name
+	function getCurrent(){
+		$PID=$this->session->userdata('PID');
+		$query = $this->db->query("SELECT * FROM projects WHERE id=$PID");
+		return $query->row();
+	}
+	
     function getProjectName($PID) {
 		if($PID){
 			$this->db->select('name');
@@ -54,6 +62,7 @@ Class Projects extends CI_Model {
 		$query = $this->db->query("SELECT * FROM projects");
 		return $query->result();
 	}
+	
 	function getID($UName){
 		$query = $this->db->query("SELECT id FROM projects WHERE name='$UName'");
 		return $query->result();
