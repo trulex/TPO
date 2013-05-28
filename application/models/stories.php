@@ -19,6 +19,11 @@ class Stories extends CI_Model{
 		return $query->result();
 	}
 	
+	function getHours($pid){
+		$query = $this->db->query("SELECT SUM(difficulty) AS sumDifficulty FROM stories WHERE PID=$pid");
+		return $query->row()->sumDifficulty;
+	}
+	
 // 	Get all stories from this project
 	function getFromProject($PID){
 		$query = $this->db->query("SELECT id, name, text, note, finished,tests FROM stories WHERE PID=$PID");
