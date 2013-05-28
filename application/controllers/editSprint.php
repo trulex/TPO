@@ -46,8 +46,8 @@ class editSprint extends CI_Controller {
 				$velocity=$this->input->post('velocity');
 				
 				$userdata=array(
-					'start_date'=>$startdate,
-					'finish_date'=>$finishdate,
+					'start_date'=>date("Y-m-d" , strtotime($startdate)),
+					'finish_date'=>date("Y-m-d", strtotime($finishdate)),
 					'velocity'=>$velocity,
 					);
 				$this->db->where('id', $this->session->userdata('sprint'));
@@ -87,17 +87,21 @@ class editSprint extends CI_Controller {
 	
 	public function startdate_check($str) {
 		$todays_date = date("Y-m-d");
-		$this->ceca=$str;
+		$this->ceca = date("Y-m-d", strtotime($str));
 		
-		$today = strtotime($todays_date);
-		$input_date = strtotime($str);
+		$input_date = date("Y-m-d", strtotime($str));
 
-		return TRUE;
+		if ($input_date < $todays_date) {
+			$this->form_validation->set_message('startdate_check', 'The date is invalid!');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
     }
 	
 	public function finishdate_check($str) {
-		$start_date = strtotime($this->ceca);
-		$input_date = strtotime($str);
+		$start_date = $this->ceca;
+		$input_date = date("Y-m-d", strtotime($str));
 
 		if ($input_date <= $start_date) {
 			$this->form_validation->set_message('finishdate_check', 'The finish date is invalid!');
@@ -110,22 +114,22 @@ class editSprint extends CI_Controller {
 	public function startsprint_check($str) {
 		$pid=$this->session->userdata('PID');
 		$sprint=$this->session->userdata('sprint');
-		$input_date = strtotime($str);
-		$this->date=$input_date; 
+		$input_date = date("Y-m-d", strtotime($str));
+		$this->ceca2 = $input_date; 
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
 		$this->db->where('id !=', $sprint);
-
+		
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;
 		
 		for($i=1; $i<=$stevilo_vrstic; $i++){
 			$row=$query->row($i);
-			$test1=strtotime($row->start_date);
-			$test2=strtotime($row->finish_date);
+			$test1=$row->start_date;
+			$test2=$row->finish_date;
 			
 			if($input_date >= $test1 && $input_date <= $test2){
 				$index++;
@@ -143,23 +147,23 @@ class editSprint extends CI_Controller {
 	public function finishsprint_check($str) {
 		$pid=$this->session->userdata('PID');
 		$sprint=$this->session->userdata('sprint');
-		$input_date = strtotime($str);
+		$input_date = date("Y-m-d", strtotime($str));
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
 		$this->db->where('PID', $pid);
 		$this->db->where('id !=', $sprint);
-
+		
 		$query=$this->db->get();
 		$stevilo_vrstic=$query->num_rows();
 		$index = 0;
 		
 		for($i=1; $i<=$stevilo_vrstic; $i++){
 			$row=$query->row($i);
-			$start=strtotime($row->start_date);
-			$finish=strtotime($row->finish_date);
+			$start=$row->start_date;
+			$finish=$row->finish_date;
 			
-			if($input_date >= $start && $input_date <= $finish || $input_date >= $start && $input_date >= $finish && $this->date <= $start && $this->date <= $finish ){
+			if($input_date >= $start && $input_date <= $finish || $input_date >= $start && $input_date >= $finish && $this->ceca2 <= $start && $this->ceca2 <= $finish ){
 				$index++;
 			}
 		}

@@ -15,9 +15,9 @@
 	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	if($currentsprints){
 		foreach($currentsprints as $row):
-		    $today = strtotime(date("Y-m-d"));
-		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
-			echo $row->start_date." - ".$row->finish_date;
+		    $today = date("Y-m-d");
+		    if($today >= $row->start_date && $today <= $row->finish_date):
+				echo date("d.m.Y", strtotime($row->start_date))." - ".date("d.m.Y", strtotime($row->finish_date));
 			$this->session->set_userdata('SpID', $row->id);
 		endif;
 		endforeach;

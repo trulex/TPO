@@ -8,7 +8,7 @@ class Sprints extends CI_Model{
 	}
 	
 	function getProjectSprints($projectid){
-		$query = $this->db->query("SELECT id, start_date, finish_date, velocity FROM sprints WHERE PID='$projectid' ORDER BY CAST(start_date AS datetime)");
+		$query = $this->db->query("SELECT id, start_date, finish_date, velocity FROM sprints WHERE PID='$projectid' ORDER BY start_date");
 		if ($query->num_rows==0){
 			return FALSE;
 		}
@@ -21,8 +21,8 @@ class Sprints extends CI_Model{
 	    $sprints=$this->getProjectSprints($projectId);
 	    if ($sprints != FALSE) {
 		foreach($sprints as $row):
-		    $today = strtotime(date("Y-m-d"));
-		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
+		    $today = date("Y-m-d");
+		    if($today >= $row->start_date && $today <= $row->finish_date):
 				return $row->id;
 		    endif;
 		endforeach;
@@ -33,6 +33,26 @@ class Sprints extends CI_Model{
 	function getSprint($SpID){
 		$query=$this->db->query("SELECT start_date, finish_date, velocity, id FROM sprints WHERE id=$SpID");
 		return $qurey->row();
+	}
+	
+	function getProjectStart($PID){
+		$query=$this->db->query("SELECT MIN(start_date) AS startDate FROM sprints WHERE PID=$PID");
+		
+		if($query->num_rows() > 0){
+			return $query->row()->startDate;
+		}else{
+			return 0;
+		}
+	}
+	
+	function getProjectEnd($PID){
+		$query=$this->db->query("SELECT MAX(finish_date) AS finishDate FROM sprints WHERE PID=$PID");
+		
+		if($query->num_rows() > 0){
+			return $query->row()->finishDate;
+		}else{
+			return 0;
+		}
 	}
 	
 	function getStartDate($sprintID){

@@ -17,11 +17,11 @@ Class SelectProject extends CI_Controller {
 		$PID=$this->input->post('PID');
 		$this->session->set_userdata('PID', $PID);
 		$sprints=$this->sprints->getProjectSprints($PID);
-		$today =strtotime(date("Y-m-d")); /*in tukej dodamo še podatek o trenutnem sprintu*/
+		$today =date("Y-m-d"); /*in tukej dodamo še podatek o trenutnem sprintu*/
 		$found=FALSE;
 		if($sprints){
 			foreach ($sprints as $sprint){
-				if($today >= strtotime($sprint->start_date) && $today <= strtotime($sprint->finish_date)){
+				if($today >= $sprint->start_date && $today <= $sprint->finish_date){
 					$SpID=$sprint->id;
 					$found=TRUE;
 				}
