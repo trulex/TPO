@@ -16,9 +16,9 @@
 	Current sprint: <?php	if($currentsprints){
 		$this->session->set_userdata('SpID', 0);
 		foreach($currentsprints as $row):
-		    $today = strtotime(date("Y-m-d"));
-		    if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)):
-			echo $row->start_date." - ".$row->finish_date;
+		    $today = date("Y-m-d");
+		    if($today >= $row->start_date && $today <= $row->finish_date):
+				echo date("d.m.Y", strtotime($row->start_date))." - ".date("d.m.Y", strtotime($row->finish_date));
 			$this->session->set_userdata('SpID', $row->id);
 		endif;
 		endforeach;
