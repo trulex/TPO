@@ -36,6 +36,11 @@ class Tasks extends CI_Model{
 		return $query->result();
 	}
 	
+	function getTimeSum($PID){
+		$query = $this->db->query("SELECT sum(tasks.time_sum) AS timeSum FROM tasks LEFT JOIN stories ON(tasks.StID=stories.id) WHERE stories.PID=$PID");
+		return $query->row()->timeSum;
+	}
+	
 // 	Returns an array of tuples where the first element is a story and the second is an array of unassigned tasks.
 	function getUnassigned(){
 		$SpID=$this->session->userdata('SpID');

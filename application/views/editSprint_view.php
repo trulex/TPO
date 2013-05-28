@@ -10,11 +10,11 @@
 	<div id="add">
 	<p>Edit sprint</p>
 		<span style="color:red">*</span><label>Start date</label>
-		<input type="text" name="startdate" value="<?php echo set_value('startdate',$startdate); ?>" size="20" placeholder="(dd.mm.YYYY)"/><br>
+		<input type="text" name="startdate" value="<?php echo set_value('startdate',date("d.m.Y",strtotime($startdate))); ?>" size="20" placeholder="(dd.mm.YYYY)"/><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('startdate'); ?></span></small>
 
 		<span style="color:red">*</span><label>Finish date</label>
-		<input type="text" name="finishdate" value="<?php echo set_value('finishdate',$finishdate); ?>" size="20" placeholder="(dd.mm.YYYY)"/><br>
+		<input type="text" name="finishdate" value="<?php echo set_value('finishdate',date("d.m.Y",strtotime($finishdate))); ?>" size="20" placeholder="(dd.mm.YYYY)"/><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('finishdate'); ?></span></small>
 			
 		<span style="color:red">*</span><label>Sprint velocity</label>
@@ -38,14 +38,14 @@
 				<?php
 				echo form_hidden('sprintid', $row->id);
 				echo "<b>Sprint ".($name+1)."</b> ";
-				echo $row->start_date." - ";
-				echo $row->finish_date;
+				echo date("d.m.Y", strtotime($row->start_date))." - ";
+				echo date("d.m.Y", strtotime($row->finish_date));
 				echo ", velocity: ".$row->velocity;
-				$today = strtotime(date("Y-m-d")); ?>
+				$today = date("Y-m-d"); ?>
 				
-				<?php if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)){ ?>
+				<?php if($today >= $row->start_date && $today <= $row->finish_date){ ?>
 					<span style="color:orange;font-weight:normal">IN PROGRESS</span>
-				<?php }elseif($today >= strtotime($row->start_date) && $today >= strtotime($row->finish_date)){ ?>
+				<?php }elseif($today >= $row->start_date && $today >= $row->finish_date){ ?>
 					<span style="color:green;font-weight:normal">FINISHED</span>
 				<?php }else{ ?>
 					<span style="color:red;font-weight:normal">FUTURE</span>
