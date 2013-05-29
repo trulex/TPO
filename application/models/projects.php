@@ -40,8 +40,9 @@ Class Projects extends CI_Model {
 		return $query->result();
     }
     
-    function setDocumentation($doc, $PID){
-		$query=$this->db->query("UPDATE projects SET documentation=$doc WHERE id=$PID");
+    function saveDocumentation($doc){
+		$PID=$this->session->userdata('PID');
+		$query=$this->db->query("UPDATE projects SET documentation='$doc' WHERE id=$PID");
     }
 	
 	function getDescription($projectId){

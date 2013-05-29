@@ -8,8 +8,11 @@
 			<?php echo $pData->documentation;?>
 			<br>
 		</div>
-		<form name="editDocumentation" method="post" action="documentation/editDocumentation" style="display:inline;">
+		<?php echo form_open('documentation/editDocumentation'); ?>
 		<button type="submit" name="doc">Edit</button>
+		</form>
+		<?php echo form_open('documentation/downloadDocumentation'); ?>
+		<button type="submit" name="doc">Download</button>
 		</form>
 	</div>
 </div>
