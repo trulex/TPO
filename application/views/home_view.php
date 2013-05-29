@@ -53,22 +53,52 @@ $(document).ready(function(){
 	</div>
 	<div style="width:600px">
 	    <?php $i=1; foreach ($wallPosts as $post) {
-		echo '<b>'.$post->username.'</b>';
-		echo ' <small>'.date('d.m.y, H:i:s', strtotime($post->date)).' </small><br />';
-		echo $post->text;
-		echo '<br />';
-		echo '<div id="comments"></div>';
-		echo '<br />';
-		echo '<a href="#" class="show_hide" rel="#slidingDiv'.$i.'">Comment</a>';
+		if (!$post->ParentID) {
+		    echo '<div style="border:1px solid lightgrey;margin-bottom:1px">';
+		    echo '<b>'.$post->username.'</b> ';
+		    echo '<small>'.date('d.m.y, H:i:s', strtotime($post->date)).' </small>';
+		    if ($isScrumMaster || $rights==1) {
+			echo '<div style="display:inline;float:right">';
+			echo form_open('home/deletePost');
+			echo '<input type="hidden" value="'.$post->id.'" name="PostID">';
+			echo form_submit('', 'Delete post');
+			echo '</form></div><br />';
+		    } else {
+			echo '<br />';
+		    }
+		    foreach (explode("\n", $post->text) as $line) {
+			echo $line.'<br />';
+		    }
+		    echo '<br />';
+		    foreach ($wallPosts as $comment) {
+			$comments[] = $comment;
+		    }
+		    for ($i=0;$i<sizeof($comments);$i++) {
+			$invComments[]=$comments[$i];
+		    }
+		    foreach ($wallPosts as $comment) {
+		   	if($comment->ParentID == $post->id) {
+			    echo '<div style="background:#e8eeff;margin-bottom:2px">';
+			    echo '<b>'.$comment->username."</b> ";
+			    foreach (explode("\n", $comment->text) as $line) {
+				echo $line.'<br />';
+			    }
+			    echo '<small>'.date('d.m.y, H:i:s', strtotime($comment->date)).'</small><br />';
+			    echo '</div>';
+			}
+		    }
+		echo '<a href="#" class="show_hide" rel="#slidingDiv'.$i.'" style="font-size:13">Comment</a>';
 		$textAreaComment=array('name'=>'comment', 'placeholder'=>'Write a comment', 'rows'=>'2', 'cols'=>'40');
 		echo form_open('home/comment');
 		    echo '<div class="toggleDiv" id="slidingDiv'.$i.'" style="display:none">'.form_textarea($textAreaComment,'','required');
+		    echo '<input type="hidden" value="'.$post->id.'" name="projectID">';
 		    echo form_submit('', 'Post');
 		    echo '</div>';
 		echo '</form>';
-		echo '<hr>';
+		echo '</div>';
 		$i++;
 		    }
+		}
 		}
 	    ?>
 	</div>

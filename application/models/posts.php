@@ -2,12 +2,13 @@
 <?php
 Class Posts extends CI_Model {
     /* Add a wall post */
-    function addPost($text, $PID, $UID) {
+    function addPost($text, $PID, $UID, $ParentID) {
 	if(strcmp($text,'')!=0) {
 	    $data = array(
 	    'text' => $text,
 	    'PID' => $PID,
 	    'UID' => $UID,
+	    'ParentID' => $ParentID,
 	    'date' => date('Y-m-d H:i:s') );
 	    $this->db->insert('posts', $data);
 	    return true;
@@ -16,7 +17,7 @@ Class Posts extends CI_Model {
     }
     /* Get all wall posts for current project */
     function getWallPosts($PID) {
-	$this->db->select('text,UID,date,username');
+	$this->db->select('posts.id,text,UID,date,username,ParentID');
 	$this->db->from('posts');
 	$this->db->join('users', 'posts.UID = users.id', 'left');
 	$this->db->where('PID', $PID);
