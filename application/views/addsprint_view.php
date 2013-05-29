@@ -36,12 +36,12 @@
 				<div class="sprintbox">
 				<?php
 				echo "<b>Sprint ".($name+1)."</b> ";
-				echo $row->start_date." - ";
-				echo $row->finish_date;
+				echo date("d.m.Y", strtotime($row->start_date))." - ";
+				echo date("d.m.Y", strtotime($row->finish_date));
 				echo ", velocity: ".$row->velocity;
-				$today = strtotime(date("Y-m-d")); ?>
+				$today = date("Y-m-d"); ?>
 				
-				<?php if($today >= strtotime($row->start_date) && $today <= strtotime($row->finish_date)){ ?>
+				<?php if($today >= $row->start_date && $today <= $row->finish_date){ ?>
 					<span style="color:orange;font-weight:normal">IN PROGRESS</span>
 					<div class="editbutton">
 					<?php 
@@ -51,7 +51,7 @@
 					echo form_close();					
 					?>
 					</div>
-				<?php }elseif($today >= strtotime($row->start_date) && $today >= strtotime($row->finish_date)){ ?>
+				<?php }elseif($today >= $row->start_date && $today >= $row->finish_date){ ?>
 					<span style="color:green;font-weight:normal">FINISHED</span>
 				<?php }else{ ?>
 					<span style="color:red;font-weight:normal">FUTURE</span>
