@@ -88,7 +88,15 @@ class ProgressReport extends CI_Controller {
 		for($i=0; $i<=$dolzina; $i++){
 			$delo[$i]=0;
 		}
-		$i=0;
+		
+		foreach($today as $danes){
+			if((strtotime($danes->date)-strtotime($start))==0){
+				$rdecaCrta[0]=$danes->ocene_sum;
+			}
+		}
+		
+		$today=$this->stories_day->getDays();
+		$i=1;
 		foreach($today as $danes){
 			$rdecaCrta[$i]=$danes->ocene_sum;
 			$i++;
