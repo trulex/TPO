@@ -49,13 +49,14 @@ class ProgressReport extends CI_Controller {
 		$DataSet = new pData;
 		
 		$hoursTotal=$this->stories->getHours($this->session->userdata('PID')); // skupno stevilo ur vseh zgodb v tem projektu
-		$today=$this->stories_day->getDays();
+		$today=$this->stories_day->getDays($this->session->userdata('PID'));
 		$start=$this->sprints->getProjectStart($this->session->userdata('PID')); // datum, kdaj zacne prvi sprint oz projekt
 		$finish=$this->sprints->getProjectEnd($this->session->userdata('PID')); // datum, kdaj konca zadnji sprint oz projekt
 		
 		$userdata=array(
 					'date'=>date("Y-m-d"),
-					'ocene_sum'=>$hoursTotal
+					'ocene_sum'=>$hoursTotal,
+					'PID'=>$this->session->userdata('PID')
 					);
 		
 		$bob=0;
@@ -73,7 +74,6 @@ class ProgressReport extends CI_Controller {
 		}
 		
 		$deloArray=$this->work->getTime($this->session->userdata('PID')); // podatki dneva in koliko ur se je delalo na dolocen dan
-		//$deloArray=$this->work->getTime(1); // podatki dneva in koliko ur se je delalo na dolocen dan
 		
 		$dolzina=(strtotime(date("Y-m-d"))-strtotime($start))/86400; //dolzina tabele za graf
 		$dolzinaMax=(strtotime($finish)-strtotime($start))/86400; //dolzina tabele za cel projekt
@@ -95,11 +95,27 @@ class ProgressReport extends CI_Controller {
 			}
 		}
 		
-		$today=$this->stories_day->getDays();
-		$i=1;
+		$today=$this->stories_day->getDays($this->session->userdata('PID'));
+		//$i=1;
+		$datica=strtotime($start);
 		foreach($today as $danes){
-			$rdecaCrta[$i]=$danes->ocene_sum;
-			$i++;
+			if((strtotime($danes->date)-$datica)/86400 > 1){
+				$meja=(strtotime($danes->date)-$datica)/86400;
+				for($i=1; $i<$meja; $i++){
+					$userdata=array(
+						'date'=>date("Y-m-d",$datica+86400),
+						'ocene_sum'=>$sumica,
+						'PID'=>$this->session->userdata('PID')
+					);
+					$this->db->insert('stories_day', $userdata);
+					$index=(strtotime($danes->date)-strtotime($start))/86400-$i; // indeks, kam se bo vpisalo delo
+					$rdecaCrta[$index+1]=$sumica;
+				}
+			}
+			$index=(strtotime($danes->date)-strtotime($start))/86400; // indeks, kam se bo vpisalo delo
+			$rdecaCrta[$index+1]=$danes->ocene_sum;
+			$datica=strtotime($danes->date);
+			$sumica=$danes->ocene_sum;
 		}
 		
 		foreach($deloArray as $polje){
