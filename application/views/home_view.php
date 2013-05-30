@@ -51,17 +51,17 @@ $(document).ready(function(){
 		echo form_submit('', 'Post'); ?>
 	    </form>
 	</div>
-	<div style="width:600px">
+	<div style="width:100%">
 	    <?php $i=1; foreach ($wallPosts as $post) {
 		if (!$post->ParentID) {
 		    echo '<div style="border:1px solid lightgrey;margin-bottom:1px">';
 		    echo '<b>'.$post->username.'</b> ';
-		    echo '<small>'.date('d.m.y, H:i:s', strtotime($post->date)).' </small>';
+		    echo '<small>'.date('d.m.y \a\t H:i', strtotime($post->date)).' </small>';
 		    if ($isScrumMaster || $rights==1) {
 			echo '<div style="display:inline;float:right">';
 			echo form_open('home/deletePost');
 			echo '<input type="hidden" value="'.$post->id.'" name="PostID">';
-			echo form_submit('', 'Delete post');
+			echo form_submit('', 'X', 'title="Delete post"');
 			echo '</form></div><br />';
 		    } else {
 			echo '<br />';
@@ -71,19 +71,23 @@ $(document).ready(function(){
 		    }
 		    echo '<br />';
 		    foreach ($wallPosts as $comment) {
-			$comments[] = $comment;
-		    }
-		    for ($i=0;$i<sizeof($comments);$i++) {
-			$invComments[]=$comments[$i];
-		    }
-		    foreach ($wallPosts as $comment) {
 		   	if($comment->ParentID == $post->id) {
-			    echo '<div style="background:#e8eeff;margin-bottom:2px">';
+			    echo '<div style="border:1px solid lightgrey;margin-bottom:2px;margin-left:10px;margin-right:1px">';
 			    echo '<b>'.$comment->username."</b> ";
+			    echo '<small>'.date('d.m.y \a\t H:i', strtotime($comment->date)).'</small> ';
+			    if ($isScrumMaster || $rights==1) {
+				echo '<div style="display:inline;float:right">';
+				echo form_open('home/deletePost');
+				echo '<input type="hidden" value="'.$comment->id.'" name="PostID">';
+				echo form_submit('', 'X', 'title="Delete comment"');
+				echo '</form></div>';
+				echo '<div style="clear:both"></div>';
+			    } else {
+				echo '<br />';
+			    }
 			    foreach (explode("\n", $comment->text) as $line) {
 				echo $line.'<br />';
 			    }
-			    echo '<small>'.date('d.m.y, H:i:s', strtotime($comment->date)).'</small><br />';
 			    echo '</div>';
 			}
 		    }
