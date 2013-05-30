@@ -39,9 +39,11 @@ class VerifyLogin extends CI_Controller {
 		$username = $this->input->post('username');
 		//query the database
 		$result = $this->users->login($username, $password);
-		if ($result->deactivated == 1) {
-		    $this->form_validation->set_message('check_database', 'Your account has been disabled');
-		    return false; 
+		if($result != NULL){
+			if ($result->deactivated == 1) {
+				$this->form_validation->set_message('check_database', 'Your account has been disabled');
+				return false; 
+			}
 		}
 		if($result)
 		{
@@ -55,7 +57,6 @@ class VerifyLogin extends CI_Controller {
 			$this->session->set_userdata('logged_in', $sess_array);
 			$this->session->set_userdata('UID',$result->id);
 			$this->session->set_userdata('PID', $this->users->getLastPID($result->id));
-			$this->session->set_userdata('SpID', 0);
 			if($this->session->userdata('PID')){
 				$this->session->set_userdata('project', $this->projects->getProjectName($this->session->userdata('PID')));
 			}
