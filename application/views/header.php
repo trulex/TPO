@@ -45,7 +45,7 @@
 		    <li><?php echo anchor('editUsers','Edit users'); ?></li>
 		</ul>
 		</li>
-		<?
+		<?php
 		/*echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); 
 		*/
 		} ?>
