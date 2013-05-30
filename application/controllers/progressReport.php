@@ -32,7 +32,12 @@ class ProgressReport extends CI_Controller {
 			$data['hoursWorked']=$this->work->getTimeSum($this->session->userdata('PID'))/3600;
 			$data['startDate']=$this->sprints->getProjectStart($this->session->userdata('PID'));
 			
-			$this->graf();
+			if($this->sprints->getProjectStart($this->session->userdata('PID')) != 0){
+				$this->graf();
+			}else{
+				$this->grafPrazen();
+			}
+			
 			
 			$this->load->view('header', $data);
 			$this->load->view('progressReport', $data);
@@ -96,8 +101,8 @@ class ProgressReport extends CI_Controller {
 		}
 		
 		$today=$this->stories_day->getDays($this->session->userdata('PID'));
-		//$i=1;
 		$datica=strtotime($start);
+		$sumica=0;
 		foreach($today as $danes){
 			if((strtotime($danes->date)-$datica)/86400 > 1){
 				$meja=(strtotime($danes->date)-$datica)/86400;
@@ -192,6 +197,41 @@ class ProgressReport extends CI_Controller {
 		$Test->drawTitle(50,22,"Burn down chart",50,50,50,585);
 		$Test->Render("pics/graf.png");
 	}
+	
+	function grafPrazen(){
+		// Dataset definition
+		$DataSet = new pData;
+		$DataSet->AddPoint(array(0),"Serie1");
+		$DataSet->AddPoint(array(0),"Serie2");
+		$DataSet->AddAllSeries();
+		$DataSet->SetAbsciseLabelSerie();
+		$DataSet->SetSerieName("Work remaining","Serie1");
+		$DataSet->SetSerieName("Workload","Serie2");
+		   
+		// Initialise the graph   
+		$Test = new pChart(720,400);
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",8);
+		$Test->setGraphArea(50,30,585,360);
+		$Test->drawFilledRoundedRectangle(7,7,720,400,5,240,240,240);
+		$Test->drawRoundedRectangle(5,5,720,400,5,230,230,230);
+		$Test->drawGraphArea(255,255,255,TRUE);
+		$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);   
+		$Test->drawGrid(4,TRUE,230,230,230,50);
+		  
+		// Draw the 0 line
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",6);
+		$Test->drawTreshold(0,143,55,72,TRUE,TRUE);
+		  
+		// Draw the line graph
+		$Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());   
+		$Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);   
+		  
+		// Finish the graph   
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",8);
+		$Test->drawLegend(600,30,$DataSet->GetDataDescription(),255,255,255);
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",10);
+		$Test->drawTitle(50,22,"Burn down chart",50,50,50,585);
+		$Test->Render("pics/graf.png");
+	}
 }
-
 ?>
