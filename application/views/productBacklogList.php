@@ -24,6 +24,7 @@
 			break;
 			case 3:
 			$naslov="Finished Stories";
+			break;
 		}
 	?>
     <div id="left">

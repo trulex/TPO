@@ -1,5 +1,5 @@
 <!-- Created by lovrenc -->
-<!-- table "stories": [id|name|text|tests|difficulty|priority|busvalue|SpID|PID] -->
+<!-- table "stories": [id|name|text|tests|difficulty|priority|busvalue|SpID|PID|note] -->
 
 <?php
 class Stories extends CI_Model{
@@ -26,7 +26,7 @@ class Stories extends CI_Model{
 	
 // 	Get all stories from this project
 	function getFromProject($PID){
-		$query = $this->db->query("SELECT id, name, text, note, finished,tests FROM stories WHERE PID=$PID");
+		$query = $this->db->query("SELECT * FROM stories WHERE PID=$PID");
 		return $query->result();
 	}
 	

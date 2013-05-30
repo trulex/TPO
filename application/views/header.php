@@ -14,6 +14,7 @@
 
 	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	if($currentsprints){
+		$this->session->set_userdata('SpID', 0);
 		foreach($currentsprints as $row):
 		    $today = date("Y-m-d");
 		    if($today >= $row->start_date && $today <= $row->finish_date):
@@ -30,7 +31,7 @@
     <div style="clear: both;"></div>​
     <div id="menu">
 	<ul class="menu">
-	    <?php echo $active == 'home' ? '<li class="active">'.anchor('home','Home') : '<li class="menu">'.anchor('home','Home'); ?>
+	    <?php echo $active == 'wall' ? '<li class="active">'.anchor('home','Wall') : '<li class="menu">'.anchor('home','Wall'); ?>
 		<?php echo $active == 'productBacklog' ? '<li class="active">'.anchor('allStories','Product Backlog') : '<li class="menu">'.anchor('allStories','Product Backlog'); ?>
 	    <?php echo $active == 'sprintBacklog' ? '<li class="active">'.anchor('allTasks','Sprint Backlog') : '<li class="menu">'.anchor('allTasks','Sprint Backlog'); ?>
 		<?php echo $active == 'mytasks' ? '<li class="active">'.anchor('mytasks','My tasks') : '<li class="menu">'.anchor('mytasks','My tasks'); ?>

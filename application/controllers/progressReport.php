@@ -32,7 +32,12 @@ class ProgressReport extends CI_Controller {
 			$data['hoursWorked']=$this->work->getTimeSum($this->session->userdata('PID'))/3600;
 			$data['startDate']=$this->sprints->getProjectStart($this->session->userdata('PID'));
 			
-			$this->graf();
+			if($this->sprints->getProjectStart($this->session->userdata('PID')) != 0){
+				$this->graf();
+			}else{
+				$this->grafPrazen();
+			}
+			
 			
 			$this->load->view('header', $data);
 			$this->load->view('progressReport', $data);
@@ -49,13 +54,14 @@ class ProgressReport extends CI_Controller {
 		$DataSet = new pData;
 		
 		$hoursTotal=$this->stories->getHours($this->session->userdata('PID')); // skupno stevilo ur vseh zgodb v tem projektu
-		$today=$this->stories_day->getDays();
+		$today=$this->stories_day->getDays($this->session->userdata('PID'));
 		$start=$this->sprints->getProjectStart($this->session->userdata('PID')); // datum, kdaj zacne prvi sprint oz projekt
 		$finish=$this->sprints->getProjectEnd($this->session->userdata('PID')); // datum, kdaj konca zadnji sprint oz projekt
 		
 		$userdata=array(
 					'date'=>date("Y-m-d"),
-					'ocene_sum'=>$hoursTotal
+					'ocene_sum'=>$hoursTotal,
+					'PID'=>$this->session->userdata('PID')
 					);
 		
 		$bob=0;
@@ -73,7 +79,6 @@ class ProgressReport extends CI_Controller {
 		}
 		
 		$deloArray=$this->work->getTime($this->session->userdata('PID')); // podatki dneva in koliko ur se je delalo na dolocen dan
-		//$deloArray=$this->work->getTime(1); // podatki dneva in koliko ur se je delalo na dolocen dan
 		
 		$dolzina=(strtotime(date("Y-m-d"))-strtotime($start))/86400; //dolzina tabele za graf
 		$dolzinaMax=(strtotime($finish)-strtotime($start))/86400; //dolzina tabele za cel projekt
@@ -88,10 +93,35 @@ class ProgressReport extends CI_Controller {
 		for($i=0; $i<=$dolzina; $i++){
 			$delo[$i]=0;
 		}
-		$i=0;
+		
 		foreach($today as $danes){
-			$rdecaCrta[$i]=$danes->ocene_sum;
-			$i++;
+			if((strtotime($danes->date)-strtotime($start))==0){
+				$rdecaCrta[0]=$danes->ocene_sum;
+			}
+		}
+		
+		$today=$this->stories_day->getDays($this->session->userdata('PID'));
+		//$i=1;
+		$datica=strtotime($start);
+		$sumica=0;
+		foreach($today as $danes){
+			if((strtotime($danes->date)-$datica)/86400 > 1){
+				$meja=(strtotime($danes->date)-$datica)/86400;
+				for($i=1; $i<$meja; $i++){
+					$userdata=array(
+						'date'=>date("Y-m-d",$datica+86400),
+						'ocene_sum'=>$sumica,
+						'PID'=>$this->session->userdata('PID')
+					);
+					$this->db->insert('stories_day', $userdata);
+					$index=(strtotime($danes->date)-strtotime($start))/86400-$i; // indeks, kam se bo vpisalo delo
+					$rdecaCrta[$index+1]=$sumica;
+				}
+			}
+			$index=(strtotime($danes->date)-strtotime($start))/86400; // indeks, kam se bo vpisalo delo
+			$rdecaCrta[$index+1]=$danes->ocene_sum;
+			$datica=strtotime($danes->date);
+			$sumica=$danes->ocene_sum;
 		}
 		
 		foreach($deloArray as $polje){
@@ -162,6 +192,42 @@ class ProgressReport extends CI_Controller {
 		//$Test->setLabel($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1","5","Sprint 2",221,230,174);
 
 		// Finish the graph
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",8);
+		$Test->drawLegend(600,30,$DataSet->GetDataDescription(),255,255,255);
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",10);
+		$Test->drawTitle(50,22,"Burn down chart",50,50,50,585);
+		$Test->Render("pics/graf.png");
+	}
+	
+	function grafPrazen(){
+		// Dataset definition
+		$DataSet = new pData;
+		$DataSet->AddPoint(array(0),"Serie1");
+		$DataSet->AddPoint(array(0),"Serie2");
+		$DataSet->AddAllSeries();
+		$DataSet->SetAbsciseLabelSerie();
+		$DataSet->SetSerieName("Work remaining","Serie1");
+		$DataSet->SetSerieName("Workload","Serie2");
+		   
+		// Initialise the graph   
+		$Test = new pChart(720,400);
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",8);
+		$Test->setGraphArea(50,30,585,360);
+		$Test->drawFilledRoundedRectangle(7,7,720,400,5,240,240,240);
+		$Test->drawRoundedRectangle(5,5,720,400,5,230,230,230);
+		$Test->drawGraphArea(255,255,255,TRUE);
+		$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);   
+		$Test->drawGrid(4,TRUE,230,230,230,50);
+		  
+		// Draw the 0 line
+		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",6);
+		$Test->drawTreshold(0,143,55,72,TRUE,TRUE);
+		  
+		// Draw the line graph
+		$Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());   
+		$Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);   
+		  
+		// Finish the graph   
 		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",8);
 		$Test->drawLegend(600,30,$DataSet->GetDataDescription(),255,255,255);
 		$Test->setFontProperties("pChart/Fonts/tahoma.ttf",10);

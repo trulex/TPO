@@ -1,5 +1,5 @@
 <!--avtor:darko-->
-<!-- table "projects":[id|project_name|description] -->
+<!-- table "projects":[id|name|description|documentation] -->
 <?php
 Class Projects extends CI_Model {
     function getProjects($rights) {
@@ -14,6 +14,14 @@ Class Projects extends CI_Model {
 			return $query->result();
 		}
 	}
+	
+// 	Get all data of current project_name
+	function getCurrent(){
+		$PID=$this->session->userdata('PID');
+		$query = $this->db->query("SELECT * FROM projects WHERE id=$PID");
+		return $query->row();
+	}
+	
     function getProjectName($PID) {
 		if($PID){
 			$this->db->select('name');
@@ -26,6 +34,16 @@ Class Projects extends CI_Model {
 			return "";
 		}
     }
+    
+    function getDocumentation($PID){
+		$query=$this->db->query("SELECT documentation FROM projects WHERE id=$PID");
+		return $query->result();
+    }
+    
+    function saveDocumentation($doc){
+		$PID=$this->session->userdata('PID');
+		$query=$this->db->query("UPDATE projects SET documentation='$doc' WHERE id=$PID");
+    }
 	
 	function getDescription($projectId){
 		$this->db->select('description');
@@ -34,7 +52,6 @@ Class Projects extends CI_Model {
 		$query=$this->db->get();
 		return $query->row()->description;
 	}
-	
     function getProjectID($projectName) {
 		$this->db->select('id');
 		$this->db->from('projects');
@@ -46,6 +63,7 @@ Class Projects extends CI_Model {
 		$query = $this->db->query("SELECT * FROM projects");
 		return $query->result();
 	}
+	
 	function getID($UName){
 		$query = $this->db->query("SELECT id FROM projects WHERE name='$UName'");
 		return $query->result();

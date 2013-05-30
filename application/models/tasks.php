@@ -19,6 +19,13 @@ class Tasks extends CI_Model{
 		    return array();
 		 }
 	}
+	
+// 	get all stories from current project
+	function getFromProject(){
+	$PID=$this->session->userdata('PID');
+		$query = $this->db->query("SELECT name, text FROM tasks WHERE PID=$PID");
+		return $query->result();
+	}
 // 	Get unasigned tasks of current story
 	function getCurrentUnasigned($StID){
 		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND UID=0");
@@ -33,7 +40,12 @@ class Tasks extends CI_Model{
 	// 	Get tasks from current story
 	function getCurrent($StID){
 		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID");
-		return $query->result();
+		if($query->num_rows>0){
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
 	}
 	
 	function getTimeSum($PID){

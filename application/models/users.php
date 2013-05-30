@@ -12,7 +12,7 @@ Class Users extends CI_Model {
 	if($query -> num_rows() == 1) {
 		return $query->row();
 	} else {
-		return false;
+		return 0;
 	}
     }
     function getPassword($userId) {
