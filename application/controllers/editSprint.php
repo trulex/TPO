@@ -30,7 +30,7 @@ class editSprint extends CI_Controller {
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');
 			
-			$this->form_validation->set_rules('startdate', 'Start date', 'required|min_length[8]|callback_date_check|callback_startdate_check|callback_startsprint_check');
+			$this->form_validation->set_rules('startdate', 'Start date', 'required|min_length[8]|callback_date_check|callback_startsprint_check');
 			$this->form_validation->set_rules('finishdate', 'Finish date', 'required|min_length[8]|callback_date_check|callback_finishdate_check|callback_finishsprint_check');
 			$this->form_validation->set_rules('velocity', 'Sprint velocity', 'required|is_natural_no_zero');
 			
