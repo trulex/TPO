@@ -130,7 +130,7 @@ h5{
 	margin-left: 25%;
 	float: left;
 	margin-bottom: -15px;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
 }
 .naslov-login{
@@ -264,11 +264,11 @@ li.active{
 }
 
 /*  */
-
+/* http://code-tricks.com/simple-css-drop-down-menu/ */
 /*Initialize*/
 ul#menu, ul#menu  {
     padding:0;
-    margin-left: 20%;
+    margin-left: 15%;
 }
 ul.sub-menu {
     padding:0;
@@ -285,6 +285,8 @@ ul#menu li a, ul#menu li ul.sub-menu li a {
     background: #666;
     padding: 5px;
     display:inline-block;
+    width:120px;
+    font-size:14;
 }
 /*Make the parent of sub-menu relative*/
 ul#menu li {

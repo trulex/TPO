@@ -39,6 +39,13 @@ $(document).ready(function(){
         hideText: 'Close' // the button text to show when a div is open
     });
 });
+
+function confirmDelete() {
+    var r=confirm("Do you really want to delete this post and all of its comments?");
+    if (!r) {
+	return false;
+    }
+}
 </script>
 <div id="content">
     <div id="left">
@@ -47,7 +54,7 @@ $(document).ready(function(){
 	    <?php if($this->session->userdata('PID')) { 
 	    echo form_open('home/wallPost'); ?>
 		<?php $textArea=array( 'name'=>'wallPost', 'placeholder'=>'Post something to the wall', 'rows'=>'4', 'cols'=>'60'); 
-		echo form_textarea($textArea,'', 'autofocus="autofocus"', 'required');
+		echo form_textarea($textArea,'', 'required', 'autofocus="autofocus"');
 		echo form_submit('', 'Post'); ?>
 	    </form>
 	</div>
@@ -59,7 +66,7 @@ $(document).ready(function(){
 		    echo '<small>'.date('d.m.y \a\t H:i', strtotime($post->date)).' </small>';
 		    if ($isScrumMaster || $rights==1) {
 			echo '<div style="display:inline;float:right">';
-			echo form_open('home/deletePost');
+			echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this post and all of its comments?\')"');
 			echo '<input type="hidden" value="'.$post->id.'" name="PostID">';
 			echo form_submit('', 'X', 'title="Delete post"');
 			echo '</form></div><br />';
@@ -77,7 +84,7 @@ $(document).ready(function(){
 			    echo '<small>'.date('d.m.y \a\t H:i', strtotime($comment->date)).'</small> ';
 			    if ($isScrumMaster || $rights==1) {
 				echo '<div style="display:inline;float:right">';
-				echo form_open('home/deletePost');
+				echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this comment?\')"');
 				echo '<input type="hidden" value="'.$comment->id.'" name="PostID">';
 				echo form_submit('', 'X', 'title="Delete comment"');
 				echo '</form></div>';

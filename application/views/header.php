@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="glava">
-    <p class="naslov">ScrumPro</p>
+    <p class="naslov"><a href="<?php echo base_url(); ?>"><font color="black">ScrumPro</font></a></p>
     <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
 	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
@@ -46,8 +46,6 @@
 		</ul>
 		</li>
 		<?
-		/*echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); 
-		*/
 		} ?>
 	</ul>
     </div>
