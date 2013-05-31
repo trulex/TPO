@@ -102,15 +102,16 @@ class ProgressReport extends CI_Controller {
 		
 		$today=$this->stories_day->getDays($this->session->userdata('PID'));
 		$datica=strtotime($start);
-		$sumica=0;
+		//$sumica=0;
 		foreach($today as $danes){
 			if((strtotime($danes->date)-$datica)/86400 > 1){
 				$meja=(strtotime($danes->date)-$datica)/86400;
 				for($i=1; $i<$meja; $i++){
+					$vsota=$datica+($i*86400);
 					$userdata=array(
-						'date'=>date("Y-m-d",$datica+86400),
-						'ocene_sum'=>$sumica,
-						'PID'=>$this->session->userdata('PID')
+						'date' => date("Y-m-d",$vsota),
+						'ocene_sum' => $sumica,
+						'PID' => $this->session->userdata('PID')
 					);
 					$this->db->insert('stories_day', $userdata);
 					$index=(strtotime($danes->date)-strtotime($start))/86400-$i; // indeks, kam se bo vpisalo delo
