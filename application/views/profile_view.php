@@ -32,6 +32,6 @@ $msg=strcmp($message,'');
    </div>
 </div>
 <?php if($msg!=0) {
-	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';
+	echo '<p style="color:green;margin-left:15%">'.$message.'</p>';
     } ?>
 </form>

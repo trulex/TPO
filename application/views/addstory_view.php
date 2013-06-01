@@ -40,7 +40,7 @@ $err=strcmp($noproject,'');
 	    ?>
 	</div>
 	<?php if($msg!=0) {
-	    echo '<p style="color:blue;margin-left:25%">'.$message.'</p>'; }
+	    echo '<p style="color:green;margin-left:25%">'.$message.'</p>'; }
     ?>
     </div>
 </div>

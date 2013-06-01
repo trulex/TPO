@@ -148,6 +148,7 @@ h5{
 .glava{
 	background-size: cover;
 	background-color: #CCCCCC;
+	background-color: #CCCCCC;
 	margin-bottom: -9px;
 }
 hr{
@@ -162,7 +163,7 @@ hr{
 }
 #menu{
 	font-family: mentone;
-	font-size: 17;
+	font-size: 15;
 	padding-bottom: 2px;
 }
 body{
@@ -181,10 +182,11 @@ body{
 	float: left;
 }
 #projects{
+	border: 1px solid #999;
 	float: right;
 	background: #D3D3D3;
-	position: absolute;
-	right: 15%;
+	position: fixed;
+	right: 2%;
 	padding-left: 15px;
 	padding-right: 15px;
 }
@@ -236,7 +238,7 @@ a:link, a:visited{
 	color: #996699;
 	text-decoration: none;
 	padding:4px;
-	width:120px;
+/* 	width:120px; */
 	text-align:center;
 }
 a:hover, a:active{
@@ -247,11 +249,11 @@ ul.menu{
 }
 li.menu{
 	display: inline-block;
-	margin-right: 3em;
+	margin-right: 2em;
 }
 li.active{
 	display: inline;
-	margin-right: 3em;
+	margin-right: 2em;
 }
 #footer {
 	margin-top: 10%;
@@ -260,4 +262,44 @@ li.active{
 	text-align: center;
 	background-color: #006699;
 	color: #FFFFFF;
+}
+
+/*  */
+
+/*Initialize*/
+ul#menu, ul#menu  {
+    padding:0;
+    margin-left: 20%;
+}
+ul.sub-menu {
+    padding:0;
+    margin: 0;
+}
+ul#menu li, ul#menu ul.sub-menu li {
+    list-style-type: none;
+    display: inline-block;
+}
+/*Link Appearance*/
+ul#menu li a, ul#menu li ul.sub-menu li a {
+    text-decoration: none;
+    color: #fff;
+    background: #666;
+    padding: 5px;
+    display:inline-block;
+}
+/*Make the parent of sub-menu relative*/
+ul#menu li {
+    position: relative;
+}
+/*sub menu*/
+ul#menu li ul.sub-menu {
+    display:none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100px;
+    margin-top: -5px;
+}
+ul#menu li:hover ul.sub-menu {
+    display:block;
 }

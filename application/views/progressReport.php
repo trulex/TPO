@@ -7,4 +7,5 @@
 		<b>Project status: </b><span style="color:#006699;font-weight:bold"><?php echo round($hoursTotal-$hoursWorked,2) ?></span> of work remaining / <span style="color:#006699;font-weight:bold"><?php echo round($hoursWorked,2) ?></span> of work spent
 		<br>
 	</div>
+	<?php $this->load->view('selProject', array('projects'=>$projects));   ?>
 </div>

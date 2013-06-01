@@ -47,7 +47,7 @@ $(document).ready(function(){
 	    <?php if($this->session->userdata('PID')) { 
 	    echo form_open('home/wallPost'); ?>
 		<?php $textArea=array( 'name'=>'wallPost', 'placeholder'=>'Post something to the wall', 'rows'=>'4', 'cols'=>'60'); 
-		echo form_textarea($textArea,'','required');
+		echo form_textarea($textArea,'', 'autofocus="autofocus"', 'required');
 		echo form_submit('', 'Post'); ?>
 	    </form>
 	</div>

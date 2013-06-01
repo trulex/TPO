@@ -18,7 +18,7 @@ class EditTask extends CI_Controller {
 	
 
 	public function index()	{	
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 		
 			$session_data = $this->session->userdata('logged_in');
@@ -37,6 +37,7 @@ class EditTask extends CI_Controller {
 			$data['TCompleted']=$TData->completed;
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if(!$data['rights']) {
 					redirect('home','refresh');
 			}
@@ -45,7 +46,7 @@ class EditTask extends CI_Controller {
 			$data['activesubmenu3']='unassignedtasks';
 			$this->load->view('header', $data);
 			$this->load->view('sprintBacklog',$data);
-			$this->load->view('submenu3');
+			//$this->load->view('submenu3');
 			$this->load->view('editTask',$data);
 			$this->load->view('footer');
 		}

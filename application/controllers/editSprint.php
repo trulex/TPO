@@ -11,7 +11,7 @@ class editSprint extends CI_Controller {
     }
 	
 	function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
@@ -26,6 +26,7 @@ class editSprint extends CI_Controller {
 			
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');
@@ -85,22 +86,8 @@ class editSprint extends CI_Controller {
 		}
     }
 	
-	public function startdate_check($str) {
-		$todays_date = date("Y-m-d");
-		$this->ceca = date("Y-m-d", strtotime($str));
-		
-		$input_date = date("Y-m-d", strtotime($str));
-
-		if ($input_date < $todays_date) {
-			$this->form_validation->set_message('startdate_check', 'The date is invalid!');
-			return FALSE;
-		} else {
-			return TRUE;
-		}
-    }
-	
 	public function finishdate_check($str) {
-		$start_date = $this->ceca;
+		$start_date = date("Y-m-d", strtotime($this->input->post('startdate')));
 		$input_date = date("Y-m-d", strtotime($str));
 
 		if ($input_date <= $start_date) {
@@ -115,7 +102,6 @@ class editSprint extends CI_Controller {
 		$pid=$this->session->userdata('PID');
 		$sprint=$this->session->userdata('sprint');
 		$input_date = date("Y-m-d", strtotime($str));
-		$this->ceca2 = $input_date; 
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
@@ -148,6 +134,7 @@ class editSprint extends CI_Controller {
 		$pid=$this->session->userdata('PID');
 		$sprint=$this->session->userdata('sprint');
 		$input_date = date("Y-m-d", strtotime($str));
+		$zacetek = date("Y-m-d", strtotime($this->input->post('startdate')));
 		
 		$this->db->select('start_date, finish_date');
 		$this->db->from('sprints');
@@ -163,7 +150,7 @@ class editSprint extends CI_Controller {
 			$start=$row->start_date;
 			$finish=$row->finish_date;
 			
-			if($input_date >= $start && $input_date <= $finish || $input_date >= $start && $input_date >= $finish && $this->ceca2 <= $start && $this->ceca2 <= $finish ){
+			if($input_date >= $start && $input_date <= $finish || $input_date >= $start && $input_date >= $finish && $zacetek <= $start && $zacetek <= $finish ){
 				$index++;
 			}
 		}
