@@ -17,14 +17,15 @@
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productBacklog';
-	    $data['activesubmenu1']='unfinishedStories';
-	    $data['activesubmenu2']='unassignedStories';
+	    //$data['activesubmenu1']='unfinishedStories';
+	    //$data['activesubmenu2']='unassignedStories';
 	    $data['id']=$session_data['id'];
 	    $data['PID']=$this->session->userdata('PID');
 	    $data['project']=$session_data['project'];
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
+		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['storyData']=$this->stories->getData($this->input->post('StID'));
 	    $this->session->set_userdata('StoryID',$this->input->post('StID'));
 	    $data['message']='';
@@ -35,8 +36,8 @@
 	    
 	    $this->load->view('header', $data);
 	    $this->load->view('productBacklog',$data);
-	    $this->load->view('submenu1');
-	    $this->load->view('submenu2');	    
+	    //$this->load->view('submenu1');
+	    //$this->load->view('submenu2');	    
 	    $this->load->view('editStory_view', $data);
 	    $this->load->view('footer');
 	}
@@ -53,14 +54,15 @@
 	    $data['name'] = $session_data['name'];
 	    $data['rights'] = $session_data['rights'];
 	    $data['active']='productbacklog';
-	    $data['activesubmenu1']='unfinishedStories';
-	    $data['activesubmenu2']='unassignedStories';
+	    //$data['activesubmenu1']='unfinishedStories';
+	    //$data['activesubmenu2']='unassignedStories';
 	    $data['id']=$session_data['id'];
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['project']=$this->session->userdata('project');
 	    $data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
+		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['storyData']=$this->stories->getData($this->session->userdata['StoryID']);
 	    
 	    $this->load->library('form_validation');

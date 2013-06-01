@@ -10,7 +10,7 @@ class VerifyAddStory extends CI_Controller {
     } 
 
     function index() {
-	if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+	//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];
@@ -24,10 +24,12 @@ class VerifyAddStory extends CI_Controller {
 	    $data['noproject']='';
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+		$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
 	    $this->load->view('productBacklog',$data);
-	    $this->load->view('submenu1');
+	    //$this->load->view('submenu1');
 	    $this->load->library('form_validation');
 	    
 	    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_storyname_check');
@@ -77,19 +79,19 @@ class VerifyAddStory extends CI_Controller {
 	$session_data = $this->session->userdata('logged_in');
 	$userId=$session_data['id'];
 	$rights=$session_data['rights'];
-	if($rights) {
+	if($rights || $this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'))==1) {
 	    return true;
 	}
 	$this->db->select('id');
 	$this->db->from('projects');
-	$this->db->where('project_name', $this->session->userdata('project'));
+	$this->db->where('name', $this->session->userdata('project'));
 	$query=$this->db->get();
 	$projectId=$query->row()->id;
 	
 	$this->db->select('role');
 	$this->db->from('project_user');
-	$this->db->where('project_id', $projectId);
-	$this->db->where('user_id', $userId);
+	$this->db->where('PID', $projectId);
+	$this->db->where('UID', $userId);
 	$query=$this->db->get();
 	$role=$query->row()->role;
 	

@@ -15,7 +15,7 @@ class EditNote extends CI_Controller {
 	
 
 	public function index()	{	
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		
 		if($this->session->userdata('logged_in')) {
 		
@@ -26,6 +26,7 @@ class EditNote extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->helper('form');	
 			$data['active']='productBacklog';

@@ -13,7 +13,7 @@ class AllStories extends CI_Controller {
     }
 	
 	function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
@@ -27,6 +27,8 @@ class AllStories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['results']= $this->stories->getFromProject($this->session->userdata('PID'));
 			$data['mode']=2;
 			$this->load->view('header', $data);

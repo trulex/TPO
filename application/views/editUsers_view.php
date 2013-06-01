@@ -41,7 +41,7 @@
 	    }	    
 	    if(strcmp($message,'')!=0) {
 	    echo '<br />';
-	    echo '<p style="color:blue">'.$message.'</p>';
+	    echo '<p style="color:green">'.$message.'</p>';
 	}
 	?>
     </div>
