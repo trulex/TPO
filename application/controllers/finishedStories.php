@@ -1,3 +1,4 @@
+<!-- controllers/finishedStories.php -->
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 

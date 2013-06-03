@@ -1,4 +1,4 @@
-<!-- header -->
+<!-- views/header.php -->
 <!--avtor:darko-->
 <html>
 <head>

@@ -1,3 +1,4 @@
+<!-- views/administration.php -->
 <!--avtor:darko-->
 <?php $this->load->helper('form'); ?>
 <div id="content">

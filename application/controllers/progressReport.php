@@ -1,3 +1,4 @@
+<!-- controllers/progressReport.php -->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class ProgressReport extends CI_Controller {
 

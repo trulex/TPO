@@ -1,3 +1,4 @@
+<!-- views/profile_view.php -->
 <!--avtor:darko-->
 <?php echo form_open('profile/verifyEdit'); 
 $msg=strcmp($message,'');

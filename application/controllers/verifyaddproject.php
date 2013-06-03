@@ -1,3 +1,5 @@
+<!-- controllers/cerifyaddproject.php -->
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class VerifyAddProject extends CI_Controller { 

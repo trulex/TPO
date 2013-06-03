@@ -1,3 +1,4 @@
+<!-- views/addstory_view.php -->
 <!--avtor:darko-->
 <?php echo form_open('verifyaddstory'); 
 $msg=strcmp($message,'');

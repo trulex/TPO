@@ -1,3 +1,4 @@
+<!-- views/footer.php -->
 <!--avtor:darko-->
 <?php $url=base_url(); ?>
 <div id="footer">

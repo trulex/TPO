@@ -1,3 +1,4 @@
+<!-- controllers/editUser.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class EditUser extends CI_Controller {

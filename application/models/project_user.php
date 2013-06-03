@@ -1,3 +1,4 @@
+<!-- models/project_user.php -->
 <!-- Created by: Lovrenc -->
 <!-- table "project_user": [PID|UID|role] -->
 <?php

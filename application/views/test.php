@@ -1,3 +1,4 @@
+<!-- views/test.php -->
 <div id="content">
 	<div id="left">
 	<h2>Sprint backlog <?php echo "(".$project.")".$this->session->userdata('SpID'); $counter=1;?></h2>

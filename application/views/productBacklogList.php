@@ -1,4 +1,6 @@
 <!--avtor:Lovrenc-->
+<!-- views/productBacklogList.php -->
+<!-- avtor:Lovrenc -->
 <!-- Ta view je narejen za celoten Product Backlog. V spremenljivki $results se vrne storyje s pravilnim querijem, kateri controller se uporablja pa se tukaj v switchu spodaj nastavi z spremenljivko $mode -->
 
 <div id="content">

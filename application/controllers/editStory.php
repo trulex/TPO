@@ -1,3 +1,4 @@
+<!-- controllers/editStory.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class EditStory extends CI_Controller {

@@ -1,3 +1,5 @@
+<!-- views/welcome_message.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

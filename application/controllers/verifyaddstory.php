@@ -1,3 +1,4 @@
+<!-- controllers/verifyaddstory.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 

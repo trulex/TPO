@@ -1,3 +1,4 @@
+<!-- views/editUser_view.php -->
 <!--avtor:darko-->
 <?php echo form_open('editUser/verifyEdit'); 
 $msg=strcmp($message,'');
