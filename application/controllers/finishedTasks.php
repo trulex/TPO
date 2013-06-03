@@ -30,7 +30,6 @@ class FinishedTasks extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));			
 			$data['mode']=3;
 			$data['tuples']=$this->tasks->getFinishedTupled();
 			$this->load->helper(array('form'));

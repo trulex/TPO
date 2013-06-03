@@ -29,7 +29,6 @@ class ProgressReport extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['hoursTotal']=$this->stories->getHours($this->session->userdata('PID'));
 			$data['hoursWorked']=$this->work->getTimeSum($this->session->userdata('PID'))/3600;
 			$data['startDate']=$this->sprints->getProjectStart($this->session->userdata('PID'));

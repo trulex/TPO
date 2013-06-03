@@ -27,7 +27,6 @@
 	    $data['projects']=$this->projects->getProjects($data['rights']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['storyData']=$this->stories->getData($this->input->post('StID'));
 	    $this->session->set_userdata('StoryID',$this->input->post('StID'));
 	    $data['message']='';

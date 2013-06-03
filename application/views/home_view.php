@@ -58,7 +58,7 @@ $(document).ready(function(){
 		    echo '<div style="border:1px solid lightgrey;margin-bottom:1px">';
 		    echo '<b>'.$post->username.'</b> ';
 		    echo '<small>'.date('d.m.y \a\t H:i', strtotime($post->date)).' </small>';
-		    if ($isScrumMaster || $rights==1) {
+		    if ($role%2 || $rights==1) {
 			echo '<div style="display:inline;float:right">';
 			echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this post and all of its comments?\')"');
 			echo '<input type="hidden" value="'.$post->id.'" name="PostID">';
@@ -76,7 +76,7 @@ $(document).ready(function(){
 			    echo '<div style="border:1px solid lightgrey;margin-bottom:2px;margin-left:10px;margin-right:1px">';
 			    echo '<b>'.$comment->username."</b> ";
 			    echo '<small>'.date('d.m.y \a\t H:i', strtotime($comment->date)).'</small> ';
-			    if ($isScrumMaster || $rights==1) {
+			    if ($role%2 || $rights==1) {
 				echo '<div style="display:inline;float:right">';
 				echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this comment?\')"');
 				echo '<input type="hidden" value="'.$comment->id.'" name="PostID">';

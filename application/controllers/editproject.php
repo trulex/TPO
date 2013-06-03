@@ -22,9 +22,7 @@ class Editproject extends CI_Controller {
 		$data['PID']=$this->session->userdata('PID');
 		$data['projects']=$this->projects->getProjects($data['rights']);
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
-		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-				
+		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));				
 	    $this->load->view('header',$data);
 	    $this->load->library('form_validation');
 		
