@@ -10,7 +10,7 @@
 			<textarea name="text" class="addTask" cols="20" rows="3"><?php echo $text?> </textarea><br />
 			<label>Time estimate</label>
 			<input type="text" name="time_estimate"  size="6"/><br>
-			<input name="StID" type="hidden" value="<?php echo $StID?>" />
+			<input name="StID" type="hidden" value="<?php echo $StID;?>" />
 			<input type="submit" value="Submit" />
 		</form>
 		<?php echo $message?>

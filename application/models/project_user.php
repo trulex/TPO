@@ -5,7 +5,7 @@ class Project_user extends CI_Model{
 	
 	function getRole($UID, $PID){
 		if( $this->session->userdata('PID')){
-			$query = $this->db->query("SELECT MAX(role) AS role FROM project_user WHERE PID=$PID and UID=$UID");
+			$query = $this->db->query("SELECT SUM(role) AS role FROM project_user WHERE PID=$PID and UID=$UID");
 			if ($query->num_rows==0){
 				return 0;
 			}

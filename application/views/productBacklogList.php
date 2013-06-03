@@ -35,7 +35,7 @@
 			foreach($results as $story){
 				echo '<div class="zgodba">';
 						echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,2)." pts.)</h4><br>";
-						if($role==2 && $mode%2){
+						if($role>1 && $mode==2){
 							if(!$story->finished && !$this->tasks->getCurrentUnfinished($story->id)){
 								echo '<form name="endStory" method="post" action="unassignedTasks/endStory" style="display:inline;">';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
@@ -49,7 +49,7 @@
 						}
 						if(!$mode){
 							echo '<div class="difficulty">';
-							if($rights  || $role==1){
+							if($rights  || $role){
 								echo '<form name="chDifficulty" method="post" action="unassignedStories/changeDifficulty" style="display:inline;">';
 								echo '<input name="difficulty" type="text" size="3" value="'.$story->difficulty.'"/>';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
