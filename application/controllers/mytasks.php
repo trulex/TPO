@@ -82,6 +82,60 @@ class MyTasks extends CI_Controller {
 		SET `time_sum` = TIME_TO_SEC( TIMEDIFF(  `end_time` ,  `start_time` ) ) +  `time_sum` 
 		WHERE  `id` =  ? ";
 		$this->db->query($sql, array($taskId));
+		
+		$this->db->select('TIME_TO_SEC( TIMEDIFF(  `end_time` ,  `start_time` ) ) as seconds');
+		$this->db->from('tasks');
+		$this->db->where('id',$taskId);
+		$query = $this->db->get();
+		$row=$query->row();
+		$difference=$row->seconds;
+		
+		$sql="SELECT time_sum, remaining,date FROM work WHERE date=? AND TID=?";
+		$query=$this->db->query($sql, array(date("Y-m-d"), $taskId));
+		$result=$query->result_array(); 
+		if(!empty($result)) {
+		   /* Add time */
+		    $sql="
+		    UPDATE work 
+		    SET time_sum=?+time_sum 
+		    WHERE TID=? AND date=? ";
+		    $this->db->query($sql, array($difference, $taskId, date("Y-m-d")));
+		    /* Subtract from remaining */
+		    $sql="
+		    UPDATE work 
+		    SET remaining=remaining-? 
+		    WHERE TID=? AND date=? ";
+		    $this->db->query($sql, array($difference, $taskId, date("Y-m-d")));
+		    $this->session->set_userdata('razlika',$difference);
+		} else {//there is no entry for today
+		    $sql="select date,time_sum,remaining,PID from work where TID=? order by date desc";
+		    $query=$this->db->query($sql, array($taskId));
+		    if ($query->num_rows() > 0) { //there was already work on task
+			$row=$query->row();
+			$data = array(
+			'date' => date("Y-m-d"),
+			'TID' => $taskId,
+			'time_sum' => $difference,
+			'remaining' => $row->remaining - $difference,
+			'PID' => $row->PID
+			);
+			$this->db->insert('work', $data); 
+		    } else {
+			$sql="select time_estimate from tasks where id=?";
+			$query=$this->db->query($sql, array($taskId));
+			$row=$query->row();
+			$data = array(
+			'date' => date("Y-m-d"),
+			'TID' => $taskId,
+			'time_sum' => $difference,
+			'remaining' => $row->time_estimate*3600 - $difference,
+			'PID' => $this->session->userdata('PID')
+			);
+			$this->db->insert('work', $data); 
+		    }
+
+		}
+		
 		redirect('mytasks'); /* redirect to previous page */
     }
 }

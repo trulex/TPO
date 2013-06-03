@@ -17,10 +17,10 @@ $msg=strcmp($message,'');
 	    <span style="color:red">*</span><label>Surname</label>
 	    <input type="text" name="surname" value="<?php if($msg==0) {echo set_value('surname');} ?>" size="20" required/><br />
 	    <label>Email</label>
-	    <input type="text" name="email" value="<?php if($msg==0) {echo set_value('email');} ?>" size="20" required/><br />
+	    <input type="text" name="email" value="<?php if($msg==0) {echo set_value('email');} ?>" size="20"/><br />
 	    <label>Rights</label>
-	    <select name="rights">
-		<option value="0">User</option>
+	    <select name="rights" size="2" required>
+		<option value="0" selected>User</option>
 		<option value="1">Administrator</option>
 	    </select>
 	    <div><form name="submit" action="verifyadduser"><input type="submit" value="Submit"/></form></div>

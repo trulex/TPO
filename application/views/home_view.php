@@ -94,7 +94,7 @@ $(document).ready(function(){
 		echo '<a href="#" class="show_hide" rel="#slidingDiv'.$i.'" style="font-size:13">Comment</a>';
 		$textAreaComment=array('name'=>'comment', 'placeholder'=>'Write a comment', 'rows'=>'2', 'cols'=>'40');
 		echo form_open('home/comment');
-		    echo '<div class="toggleDiv" id="slidingDiv'.$i.'" style="display:none">'.form_textarea($textAreaComment,'','required');
+		    echo '<div id="slidingDiv'.$i.'" style="display:none">'.form_textarea($textAreaComment,'','required');
 		    echo '<input type="hidden" value="'.$post->id.'" name="projectID">';
 		    echo form_submit('', 'Post');
 		    echo '</div>';
