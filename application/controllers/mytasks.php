@@ -27,6 +27,7 @@ class MyTasks extends CI_Controller {
 			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
+			$data['workHistory']=$this->tasks->getWorkHistory($data['id'],$this->session->userdata('SpID'));
 			
 			$this->load->view('header', $data);
 			$this->load->view('mytasks_view', $data);

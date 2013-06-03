@@ -4,8 +4,8 @@ $msg=strcmp($message,'');
 ?>
 <div id="content">
     <div id="left">
+	<h2>Add a new user</h2>
 	<div id="add">
-	    <p>Add a new user</p>
 	    <span style="color:red">*</span><label>Username</label>
 	    <input type="text" name="username" value="<?php if($msg==0) {echo set_value('username');} ?>" size="20" autofocus="autofocus" required/><br />
 	    <span style="color:red">*</span><label>Password</label>

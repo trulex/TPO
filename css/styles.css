@@ -223,6 +223,10 @@ body{
 }
 button.task{
 	float: right;
+	display:inline-block;
+}
+button.left{
+    float: left;
 }
 textarea.addstory{
 	resize: none;

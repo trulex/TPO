@@ -39,13 +39,6 @@ $(document).ready(function(){
         hideText: 'Close' // the button text to show when a div is open
     });
 });
-
-function confirmDelete() {
-    var r=confirm("Do you really want to delete this post and all of its comments?");
-    if (!r) {
-	return false;
-    }
-}
 </script>
 <div id="content">
     <div id="left">

@@ -137,7 +137,16 @@ class Tasks extends CI_Model{
 			return FALSE;
 		}
 	}
-	
+	/* Get work history for current sprint */
+	function getWorkHistory($UID, $SpID){
+		$query=$this->db->query("SELECT tasks.id,work.time_sum,work.remaining,work.date,work.TID FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) LEFT JOIN work ON (tasks.id=work.TID) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
+	}
 	function getTask($TID){
 		$query=$this->db->query("SELECT * FROM tasks WHERE id=$TID");
 		if($query->num_rows==1){
