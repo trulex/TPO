@@ -65,12 +65,11 @@
 					?>					
 					</div>
 					<div class="deletebutton">
-					<?php 
+					<?php
 					echo form_open('verifyaddsprint/deleteSprint');
-					echo form_submit('editbutton', 'Delete');
+					echo form_submit('deletbutton', 'Delete');
 					echo form_hidden('sprintid', $row->id);
-					echo form_close();					
-					?>
+					echo form_close(); ?>
 					</div>
 				<?php } ?>
 				</div>
@@ -84,4 +83,3 @@
 	</div>
 </div>
 </form>
-

@@ -54,7 +54,7 @@ class Tasks extends CI_Model{
 	}
 	
 // 	Returns an array of tuples where the first element is a story and the second is an array of unassigned tasks.
-	function getUnassigned(){
+	function getUnassignedTupled(){
 		$SpID=$this->session->userdata('SpID');
 		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
 		$result=array();
@@ -68,7 +68,7 @@ class Tasks extends CI_Model{
 	}
 	
 	// 	Returns an array of tuples where the first element is a story and the second is an array of assigned tasks.
-	function getAssigned(){
+	function getAssignedTupled(){
 		$SpID=$this->session->userdata('SpID');
 		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID!=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
 		$result=array();
@@ -102,6 +102,19 @@ class Tasks extends CI_Model{
 		foreach($stories as $story){
 			$StID=$story->id;
 			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND active=1");
+			array_push($result,array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
+	function getFinishedTupled(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND completed=1 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND completed=1");
 			array_push($result,array($story, $tasks->result()));
 		}
 		return $result;

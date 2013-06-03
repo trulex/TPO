@@ -11,6 +11,7 @@
     }
 
     function index() {
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 	if($this->session->userdata('logged_in')) {
 	    $session_data = $this->session->userdata('logged_in');
 	    $data['username'] = $session_data['username'];

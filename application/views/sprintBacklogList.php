@@ -72,7 +72,7 @@
 								} 
 							}
 							else if(!$mode){
-								if ( $rights || $role==1 ){			
+								if ( $rights || $role%2 ){			
 									echo '<form name="asign" class="assignTaskUser" method="post" action="unassignedTasks/asignTask">';
 									echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
 									echo '<select name="UID">' ;
@@ -95,7 +95,7 @@
 								echo '<input type="submit" name="TID" value="Edit" />';
 								echo '<input type="hidden" name="TID" value='.$task->id.'" />';
 								echo '</form>';
-								echo '<br>';
+								//echo '<br>';
 							}
 						}
 					?>
@@ -111,11 +111,11 @@
 						<br>
 					</div>
 					<?php 
-						if(!$mode){
+						if($mode==2){
 							echo '<div class="gumbR">';
 							echo '<form name="createTask" class="addTaskButton" action="verifyAddTask" method="post">';
 							echo '<input type="submit" name="task" value="Add a task" />';
-							echo '<input type="hidden" name="task" value='.$story->id.'/>';
+							echo '<input type="hidden" name="task" value="'.$story->id.'"/>';
 							echo '</form>';
 							echo '</div>';
 						}

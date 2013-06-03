@@ -14,7 +14,7 @@ class AssignedTasks extends CI_Controller {
 	}
 
 	public function index()	{
-		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
@@ -30,7 +30,7 @@ class AssignedTasks extends CI_Controller {
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
 			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['mode']=1;
-			$data['tuples']=$this->tasks->getAllTupled();
+			$data['tuples']=$this->tasks->getAssignedTupled();
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);

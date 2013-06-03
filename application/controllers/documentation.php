@@ -15,7 +15,7 @@ class Documentation extends CI_Controller {
 	}
 	
 	public function index()	{	
-		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		
 		if($this->session->userdata('logged_in')) {
 		
