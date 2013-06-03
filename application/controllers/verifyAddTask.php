@@ -101,7 +101,7 @@ class VerifyAddTask extends CI_Controller {
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate,
-				'SpID' => $this->session->userdata('SpID')
+				//'SpID' => $this->session->userdata('SpID')
 				);
 			$this->db->insert('tasks',$taskData);
 			redirect('unassignedtasks');
