@@ -34,9 +34,9 @@ class Installation extends CI_Controller {
 			$userdata=array(
 				'username'=>$username,
 				'password'=>$password,
-				'name'=>"",
-				'surname'=>"",
-				'email'=>"",
+				'name'=>"$username",
+				'surname'=>"$username",
+				'email'=>$username."@scrum.pro",
 				'rights'=>1 );
 			$this->db->insert('users', $userdata);
 			redirect('home/logout', 'refresh');
