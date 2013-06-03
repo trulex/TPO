@@ -14,7 +14,7 @@ class Unassignedstories extends CI_Controller {
     }
 	
 	function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
@@ -29,6 +29,8 @@ class Unassignedstories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
+			$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['results']= $this->stories->getUnassigned();
 			$data['mode']=0;
 			$this->load->view('header', $data);
@@ -47,6 +49,7 @@ class Unassignedstories extends CI_Controller {
 	
 	function entry_SpID(){ 
 		$this->sprint_story->setSprint($this->input->post('submitstories'),$this->session->userdata('SpID'));
+		redirect($this->input->post('redirect'));
 // 		$this->load->database();
 // 
 // 		$name=$this->input->post('submitstories');

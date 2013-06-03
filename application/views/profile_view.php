@@ -4,17 +4,17 @@ $msg=strcmp($message,'');
 ?>
 <div id="content">
     <div id="left">
+	<h2>Edit profile</h2>
 	<div id="add">
-	    <p>Edit profile</p>
 	    <span style="color:red;vertical-align:top">*</span><label>Username</label>
-	    <input type="text" name="username" value="<?php echo set_value('username',$userData->username); ?>" size="20" />
+	    <input type="text" name="username" value="<?php echo set_value('username',$userData->username); ?>" size="20" required/>
 	    <?php echo form_error('username','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Name</label>
-	    <input type="text" name="name" value="<?php echo set_value('name',$userData->name) ?>" size="20"/><?php echo form_error('name','<div id="validation">','</div>'); ?><br />
+	    <input type="text" name="name" value="<?php echo set_value('name',$userData->name) ?>" size="20" required/><?php echo form_error('name','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Surname</label>
-	    <input type="text" name="surname" value="<?php echo set_value('surname',$userData->surname) ?>" size="20"/><?php echo form_error('surname','<div id="validation">','</div>'); ?><br />
+	    <input type="text" name="surname" value="<?php echo set_value('surname',$userData->surname) ?>" size="20" required/><?php echo form_error('surname','<div id="validation">','</div>'); ?><br />
 	    
 	    <label>Email</label>
 	    <input type="text" name="email" value="<?php echo set_value('email',$userData->email) ?>" size="20"/><?php echo form_error('email','<div id="validation">','</div>'); ?><br />
@@ -32,6 +32,6 @@ $msg=strcmp($message,'');
    </div>
 </div>
 <?php if($msg!=0) {
-	echo '<p style="color:blue;margin-left:15%">'.$message.'</p>';
+	echo '<p style="color:green;margin-left:15%">'.$message.'</p>';
     } ?>
 </form>

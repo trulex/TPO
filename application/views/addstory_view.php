@@ -8,19 +8,19 @@ $err=strcmp($noproject,'');
 	<h3>Add a new user story</h3>
 	<div id="add">
 	    <span style="color:red">*</span><label>Name</label>
-	    <input type="text" name="name" value="<?php if($msg==0) {echo set_value('name');} ?>" size="20"/>
+	    <input type="text" name="name" value="<?php if($msg==0) {echo set_value('name');} ?>" size="20" required/>
 	    <?php echo form_error('name','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Text</label>
-	    <textarea name="text" class="addstory" cols="19" rows="3"><?php if($msg==0) {echo set_value('text');} ?></textarea>
+	    <textarea name="text" class="addstory" cols="19" rows="3"  required><?php if($msg==0) {echo set_value('text');} ?></textarea>
 	    <?php echo form_error('text','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red;vertical-align:top">*</span><label>Tests</label>
-	    <textarea name="tests" class="addstory" cols="19" rows="3"><?php if($msg==0) {echo set_value('tests');} ?></textarea>
+	    <textarea name="tests" class="addstory" cols="19" rows="3"  required><?php if($msg==0) {echo set_value('tests');} ?></textarea>
 	    <?php echo form_error('tests','<div id="validation">','</div>'); ?><br />
 	    
 	    <span style="color:red">*</span><label>Business value</label>
-	    <input type="text" name="business_value" value="<?php if($msg==0) {echo set_value('business_value');} ?>" size="20"/>
+	    <input type="text" name="business_value" value="<?php if($msg==0) {echo set_value('business_value');} ?>" size="20" required/>
 	    <?php echo form_error('business_value','<div id="validation">','</div>'); ?><br />
 	    
 	    <label>Priority</label>
@@ -40,7 +40,7 @@ $err=strcmp($noproject,'');
 	    ?>
 	</div>
 	<?php if($msg!=0) {
-	    echo '<p style="color:blue;margin-left:25%">'.$message.'</p>'; }
+	    echo '<p style="color:green;margin-left:25%">'.$message.'</p>'; }
     ?>
     </div>
 </div>

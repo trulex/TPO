@@ -7,9 +7,8 @@
 
 <div id="content">
     <div id="left">
+    <h2>Create a new project</h2>
 	<div id="add">
-	    <p>Create a new project</p>
-
 		<span style="color:red">*</span><label>Project name</label>
 		<input type="text" name="projectname" value="<?php echo set_value('projectname'); ?>" size="20"/><br>
 		<small><span style="color:red;font-weight:normal"><?php echo form_error('projectname'); ?></span></small>

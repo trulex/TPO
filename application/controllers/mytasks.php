@@ -12,7 +12,7 @@ class MyTasks extends CI_Controller {
     }
     
     function index() {
-		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['id']=$session_data['id'];
@@ -24,8 +24,10 @@ class MyTasks extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
+			$data['workHistory']=$this->tasks->getWorkHistory($data['id'],$this->session->userdata('SpID'));
 			
 			$this->load->view('header', $data);
 			$this->load->view('mytasks_view', $data);

@@ -12,7 +12,7 @@
     <p class="naslov"><a href="<?php echo base_url(); ?>"><font color="black">ScrumPro</font></a></p>
     <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
-	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role==1)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
+	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $isScrumMaster==$this->session->userdata('UID'))){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	if($currentsprints){
 		$this->session->set_userdata('SpID', 0);
 		foreach($currentsprints as $row):

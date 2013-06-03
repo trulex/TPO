@@ -29,7 +29,7 @@
 					$story=$tuple[0];
 					?>
 					<div class="zgodba">
-						<?php echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,2)." pts.)</h4>"; ?>
+						<?php echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,1)." pts.)</h4>"; ?>
 						<div class="gumbR">
 						
 						</div>
