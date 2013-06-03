@@ -101,6 +101,8 @@ class VerifyAddTask extends CI_Controller {
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate	);
+
+				);
 			$this->db->insert('tasks',$taskData);
 			redirect('allTasks');
 		}
