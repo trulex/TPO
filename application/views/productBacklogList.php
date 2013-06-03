@@ -92,7 +92,7 @@
 						if($story->difficulty ){
 				?>
 							<div class="gumb">
-								<form action="unassignedstories/entry_SpID" method="post">
+								<form action="unassignedStories/entry_SpID" method="post">
 									<input type="submit" name="submitbutton" value="Add to sprint" />
 									<input type="hidden" name="submitstories" value="<?php echo $story->id ?>" />
 									<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
