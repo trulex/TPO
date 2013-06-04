@@ -1,4 +1,4 @@
-<!-- submenu 2 -->
+<!-- views/submenu 2.php -->
 <!-- avtor: BOSTJAN -->
 <div>
 	<ul class="menu">

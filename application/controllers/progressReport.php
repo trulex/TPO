@@ -1,3 +1,4 @@
+<!-- controllers/progressReport.php -->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class ProgressReport extends CI_Controller {
 
@@ -28,7 +29,6 @@ class ProgressReport extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['hoursTotal']=$this->stories->getHours($this->session->userdata('PID'));
 			$data['hoursWorked']=$this->work->getTimeSum($this->session->userdata('PID'))/3600;
 			$data['startDate']=$this->sprints->getProjectStart($this->session->userdata('PID'));
@@ -66,9 +66,11 @@ class ProgressReport extends CI_Controller {
 					);
 		
 		$bob=0;
-		foreach($today as $day){
-			if(strtotime($day->date)==strtotime(date("Y-m-d"))){
-				$bob++;
+		if($today != 0){
+			foreach($today as $day){
+				if(strtotime($day->date)==strtotime(date("Y-m-d"))){
+					$bob++;
+				}
 			}
 		}
 		
@@ -95,9 +97,15 @@ class ProgressReport extends CI_Controller {
 			$delo[$i]=0;
 		}
 		
-		foreach($today as $danes){
-			if((strtotime($danes->date)-strtotime($start))==0){
-				$rdecaCrta[0]=$danes->ocene_sum;
+		if($today == 0){
+			$rdecaCrta[0]=$hoursTotal;
+		}
+		
+		if($today != 0){
+			foreach($today as $danes){
+				if((strtotime($danes->date)-strtotime($start))==0){
+					$rdecaCrta[0]=$danes->ocene_sum;
+				}
 			}
 		}
 		

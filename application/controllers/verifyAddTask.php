@@ -1,3 +1,4 @@
+<!-- controllers/verifyAddTask.php -->
 <!--avtor: Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -39,6 +40,7 @@ class VerifyAddTask extends CI_Controller {
 			else{
 				$StID=$this->input->post('task');
 				$data['StID']=$StID;
+				$this->load->view('submenu3');
 				$this->load->view('sprintBacklog',$data);
 				$this->load->view('addTask', $data);
 				$this->load->view('footer');
@@ -74,6 +76,8 @@ class VerifyAddTask extends CI_Controller {
 		$data['text'] = $this->input->post('text');
 		$name=$this->input->post('task_name');
 		$data['StID']=$this->input->post('StID');
+		$data['projects']=$this->projects->getProjects($data['rights']);
+		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 		$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 		$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 		$data['currentsprint']=$this->sprints->getCurrentSprint($data['currentproject']);
@@ -87,6 +91,7 @@ class VerifyAddTask extends CI_Controller {
 		$this->load->view('header', $data);
 		if ($this->form_validation->run() == FALSE) {
 			$data['message']=validation_errors();
+			
 			$this->load->view('sprintBacklog',$data);
 			$this->load->view('submenu3');
 			$this->load->view('addTask', $data);
@@ -101,8 +106,6 @@ class VerifyAddTask extends CI_Controller {
 				'text'=>$text,
 				'StID'=>$StID,
 				'time_estimate'=>$time_estimate	);
-
-				
 			$this->db->insert('tasks',$taskData);
 			redirect('allTasks');
 		}

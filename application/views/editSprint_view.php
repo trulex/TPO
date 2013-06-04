@@ -1,3 +1,4 @@
+<!-- views/editSprintView.php -->
 <!--avtor:BOSTJAN-->
 <?php echo form_open('editSprint');
 		if ($this->session->flashdata('flashSuccess') != ''): 

@@ -1,4 +1,4 @@
-<!-- editDocumentation -->
+<!-- views/editDocumentation.php -->
 <!-- avtor: Lovrenc -->
 
 <div id="content">

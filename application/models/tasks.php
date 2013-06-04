@@ -1,3 +1,4 @@
+<!-- models/tasks.php -->
 <!-- Created by lovrenc -->
 <!-- table "tasks": [id|name|StID|text|time_estimate|UID|accepted|start_time|end_time|time_sum|active|completed] -->
 
@@ -179,7 +180,7 @@ class Tasks extends CI_Model{
 			return $query->result();
 		}
 		else{
-			return array();
+			return 0;
 		}
 	}
 	function getTask($TID){

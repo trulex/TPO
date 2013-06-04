@@ -1,4 +1,4 @@
-<!-- header -->
+<!-- views/header.php -->
 <!--avtor:darko-->
 <html>
 <head>
@@ -12,11 +12,11 @@
     <p class="naslov"><a href="<?php echo base_url(); ?>"><font color="black">ScrumPro</font></a></p>
     <p class="welcome">Welcome, <?php echo anchor('profile',$name,'title="Edit profile"'); ?><br/>
 
-	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $isScrumMaster==$this->session->userdata('UID'))){ echo " - (".anchor('editproject','Edit').")";} ?><br>
+	Current project: <?php echo $this->session->userdata('project'); ?><?php if($this->session->userdata('PID') && ($rights || $role%2)){ echo " - (".anchor('editproject','Edit').")";} ?><br>
 	Current sprint: <?php	
+	$this->session->set_userdata('SpID', 0);
 	if($this->session->userdata('PID')){
 		if($currentsprints){
-			$this->session->set_userdata('SpID', 0);
 			foreach($currentsprints as $row):
 				$today = date("Y-m-d");
 				if($today >= $row->start_date && $today <= $row->finish_date):
@@ -25,12 +25,8 @@
 			endif;
 			endforeach;
 		}
-		else{
-			$this->session->set_userdata('SpID', 0);
-		}
 	}
 	else{
-		$this->session->set_userdata('SpID', 0);
 		echo "/";
 	}
 	?>
@@ -54,8 +50,7 @@
 		</ul>
 		</li>
 		<?php
-		/*echo $active == 'administration' ? '<li class="active">'.anchor('administration','Administration') : '<li class="menu">'.anchor('administration','Administration'); 
-		*/
+		
 		} ?>
 	</ul>
     </div>

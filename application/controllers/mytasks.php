@@ -1,3 +1,4 @@
+<!-- controllers/mytasks.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start(); //we need to call PHP's session object to access it through CI
@@ -24,7 +25,6 @@ class MyTasks extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['currentsprint']=$this->sprints->getCurrentSprint($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['tasks']=$this->tasks->getMyCurrent($data['id'],$this->session->userdata('SpID')); //Get tasks data
 			$data['activeTask']=$this->tasks->getActive($data['id']);
 			$data['workHistory']=$this->tasks->getWorkHistory($data['id'],$this->session->userdata('SpID'));

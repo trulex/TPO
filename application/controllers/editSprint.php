@@ -1,3 +1,4 @@
+<!-- controllers/editSprint.php -->
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -26,7 +27,6 @@ class editSprint extends CI_Controller {
 			
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$this->load->view('header',$data);
 			$this->load->library('form_validation');

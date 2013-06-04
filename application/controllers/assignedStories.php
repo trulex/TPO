@@ -1,3 +1,4 @@
+<!-- controllers/assignedStories.php -->
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -29,8 +30,6 @@ class AssignedStories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['results']= $this->stories->getAssigned();
 			$data['mode']=1;
 			$this->load->view('header', $data);

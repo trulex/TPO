@@ -1,4 +1,4 @@
-<!-- SprintBacklogList -->
+<!-- views/SprintBacklogList.php -->
 <!--avtor:Lovrenc-->
 
 <?php 

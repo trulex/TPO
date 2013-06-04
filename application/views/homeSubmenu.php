@@ -1,4 +1,4 @@
-<!-- homeSubmenu -->
+<!-- views/homeSubmenu.php -->
 <!-- avtor: Lovrenc -->
 <div>
 	<ul class="menu">

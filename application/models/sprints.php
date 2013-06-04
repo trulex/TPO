@@ -1,3 +1,4 @@
+<!-- models/sprints.php -->
 <!-- table "sprints": [id|start_date|finish_date|velocity|PID] -->
 <?php
 class Sprints extends CI_Model{

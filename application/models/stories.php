@@ -1,3 +1,4 @@
+<!-- models/stories.php -->
 <!-- Created by lovrenc -->
 <!-- table "stories": [id|name|text|tests|difficulty|priority|busvalue|SpID|PID|note] -->
 

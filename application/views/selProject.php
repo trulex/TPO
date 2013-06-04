@@ -1,3 +1,4 @@
+<!-- views/selProjects.php -->
 <!-- requires projects -->
 
 <div id="projects">

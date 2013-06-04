@@ -1,3 +1,4 @@
+<!-- controllers/editTask.php -->
 <!-- avtor: Lovrenc -->
 
 <?php
@@ -37,7 +38,6 @@ class EditTask extends CI_Controller {
 			$data['TCompleted']=$TData->completed;
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if(!$data['rights']) {
 					redirect('home','refresh');
 			}

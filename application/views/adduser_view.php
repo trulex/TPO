@@ -1,3 +1,4 @@
+<!-- views/adduser_view.php -->
 <!--avtor:darko-->
 <?php echo form_open('verifyadduser'); 
 $msg=strcmp($message,'');

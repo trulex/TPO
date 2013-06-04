@@ -1,3 +1,4 @@
+<!-- views/addproject_view.php -->
 <!--avtor:BOSTJAN-->
 <?php echo form_open('verifyaddproject');
 		if ($this->session->flashdata('flashSuccess') != ''): 
