@@ -66,9 +66,11 @@ class ProgressReport extends CI_Controller {
 					);
 		
 		$bob=0;
-		foreach($today as $day){
-			if(strtotime($day->date)==strtotime(date("Y-m-d"))){
-				$bob++;
+		if($today != 0){
+			foreach($today as $day){
+				if(strtotime($day->date)==strtotime(date("Y-m-d"))){
+					$bob++;
+				}
 			}
 		}
 		
@@ -95,9 +97,15 @@ class ProgressReport extends CI_Controller {
 			$delo[$i]=0;
 		}
 		
-		foreach($today as $danes){
-			if((strtotime($danes->date)-strtotime($start))==0){
-				$rdecaCrta[0]=$danes->ocene_sum;
+		if($today == 0){
+			$rdecaCrta[0]=$hoursTotal;
+		}
+		
+		if($today != 0){
+			foreach($today as $danes){
+				if((strtotime($danes->date)-strtotime($start))==0){
+					$rdecaCrta[0]=$danes->ocene_sum;
+				}
 			}
 		}
 		

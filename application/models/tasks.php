@@ -159,7 +159,7 @@ class Tasks extends CI_Model{
 			return $query->result();
 		}
 		else{
-			return FALSE;
+			return 0;
 		}
 	}
 	function getTask($TID){
