@@ -86,8 +86,8 @@ $(document).ready(function(){
 		foreach ($workHistory as $day) {
 		    if( $day->TID == $tas->id ) {
 			echo "<small>".$day->date."</small>&nbsp&nbsp&nbsp";
-			echo 'Time spent: <input type="text" size="5" name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
-			echo 'time remaining: <input type="text" size="5" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
+			echo 'Time spent: <input style="width:60px" type="number" step="any" min="0" name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
+			echo 'time remaining: <input style="width:60px" type="number" step="any" min="0" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
 			echo '<input name="history[]" type="hidden" value="'.$day->id.'" />';
 			echo '<br />';
 		    }
@@ -118,8 +118,8 @@ $(document).ready(function(){
 		foreach ($workHistory as $day) {
 		    if( $day->TID == $tas->id ) {
 		    echo "<small>".$day->date."</small>&nbsp&nbsp&nbsp";
-		    echo 'Time spent: <input type="text" size="5" name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
-		    echo 'time remaining: <input type="text" size="5" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
+		    echo 'Time spent: <input style="width:60px" type="number" step="any" min="0"  name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
+		    echo 'time remaining: <input style="width:60px" type="number" step="any" min="0" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
 		    echo '<input name="history[]" type="hidden" value="'.$day->id.'" />';
 		    echo '<br />';
 		    }
