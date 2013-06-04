@@ -1,3 +1,4 @@
+<!-- controllers/viewTasks.php -->
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -16,7 +17,6 @@ class ViewTasks extends CI_Controller {
 			$data['rights'] = $session_data['rights'];
 			$data['id']=$session_data['id'];
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			if(!$data['rights']) {
 					redirect('home','refresh');
 			}

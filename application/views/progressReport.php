@@ -1,3 +1,4 @@
+<!-- views/progressReport.php -->
 <div id="content">
     <div id="left">
 	<h2>Progress report</h2>

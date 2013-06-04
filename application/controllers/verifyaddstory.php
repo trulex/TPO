@@ -1,3 +1,4 @@
+<!-- controllers/verifyaddstory.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -24,8 +25,6 @@ class VerifyAddStory extends CI_Controller {
 	    $data['noproject']='';
 		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-		$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 	    
 	    $this->load->view('header',$data);
 	    $this->load->view('productBacklog',$data);
@@ -88,7 +87,7 @@ class VerifyAddStory extends CI_Controller {
 	$query=$this->db->get();
 	$projectId=$query->row()->id;
 	
-	$this->db->select('role');
+	$this->db->select_max('role');
 	$this->db->from('project_user');
 	$this->db->where('PID', $projectId);
 	$this->db->where('UID', $userId);

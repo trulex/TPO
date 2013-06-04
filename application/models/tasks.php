@@ -1,3 +1,4 @@
+<!-- models/tasks.php -->
 <!-- Created by lovrenc -->
 <!-- table "tasks": [id|name|StID|text|time_estimate|UID|accepted|start_time|end_time|time_sum|active|completed] -->
 
@@ -54,7 +55,7 @@ class Tasks extends CI_Model{
 	}
 	
 // 	Returns an array of tuples where the first element is a story and the second is an array of unassigned tasks.
-	function getUnassigned(){
+	function getUnassignedTupled(){
 		$SpID=$this->session->userdata('SpID');
 		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
 		$result=array();
@@ -68,7 +69,7 @@ class Tasks extends CI_Model{
 	}
 	
 	// 	Returns an array of tuples where the first element is a story and the second is an array of assigned tasks.
-	function getAssigned(){
+	function getAssignedTupled(){
 		$SpID=$this->session->userdata('SpID');
 		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND UID!=0 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
 		$result=array();
@@ -107,6 +108,19 @@ class Tasks extends CI_Model{
 		return $result;
 	}
 	
+	function getFinishedTupled(){
+		$SpID=$this->session->userdata('SpID');
+		$query=$this->db->query("SELECT id, name, text, tests, difficulty, note FROM stories WHERE EXISTS( SELECT * FROM tasks WHERE StID=stories.id AND completed=1 ) AND EXISTS (SELECT * FROM sprint_story WHERE StID=stories.id AND SpID=$SpID)");
+		$result=array();
+		$stories=$query->result();
+		foreach($stories as $story){
+			$StID=$story->id;
+			$tasks=$this->db->query("SELECT * FROM tasks WHERE StID=$StID AND completed=1");
+			array_push($result,array($story, $tasks->result()));
+		}
+		return $result;
+	}
+	
 	function getCurrentFinished($StID){
 		$query=$this->db->query("SELECT id, name, text, StID, UID , time_estimate, accepted, completed, active FROM tasks where StID=$StID AND completed=1");
 		if($query->num_rows>0){
@@ -126,7 +140,28 @@ class Tasks extends CI_Model{
 			return FALSE;
 		}
 	}
-	
+	function getTaskId($workID) {
+	    $query=$this->db->query("SELECT TID FROM work where id=$workID");
+	    $row=$query->row();
+	    return $row->TID;
+	}
+	function updateSum($sum, $taskID) {
+	    $data=array(
+		'time_sum'=>round($sum*3600,2) );
+	    $this->db->where('id', $taskID);
+	    $this->db->update('tasks', $data);
+	}
+	/* Update work history */
+	function updateHistory($workID, $remaining, $spent) {
+	    $data = array(
+               'time_sum' => round($spent*3600,2),
+               'remaining' => round($remaining*3600,2)
+            );
+//             $this->db->where('date', $date);
+            $this->db->where('id', $workID);
+	    $this->db->update('work', $data); 
+	    return true;
+	}
 // 	Get all my tasks from current sprint
 	function getMyCurrent($UID, $SpID){
 		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID");
@@ -137,7 +172,17 @@ class Tasks extends CI_Model{
 			return FALSE;
 		}
 	}
-	
+	/* Get work history for current sprint */
+	function getWorkHistory($UID, $SpID){
+// 		$query=$this->db->query("SELECT tasks.id,work.time_sum,work.remaining,work.date,work.TID FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) LEFT JOIN work ON (tasks.id=work.TID) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID GROUP BY work.date DESC");
+		$query=$this->db->query("SELECT id,date,TID,time_sum,remaining FROM work ORDER BY date DESC");
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		else{
+			return 0;
+		}
+	}
 	function getTask($TID){
 		$query=$this->db->query("SELECT * FROM tasks WHERE id=$TID");
 		if($query->num_rows==1){

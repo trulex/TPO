@@ -1,4 +1,4 @@
-<!-- documentation -->
+<!-- controllers/documentation.php -->
 <!-- avtor: Lovrenc -->
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
@@ -15,7 +15,7 @@ class Documentation extends CI_Controller {
 	}
 	
 	public function index()	{	
-		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		
 		if($this->session->userdata('logged_in')) {
 		
@@ -25,14 +25,9 @@ class Documentation extends CI_Controller {
 			$data['currentproject']=$this->projects->getProjectID($this->session->userdata('project'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$data['active']='wall';
 			$data['active2']='documentation';
-			$this->load->helper(array('form'));
-			if(!$data['rights']) {
-					redirect('home','refresh');
-			}
-			
+			$this->load->helper(array('form'));		
 			$data['pData']=$this->projects->getCurrent();
 			
 			$this->load->view('header', $data);

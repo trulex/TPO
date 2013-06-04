@@ -1,3 +1,5 @@
+<!-- controllers/unassignedTasks.php -->
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
@@ -28,9 +30,8 @@ class UnassignedTasks extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['projectUsers']=$this->project_user->getAllFromProject($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata('UID'),$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));			
 			$data['mode']=0;
-			$data['tuples']=$this->tasks->getAllTupled();
+			$data['tuples']=$this->tasks->getUnassignedTupled();
 			$this->load->helper(array('form'));
 			$this->load->view('header',$data);
 			$this->load->view('sprintBacklog',$data);

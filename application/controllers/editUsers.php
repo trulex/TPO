@@ -1,3 +1,4 @@
+<!-- controllers/editUsers.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class EditUsers extends CI_Controller {
@@ -24,7 +25,6 @@ class EditUsers extends CI_Controller {
 	    $data['projects']=$this->projects->getProjects($data['id']);
 	    $data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['users']=$this->users->getActiveUsers($data['username']); //get usernames,names and surnames of all users
 	    $data['deactivatedUsers']=$this->users->getInactiveUsers();
 	    

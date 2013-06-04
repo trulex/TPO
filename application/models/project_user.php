@@ -1,15 +1,21 @@
+<!-- models/project_user.php -->
 <!-- Created by: Lovrenc -->
 <!-- table "project_user": [PID|UID|role] -->
 <?php
 class Project_user extends CI_Model{
 	
 	function getRole($UID, $PID){
-		$query = $this->db->query("SELECT MAX(role) AS role FROM project_user WHERE PID=$PID and UID=$UID");
-		if ($query->num_rows==0){
-			return 0;
+		if( $this->session->userdata('PID')){
+			$query = $this->db->query("SELECT SUM(role) AS role FROM project_user WHERE PID=$PID and UID=$UID");
+			if ($query->num_rows==0){
+				return 0;
+			}
+			else{
+				return $query->row()->role;
+			}
 		}
 		else{
-			return $query->row()->role;
+			return 0;
 		}
 	}
 		function getAllFromProject($PID){

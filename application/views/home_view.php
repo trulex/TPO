@@ -1,3 +1,4 @@
+<!-- views/home_view.php -->
 <!-- http://papermashup.com/jquery-show-hide-plugin/ -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -47,7 +48,7 @@ $(document).ready(function(){
 	    <?php if($this->session->userdata('PID')) { 
 	    echo form_open('home/wallPost'); ?>
 		<?php $textArea=array( 'name'=>'wallPost', 'placeholder'=>'Post something to the wall', 'rows'=>'4', 'cols'=>'60'); 
-		echo form_textarea($textArea,'', 'autofocus="autofocus"', 'required');
+		echo form_textarea($textArea,'', 'required', 'autofocus="autofocus"');
 		echo form_submit('', 'Post'); ?>
 	    </form>
 	</div>
@@ -57,9 +58,9 @@ $(document).ready(function(){
 		    echo '<div style="border:1px solid lightgrey;margin-bottom:1px">';
 		    echo '<b>'.$post->username.'</b> ';
 		    echo '<small>'.date('d.m.y \a\t H:i', strtotime($post->date)).' </small>';
-		    if ($isScrumMaster || $rights==1) {
+		    if ($role%2 || $rights==1) {
 			echo '<div style="display:inline;float:right">';
-			echo form_open('home/deletePost');
+			echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this post and all of its comments?\')"');
 			echo '<input type="hidden" value="'.$post->id.'" name="PostID">';
 			echo form_submit('', 'X', 'title="Delete post"');
 			echo '</form></div><br />';
@@ -75,9 +76,9 @@ $(document).ready(function(){
 			    echo '<div style="border:1px solid lightgrey;margin-bottom:2px;margin-left:10px;margin-right:1px">';
 			    echo '<b>'.$comment->username."</b> ";
 			    echo '<small>'.date('d.m.y \a\t H:i', strtotime($comment->date)).'</small> ';
-			    if ($isScrumMaster || $rights==1) {
+			    if ($role%2 || $rights==1) {
 				echo '<div style="display:inline;float:right">';
-				echo form_open('home/deletePost');
+				echo form_open('home/deletePost', 'onSubmit="return confirm(\'Do you really want to delete this comment?\')"');
 				echo '<input type="hidden" value="'.$comment->id.'" name="PostID">';
 				echo form_submit('', 'X', 'title="Delete comment"');
 				echo '</form></div>';
@@ -94,7 +95,7 @@ $(document).ready(function(){
 		echo '<a href="#" class="show_hide" rel="#slidingDiv'.$i.'" style="font-size:13">Comment</a>';
 		$textAreaComment=array('name'=>'comment', 'placeholder'=>'Write a comment', 'rows'=>'2', 'cols'=>'40');
 		echo form_open('home/comment');
-		    echo '<div class="toggleDiv" id="slidingDiv'.$i.'" style="display:none">'.form_textarea($textAreaComment,'','required');
+		    echo '<div id="slidingDiv'.$i.'" style="display:none">'.form_textarea($textAreaComment,'','required');
 		    echo '<input type="hidden" value="'.$post->id.'" name="projectID">';
 		    echo form_submit('', 'Post');
 		    echo '</div>';

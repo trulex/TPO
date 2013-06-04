@@ -130,7 +130,7 @@ h5{
 	margin-left: 25%;
 	float: left;
 	margin-bottom: -15px;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
 }
 .naslov-login{
@@ -223,6 +223,10 @@ body{
 }
 button.task{
 	float: right;
+	display:inline-block;
+}
+button.left{
+    float: left;
 }
 textarea.addstory{
 	resize: none;
@@ -263,13 +267,12 @@ li.active{
 	background-color: #006699;
 	color: #FFFFFF;
 }
-
 /*  */
-
+/* http://code-tricks.com/simple-css-drop-down-menu/ */
 /*Initialize*/
 ul#menu, ul#menu  {
     padding:0;
-    margin-left: 20%;
+    margin-left: 15%;
 }
 ul.sub-menu {
     padding:0;
@@ -283,9 +286,12 @@ ul#menu li, ul#menu ul.sub-menu li {
 ul#menu li a, ul#menu li ul.sub-menu li a {
     text-decoration: none;
     color: #fff;
-    background: #666;
+    background: #888;
     padding: 5px;
     display:inline-block;
+    width:140px;
+    font-size:18;
+	margin-right:-19px;
 }
 /*Make the parent of sub-menu relative*/
 ul#menu li {

@@ -1,3 +1,5 @@
+<!-- views/editStory_view.php -->
+
 <?php
 echo form_open('editStory/verifyEdit'); 
 $msg=strcmp($message,'');

@@ -1,3 +1,4 @@
+<!-- views/editproject_view.php -->
 <!--avtor:BOSTJAN-->
 <?php echo form_open('editproject');
 		if ($this->session->flashdata('flashSuccess') != ''): 

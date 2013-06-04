@@ -1,3 +1,4 @@
+<!-- views/addsprint_view.php -->
 <!--avtor:BOSTJAN-->
 <?php echo form_open('verifyaddsprint');
 		if ($this->session->flashdata('flashSuccess') != ''): 

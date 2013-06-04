@@ -1,3 +1,4 @@
+<!-- controllers/addstory.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -10,7 +11,7 @@ class Addstory extends CI_Controller {
     }
     
     function index() {
-		//if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
+		if ( $this->session->userdata('PID')==0) redirect('home', 'refresh');
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
@@ -23,7 +24,6 @@ class Addstory extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			
 			$data['message']='';
 			$data['noproject']='';

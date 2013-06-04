@@ -1,3 +1,4 @@
+<!-- controllers/finishedStories.php -->
 <!--avtor:Lovrenc-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -28,8 +29,6 @@ class FinishedStories extends CI_Controller {
 			$data['projects']=$this->projects->getProjects($data['rights']);
 			$data['results']= $this->stories->getFinished($this->session->userdata('SpID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-			$data['isProductOwner']=$this->project_user->getProductOwner($this->session->userdata('PID'));
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['mode']=3;
 			$this->load->view('header', $data);

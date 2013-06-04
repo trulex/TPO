@@ -1,3 +1,5 @@
+<!-- views/login_view.php -->
+
 <center>
     <?php echo validation_errors(); ?>
     <?php echo form_open('verifylogin'); ?>

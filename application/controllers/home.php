@@ -1,4 +1,6 @@
+<!-- controllers/home.php -->
 <!--avtor:darko-->
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start(); //we need to call PHP's session object to access it through CI
 class Home extends CI_Controller {
@@ -29,7 +31,6 @@ class Home extends CI_Controller {
 			$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 			$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
 			$data['wallPosts']=$this->posts->getWallPosts($this->session->userdata('PID'));
-			$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 			$this->load->view('header', $data);
 			$this->load->view('homeSubmenu', $data);
 			$this->load->view('home_view', $data);

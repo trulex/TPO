@@ -1,3 +1,4 @@
+<!-- controllers/addproject.php -->
 <!--avtor:BOSTJAN-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -22,14 +23,12 @@ class Addproject extends CI_Controller {
 		redirect('home','refresh');
 	    }
 	    $data['active']='administration';
+	    if($this->session->userdata('PID')){
+				$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
+				$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
+		}
 	    $data['projects']=$this->projects->getProjects($data['rights']);
-		$data['currentsprints']=$this->sprints->getProjectSprints($this->session->userdata('PID'));
 	    $data['results']= $this->projects->getAll();
-		$data['role']=$this->project_user->getRole($this->session->userdata['UID'],$this->session->userdata('PID'));
-		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
-
-		//$this->load->model("get_projects");
-		//$data['results']= $this->get_projects->getAll();
 
 	    $this->load->view('header', $data);
 	    $this->load->helper(array('form'));

@@ -1,3 +1,5 @@
+<!-- views/notes.php -->
+
 <div class="notes">
 	<h5 id="note"><?php foreach(explode("\n", $story->note) as $note) { echo $note.'<br>';}?></h5>
 	<div class="gumbR">

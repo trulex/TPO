@@ -1,4 +1,6 @@
 <!--avtor:Lovrenc-->
+<!-- views/productBacklogList.php -->
+<!-- avtor:Lovrenc -->
 <!-- Ta view je narejen za celoten Product Backlog. V spremenljivki $results se vrne storyje s pravilnim querijem, kateri controller se uporablja pa se tukaj v switchu spodaj nastavi z spremenljivko $mode -->
 
 <div id="content">
@@ -31,16 +33,11 @@
 	<div id="add">
 	    <p> <?php echo $naslov ?></p>
 	    <br>
-		<?php if( !$mode && ($rights || $role == 1)){ ?>
-		<form action="addsprint" method="post">
-			<input style="margin-right:100%;" type="submit" name="submitbutton" value="Manage sprints" />
-		</form>
-		<?php } ?>
 	    <?php 
 			foreach($results as $story){
 				echo '<div class="zgodba">';
 						echo "<h4>".$story->name." (Estimate: ".round($story->difficulty,2)." pts.)</h4><br>";
-						if($role==2 && $mode%2){
+						if($role>1 && $mode==2){
 							if(!$story->finished && !$this->tasks->getCurrentUnfinished($story->id)){
 								echo '<form name="endStory" method="post" action="unassignedTasks/endStory" style="display:inline;">';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
@@ -54,7 +51,7 @@
 						}
 						if(!$mode){
 							echo '<div class="difficulty">';
-							if($rights  || $role==1){
+							if($rights  || $role){
 								echo '<form name="chDifficulty" method="post" action="unassignedStories/changeDifficulty" style="display:inline;">';
 								echo '<input name="difficulty" type="text" size="3" value="'.$story->difficulty.'"/>';
 								echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
@@ -93,27 +90,20 @@
 					<br>
 				</div>
 				<?php 
-					if(!$mode && ($rights || $role == 1)){
-						if($story->difficulty ){
-				?>
-							<div class="gumb">
-								<form action="unassignedstories/entry_SpID" method="post">
-									<input type="submit" name="submitbutton" value="Add to sprint" />
-									<input type="hidden" name="submitstories" value="<?php echo $story->id ?>" />
-									<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
-								</form>
-							</div>
-							<?php
+					if(!$mode && ($rights || $role%2) && $this->session->userdata('SpID')){
+						if($story->difficulty>0 ){
+							echo '<div class="gumb">';
+							echo '<form action="unassignedStories/entry_SpID" method="post">';
+							echo '<input type="submit" name="submitbutton" value="Add to sprint" />';
+							echo '<input type="hidden" name="submitstories" value="'.$story->id.'" />';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+							echo '</form>';
+							echo '</div>';
 						}
 					}
 		}
 	?>	
 		</div><br>
-		<?php if( !$mode && ($rights || $role == 1)){ ?>
-		<form action="addsprint" method="post">
-			<input type="submit" name="submitbutton" value="Manage sprints" />
-		</form>
-		<?php } ?>
     </div>
 </div>
 </form>

@@ -1,3 +1,4 @@
+<!-- models/posts.php -->
 <!-- table "posts": [id|text|PID|UID|date] -->
 <?php
 Class Posts extends CI_Model {

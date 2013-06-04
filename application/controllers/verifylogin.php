@@ -1,3 +1,4 @@
+<!-- controllers/verifylogin.php -->
 <!--avtor:darko-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -39,7 +40,7 @@ class VerifyLogin extends CI_Controller {
 		$username = $this->input->post('username');
 		//query the database
 		$result = $this->users->login($username, $password);
-		if($result != 0){
+		if($result){
 			if ($result->deactivated == 1) {
 				$this->form_validation->set_message('check_database', 'Your account has been disabled');
 				return false; 

@@ -1,3 +1,4 @@
+<!-- models/sprint_story.php -->
 <!-- avtor: Lovrenc -->
 <!-- table "sprint_story": [StID|SpID] -->
 <?php
