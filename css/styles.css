@@ -286,11 +286,12 @@ ul#menu li, ul#menu ul.sub-menu li {
 ul#menu li a, ul#menu li ul.sub-menu li a {
     text-decoration: none;
     color: #fff;
-    background: #666;
+    background: #888;
     padding: 5px;
     display:inline-block;
-    width:120px;
-    font-size:14;
+    width:140px;
+    font-size:18;
+	margin-right:-19px;
 }
 /*Make the parent of sub-menu relative*/
 ul#menu li {

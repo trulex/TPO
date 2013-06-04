@@ -33,11 +33,6 @@
 	<div id="add">
 	    <p> <?php echo $naslov ?></p>
 	    <br>
-		<?php if( !$mode && ($rights || $role == 1)){ ?>
-		<form action="addsprint" method="post">
-			<input style="margin-right:100%;" type="submit" name="submitbutton" value="Manage sprints" />
-		</form>
-		<?php } ?>
 	    <?php 
 			foreach($results as $story){
 				echo '<div class="zgodba">';
@@ -109,11 +104,6 @@
 		}
 	?>	
 		</div><br>
-		<?php if( !$mode && ($rights || $role%2)){ ?>
-		<form action="addsprint" method="post">
-			<input type="submit" name="submitbutton" value="Manage sprints" />
-		</form>
-		<?php } ?>
     </div>
 </div>
 </form>
