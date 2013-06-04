@@ -11,6 +11,7 @@ class AssignedStories extends CI_Controller {
 		$this->load->model("stories");
 		$this->load->model("tasks");
 		$this->load->model('project_user');
+		$this->load->model('sprint_story');
     }
 	
 	function index() {
