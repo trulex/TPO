@@ -65,6 +65,8 @@
 	    $data['currentsprints']=$this->sprints->getProjectSprints($data['currentproject']);
 		$data['isScrumMaster']=$this->project_user->getScrumMaster($this->session->userdata('PID'));
 	    $data['storyData']=$this->stories->getData($this->session->userdata['StoryID']);
+	    $data['PID']=$this->session->userdata('PID');
+	    $data['role']=$this->project_user->getRole($this->session->userdata['UID'],$data['PID']);
 	    
 	    $this->load->library('form_validation');
 	    

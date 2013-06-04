@@ -29,7 +29,9 @@ Class Projects extends CI_Model {
 			$this->db->from('projects');
 			$this->db->where('id',$PID);
 			$query=$this->db->get();
-			return $query->row()->name;
+			if($query->num_rows() > 0){
+			    return $query->row()->name;
+			} 
 		}
 		else{
 			return "";
