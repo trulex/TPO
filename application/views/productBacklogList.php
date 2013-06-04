@@ -95,7 +95,7 @@
 					<br>
 				</div>
 				<?php 
-					if(!$mode && ($rights || $role%2)){
+					if(!$mode && ($rights || $role%2) && $this->session->userdata('SpID')){
 						if($story->difficulty>0 ){
 							echo '<div class="gumb">';
 							echo '<form action="unassignedStories/entry_SpID" method="post">';
