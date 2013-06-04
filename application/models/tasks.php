@@ -139,7 +139,28 @@ class Tasks extends CI_Model{
 			return FALSE;
 		}
 	}
-	
+	function getTaskId($workID) {
+	    $query=$this->db->query("SELECT TID FROM work where id=$workID");
+	    $row=$query->row();
+	    return $row->TID;
+	}
+	function updateSum($sum, $taskID) {
+	    $data=array(
+		'time_sum'=>round($sum*3600,2) );
+	    $this->db->where('id', $taskID);
+	    $this->db->update('tasks', $data);
+	}
+	/* Update work history */
+	function updateHistory($workID, $remaining, $spent) {
+	    $data = array(
+               'time_sum' => round($spent*3600,2),
+               'remaining' => round($remaining*3600,2)
+            );
+//             $this->db->where('date', $date);
+            $this->db->where('id', $workID);
+	    $this->db->update('work', $data); 
+	    return true;
+	}
 // 	Get all my tasks from current sprint
 	function getMyCurrent($UID, $SpID){
 		$query=$this->db->query("SELECT tasks.name, tasks.text, tasks.id, tasks.accepted FROM tasks LEFT JOIN stories ON (tasks.StID=stories.id) WHERE (SELECT SpID from sprint_story WHERE StID=stories.id)=$SpID AND tasks.UID=$UID");
@@ -158,7 +179,7 @@ class Tasks extends CI_Model{
 			return $query->result();
 		}
 		else{
-			return FALSE;
+			return array();
 		}
 	}
 	function getTask($TID){

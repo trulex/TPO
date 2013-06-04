@@ -80,16 +80,20 @@ $(document).ready(function(){
 	
 		echo '<div align="right"><a href="#" class="show_hide" rel="#slidingDiv'.$tas->id.'" style="font-size:13">Work history</a></div><br />';
 		echo '<div title="Work history" id="slidingDiv'.$tas->id.'" style="display:none;border:1px solid lightgrey">';
+		echo '<form name="editWork" method="post" action="mytasks/editWork">';
+		if (!empty($workHistory)) {
 		foreach ($workHistory as $day) {
 		    if( $day->TID == $tas->id ) {
 			echo "<small>".$day->date."</small>&nbsp&nbsp&nbsp";
-			echo 'Time spent: <input type="text" size="5" name="timeSum" value="'.round($day->time_sum/3600,2).'"> hours, ';
-			echo 'time remaining: <input type="text" size="5" name="timeRemaining" value="'.round($day->remaining/3600,2).'"> hours';
-			echo '<input name="dayId" type="hidden" value="'.$day->id.'" />';
+			echo 'Time spent: <input type="text" size="5" name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
+			echo 'time remaining: <input type="text" size="5" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
+			echo '<input name="history[]" type="hidden" value="'.$day->id.'" />';
 			echo '<br />';
 		    }
 		}
-		echo '<button type="submit" value="'.$tas->id.'" name="TID">Save changes</button>';
+		echo '<button type="submit" name="TID">Save changes</button>';
+		echo '</form>';
+		}
 		echo '</div>';
 	    } else if ($accepted==1){
 		if(strcmp($previousStory,$storyData['name'])!=0) {
@@ -108,16 +112,20 @@ $(document).ready(function(){
 		
 		echo '<div align="right"><a href="#" class="show_hide" rel="#slidingDiv'.$tas->id.'" style="font-size:13">Work history</a></div><br />';
 		echo '<div title="Work history" id="slidingDiv'.$tas->id.'" style="display:none;border:1px solid lightgrey">';
+		echo '<form name="editWork" method="post" action="mytasks/editWork">';
+		if ($workHistory) {
 		foreach ($workHistory as $day) {
 		    if( $day->TID == $tas->id ) {
 		    echo "<small>".$day->date."</small>&nbsp&nbsp&nbsp";
-		    echo 'Time spent: <input type="text" size="5" name="timeSum" value="'.round($day->time_sum/3600,2).'"> hours, ';
-		    echo 'time remaining: <input type="text" size="5" name="timeRemaining" value="'.round($day->remaining/3600,2).'"> hours';
-		    echo '<input name="dayId" type="hidden" value="'.$day->id.'" />';
+		    echo 'Time spent: <input type="text" size="5" name="history[]" value="'.round($day->time_sum/3600,2).'"> hours, ';
+		    echo 'time remaining: <input type="text" size="5" name="history[]" value="'.round($day->remaining/3600,2).'"> hours';
+		    echo '<input name="history[]" type="hidden" value="'.$day->id.'" />';
 		    echo '<br />';
 		    }
 		}
-		echo '<button type="submit" value="'.$tas->id.'" name="TID">Save changes</button>';
+		echo '<button type="submit" name="TID">Save changes</button>';
+		echo '</form>';
+		}
 		if(!$workHistory) {
 		    echo 'There has not been any work on this task';
 		}

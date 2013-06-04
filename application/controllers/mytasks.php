@@ -37,6 +37,32 @@ class MyTasks extends CI_Controller {
 			redirect('login', 'refresh');
 		}
     }
+    function editWork() {
+	if( ! empty( $_POST )) {
+	    $history=$this->input->post('history');
+	    $i=1;
+	    $spent=0;
+	    $remaining=0;
+	    $workID=0;
+	    foreach ($history as $day) {
+		if($i%3==1) {
+		    $spent=$day;
+		    $spentA[]=$spent;
+		} else if($i%3==2) {
+		    $remaining=$day;
+		} else {
+		    $workID=$day;
+//  		    echo $workID.' '.$remaining.' '.$spent.'<br />';
+		    $this->tasks->updateHistory($workID, $remaining, $spent);
+		}
+		$i++;
+	    }
+	    $sum=array_sum($spentA);
+	    $taskID=$this->tasks->getTaskId($workID);
+	    $this->tasks->updateSum($sum, $taskID);
+	}
+	redirect('mytasks');
+    }
     function startWork() {
 		/* Check if some taks is already being worked on */
 		$session_data = $this->session->userdata('logged_in');

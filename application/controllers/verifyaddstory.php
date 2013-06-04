@@ -88,7 +88,7 @@ class VerifyAddStory extends CI_Controller {
 	$query=$this->db->get();
 	$projectId=$query->row()->id;
 	
-	$this->db->select('role');
+	$this->db->select_max('role');
 	$this->db->from('project_user');
 	$this->db->where('PID', $projectId);
 	$this->db->where('UID', $userId);
