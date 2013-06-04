@@ -95,23 +95,21 @@
 					<br>
 				</div>
 				<?php 
-					if(!$mode && ($rights || $role == 1)){
-						if($story->difficulty ){
-				?>
-							<div class="gumb">
-								<form action="unassignedStories/entry_SpID" method="post">
-									<input type="submit" name="submitbutton" value="Add to sprint" />
-									<input type="hidden" name="submitstories" value="<?php echo $story->id ?>" />
-									<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
-								</form>
-							</div>
-							<?php
+					if(!$mode && ($rights || $role%2)){
+						if($story->difficulty>0 ){
+							echo '<div class="gumb">';
+							echo '<form action="unassignedStories/entry_SpID" method="post">';
+							echo '<input type="submit" name="submitbutton" value="Add to sprint" />';
+							echo '<input type="hidden" name="submitstories" value="'.$story->id.'" />';
+							echo '<input name="redirect" type="hidden" value="'.$this->uri->uri_string().'" />';
+							echo '</form>';
+							echo '</div>';
 						}
 					}
 		}
 	?>	
 		</div><br>
-		<?php if( !$mode && ($rights || $role == 1)){ ?>
+		<?php if( !$mode && ($rights || $role%2)){ ?>
 		<form action="addsprint" method="post">
 			<input type="submit" name="submitbutton" value="Manage sprints" />
 		</form>
